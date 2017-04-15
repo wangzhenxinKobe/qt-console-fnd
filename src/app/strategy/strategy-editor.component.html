@@ -1,0 +1,74 @@
+
+<div id="addCelue" class="modal fade" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" >{{title}}</h4>
+      </div>
+      <div class="modal-body">
+
+        <div class="row" *ngIf="!strategy">
+          <div class="col-md-10">
+            <div class="r_boxToolPad"><input class="form-control" type="text" placeholder="策略名称" #strategyName></div>
+          </div>
+          <div class="col-md-2"><div class="r_boxToolPad"><button class="btn btn-default btn-block" (click)="onLoadParam(strategyName)">导入</button></div></div>
+        </div>
+
+        <div class="table-responsive" *ngIf="strategy">
+          <table class="table table-bordered">
+            <thead>
+            <tr>
+              <th><div class="th-inner ">策略名称</div></th>
+              <th><div class="th-inner ">交易平台</div></th>
+              <th><div class="th-inner ">策略文件名</div></th>
+              <th><div class="th-inner ">策略类型</div></th>
+              <th><div class="th-inner ">开发者</div></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>{{strategy?.strategyName}}</td>
+              <td>{{strategy?.platId}}</td>
+              <td>{{strategy?.winFile}}</td>
+              <td>{{strategy?.strategyType}}</td>
+              <td>{{strategy?.author}}</td>
+            </tr>
+
+            </tbody>
+          </table>
+        </div>
+
+        <br/>
+
+        <div id="daoruContent" [style.display]="displayParam" *ngIf="strategy?.paraList?.length > 0">
+          <div class="">策略参数</div>
+          <div class="table-responsive">
+            <table class="table table-bordered table-striped table-hover">
+              <thead>
+              <tr>
+                <th data-field="0"><div class="th-inner ">参数名</div></th>
+                <th data-field="1"><div class="th-inner ">数据类型</div></th>
+                <th data-field="2"><div class="th-inner ">默认值</div></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let param of strategy?.paraList">
+                <td >{{param.paraName}}</td>
+                <td >{{param.paraType}}</td>
+                <td ><input type="text" [(ngModel)]="param.paraValue" style="width: 200px; text-align: left;" /></td>
+              </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">保存</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+
+      </div>
+    </div>
+  </div>
+</div>

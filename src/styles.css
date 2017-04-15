@@ -1,0 +1,167 @@
+/* You can add global styles to this file, and also import other style files */
+
+.r_crumbs{
+  background: #fff;
+  padding: 0 30px;
+  line-height: 40px;
+  color: #099fde;
+}
+.r_crumbs a{
+  display: inline-block;
+  position: relative;
+  padding: 0 10px 0 0;
+  margin: 0 5px 0 0;
+  color: #666;
+}
+.r_crumbs a:after,
+.r_crumbs a:before{
+  display: block;
+  content: '';
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  border-width:4px 7px;
+  border-style: solid;
+  position: absolute;
+  top: 50%;
+  margin: -4px 0 0 0;
+}
+.r_crumbs a:after{
+  border-color: transparent transparent transparent #666;
+  right: -10px;
+  z-index: 1;
+}
+.r_crumbs a:before{
+  border-color: transparent transparent transparent #fff;
+  z-index: 2;
+  right: -9px;
+}
+.r_crumbs a:hover{
+  color: #099fde;
+}
+.user-menuIcon{
+  vertical-align: middle;
+}
+.r_main{
+  padding: 20px 30px;
+}
+.r_box{
+  background: #fff;
+  border-top: 3px solid #099fde;
+  box-shadow: 0 1px 2px #ccc;
+}
+.r_boxHead{
+  padding: 0 15px;
+}
+.r_boxHead h2{
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  color: #333;
+  font-weight: 600;
+  line-height: 40px;
+}
+.r_userTool{
+  width: auto !important;
+}
+.r_userTool li a{
+  display: block;
+  line-height: 34px;
+  border-bottom:1px solid #f4f4f4;
+}
+.r_boxTool{
+  background: #f0f7fd;
+  padding: 10px 15px;
+  position: relative;
+}
+.r_boxTool .sidebar-form{
+  margin: 0;
+}
+.r_Search{
+  display: block;
+  position: relative;
+}
+.r_Search input{
+  width: 100%;
+  background: #fff;
+  border: 1px solid #ccc;
+  height: 38px;
+  padding: 0 10px;;
+}
+.r_Search .btn-flat{
+  position: absolute;
+  right: 0;
+  top: 0;
+  background: none;
+  height: 38px;
+}
+.r_Search input[type="text"]:focus{
+  border: 1px solid #099fde;
+  box-shadow: none;
+}
+.r_boxToolFl{
+  margin: 0 80px 0 0;
+}
+.r_boxToolFRl{
+  position: absolute;
+  right:15px;
+  top: 10px;
+}
+.r_boxToolFl .input-group{
+
+}
+.r_boxPad{
+  padding: 15px;
+}
+.r_paging{
+  text-align: center;
+}
+.modal-header{
+  background: #3eabe6;
+  color: #fff;
+  padding: 10px 15px;
+}
+.modal-footer{
+  text-align: center;
+}
+@media (max-width: 768px) {
+  .r_crumbs{
+
+    padding: 0 10px;
+    font-size: 12px;
+
+  }
+  .r_main{
+    padding: 20px;
+  }
+  .r_boxToolPad{
+    padding:0 0 10px 0;
+  }
+  .r_boxToolFl{
+    margin: 0 0 10px 0;
+  }
+  .r_boxToolFRl{
+    position: relative;
+    right: auto;
+    top: auto;
+  }
+  .r_boxToolFRl .btn{
+    width: 100%;
+    margin-bottom: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .r_main{
+    padding: 10px;
+  }
+  .r_boxHead{
+    padding: 0 10px;
+  }
+  .r_boxHead h2{
+    font-size: 16px;
+  }
+
+
+
+}

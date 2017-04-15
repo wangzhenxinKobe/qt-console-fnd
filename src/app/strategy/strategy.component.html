@@ -1,0 +1,92 @@
+<div class="r_crumbs">
+  <a href="#">首页</a>
+  <a href="#">业务信息管理</a>
+  策略维护
+</div>
+<div class="r_main">
+  <div class="r_box">
+    <div class="r_boxHead">
+      <h2>策略维护</h2>
+    </div>
+    <div class="r_boxContent">
+      <div class="r_boxTool clearfix">
+
+        <div class="r_boxToolFl">
+          <div class="row">
+            <div class="col-md-3 col-sm-4">
+              <div class="r_boxToolPad">
+                <select class="form-control" [(ngModel)]="curPlatId" (change)="search()">
+                  <option value="">全部交易平台</option>
+                  <option value="101">交易平台-101</option>
+                  <option value="102">交易平台-102</option>
+                  <option value="103">交易平台-103</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-4">
+              <div class="r_boxToolPad">
+                <select class="form-control" [(ngModel)]="curStrategyType" (change)="search()">
+                  <option value="">全部策略类型</option>
+                  <option value="0">类型-0</option>
+                  <option value="1">类型-1</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-4 ">
+              <div class="r_boxToolPad">
+                <div class="input-group">
+                  <input type="text" name="table_search" class="form-control pull-right" placeholder="按策略名称搜索" (keyup.enter)="search()" [(ngModel)]="curStrategyName">
+                  <div class="input-group-btn">
+                    <button type="submit" class="btn btn-default">
+                      <i class="fa fa-search"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="r_boxToolFRl">
+          <button type="button" class="btn btn-primary" (click)="addStrategy()"><i class="fa fa-plus"></i> 新增</button>
+        </div>
+      </div>
+      <div>
+        <div class="r_boxPad">
+          <div class="table-responsive">
+            <table class="table table-bordered table-striped table-hover">
+              <thead>
+              <tr>
+                <th><div class="th-inner ">策略名称</div></th>
+                <th><div class="th-inner ">交易平台</div></th>
+                <th><div class="th-inner ">策略类型</div></th>
+                <th><div class="th-inner ">策略文件名</div></th>
+                <th><div class="th-inner ">状态</div></th>
+                <th><div class="th-inner ">策略版本</div></th>
+                <th><div class="th-inner ">开发者</div></th>
+                <th><div class="th-inner ">操作</div></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let strategy of strategyPage?.strategies">
+                <td>{{strategy.strategyName}}</td>
+                <td>{{strategy.platId}}</td>
+                <td>{{strategy.strategyType}}</td>
+                <td>{{strategy.winFile}}</td>
+                <td> --- </td>
+                <td>{{strategy.strategyVer}}</td>
+                <td>{{strategy.author}}</td>
+                <td>
+                  <a class="editcs" (click)="editStrategy(strategy)" >策略配置</a>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <app-pagination [currentPage]="curPage" [totalPages]="strategyPage?.totalPages" (clickPage)="onPage($event)" ></app-pagination>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-strategy-detail></app-strategy-detail>
