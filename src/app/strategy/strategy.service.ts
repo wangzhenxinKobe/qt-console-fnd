@@ -9,8 +9,8 @@ import {ParamConfig} from "../common/param.config";
 @Injectable()
 export class StrategyService {
 
-//  private hostUrl = 'http://192.168.0.36:8081/handler'; //URL to web api
-  private hostUrl = 'app/strategies'; //URL to web api
+  private hostUrl = 'http://192.168.0.36:8081/handler'; //URL to web api
+//  private hostUrl = 'app/strategies'; //URL to web api
   private headers = new Headers({'Content-Type': 'application/json'});
   private request_id = '';
 
@@ -29,24 +29,12 @@ export class StrategyService {
       serviceCode : 'FS001'
 
     });
-/*
+
     return this.http
       .post(this.hostUrl, request, {headers: this.headers})
       .toPromise()
       .then(this.extractStragiesData)
       .catch(this.handleError);
-*/
-    return this.http.get(this.hostUrl)
-      .toPromise()
-      .then( response => {
-        let page : StrategyPage = new StrategyPage();
-        page.strategies = response.json().data as Strategy[];
-        page.totalPages = 4;
-        page.totalRows = page.strategies.length;
-        return page;
-      })
-      .catch(this.handleError);
-
 
   }
 

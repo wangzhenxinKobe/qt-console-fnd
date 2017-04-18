@@ -11,10 +11,10 @@ import {StrategyComponent} from "./strategy/strategy.component";
 import {StrategyEditorComponent} from "./strategy/strategy-editor.component";
 import {StrategyService} from "./strategy/strategy.service";
 
-import {StrategyInMemoryDataService} from "./mock/strategy-in-memory-data.service";
-import {InMemoryWebApiModule} from "angular-in-memory-web-api/in-memory-web-api.module";
 import {PaginationComponent} from "./elements/pagination.component";
 import { FuturesComponent } from './futures/futures.component';
+import { MarketDataComponent } from './market-data/market-data.component';
+import {MarketDataService} from "./market-data/market-data.service";
 
 @NgModule({
   declarations: [
@@ -23,7 +23,8 @@ import { FuturesComponent } from './futures/futures.component';
     StrategyComponent,
     StrategyEditorComponent,
     PaginationComponent,
-    FuturesComponent
+    FuturesComponent,
+    MarketDataComponent
   ],
   imports: [
     BrowserModule,
@@ -31,11 +32,8 @@ import { FuturesComponent } from './futures/futures.component';
     HttpModule,
     AppRoutingModule,
 
-    InMemoryWebApiModule.forRoot(StrategyInMemoryDataService)
-
-
   ],
-  providers: [ StrategyService ],
+  providers: [ StrategyService, MarketDataService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

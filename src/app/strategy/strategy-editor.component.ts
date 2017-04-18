@@ -15,7 +15,7 @@ export class StrategyEditorComponent {
   strategy : Strategy;
 
   title : string;
-  displayParam : string;
+  displayParam : boolean;
 
   constructor( private strategyService : StrategyService ){}
 
@@ -24,7 +24,7 @@ export class StrategyEditorComponent {
     if(this.strategy) { //配置策略
 
       this.title = '配置策略';
-      this.displayParam = 'block';
+      this.displayParam = true;
 
       //获取策略参数列表
       this.strategyService.getStrategyParam(this.strategy)
@@ -36,7 +36,7 @@ export class StrategyEditorComponent {
     } else { //新增策略
 
       this.title = '新增策略';
-      this.displayParam = 'none';
+      this.displayParam = false;
 
       $('#addCelue').modal();
     }

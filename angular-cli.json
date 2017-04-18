@@ -30,8 +30,9 @@
         "../node_modules/bootstrap/dist/js/bootstrap.min.js",
 
         "../admin-lte/js/app.min.js",
-        "../admin-lte/js/demo.js"
+        "../admin-lte/js/demo.js",
 
+        "../plugins/tabledit-cust/js/jquery.tabledit.js"
       ],
       "environments": {
         "source": "environments/environment.ts",

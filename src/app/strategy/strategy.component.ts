@@ -13,9 +13,9 @@ export class StrategyComponent implements OnInit {
   @ViewChild(StrategyEditorComponent)
   public readonly strategyEditorModal : StrategyEditorComponent;
 
-  curPlatId : string = '';
-  curStrategyType : string = '';
-  curStrategyName : string = '';
+  searchPlatId : string = '';
+  searchStrategyType : string = '';
+  searchStrategyName : string = '';
   curPage : number = 1;
 
   strategyPage : StrategyPage;
@@ -28,9 +28,9 @@ export class StrategyComponent implements OnInit {
 
   search() {
 
-    console.info(`curPlatId[${this.curPlatId}], curStrategyType[${this.curStrategyType}], curStrategyName[${this.curStrategyName}], curPage[${this.curPage}]`);
+    console.info(`curPlatId[${this.searchPlatId}], curStrategyType[${this.searchStrategyType}], curStrategyName[${this.searchStrategyName}], curPage[${this.curPage}]`);
 
-    this.strategyService.getStrategies(this.curPlatId, this.curStrategyType, this.curStrategyName, this.curPage)
+    this.strategyService.getStrategies(this.searchPlatId, this.searchStrategyType, this.searchStrategyName, this.curPage)
       .then( page => this.strategyPage = page );
 
   }
