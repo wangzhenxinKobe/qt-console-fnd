@@ -2,14 +2,14 @@
  * Created by gavin on 2017/4/18.
  */
 
-import {Component, Input, Output, OnChanges, OnInit, EventEmitter, SimpleChanges } from '@angular/core';
+import {Component, Input, Output, OnChanges, OnInit, EventEmitter } from '@angular/core';
 
 @Component({
-    selector: 'app-cust-selection',
+    selector: 'app-cust-select',
     template: `
     
-    <select *ngIf="viewType != 'readonly'" [(ngModel)]="value" class="form-control" >
-      <option *ngFor="let obj of dataList" value="obj.value">{{obj.text}}</option>
+    <select *ngIf="viewType != 'readonly'" [(ngModel)]="value" class="form-control" (change)="onChange()">
+      <option *ngFor="let obj of dataList" value="{{obj.value}}">{{obj.text}}</option>
     </select>
     
     <div *ngIf="viewType == 'readonly'">{{curData?.text}}</div>
@@ -17,12 +17,14 @@ import {Component, Input, Output, OnChanges, OnInit, EventEmitter, SimpleChanges
     `
 })
 
-export class CustSelectionComponent implements OnChanges, OnInit {
+export class CustSelectionComponent implements OnInit {
 
   @Input() class : string;
 
   @Input() value : string;
   @Output() valueChange = new EventEmitter<string>();
+
+  @Output() change = new EventEmitter()
 
   @Input() viewType : string;
   @Input() dataType : string;
@@ -30,17 +32,10 @@ export class CustSelectionComponent implements OnChanges, OnInit {
   dataList : any[];
   curData : any;
 
-  ngOnChanges(changes : SimpleChanges) {
+  onChange() {
 
-    for(let propName in changes) {
-
-      if(propName == 'value') {
-
-        this.valueChange.emit(this.value);
-
-      }
-
-    }
+    this.valueChange.emit(this.value);
+    this.change.emit();
 
   }
 
