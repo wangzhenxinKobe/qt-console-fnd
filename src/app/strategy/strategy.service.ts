@@ -9,9 +9,9 @@ import {ParamConfig} from "../common/param.config";
 @Injectable()
 export class StrategyService {
 
-  private hostUrl = ParamConfig.HOST_URL; //URL to web api
+  private hostUrl = ParamConfig.HTTP_HOST_URL; //URL to web api
   private headers = new Headers({'Content-Type': 'application/json'});
-  private request_id = '';
+  private request_id = ParamConfig.HTTP_REQUEST_ID;
 
   constructor(private http : Http) {}
 
