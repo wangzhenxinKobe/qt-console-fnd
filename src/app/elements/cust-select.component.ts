@@ -17,7 +17,7 @@ import {Component, Input, Output, OnChanges, OnInit, EventEmitter } from '@angul
     `
 })
 
-export class CustSelectionComponent implements OnInit {
+export class CustSelectComponent implements OnInit {
 
   @Input() class : string;
 
