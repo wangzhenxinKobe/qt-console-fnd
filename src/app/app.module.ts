@@ -15,6 +15,7 @@ import {PaginationComponent} from "./elements/pagination.component";
 import { FuturesComponent } from './futures/futures.component';
 import { MarketDataComponent } from './market-data/market-data.component';
 import {MarketDataService} from "./market-data/market-data.service";
+import {CustSelectionComponent} from "./elements/cust-selection.component";
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {MarketDataService} from "./market-data/market-data.service";
     StrategyEditorComponent,
     PaginationComponent,
     FuturesComponent,
-    MarketDataComponent
+    MarketDataComponent,
+    CustSelectionComponent
   ],
   imports: [
     BrowserModule,

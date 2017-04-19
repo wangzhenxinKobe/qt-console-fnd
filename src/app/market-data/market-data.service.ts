@@ -6,7 +6,8 @@ import {ParamConfig} from "../common/param.config";
 
 @Injectable()
 export class MarketDataService {
-  private hostUrl = 'http://192.168.0.36:8081/handler'; //URL to web api
+
+  private hostUrl = ParamConfig.HOST_URL; //URL to web api
   private headers = new Headers({'Content-Type': 'application/json'});
   private request_id = '';
 
@@ -21,7 +22,7 @@ export class MarketDataService {
       pageSize : ParamConfig.DATA_LIST_PAGE_SIZE,
       currentPage : currentPage,
       requestId : this.request_id,
-      serviceCode : 'FS030' 
+      serviceCode : 'FS030'
 
     });
 

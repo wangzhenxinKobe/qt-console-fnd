@@ -27,9 +27,9 @@ export class StrategyEditorComponent {
       this.displayParam = true;
 
       //获取策略参数列表
-      this.strategyService.getStrategyParam(this.strategy)
-        .then( params => {
-          this.strategy.paraList = params;
+      this.strategyService.getStrategyByName(this.strategy.strategyName)
+        .then( stratety => {
+          this.strategy = stratety;
           $('#addCelue').modal();
         });
 

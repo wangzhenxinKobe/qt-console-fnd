@@ -9,8 +9,7 @@ import {ParamConfig} from "../common/param.config";
 @Injectable()
 export class StrategyService {
 
-  private hostUrl = 'http://192.168.0.36:8081/handler'; //URL to web api
-//  private hostUrl = 'app/strategies'; //URL to web api
+  private hostUrl = ParamConfig.HOST_URL; //URL to web api
   private headers = new Headers({'Content-Type': 'application/json'});
   private request_id = '';
 
@@ -62,16 +61,63 @@ export class StrategyService {
   }
 
   /**
-   * 获取策略参数列表
+   * 根据策略名称获取策略信息
+   * @param name
+     */
+  getStrategyByName(name : string) : Promise<Strategy> {
+
+    let request = JSON.stringify({
+
+      strategyName : name,
+      requestId : this.request_id,
+      serviceCode : 'FS003'
+
+    });
+
+    return this.http
+      .post(this.hostUrl, request, {headers: this.headers})
+      .toPromise()
+      .then( res => {
+
+        let body = res.json();
+        if(body.errCode == '000000') {
+
+          return body as Strategy;
+
+        } else {
+
+          console.error("请求失败：" + body.errMsg);
+          return null;
+
+        }
+
+      })
+      .catch(this.handleError);
+
+  }
+
+  /**
+   * 用于策略新增时，导入策略参数列表
    * @param strategy
      */
-  getStrategyParam(strategy : Strategy) : Promise<any> {
+  loadStrategyParam(name : string) : Promise<any> {
 
-    return this.http.get(this.hostUrl+`?strategyName=${strategy.strategyName}`)
+    let request = JSON.stringify({
+
+      strategyName : name,
+      requestId : this.request_id,
+      serviceCode : 'FS001'
+
+    });
+
+    return this.http
+      .post(this.hostUrl, request, {headers: this.headers})
       .toPromise()
-      .then( (response : Response) => {
-        let body = response.json().data as Strategy[];
-        return body[0].paraList;
+      .then( res => {
+
+        let body = res.json();
+
+
       })
       .catch(this.handleError);
 

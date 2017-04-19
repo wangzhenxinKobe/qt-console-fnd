@@ -13,7 +13,7 @@ export class Strategy {
   public author : string;       //开发者
   public comment : string;
 
-  public paraList :{
+  public fieldList :{
     paraName  : string;
     paraType  : string;
     paraValue : string; }[];
