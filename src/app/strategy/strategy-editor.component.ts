@@ -29,6 +29,7 @@ export class StrategyEditorComponent {
       //获取策略参数列表
       this.strategyService.getStrategyByName(this.strategy.strategyName)
         .then( stratety => {
+          console.info(stratety);
           this.strategy = stratety;
           $('#addCelue').modal();
         });

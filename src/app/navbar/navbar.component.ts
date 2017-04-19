@@ -56,7 +56,7 @@ export class NavbarComponent implements OnInit {
   ];
 
   selectedParent = this.routers[0];
-  selectedRouter = this.selectedParent.children[5];
+  selectedRouter = this.selectedParent.children[0];
 
   constructor(
     private router : Router

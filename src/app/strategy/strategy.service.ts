@@ -79,6 +79,8 @@ export class StrategyService {
       .toPromise()
       .then( res => {
 
+        console.info(res);
+
         let body = res.json();
         if(body.errCode == '000000') {
 

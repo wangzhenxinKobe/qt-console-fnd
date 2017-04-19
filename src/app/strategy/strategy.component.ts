@@ -30,6 +30,8 @@ export class StrategyComponent implements OnInit {
 
     console.info(`curPlatId[${this.searchPlatId}], curStrategyType[${this.searchStrategyType}], curStrategyName[${this.searchStrategyName}], curPage[${this.curPage}]`);
 
+    this.curPage = 1;
+
     this.strategyService.getStrategies(this.searchPlatId, this.searchStrategyType, this.searchStrategyName, this.curPage)
       .then( page => this.strategyPage = page );
 
