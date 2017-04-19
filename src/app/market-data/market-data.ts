@@ -5,8 +5,8 @@
  */
 export class MarketData{
 
-  public platId : number; //平台编号
-  public symbolType : number;       //代码类型
+  public platId : string; //平台编号
+  public symbolType : string;       //代码类型
   public symbolId : string; //合约代码
 
   constructor() {}

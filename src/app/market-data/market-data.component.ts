@@ -28,8 +28,8 @@ export class MarketDataComponent implements OnInit {
   ngOnInit() {
 
     this.curMarketData = {
-      platId : 0,
-      symbolType : 0,
+      platId : '',
+      symbolType : '',
       symbolId : ''
     };
 
@@ -55,8 +55,8 @@ export class MarketDataComponent implements OnInit {
     this.editorTitle = '新增行情订阅';
 
     this.curMarketData = { //初始化行情数据
-      platId : 0,
-      symbolType : 0,
+      platId : '',
+      symbolType : '',
       symbolId : ''
     };
 
@@ -87,14 +87,36 @@ export class MarketDataComponent implements OnInit {
 
     if(this.isAddEditor) { //新增行情数据
 
-      this.curPage = 1;
       this.marketDataService.addMarketData(this.curMarketData)
-        .then(result => result ? this.queryList() : alert("数据新增失败，请重试！"));
+        .then(result => {
+          if(result) {
+
+            this.curPage = 1;
+            this.searchPlatId = this.curMarketData.platId;
+            this.queryList();
+
+          } else {
+            alert("数据新增失败，请重试！");
+          }
+        });
 
     } else { //修改行情数据
 
       this.marketDataService.updateMarketData(this.curMarketData)
-        .then( result => result ? this.queryList() : alert("数据修改失败，请重试！") );
+        .then( result => {
+
+          if(result) {
+
+            this.searchPlatId = this.curMarketData.platId;
+            this.queryList();
+
+          } else {
+
+            alert("数据修改失败，请重试！");
+
+          }
+
+        });
 
     }
 
