@@ -19,12 +19,12 @@ export class NavbarComponent implements OnInit {
     },*/
     {id: 1400, icon: 'fa fa-dashboard', name: '业务信息管理',
       children: [
-        {id: 1401, url: '/strategy', name: '策略维护', active: ''},
+        {id: 1401, url: '/buz/strategy', name: '策略维护', active: ''},
         {id: 1403, url: '#', name: '股票基本信息维护', active: ''},
         {id: 1404, url: '#', name: '股票指数管理', active: ''},
         {id: 1405, url: '#', name: '股票篮子管理', active: ''},
-        {id: 1406, url: '/futures', name: '期货品种管理', active: ''},
-        {id: 1407, url: '/market-data', name: '行情订阅信息维护', active: ''},
+        {id: 1406, url: '/buz/futures', name: '期货品种管理', active: ''},
+        {id: 1407, url: '/buz/market-data', name: '行情订阅信息维护', active: ''},
         {id: 1408, url: '#', name: '行情源配置', active: ''},
         {id: 1409, url: '#', name: '柜台系统配置', active: ''},
         {id: 1410, url: '#', name: '交易账户维护', active: ''}
@@ -32,7 +32,7 @@ export class NavbarComponent implements OnInit {
     },
     {id: 1300, icon: 'fa fa-rmb', name: '交易管理',
       children: [
-        {id: 1301, url: '/trade-unit', name: '交易单元创建维护', active: ''},
+        {id: 1301, url: '/buz/trade-unit', name: '交易单元创建维护', active: ''},
         {id: 1303, url: '#', name: '期货交易', active: ''},
         {id: 1304, url: '#', name: '股票交易', active: ''},
       ]

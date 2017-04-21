@@ -1,7 +1,9 @@
 import { Interceptor, InterceptedRequest, InterceptedResponse } from 'ng2-interceptors';
+import {AuthService} from "./auth.service";
 
 export class HttpInterceptor implements Interceptor {
 
+//  constructor(private authService : AuthService){}
 
   public interceptBefore(request: InterceptedRequest): InterceptedRequest {
 
@@ -19,6 +21,8 @@ export class HttpInterceptor implements Interceptor {
   public interceptAfter(response: InterceptedResponse): InterceptedResponse {
 
     console.info(response);
+
+//    this.authService.sendLoginStatus(false);
 
     return response;
     /*

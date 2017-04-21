@@ -24,6 +24,7 @@ export class StrategyComponent implements OnInit {
   constructor( private strategyService : StrategyService ) { }
 
   ngOnInit() {
+    console.info("StrategyComponent ----- in ngOnInit() ");
   }
 
   private queryList() {

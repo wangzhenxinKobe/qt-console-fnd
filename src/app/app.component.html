@@ -1,15 +1,1 @@
-<body class="hold-transition skin-blue sidebar-mini" *ngIf="isLanded">
-  <div class="wrapper">
-
-    <app-navbar></app-navbar>
-
-    <div class="content-wrapper">
-
-      <router-outlet></router-outlet>
-
-    </div>
-
-  </div>
-</body>
-
-<app-login *ngIf="!isLanded"></app-login>
+<router-outlet></router-outlet>

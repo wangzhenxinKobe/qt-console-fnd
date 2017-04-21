@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthService} from "./auth.service";
+import { Router } from '@angular/router';
+
+import {AuthService} from "./common/auth.service";
+import {UserService} from "./user/user.service";
 
 @Component({
   selector: 'app-root',
@@ -8,13 +11,24 @@ import {AuthService} from "./auth.service";
 })
 export class AppComponent implements OnInit{
 
-  isLanded : boolean = true;
+  constructor(
+    private authService : AuthService,
+    private userService : UserService,
+    private router : Router
+  ) {
 
-  constructor( private authService : AuthService ) {
+    console.info("AppComponent ----- in constructor() ");
 
     authService.loginStatus$.subscribe( status => {
-      this.isLanded = status;
-      console.info(`isLanded[${status}]`);
+
+      console.info(`AppComponent ---- login status [${status}]`);
+
+      if(!status) { //登出或者Token失效
+
+        this.router.navigate(['/login']);
+
+      }
+
     });
 
   }
@@ -22,7 +36,13 @@ export class AppComponent implements OnInit{
 
   ngOnInit() {
 
-    this.authService.getUser();
+    console.info("AppComponent ----- in ngOnInit() ");
+
+    if(!!this.userService.getUser()) { //用户信息为空
+
+      this.router.navigate(['/login']);
+
+    }
 
   }
 
