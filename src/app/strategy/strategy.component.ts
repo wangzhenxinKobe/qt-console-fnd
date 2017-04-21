@@ -24,23 +24,28 @@ export class StrategyComponent implements OnInit {
   constructor( private strategyService : StrategyService ) { }
 
   ngOnInit() {
+    console.info("StrategyComponent ----- in ngOnInit() ");
   }
 
-  search() {
+  private queryList() {
 
     console.info(`curPlatId[${this.searchPlatId}], curStrategyType[${this.searchStrategyType}], curStrategyName[${this.searchStrategyName}], curPage[${this.curPage}]`);
-
-    this.curPage = 1;
 
     this.strategyService.getStrategies(this.searchPlatId, this.searchStrategyType, this.searchStrategyName, this.curPage)
       .then( page => this.strategyPage = page );
 
   }
 
+  search() {
+
+    this.curPage = 1;
+    this.queryList();
+
+  }
   onPage(event) {
 
     this.curPage = event;
-    this.search();
+    this.queryList();
 
   }
 

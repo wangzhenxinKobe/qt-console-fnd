@@ -31,7 +31,7 @@
               <td>{{strategy?.strategyName}}</td>
               <td>{{strategy?.platId}}</td>
               <td>{{strategy?.winFile}}</td>
-              <td>{{strategy?.strategyType}}</td>
+              <td><app-cust-select dataType="strategy_type" viewType="readonly" [value]="strategy?.strategyType" ></app-cust-select></td>
               <td>{{strategy?.author}}</td>
             </tr>
 
@@ -47,26 +47,33 @@
             <table class="table table-bordered table-striped table-hover">
               <thead>
               <tr>
-                <th data-field="0"><div class="th-inner ">参数名</div></th>
-                <th data-field="1"><div class="th-inner ">数据类型</div></th>
-                <th data-field="2"><div class="th-inner ">默认值</div></th>
+                <th ><div class="th-inner ">参数名</div></th>
+                <th ><div class="th-inner ">数据类型</div></th>
+                <th ><div class="th-inner ">默认值</div></th>
+                <th *ngIf="!isAdd"><div class="th-inner ">操作</div></th>
               </tr>
               </thead>
               <tbody>
-              <tr *ngFor="let param of strategy?.paraList">
+              <tr *ngFor="let param of strategy?.fieldList">
                 <td >{{param.paraName}}</td>
-                <td >{{param.paraType}}</td>
+                <td ><app-cust-select dataType="strategy_param_type" viewType="readonly" [value]="param.paraType" ></app-cust-select></td>
                 <td ><input type="text" [(ngModel)]="param.paraValue" style="width: 200px; text-align: left;" /></td>
+                <td *ngIf="!isAdd">
+                <div class="tabledit-toolbar btn-toolbar">
+                  <div class="btn-group btn-group-sm">
+                    <button type="button" class="tabledit-edit-button btn btn-sm btn-primary" (click)="saveParam(param)">保存</button>
+                  </div>
+                </div>
+                </td>
               </tr>
-
               </tbody>
             </table>
           </div>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary">保存</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-primary" *ngIf="isAdd">保存</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 
       </div>
     </div>
