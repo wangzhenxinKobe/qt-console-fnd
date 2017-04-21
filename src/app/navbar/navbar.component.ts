@@ -32,7 +32,7 @@ export class NavbarComponent implements OnInit {
     },
     {id: 1300, icon: 'fa fa-rmb', name: '交易管理',
       children: [
-        {id: 1301, url: '#', name: '交易单元创建维护', active: ''},
+        {id: 1301, url: '/trade-unit', name: '交易单元创建维护', active: ''},
         {id: 1303, url: '#', name: '期货交易', active: ''},
         {id: 1304, url: '#', name: '股票交易', active: ''},
       ]

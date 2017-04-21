@@ -79,9 +79,8 @@ export class StrategyService {
       .toPromise()
       .then( res => {
 
-        console.info(res);
-
         let body = res.json();
+
         if(body.errCode == '000000') {
 
           return body as Strategy;
@@ -119,6 +118,37 @@ export class StrategyService {
 
         let body = res.json();
 
+      })
+      .catch(this.handleError);
+
+  }
+
+  updateStrategyParam(strategyName : string, paraName : string, paraValue : string) {
+
+    let request = JSON.stringify({
+
+      strategyName : strategyName,
+      paraName : paraName,
+      paraValue : paraValue,
+      requestId : this.request_id,
+      serviceCode : 'FS004'
+
+    });
+
+    return this.http
+      .post(this.hostUrl, request, {headers: this.headers})
+      .toPromise()
+      .then( res => {
+
+        let body = res.json();
+
+        if(body.errCode == '000000') {
+          return true ;
+        }
+        else {
+          console.error("请求失败：" + body.errMsg);
+          return false;
+        }
 
       })
       .catch(this.handleError);

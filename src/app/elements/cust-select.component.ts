@@ -19,8 +19,6 @@ import {Component, Input, Output, OnChanges, OnInit, EventEmitter } from '@angul
 
 export class CustSelectComponent implements OnInit {
 
-  @Input() class : string;
-
   @Input() value : string;
   @Output() valueChange = new EventEmitter<string>();
 
@@ -55,12 +53,34 @@ export class CustSelectComponent implements OnInit {
 
       case 'strategy_type':
         this.dataList = [
-          {value:'0', text:'类型-0'},
-          {value:'1', text:'类型-1'}
+          {value:'0', text:'插件'},
+          {value:'1', text:'脚本'}
         ];
         if(this.viewType == 'select_all') {
           this.dataList.unshift( {value:'', text:'全部策略类型'} );
         }
+        break;
+
+      case 'trade_unit_status':
+        this.dataList = [
+          {value:'1', text:'已创建'},
+          {value:'2', text:'已启动'},
+          {value:'3', text:'已停止'},
+          {value:'4', text:'已删除'}
+        ];
+        if(this.viewType == 'select_all') {
+          this.dataList.unshift( {value:'', text:'全部交易单元状态'} );
+        }
+        break;
+
+      case 'strategy_param_type':
+        this.dataList = [
+          {value:'0', text:'bool'},
+          {value:'1', text:'int'},
+          {value:'2', text:'float'},
+          {value:'3', text:'string'},
+          {value:'4', text:'json'}
+        ];
         break;
 
       default:
