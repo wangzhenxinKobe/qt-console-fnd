@@ -17,11 +17,7 @@ export class AppComponent implements OnInit{
     private router : Router
   ) {
 
-    console.info("AppComponent ----- in constructor() ");
-
     authService.loginStatus$.subscribe( status => {
-
-      console.info(`AppComponent ---- login status [${status}]`);
 
       if(!status) { //登出或者Token失效
 
@@ -36,9 +32,7 @@ export class AppComponent implements OnInit{
 
   ngOnInit() {
 
-    console.info("AppComponent ----- in ngOnInit() ");
-
-    if(!!this.userService.getUser()) { //用户信息为空
+    if(!this.userService.getUser()) { //用户信息为空
 
       this.router.navigate(['/login']);
 

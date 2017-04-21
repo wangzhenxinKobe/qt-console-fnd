@@ -1,27 +1,39 @@
-<div class="bg">
-  <div class="login">
-    <div class="loginHead"><img src="assets/images/loginLogo.png" /></div>
-    <div class="loginMain">
-      <div class="loginForm">
-        <div class="loginRow">
-          <label>登录名：</label>
-          <div class="loginInput"><input type="text" /></div>
-        </div>
-        <div class="loginRow">
-          <label>密 码：</label>
-          <div class="loginInput"><input type="password" /></div>
-        </div>
-        <div class="loginRow">
-          <label>验证码：</label>
-          <div class="loginRowCode">
-            <a href="#" class="loginRowCodeImg"><img src="assets/images/code.png" /></a>
-            <div class="loginInput"><input type="password" /></div>
+<body class="hold-transition login-page">
+<div class="login-box">
+  <div class="login-logo">
+    <a href="../../index2.html"><b>Admin</b>LTE</a>
+  </div>
+  <!-- /.login-logo -->
+  <div class="login-box-body">
+    <p class="login-box-msg">Sign in to start your session</p>
+
+    <form action="../../index2.html" method="post">
+      <div class="form-group has-feedback">
+        <input type="email" class="form-control" placeholder="Email">
+        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input type="password" class="form-control" placeholder="Password">
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
+      <div class="row">
+        <div class="col-xs-8">
+          <div class="checkbox">
+            <label>
+              <input type="checkbox"> Remember Me
+            </label>
           </div>
         </div>
-        <div class="loginRow">
-          <a href="#" class="loginBtn" (click)="onLogin()">登 录</a>
+        <!-- /.col -->
+        <div class="col-xs-4">
+          <button type="submit" class="btn btn-primary btn-block btn-flat" (click)="onLogin()">Sign In</button>
         </div>
+        <!-- /.col -->
       </div>
-    </div>
+    </form>
+
   </div>
+  <!-- /.login-box-body -->
 </div>
+<!-- /.login-box -->
+</body>

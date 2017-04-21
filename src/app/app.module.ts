@@ -8,7 +8,7 @@ import { Http, XHRBackend, RequestOptions } from '@angular/http';
 import {BusinessModule} from "./business.module";
 import {AppRoutingModule} from "./app-routing.module";
 
-import {HttpInterceptor} from "./common/http.interceptor";
+import {HttpInterceptor} from "./common/http-interceptor.service";
 
 import {AuthService} from "./common/auth.service";
 import {UserService} from "./user/user.service";

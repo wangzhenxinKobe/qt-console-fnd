@@ -1,9 +1,11 @@
+import { Injectable } from '@angular/core';
 import { Interceptor, InterceptedRequest, InterceptedResponse } from 'ng2-interceptors';
 import {AuthService} from "./auth.service";
 
+@Injectable()
 export class HttpInterceptor implements Interceptor {
 
-//  constructor(private authService : AuthService){}
+  constructor(private authService : AuthService){}
 
   public interceptBefore(request: InterceptedRequest): InterceptedRequest {
 
@@ -22,7 +24,7 @@ export class HttpInterceptor implements Interceptor {
 
     console.info(response);
 
-//    this.authService.sendLoginStatus(false);
+    this.authService.sendLoginStatus(false);
 
     return response;
     /*
