@@ -7,16 +7,14 @@ import {Component} from '@angular/core';
 @Component({
     selector: 'app-business',
     template: `
-    
-    <body class="hold-transition skin-blue sidebar-mini">
+    <div class=" ">
       <div class="wrapper">
         <app-navbar></app-navbar>
         <div class="content-wrapper">
             <router-outlet></router-outlet>
         </div>
       </div>
-    </body>
-    
+    </div>
     `
 })
 
