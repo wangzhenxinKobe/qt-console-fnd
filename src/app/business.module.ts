@@ -18,6 +18,7 @@ import {CustSelectComponent} from "./elements/cust-select.component";
 import { TradeUnitComponent } from './trade-unit/trade-unit.component';
 import {BusinessComponent} from "./business.component";
 import {NavbarComponent} from "./navbar/navbar.component";
+import {AlertComponent} from "./elements/alert.component";
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import {NavbarComponent} from "./navbar/navbar.component";
     FuturesComponent,
     MarketDataComponent,
     CustSelectComponent,
-    TradeUnitComponent
+    TradeUnitComponent,
+    AlertComponent
 
   ],
   imports: [
