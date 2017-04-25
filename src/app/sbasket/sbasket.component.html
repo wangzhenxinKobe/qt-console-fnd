@@ -1,0 +1,168 @@
+<div class="r_crumbs">
+  <a href="#">首页</a>
+  <a href="#">业务信息管理</a>
+  股票篮子管理
+</div>
+<div class="r_main">
+  <div class="r_box">
+    <div class="r_boxHead">
+      <h2>股票篮子管理</h2>
+    </div>
+    <div class="r_boxContent">
+      <div class="r_boxTool clearfix">
+        <div class="row">
+          <div class="col-md-4 col-md-offset-8">
+            <div class="row">
+              <div class="col-md-8">
+                <div class="r_boxToolPad">
+                  <select class="form-control" [(ngModel)]="searchPlatId" (change)="search()">
+                    <option value="测">请选择篮子名称</option>
+                    <option value="篮子名称1">名称一</option>
+                    <option value="篮子名称2">名称二</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="r_boxToolPad">
+                  <a href=" " class="btn btn-default btnFile btn-block"><input type="file" ng2FileSelect [uploader]="uploader" (change)="selectedFileOnChanged($event)"/>导入</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+      <div>
+        <div class="r_boxPad">
+          <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover" id="example2">
+              <thead>
+              <tr>
+                <th>权重</th>
+                <th>股数</th>
+                <th>备选代码</th>
+                <th>备选股数</th>
+                <th width="120">操作</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let item of sbasketPage?.sbasket">
+                <td>{{item.weight}}</td>
+                <td>{{item.volume}}</td>
+                <td>{{item.errCode1}}</td>
+                <td>{{item.volume1}}</td>
+
+                <td style="text-align: center;">
+                  <div class="tabledit-toolbar btn-toolbar" style=" display: inline-block;">
+                    <div class="btn-group btn-group-sm" >
+                      <button class="tabledit-edit-button btn btn-sm btn-default" type="button" (click)="onEditSbasket(item)" >编辑</button>
+                      <button class="tabledit-delete-button btn btn-sm btn-default" type="button" (click)="onDeleteSbasket(item)">删除</button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <app-pagination [currentPage]="curPage" [totalPages]="mdServicePage?.totalPages" (clickPage)="onPage($event)" ></app-pagination>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- 新增/编辑 -->
+<div id="data_editor" class="modal fade" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">{{editorTitle}}</h4>
+      </div>
+      <div class="modal-body form-horizontal">
+
+          <div class="form-group">
+            <label class="col-sm-3 control-label">权重:</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" id="inputEmail3" placeholder="请输入权重" [(ngModel)]="curSbasket.weight">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">股数:</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control"  placeholder="请输入股数" [(ngModel)]="curSbasket.volume">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">备选代码:</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control"  placeholder="请输入备选代码" [(ngModel)]="curSbasket.errCode1">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">备选股数:</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control"  placeholder="请输入备选股数" [(ngModel)]="curSbasket.volume1">
+            </div>
+          </div>
+
+
+
+
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="save()">保存</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 删除 -->
+<div id="delete_confirm" class="modal fade bs-example-modal-sm" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" >删除</h4>
+      </div>
+
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-xs-offset-1 col-xs-11"><p class="lead">是否确定<strong>删除</strong>该行情订阅记录？</p></div>
+        </div>
+        <!--<div class="row">-->
+        <!--<div class="col-xs-offset-1 col-xs-11">-->
+        <!--<dl class="dl-horizontal" style="margin-bottom: 2px;">-->
+        <!--<dt>交易所代码</dt><dd>{{curFutures?.exchangeId}}</dd>-->
+        <!--</dl>-->
+        <!--dl class="dl-horizontal" style="margin-bottom: 2px;">-->
+        <!--<dt>代码</dt><dd>{{curFutures?.productId}}</dd>-->
+        <!--</dl>-->
+        <!--dl class="dl-horizontal" style="margin-bottom: 2px;">-->
+        <!--<dt>名称</dt><dd>{{curFutures?.productName}}</dd>-->
+        <!--</dl>-->
+        <!--dl class="dl-horizontal" style="margin-bottom: 2px;">-->
+        <!--<dt>合约乘数</dt><dd>{{curFutures?.volumeMultiple}}</dd>-->
+        <!--</dl>-->
+        <!--dl class="dl-horizontal" style="margin-bottom: 2px;">-->
+        <!--<dt>最小价格变动单位</dt><dd>{{curFutures?.priceTick}}</dd>-->
+        <!--</dl>-->
+        <!--dl class="dl-horizontal">-->
+        <!--<dt>计费方式</dt><dd>{{curFutures?.feeMode}}</dd>-->
+        <!--</dl>-->
+        <!--</div>-->
+        <!--</div>-->
+      </div>
+
+      <div class="modal-footer" style="text-align: right;">
+        <button type="button" class="btn btn-primary" (click)="delete()">确定</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+      </div>
+    </div>
+  </div>
+</div>

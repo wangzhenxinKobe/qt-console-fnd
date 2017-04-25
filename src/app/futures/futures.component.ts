@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {Futures} from "./futures";
+import {FuturesService} from "./futures.service";
+import {FuturesPage,Futures} from "./futures";
 
-declare var $;
+declare var $ : any;
 
 @Component({
   selector: 'app-futures',
@@ -9,126 +10,122 @@ declare var $;
   styleUrls: ['./futures.component.css']
 })
 export class FuturesComponent implements OnInit {
+  searchPlatId : string = '';
 
-  futuresList : Futures[];
+  curPage : number = 1;
+
+  futuresPage : FuturesPage;
+
+  curFutures : Futures;
+  editorTitle : string = '';
+  isAddEditor : boolean;
+  // futuresList : Futures[];
 
 
-  constructor() { }
+  constructor(
+    private futuresService : FuturesService
+  ) { }
 
   ngOnInit() {
 
-
-    $(function () {
-
-      $('#futures-table').Tabledit({
-
-        url: 'http://localhost:8080/submit_photos',
-        columns: {
-          identifier: [0, 'productId'],
-          editable: [
-            [1, 'productName'],
-            [2, 'exchangeId', '{"100001": "交易所代码1", "100002": "交易所代码2", "100003": "交易所代码3"}'],
-            [3, 'volumeMultiple'],
-            [4, 'priceTick', '{"1": "十万", "2": "百万", "3": "千万"}'],
-            [5, 'feeMode', '{"1": "单元制1", "2": "单元制2", "3": "单元制3"}']
-          ]
-        },
-
-        onAjax: function(action, serialize) { //发送请求前，对请求数据进行预处理
-
-          console.log('onAjax(action, serialize)');
-          console.log(action);
-          console.log(serialize);
-
-          return serialize;
-
-        },
-
-        onSuccess: function(data, textStatus, jqXHR) { //对成功应答进行处理，返回false，表示实际请求失败
-
-          console.log('onSuccess(data, textStatus, jqXHR)');
-          console.log(data);
-          console.log(textStatus);
-          console.log(jqXHR);
-
-          return true;
-
-        },
-
-        onFail: function(jqXHR, textStatus, errorThrown) {
-
-          console.log('onFail(jqXHR, textStatus, errorThrown)');
-          console.log(jqXHR);
-          console.log(textStatus);
-          console.log(errorThrown);
-
-        }
-
-      });
-
-    });
-
-    this.futuresList = [
-      {
-        exchangeId : '100001',      //交易所代码
-        productId : '880001',       //期货品种代码
-        productName : '期货合约-1',     //名称
-        volumeMultiple : 100, //合约乘数
-        priceTick : 10,       //最小价格变动单位
-        feeMode : 23          //最小价格变动单位
-      },
-      {
-        exchangeId : '100002',      //交易所代码
-        productId : '880002',       //期货品种代码
-        productName : '期货合约-2',     //名称
-        volumeMultiple : 100, //合约乘数
-        priceTick : 10,       //最小价格变动单位
-        feeMode : 23          //最小价格变动单位
-      },
-      {
-        exchangeId : '100001',      //交易所代码
-        productId : '880003',       //期货品种代码
-        productName : '期货合约-3',     //名称
-        volumeMultiple : 100, //合约乘数
-        priceTick : 10,       //最小价格变动单位
-        feeMode : 23          //最小价格变动单位
-      },
-      {
-        exchangeId : '100001',      //交易所代码
-        productId : '880004',       //期货品种代码
-        productName : '期货合约-4',     //名称
-        volumeMultiple : 100, //合约乘数
-        priceTick : 10,       //最小价格变动单位
-        feeMode : 23          //最小价格变动单位
-      },
-      {
-        exchangeId : '100001',      //交易所代码
-        productId : '880005',       //期货品种代码
-        productName : '期货合约-5',     //名称
-        volumeMultiple : 100, //合约乘数
-        priceTick : 10,       //最小价格变动单位
-        feeMode : 23          //最小价格变动单位
-      },
-      {
-        exchangeId : '100001',      //交易所代码
-        productId : '880006',       //期货品种代码
-        productName : '期货合约-6',     //名称
-        volumeMultiple : 100, //合约乘数
-        priceTick : 10,       //最小价格变动单位
-        feeMode : 23          //最小价格变动单位
-      }
-    ];
+    this.curFutures = {
+      exchangeId :"",
+      productId :"",
+      productName :"",
+      volumeMultiple : 0,
+      priceTick : 0,
+      feeMode : 0,
+    };
 
   }
 
-  addFutures() {
+  search() {
 
-    var tr = "<tr><td>600000</td><td>浦发银行</td><td>0789797</td><td>2132</td><td>4.4万</td><td>创业板</td></tr>";
-    $('#futures-table').append(tr).DrawToolbar({
-      editButton: true,
-      deleteButton: true
-    });
+    this.curPage = 1;
+    this.queryList();
 
   }
+
+  onPage(event) {
+
+    this.curPage = event;
+    this.queryList();
+
+  }
+
+  onAddFutures() {
+
+    this.isAddEditor = true;
+    this.editorTitle = '新增期货';
+
+    this.curFutures = { //初始化期货数据
+      exchangeId :"",
+      productId :"",
+      productName :"",
+      volumeMultiple : 0,
+      priceTick : 0,
+      feeMode : 0,
+    };
+
+    $('#data_editor').modal('show'); //显示编辑对话框
+
+  }
+
+  onEditFutures(value : Futures) {
+
+    this.isAddEditor = false;
+    this.editorTitle = '编辑期货';
+
+    this.curFutures = value;
+
+    $('#data_editor').modal('show'); //显示编辑对话框
+
+  }
+
+  onDeleteFutures(value : Futures) {
+
+    this.curFutures = value;
+
+    $('#delete_confirm').modal('show'); //显示编辑对话框
+
+  }
+
+  save() {
+
+    if(this.isAddEditor) { //新增期货数据
+
+      this.curPage = 1;
+      this.futuresService.addFutures(this.curFutures)
+        .then(result => result ? this.queryList() : alert("数据新增失败，请重试！"));
+
+    } else { //修改期货数据
+
+      this.futuresService.updateFutures(this.curFutures)
+        .then( result => result ? this.queryList() : alert("数据修改失败，请重试！") );
+
+    }
+
+    $('#data_editor').modal('hide');
+
+  }
+
+  delete() {
+
+    this.futuresService.removeFutures(this.curFutures)
+      .then( result => result ? this.queryList() : alert("数据删除失败，请重试！") );
+
+    $('#delete_confirm').modal('hide');
+
+  }
+
+  private queryList() {
+
+    console.info(`searchPlatId[${this.searchPlatId}], curPage[${this.curPage}]`);
+
+    this.futuresService.getFuturesPage(this.searchPlatId, this.curPage)
+      .then( page => this.futuresPage = page );
+
+  }
+
 
 }

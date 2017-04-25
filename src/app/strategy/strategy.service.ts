@@ -4,16 +4,21 @@ import { Headers, Http, Response } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import {Strategy, StrategyPage} from "./strategy";
 import {ParamConfig} from "../common/param.config";
+import {generateRequestId} from "../app.module";
 
 
 @Injectable()
 export class StrategyService {
 
-  private hostUrl = ParamConfig.HOST_URL; //URL to web api
+  private hostUrl = ParamConfig.HTTP_HOST_URL; //URL to web api
   private headers = new Headers({'Content-Type': 'application/json'});
   private request_id = '';
 
-  constructor(private http : Http) {}
+  constructor(private http : Http) {
+
+    this.request_id = generateRequestId();
+
+  }
 
   getStrategies(plat_id, strategy_type, strategy_name, current_page) : Promise<StrategyPage> {
 
@@ -80,6 +85,7 @@ export class StrategyService {
       .then( res => {
 
         let body = res.json();
+
         if(body.errCode == '000000') {
 
           return body as Strategy;
@@ -117,6 +123,37 @@ export class StrategyService {
 
         let body = res.json();
 
+      })
+      .catch(this.handleError);
+
+  }
+
+  updateStrategyParam(strategyName : string, paraName : string, paraValue : string) {
+
+    let request = JSON.stringify({
+
+      strategyName : strategyName,
+      paraName : paraName,
+      paraValue : paraValue,
+      requestId : this.request_id,
+      serviceCode : 'FS004'
+
+    });
+
+    return this.http
+      .post(this.hostUrl, request, {headers: this.headers})
+      .toPromise()
+      .then( res => {
+
+        let body = res.json();
+
+        if(body.errCode == '000000') {
+          return true ;
+        }
+        else {
+          console.error("请求失败：" + body.errMsg);
+          return false;
+        }
 
       })
       .catch(this.handleError);

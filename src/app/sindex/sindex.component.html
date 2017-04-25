@@ -1,0 +1,215 @@
+<div class="r_crumbs">
+  <a href="#">首页</a>
+  <a href="#">业务信息管理</a>
+  股票指数管理
+</div>
+<div class="r_main">
+  <div class="r_box">
+    <div class="r_boxHead">
+      <h2>股票指数管理</h2>
+    </div>
+    <div class="r_boxContent">
+      <div class="r_boxTool clearfix">
+        <div class="row">
+          <div class="col-md-4 col-md-offset-8">
+            <div class="row">
+              <div class="col-md-8">
+                <div class="r_boxToolPad">
+                  <select class="form-control" [(ngModel)]="searchPlatId" (change)="search()">
+                    <option value="">请选择指数名称</option>
+                    <option value="414">浦发银行</option>
+                    <option value="415">东风汽车</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="r_boxToolPad">
+                  <a href=" " class="btn btn-default btnFile btn-block"><input type="file" />导入</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+      <div>
+        <div class="r_boxPad">
+          <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover" id="example2">
+              <thead>
+              <tr>
+                <th>股票代码</th>
+                <th>股票名称</th>
+                <th>交易所代码</th>
+                <th>流通股本</th>
+                <th>总股本</th>
+                <th>板块</th>
+                <th>是否是基金</th>
+                <th>是否是指数</th>
+                <th>操作</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let item of sindexPage?.sindex">
+                <td>{{item.stockCode}}</td>
+                <td>{{item.stockName}}</td>
+                <td>{{item.exchangeId}}</td>
+                <td>{{item.flowVolume}}</td>
+                <td>{{item.allVolume}}</td>
+                <td>{{item.stockBoard}}</td>
+                <td>{{item.isFund}}</td>
+                <td>{{item.isIndex}}</td>
+                <td style="text-align: center;">
+                  <div class="tabledit-toolbar btn-toolbar" style=" display: inline-block;">
+                    <div class="btn-group btn-group-sm" >
+                      <button class="tabledit-edit-button btn btn-sm btn-default" type="button" (click)="onEditSindex(item)" >编辑</button>
+                      <button class="tabledit-delete-button btn btn-sm btn-default" type="button" (click)="onDeleteSindex(item)">删除</button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- 新增/编辑 -->
+<div id="data_editor" class="modal fade" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">{{editorTitle}}</h4>
+      </div>
+      <div class="modal-body form-horizontal">
+
+        <div class="form-group">
+          <label class="col-sm-3 control-label">股票代码:</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control" id="inputEmail3" placeholder="股票代码" [(ngModel)]="curSindex.stockCode">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label">股票名称:</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control"  placeholder="股票名称" [(ngModel)]="curSindex.stockName">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label">交易所代码:</label>
+          <div class="col-sm-9">
+            <select class="form-control" [(ngModel)]="curSindex.exchangeId">
+              <option>32131</option>
+              <option>32132</option>
+              <option>32133</option>
+              <option>3214</option>
+              <option>3215</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label">流通股本:</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control"  placeholder="流通股本" [(ngModel)]="curSindex.flowVolume">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label">总股本:</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control"  placeholder="总股本" [(ngModel)]="curSindex.allVolume">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label">板块:</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control"  placeholder="板块" [(ngModel)]="curSindex.stockBoard">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label">是否是基金:</label>
+          <div class="col-sm-9">
+            <div class="  ">
+              <label class="radio-inline">
+                <input type="radio" name="a1" [(ngModel)]="curSindex.isFund" value="1"> 是
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="a1" [(ngModel)]="curSindex.isFund" value="0"> 否
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label">是否是指数:</label>
+          <div class="col-sm-9">
+            <div class=" ">
+              <label class="radio-inline">
+              <input type="radio" name="a2" [(ngModel)]="curSindex.isIndex" value="1"> 是
+              </label>
+              <label class="radio-inline">
+              <input type="radio" name="a2" [(ngModel)]="curSindex.isIndex" value="0"> 否
+            </label>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="save()">保存</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 删除 -->
+<div id="delete_confirm" class="modal fade bs-example-modal-sm" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" >删除</h4>
+      </div>
+
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-xs-offset-1 col-xs-11"><p class="lead">是否确定<strong>删除</strong>该行情订阅记录？</p></div>
+        </div>
+        <!--<div class="row">-->
+        <!--<div class="col-xs-offset-1 col-xs-11">-->
+        <!--<dl class="dl-horizontal" style="margin-bottom: 2px;">-->
+        <!--<dt>交易所代码</dt><dd>{{curFutures?.exchangeId}}</dd>-->
+        <!--</dl>-->
+        <!--dl class="dl-horizontal" style="margin-bottom: 2px;">-->
+        <!--<dt>代码</dt><dd>{{curFutures?.productId}}</dd>-->
+        <!--</dl>-->
+        <!--dl class="dl-horizontal" style="margin-bottom: 2px;">-->
+        <!--<dt>名称</dt><dd>{{curFutures?.productName}}</dd>-->
+        <!--</dl>-->
+        <!--dl class="dl-horizontal" style="margin-bottom: 2px;">-->
+        <!--<dt>合约乘数</dt><dd>{{curFutures?.volumeMultiple}}</dd>-->
+        <!--</dl>-->
+        <!--dl class="dl-horizontal" style="margin-bottom: 2px;">-->
+        <!--<dt>最小价格变动单位</dt><dd>{{curFutures?.priceTick}}</dd>-->
+        <!--</dl>-->
+        <!--dl class="dl-horizontal">-->
+        <!--<dt>计费方式</dt><dd>{{curFutures?.feeMode}}</dd>-->
+        <!--</dl>-->
+        <!--</div>-->
+        <!--</div>-->
+      </div>
+
+      <div class="modal-footer" style="text-align: right;">
+        <button type="button" class="btn btn-primary" (click)="delete()">确定</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+      </div>
+    </div>
+  </div>
+</div>

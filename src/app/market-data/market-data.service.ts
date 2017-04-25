@@ -3,13 +3,14 @@ import { Headers, Http, Response } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import {MarketData,MarketDataPage} from "./market-data";
 import {ParamConfig} from "../common/param.config";
+import {generateRequestId} from "../app.module";
 
 @Injectable()
 export class MarketDataService {
 
-  private hostUrl = ParamConfig.HOST_URL; //URL to web api
+  private hostUrl = ParamConfig.HTTP_HOST_URL; //URL to web api
   private headers = new Headers({'Content-Type': 'application/json'});
-  private request_id = '';
+  private request_id = generateRequestId();
 
   constructor(private http : Http) { }
 
