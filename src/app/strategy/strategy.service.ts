@@ -4,6 +4,7 @@ import { Headers, Http, Response } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import {Strategy, StrategyPage} from "./strategy";
 import {ParamConfig} from "../common/param.config";
+import {generateRequestId} from "../app.module";
 
 
 @Injectable()
@@ -11,9 +12,13 @@ export class StrategyService {
 
   private hostUrl = ParamConfig.HTTP_HOST_URL; //URL to web api
   private headers = new Headers({'Content-Type': 'application/json'});
-  private request_id = ParamConfig.HTTP_REQUEST_ID;
+  private request_id = '';
 
-  constructor(private http : Http) {}
+  constructor(private http : Http) {
+
+    this.request_id = generateRequestId();
+
+  }
 
   getStrategies(plat_id, strategy_type, strategy_name, current_page) : Promise<StrategyPage> {
 

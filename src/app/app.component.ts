@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import {AuthService} from "./common/auth.service";
+import {AuthService} from "./user/auth.service";
 import {UserService} from "./user/user.service";
 
 declare var $ : any;
@@ -24,6 +24,8 @@ export class AppComponent implements OnInit{
   ) {
 
     authService.loginStatus$.subscribe( status => {
+
+      console.info(`loginStatus change to [${status}]`);
 
       if(!status) { //登出或者Token失效
 
@@ -69,7 +71,6 @@ export class AppComponent implements OnInit{
       $('body').addClass('sidebar-mini');
 
     }
-
 
   }
 

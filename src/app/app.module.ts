@@ -10,12 +10,24 @@ import {AppRoutingModule} from "./app-routing.module";
 
 import {HttpInterceptor} from "./common/http-interceptor.service";
 
-import {AuthService} from "./common/auth.service";
+import {AuthService} from "./user/auth.service";
 import {UserService} from "./user/user.service";
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './user/login.component';
 
+export function generateRequestId() {
+
+  let chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let maxPos = chars.length;
+  let pwd = '';
+  for (let i = 0; i < 32; i++) {
+    //0~32的整数
+    pwd += chars.charAt(Math.floor(Math.random() * (maxPos+1)));
+  }
+  return pwd;
+
+}
 
 export function interceptorFactory(xhrBackend: XHRBackend, requestOptions: RequestOptions, httpInterceptor: HttpInterceptor){ // Add it here
 

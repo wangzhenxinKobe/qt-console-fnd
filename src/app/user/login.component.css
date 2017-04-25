@@ -1,125 +1,38 @@
-.bg{
-  background: url(assets/images/bg.png) repeat-x 0 bottom #099fde;
-  background-size: auto 100%;
-}
-.login{
+.login-box{
+  width: 400px;
   position: absolute;
-  width: 900px;
   left: 50%;
   top: 50%;
-  background: #e5e5e5;
-  border-top: 5px solid #00b4ff;
-  box-shadow:0 5px 10px rgba(0,0,0,0.25) ;
-  margin-left: -450px;
+  margin-left: -200px;
+  border-top:5px solid #00b4ff;
 }
-.loginHead{
-  padding: 65px 0;
-  text-align: center;
-  background: #fff;
-}
-.loginRow{
-  padding: 20px 0 0 0;
-}
-.loginForm{
-  max-width: 230px;
+.register-box{
   margin: 0 auto;
 }
-.loginInput{
-  margin: 5px 0 0 0;
-  position:relative;
+.login-logo{
+  background: #fff;
+  padding: 30px 20px 40px 20px;
+  margin: 0;
 }
-.loginInput input{
-  border: 1px solid #e0e0e0;
-  background: #FFF;
-  line-height: 36px;
-  height: 36px;
-  padding: 0 10px;
-  box-sizing: border-box;
-  width: 100%;
+img{
+  max-width: 100%;
 }
-.loginRowCode{
-  position: relative;
-  padding: 0 90px 0 0;
+.login-box-body{
+  background: #e5e5e5;
 }
-.loginRowCodeImg{
-  position: absolute;
-  right: 0;
-  top: 1px;
-}
-.loginText{
-  padding: 5px 0 0 0;
-  text-align: right;
-}
-.loginText a{
-  color: #099fde;
-  text-decoration: none;
-}
-.loginText a:hover{
-  text-decoration: underline;
-}
-.loginBtn{
-  display: block;
-  text-align: center;
-  line-height: 50px;
-  background: #099fde;
-  font-size: 20px;
-  color: #fff;
-  box-shadow: 0 2px 3px rgba(0,94,134,0.3);
-  font-weight: bold;
-  text-decoration: none;
-}
-.loginBtn:hover{
-  color: #fff;
-  background: #0084bb;
-}
-.loginMain{
-  padding: 30px 0 70px 0;
-}
-a{
-  -webkit-transition:0.2s ease-in 0s;
-  -o-transition:0.2s ease-in 0s;
-  transition:0.2s ease-in 0s;
-}
-@media (max-width: 960px) {
-  .bg{
-    padding:15% 10px;
-
-    height: auto;
-  }
-  .login{
-    position: relative;
+@media (max-width: 480px) {
+  .login-box{
     width: auto;
     left: auto;
     top: auto;
-    margin: auto !important;
-    max-width: 900;
+    margin:0 10px 10px 10px !important;
+    border-top:5px solid #00b4ff;
+    position: relative;
   }
-
-
-}
-@media (max-width: 768px) {
-  .loginHead img{
-    width: 151px;
+  body{
+    padding: 10px 0 0 0;
   }
-  .loginHead{
-    padding: 30px 10px;
-  }
-  .loginMain{
-    padding:10px 10px 30px 10px;
-  }
-}
-@media (max-width: 480px) {
-
-  .loginHead{
-    padding: 20px 10px;
-  }
-  .loginMain{
-    padding:10px 10px 30px 10px;
-  }
-  .bg{
-    padding:12% 10px;
-  }
-  .loginRow{
-    padding: 15px 0 0 0;
+  .login-logo{
+    padding: 20px 30px 30px 30px;
   }
 }

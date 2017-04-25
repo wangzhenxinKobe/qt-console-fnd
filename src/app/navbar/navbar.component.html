@@ -73,7 +73,7 @@
     <!-- sidebar menu: : style can be found in sidebar.less -->
 
     <ul class="sidebar-menu">
-      <li *ngFor="let group of routers" class="treeview" [class.active]="group == selectedParent">
+      <li *ngFor="let group of authorities" class="treeview" [class.active]="group == selectedParent">
         <a href="#">
           <i class={{group.icon}}></i> <span>{{group.name}}</span>
             <span class="pull-right-container">

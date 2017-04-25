@@ -4,13 +4,14 @@ import { Headers, Http, Response } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import {ParamConfig} from "../common/param.config";
 import {TradeUnitPage, TradeUnit} from "./trade-unit";
+import {generateRequestId} from "../app.module";
 
 @Injectable()
 export class TradeUnitService {
 
   private hostUrl = ParamConfig.HTTP_HOST_URL; //URL to web api
   private headers = new Headers({'Content-Type': 'application/json'});
-  private request_id = ParamConfig.HTTP_REQUEST_ID;
+  private request_id = generateRequestId();
 
   constructor(private http : Http) {}
 

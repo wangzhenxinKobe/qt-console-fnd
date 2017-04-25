@@ -1,7 +1,11 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+import {Md5} from "ts-md5/dist/md5";
+
 import {UserService} from "./user.service";
+
+declare var $ : any;
 
 @Component({
   selector: 'app-login',
@@ -10,7 +14,11 @@ import {UserService} from "./user.service";
 })
 export class LoginComponent implements OnInit {
 
-  @Output() success : EventEmitter<any> = new EventEmitter();
+  chkCodeRequest : string;
+
+  password : string;
+  userNo : string;
+  chkCode : string;
 
   constructor(
     private userService : UserService,
@@ -18,13 +26,37 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+    var boxH = $('.login-box').height()/2;
+    $('.login-box').css({'marginTop':-boxH});
+
+    this.updateChkCode();
+
+  }
+
+  updateChkCode() {
+
+    this.chkCodeRequest = this.userService.getChkCodeRequest();
+
   }
 
   onLogin() {
 
-    this.userService.login('', '', '');
-    this.router.navigate(['/business']);
+    if(this.password == '') return ;
 
+    let pwdMd5 = Md5.hashStr(this.password).toString();
+
+    console.info(`UserName[${this.userNo}], Password[${this.password}], MD5[${pwdMd5}], chkCode[${this.chkCode}]`);
+
+    this.userService.login(this.userNo, pwdMd5, this.chkCode)
+      .then( (res : boolean) => {
+
+        if(res) {
+          this.router.navigate(['/business']);
+        }
+
+      });
+    
   }
 
 }

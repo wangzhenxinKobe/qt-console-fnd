@@ -2,15 +2,19 @@ import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
-import {User} from "./user";
-import {AuthService} from "../common/auth.service";
+import {User, Authority} from "./user";
+import {AuthService} from "./auth.service";
+import {generateRequestId} from "../app.module";
+import {ParamConfig} from "../common/param.config";
 
 @Injectable()
 export class UserService {
 
+  private hostUrl = ParamConfig.HTTP_HOST_URL; //URL to web api
   private headers = new Headers({'Content-Type': 'application/json'});
 
   private user : User = null;
+  private request_id : string;
 
   constructor(
     private http: Http,
@@ -26,22 +30,58 @@ export class UserService {
 
   }
 
+  getChkCodeRequest() : string {
+
+    this.request_id = generateRequestId();
+
+    return `${ParamConfig.HTTP_CHKCODE_URL}?requestId=${this.request_id}&serviceCode=FS102`;
+
+  }
+
   // 登陆
-  login(account : string, password : string, chkCode : string) {
+  login(account : string, password : string, chkCode : string) : Promise<any> {
 
-    this.user = {id: '1233232', name : 'gavin'};
+    let request = JSON.stringify({
 
-    this.authService.sendLoginStatus(true);
+      userNo : account,
+      password : password,
+      code : chkCode,
+      originRequestId : this.request_id,
+      requestId : this.request_id,
+      serviceCode : 'FS093'
 
-    return true;
+    });
 
-    /*
-     return this.http.post(this.url_authLogin,
-     JSON.stringify({account:account,password:password}))
-     .toPromise()
-     .then(response => response.json().data as User  )
-     .catch(this.handleError);
-     */
+    return this.http
+      .post(this.hostUrl, request, {headers: this.headers})
+      .toPromise()
+      .then( res => {
+
+        let body = res.json();
+
+        if(body.errCode == '000000') {
+
+          //获取用户及权限信息
+          this.user = new User();
+          this.user.userName = body.userName;
+          this.user.userNo = body.userNo;
+          this.authService.authorities = body.fieldList as Authority[];
+
+          //设置登录信息
+          this.authService.setTokenId(body.tokenId);
+          this.authService.sendLoginStatus(true);
+
+          return true;
+
+        } else {
+
+          console.error("请求失败：" + body.errMsg);
+          return false;
+
+        }
+
+      })
+      .catch(this.handleError);
 
   }
 
@@ -58,8 +98,8 @@ export class UserService {
   }
 
   private handleError(error: any): Promise<any> {
-    console.error('发生错误', error);
-    return Promise.reject(error.message || error);
+    console.error('An error occurred', error); // for demo purposes only
+    return null;
   }
 
 }
