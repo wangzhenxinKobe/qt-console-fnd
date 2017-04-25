@@ -6,13 +6,29 @@ import {FuturesComponent} from "./futures/futures.component";
 import {MarketDataComponent} from "./market-data/market-data.component";
 import {TradeUnitComponent} from "./trade-unit/trade-unit.component";
 import {BusinessComponent} from "./business.component";
+import {TdServiceComponent} from "./tdService/tdService.component";
+import {MdServiceComponent} from "./mdService/mdService.component";
+import {AccountComponent} from "./account/account.component";
+import {TplatformComponent} from "./tplatform/tplatform.component";
+import {SysfuncComponent} from "./sysfunc/sysfunc.component";
+import {BinfoComponent} from "./binfo/binfo.component";
+import {SindexComponent} from "./sindex/sindex.component";
+import {SbasketComponent} from "./sbasket/sbasket.component";
 
 
 const childrenRoutes: Routes = [
   { path: 'strategy',  component: StrategyComponent },
   { path: 'market-data',  component: MarketDataComponent },
   { path: 'futures',  component: FuturesComponent },
-  { path: 'trade-unit',  component: TradeUnitComponent }
+  { path: 'trade-unit',  component: TradeUnitComponent },
+  { path: 'tdService',  component: TdServiceComponent },
+  { path: 'mdService',  component: MdServiceComponent },
+  { path: 'account',  component: AccountComponent },
+  { path: 'tplatform',  component: TplatformComponent },
+  { path: 'sysfunc',  component: SysfuncComponent },
+  { path: 'binfo',  component: BinfoComponent },
+  { path: 'sindex',  component: SindexComponent },
+  { path: 'sbasket',  component: SbasketComponent }
 ];
 
 const businessRoutes : Routes = [{

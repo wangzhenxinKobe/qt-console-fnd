@@ -65,7 +65,17 @@ export class UserService {
           this.user = new User();
           this.user.userName = body.userName;
           this.user.userNo = body.userNo;
+
           this.authService.authorities = body.fieldList as Authority[];
+
+          console.info(this.authService.authorities);
+
+          if(!this.authService.authorities || this.authService.authorities.length == 0) {
+
+            console.error("请求失败：用户权限为空");
+            return false;
+
+          }
 
           //设置登录信息
           this.authService.setTokenId(body.tokenId);

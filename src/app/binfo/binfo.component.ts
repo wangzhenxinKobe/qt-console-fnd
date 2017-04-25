@@ -1,40 +1,45 @@
 import { Component, OnInit } from '@angular/core';
-import {FuturesService} from "./futures.service";
-import {FuturesPage,Futures} from "./futures";
+import {BinfoService} from "./binfo.service";
+import {BinfoPage,Binfo} from "./binfo";
 
 declare var $ : any;
 
 @Component({
-  selector: 'app-futures',
-  templateUrl: './futures.component.html',
-  styleUrls: ['./futures.component.css']
+  selector: 'app-binfo',
+  templateUrl: './binfo.component.html',
+  styleUrls: ['./binfo.component.css']
 })
-export class FuturesComponent implements OnInit {
+export class BinfoComponent implements OnInit {
   searchPlatId : string = '';
 
   curPage : number = 1;
 
-  futuresPage : FuturesPage;
 
-  curFutures : Futures;
+  binfoPage : BinfoPage;
+
+  curBinfo : Binfo;
   editorTitle : string = '';
   isAddEditor : boolean;
-  // futuresList : Futures[];
+
 
 
   constructor(
-    private futuresService : FuturesService
+    private binfoService : BinfoService
   ) { }
 
   ngOnInit() {
 
-    this.curFutures = {
+    this.curBinfo = {
+      stockCode :"",
+      stockName :"",
       exchangeId :"",
-      productId :"",
-      productName :"",
-      volumeMultiple : 0,
-      priceTick : 0,
-      feeMode : 0,
+      flowVolume : 0,
+      allVolume : 0,
+      stockBoard : 0,
+      isFund : "",
+      isIndex : "",
+
+
     };
 
   }
@@ -53,38 +58,41 @@ export class FuturesComponent implements OnInit {
 
   }
 
-  onAddFutures() {
+  onAddBinfo() {
 
     this.isAddEditor = true;
-    this.editorTitle = '新增期货';
+    this.editorTitle = '新增股票基本信息';
 
-    this.curFutures = { //初始化期货数据
+    this.curBinfo = { //初始化期货数据
+      stockCode :"",
+      stockName :"",
       exchangeId :"",
-      productId :"",
-      productName :"",
-      volumeMultiple : 0,
-      priceTick : 0,
-      feeMode : 0,
+      flowVolume : 0,
+      allVolume : 0,
+      stockBoard : 0,
+      isFund : "",
+      isIndex : "",
+
     };
 
     $('#data_editor').modal('show'); //显示编辑对话框
 
   }
 
-  onEditFutures(value : Futures) {
+  onEditBinfo(value : Binfo) {
 
     this.isAddEditor = false;
-    this.editorTitle = '编辑期货';
+    this.editorTitle = '编辑股票基本信息';
 
-    this.curFutures = value;
+    this.curBinfo = value;
 
     $('#data_editor').modal('show'); //显示编辑对话框
 
   }
 
-  onDeleteFutures(value : Futures) {
+  onDeleteBinfo(value : Binfo) {
 
-    this.curFutures = value;
+    this.curBinfo = value;
 
     $('#delete_confirm').modal('show'); //显示编辑对话框
 
@@ -95,12 +103,12 @@ export class FuturesComponent implements OnInit {
     if(this.isAddEditor) { //新增期货数据
 
       this.curPage = 1;
-      this.futuresService.addFutures(this.curFutures)
+      this.binfoService.addBinfo(this.curBinfo)
         .then(result => result ? this.queryList() : alert("数据新增失败，请重试！"));
 
     } else { //修改期货数据
 
-      this.futuresService.updateFutures(this.curFutures)
+      this.binfoService.updateBinfo(this.curBinfo)
         .then( result => result ? this.queryList() : alert("数据修改失败，请重试！") );
 
     }
@@ -111,7 +119,7 @@ export class FuturesComponent implements OnInit {
 
   delete() {
 
-    this.futuresService.removeFutures(this.curFutures)
+    this.binfoService.removeBinfo(this.curBinfo)
       .then( result => result ? this.queryList() : alert("数据删除失败，请重试！") );
 
     $('#delete_confirm').modal('hide');
@@ -122,8 +130,8 @@ export class FuturesComponent implements OnInit {
 
     console.info(`searchPlatId[${this.searchPlatId}], curPage[${this.curPage}]`);
 
-    this.futuresService.getFuturesPage(this.searchPlatId, this.curPage)
-      .then( page => this.futuresPage = page );
+    this.binfoService.getBinfoPage(this.searchPlatId, this.curPage)
+      .then( page => this.binfoPage = page );
 
   }
 
