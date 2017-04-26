@@ -39,6 +39,9 @@ import {TdServiceComponent} from "./tdService/tdService.component";
 import {TdServiceService} from "./tdService/tdService.service";
 import {TplatformComponent} from "./tplatform/tplatform.component";
 import {TplatformService} from "./tplatform/tplatform.service";
+import {OproleComponent} from "./oprole/oprole.component";
+import {OproleService} from "./oprole/oprole.service";
+import {OproleDetailComponent} from "./oprole/oprole-detail.component";
 
 
 @NgModule({
@@ -60,7 +63,9 @@ import {TplatformService} from "./tplatform/tplatform.service";
     SindexComponent,
     SysfuncComponent,
     TdServiceComponent,
-    TplatformComponent
+    TplatformComponent,
+    OproleComponent,
+    OproleDetailComponent
 
   ],
   imports: [
@@ -73,7 +78,7 @@ import {TplatformService} from "./tplatform/tplatform.service";
 
   ],
   providers: [ StrategyService, MarketDataService, TradeUnitService, AccountService, BinfoService, FuturesService, MdServiceService,
-    SbasketService, SindexService, SysfuncService, TdServiceService, TplatformService
+    SbasketService, SindexService, SysfuncService, TdServiceService, TplatformService, OproleService
   ]
 
 })

@@ -14,6 +14,8 @@ import {SysfuncComponent} from "./sysfunc/sysfunc.component";
 import {BinfoComponent} from "./binfo/binfo.component";
 import {SindexComponent} from "./sindex/sindex.component";
 import {SbasketComponent} from "./sbasket/sbasket.component";
+import {OproleComponent} from "./oprole/oprole.component";
+import {OproleDetailComponent} from "./oprole/oprole-detail.component";
 
 
 const childrenRoutes: Routes = [
@@ -28,7 +30,9 @@ const childrenRoutes: Routes = [
   { path: 'sysfunc',  component: SysfuncComponent },
   { path: 'binfo',  component: BinfoComponent },
   { path: 'sindex',  component: SindexComponent },
-  { path: 'sbasket',  component: SbasketComponent }
+  { path: 'sbasket',  component: SbasketComponent },
+  { path: 'oprole',  component: OproleComponent },
+  { path: 'oprole-detail',  component: OproleDetailComponent }
 ];
 
 const businessRoutes : Routes = [{
