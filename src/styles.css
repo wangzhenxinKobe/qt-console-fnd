@@ -55,15 +55,22 @@ body,html{
   vertical-align: middle;
 }
 .r_main{
-  padding: 20px 30px;
+  margin: 20px 30px;
+  position: relative;
 }
 .r_box{
   background: #fff;
   border-top: 3px solid #099fde;
   box-shadow: 0 1px 2px #ccc;
 }
+.r_boxNoBorder{
+  border-top: none;
+  margin: 20px 0 0 0;
+}
 .r_boxHead{
   padding: 0 15px;
+  position: relative;
+  border-bottom: 1px solid #eee;
 }
 .r_boxHead h2{
   margin: 0;
@@ -71,7 +78,7 @@ body,html{
   font-size: 20px;
   color: #333;
   font-weight: 600;
-  line-height: 40px;
+  line-height: 54px;
 }
 .r_userTool{
   width: auto !important;
@@ -85,6 +92,7 @@ body,html{
   background: #f0f7fd;
   padding: 10px 15px;
   position: relative;
+  margin: -1px 0 0 0;
 }
 .r_boxTool .sidebar-form{
   margin: 0;
@@ -136,6 +144,137 @@ body,html{
 .modal-footer{
   text-align: center;
 }
+.r_collapse ul{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.r_collapseLi>a{
+  display: block;
+  line-height: 40px;
+  position: relative;
+  padding: 0 0 0 14px;
+}
+.r_collapseLi>a>i{
+  position: absolute;
+  left: 2px;
+  top: 50%;
+  margin: -9px 0 0 0;
+  font-size: 18px;
+  line-height: 18px;
+}
+.r_collapseLi li a{
+  line-height: 40px;
+  display: block;
+  padding: 0 0 0 28px;
+  position:relative;
+}
+.r_collapseLi li a .fa{
+  position:absolute;
+  right: 12px;
+  top: 50%;
+  line-height: 16px;
+  font-size: 16px;
+  margin: -7px 0 0 0;
+  display: none;
+}
+.r_collapseLi li.active a .fa{
+  display: block;
+}
+.r_collapseLi li{
+  padding: 0 0 1px 0;
+}
+.r_collapseLi li a:hover{
+  background: #eee;
+}
+.r_collapseLi li.active a{
+  background: #0a9edc;
+  color: #fff;
+}
+.r_collapseLi ul{
+  display: none;
+}
+.r_collapseLi.active .fa-angle-right{
+  transform: rotate(90deg);
+}
+.r_footRow{
+  padding: 20px 0 0 0;
+}
+.r_tableChoose tr{
+  cursor: pointer;
+}
+.r_tableChoose tr.active td{
+  background: #0a9edc !important;
+  color: #fff;
+}
+.table-responsive tr td:last-child,
+.table-responsive tr th:last-child{
+  text-align: center;
+}
+.table-responsive tr td:last-child .tabledit-toolbar{
+  display: inline-block;
+}
+.r_tips{
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  text-align: center;
+  color: #fff;
+  line-height: 150%;
+  padding:  10px;
+  z-index: 99;
+  display: none;
+}
+.r_tips i{
+  font-size: 18px;
+  vertical-align: middle;
+  margin: -3px 0 0 0;
+}
+.r_danger{
+  background: rgba(221,75,57,0.9);
+}
+.r_warning{
+  background: rgba(243,156,18,0.9);
+}
+.r_success{
+  background: rgba(0,192,239,0.9);
+}
+.hover{
+  -webkit-animation: twinkling 1s infinite ease-in-out;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both
+}
+@-webkit-keyframes twinkling{
+  0%{
+    background: #eedeb7;
+  }
+  100%{
+    opacity: 1;
+  }
+}
+@keyframes twinkling{
+  0%{
+    background: #fff;
+  }
+  100%{
+    background: #eedeb7;
+  }
+}
+.btnFile{
+  position: relative;
+
+}
+.btnFile input{
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  opacity: 0;
+}
 @media (max-width: 768px) {
   .r_crumbs{
 
@@ -144,7 +283,7 @@ body,html{
 
   }
   .r_main{
-    padding: 20px;
+    margin: 20px;
   }
   .r_boxToolPad{
     padding:0 0 10px 0;
@@ -161,11 +300,16 @@ body,html{
     width: 100%;
     margin-bottom: 5px;
   }
+  .r_boxHead .r_boxToolFRl{
+    position: absolute;
+    right:10px;
+    top: 10px;
+  }
 }
 
 @media (max-width: 480px) {
   .r_main{
-    padding: 10px;
+    margin: 10px;
   }
   .r_boxHead{
     padding: 0 10px;
@@ -173,7 +317,10 @@ body,html{
   .r_boxHead h2{
     font-size: 16px;
   }
-
-
-
+  .r_boxTool{
+    padding: 10px;;
+  }
+  .r_boxPad{
+    padding: 10px;
+  }
 }

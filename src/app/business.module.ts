@@ -41,6 +41,9 @@ import {TplatformComponent} from "./tplatform/tplatform.component";
 import {TplatformService} from "./tplatform/tplatform.service";
 import {AgroupComponent} from "./agroup/agroup.component";
 import {AgroupService} from "./agroup/agroup.service";
+import {OproleComponent} from "./oprole/oprole.component";
+import {OproleService} from "./oprole/oprole.service";
+import {OproleDetailComponent} from "./oprole/oprole-detail.component";
 
 
 @NgModule({
@@ -63,7 +66,10 @@ import {AgroupService} from "./agroup/agroup.service";
     SysfuncComponent,
     TdServiceComponent,
     TplatformComponent,
-    AgroupComponent
+    AgroupComponent,
+    OproleComponent,
+    OproleDetailComponent
+
   ],
   imports: [
     BrowserModule,
@@ -75,7 +81,7 @@ import {AgroupService} from "./agroup/agroup.service";
 
   ],
   providers: [ StrategyService, MarketDataService, TradeUnitService, AccountService, BinfoService, FuturesService, MdServiceService,
-    SbasketService, SindexService, SysfuncService, TdServiceService, TplatformService, AgroupService
+    SbasketService, SindexService, SysfuncService, TdServiceService, TplatformService, AgroupService, OproleService
   ]
 
 })

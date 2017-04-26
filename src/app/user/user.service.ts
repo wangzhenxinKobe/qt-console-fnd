@@ -21,12 +21,61 @@ export class UserService {
     private authService : AuthService
   ) { }
 
-  getUser() {
+  getUser() : Promise<User> {
 
-    if( this.user ) return this.user;
+    if( this.user ) return Promise.resolve(this.user);
 
-    //TODO:用户信息为空，向服务端获取用户信息
-    return null;
+    let tokenId = this.authService.getTokenId();
+    if( !tokenId ) return Promise.reject('TokenId失效');
+
+    this.request_id = generateRequestId();
+
+    //用户信息为空，向服务端获取用户信息
+    let request = JSON.stringify({
+
+      tokenId : tokenId,
+      requestId : this.request_id,
+      serviceCode : 'FS101'
+
+    });
+
+    return this.http
+      .post(this.hostUrl, request, {headers: this.headers})
+      .toPromise()
+      .then( res => {
+
+        let body = res.json();
+
+        if(body.errCode == '000000') {
+
+          //获取用户及权限信息
+          this.user = new User();
+          this.user.userName = body.userName;
+          this.user.userNo = body.userNo;
+
+          this.authService.authorities = body.fieldList as Authority[];
+
+          if(!this.authService.authorities || this.authService.authorities.length == 0) {
+
+            console.error("请求失败：用户权限为空");
+            return null;
+
+          }
+
+          //设置登录信息
+          this.authService.sendLoginStatus(true);
+
+          return this.user;
+
+        } else {
+
+          console.error("请求失败：" + body.errMsg);
+          return null;
+
+        }
+
+      })
+      .catch(this.handleError);
 
   }
 
@@ -67,8 +116,6 @@ export class UserService {
           this.user.userNo = body.userNo;
 
           this.authService.authorities = body.fieldList as Authority[];
-
-          console.info(this.authService.authorities);
 
           if(!this.authService.authorities || this.authService.authorities.length == 0) {
 

@@ -6,7 +6,6 @@ import {BusinessComponent} from "./business.component";
 
 
 const routes: Routes = [
-  { path: '',   redirectTo: '/business', pathMatch: 'full' },
   { path: 'business',  component: BusinessComponent },
   { path: 'login',  component: LoginComponent }
 ];

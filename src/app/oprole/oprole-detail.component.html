@@ -1,0 +1,69 @@
+<div class="r_crumbs">
+  <a href="#">首页</a>
+  <a href="#">系统管理</a>
+  {{title}}
+</div>
+<div class="r_main">
+  <app-alert></app-alert>
+  <div class="r_box">
+    <div class="r_boxHead">
+      <h2>{{title}}</h2>
+      <div class="r_boxToolFRl">
+        <button class="btn btn-primary" (click)="goback()"><i class="fa fa-mail-reply"></i> 返回</button>
+      </div>
+    </div>
+    <div class="r_boxContent">
+      <div class="r_boxPad">
+        <div class="table-responsive form-inline">
+          <table class="table  table-bordered" id="example2">
+            <thead>
+            <tr>
+              <th>角色名称</th>
+              <th>描述</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td><input type="text" class="form-control" [(ngModel)]="role.roleName"></td>
+              <td><input type="text" class="form-control" [(ngModel)]="role.roleDescr"></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="r_box r_boxNoBorder">
+    <div class="r_boxHead">
+      <h2>全部权限</h2>
+    </div>
+    <div class="r_boxContent">
+      <div class="r_boxPad">
+
+
+        <div class="r_collapse">
+          <ul>
+            <li class="r_collapseLi" *ngFor="let parent of allSysFuncs">
+              <a href="javascript:;" id="par_func_{{parent.funcId}}" (click)="onClickParent(parent.funcId)"><i class="fa fa-angle-right"></i>{{parent?.funcName}}</a>
+              <ul >
+                <li *ngFor="let func of parent?.children" (click)="onClickFunc(func, parent)" [class.active]="canActive(func.funcId)">
+                  <a href="javascript:;" >{{func.funcName}}<i class="fa fa-check"></i></a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="r_footRow">
+    <div class="row show-grid">
+      <div class="col-md-1 col-md-offset-5 col-md-sm-2"><button type="button" class="btn btn-primary btn-lg btn-block" (click)="save()">保存</button></div>
+      <div class="col-md-1 col-md-sm-2"><button type="button" class="btn btn-default btn-lg btn-block" (click)="goback()">取消</button></div>
+    </div>
+
+  </div>
+</div>

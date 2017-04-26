@@ -41,7 +41,8 @@ export class AccountComponent implements OnInit {
     userProductInfo  : "",
     inverstorId :"" ,
       ratio :0 ,
-      groupName :""
+      groupName :"",
+      groupId : ""
 
 
 
@@ -81,7 +82,8 @@ export class AccountComponent implements OnInit {
       userProductInfo  : "",
       inverstorId :"" ,
       ratio :0 ,
-      groupName :""
+      groupName :"",
+      groupId : ""
 
     };
 
