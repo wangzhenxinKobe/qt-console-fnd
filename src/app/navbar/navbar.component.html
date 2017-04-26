@@ -75,14 +75,14 @@
     <ul class="sidebar-menu">
       <li *ngFor="let group of authorities" class="treeview" [class.active]="group == selectedParent">
         <a href="#">
-          <i class={{group.icon}}></i> <span>{{group.name}}</span>
+          <i class={{group?.icon}}></i> <span>{{group?.name}}</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
         </a>
         <ul class="treeview-menu">
-          <li *ngFor="let router of group.children" [class.active]="router == selectedRouter" >
-            <a [routerLink]="router.url" (click)="OnSelect(router, group)" > {{router.name}}</a>
+          <li *ngFor="let router of group?.children" [class.active]="router == selectedRouter" >
+            <a [routerLink]="router?.url" (click)="OnSelect(router, group)" > {{router?.name}}</a>
           </li>
         </ul>
       </li>

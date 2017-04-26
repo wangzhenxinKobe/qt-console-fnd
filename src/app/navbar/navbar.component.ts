@@ -10,7 +10,7 @@ import {AuthService} from "../user/auth.service";
 
 export class NavbarComponent implements OnInit {
 
-  authorities : any;
+  authorities : any = null;
 
   selectedParent : any;
   selectedRouter : any;
@@ -21,14 +21,18 @@ export class NavbarComponent implements OnInit {
   ) {
 
     this.authorities = this.authService.authorities;
-    this.selectedParent = this.authorities[0];
-    this.selectedRouter = this.selectedParent.children[0];
+
+    if(!!this.authorities) {
+      this.selectedParent = this.authorities[0];
+      this.selectedRouter = this.selectedParent.children[0];
+    }
 
   }
 
   ngOnInit() {
 
-    this.router.navigate([this.selectedRouter.url]);
+    if(!!this.selectedRouter)
+      this.router.navigate([this.selectedRouter.url]);
 
   }
 

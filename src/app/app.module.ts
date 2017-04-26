@@ -15,6 +15,7 @@ import {UserService} from "./user/user.service";
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './user/login.component';
+import {CookieService} from "angular2-cookie/core";
 
 export function generateRequestId() {
 
@@ -53,7 +54,7 @@ export function interceptorFactory(xhrBackend: XHRBackend, requestOptions: Reque
     AppRoutingModule
 
   ],
-  providers: [ HttpInterceptor, AuthService, UserService,
+  providers: [ CookieService, HttpInterceptor, AuthService, UserService,
     {
       provide: Http,
       useFactory: interceptorFactory,

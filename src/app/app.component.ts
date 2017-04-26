@@ -45,12 +45,33 @@ export class AppComponent implements OnInit{
 
   ngOnInit() {
 
-    if(!this.userService.getUser()) { //用户信息为空
+    this.userService.getUser()
+      .then( res => {
 
-      this.setBodyClass(true);
-      this.router.navigate(['/login']);
+        if(res) {
 
-    }
+          console.info(res);
+          this.setBodyClass(false);
+          this.router.navigate(['/business']);
+
+        } else {
+
+          console.info(res);
+
+          this.setBodyClass(true);
+          this.router.navigate(['/login']);
+
+        }
+
+      })
+      .catch( res => {
+
+        console.info(res);
+
+        this.setBodyClass(true);
+        this.router.navigate(['/login']);
+
+      });
 
   }
 
