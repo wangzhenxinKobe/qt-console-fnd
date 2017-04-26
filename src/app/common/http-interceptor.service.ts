@@ -9,7 +9,7 @@ export class HttpInterceptor implements Interceptor {
 
   public interceptBefore(request: InterceptedRequest): InterceptedRequest {
 
-    request.options.headers.append('tokenId', this.authService.getTokenId() ? this.authService.getTokenId() : ' ');
+    request.options.headers.set('tokenId', this.authService.getTokenId() ? this.authService.getTokenId() : ' ');
 
     console.info(request);
 
