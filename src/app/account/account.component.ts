@@ -40,6 +40,8 @@ export class AccountComponent implements OnInit {
     isauth :"",
     userProductInfo  : "",
     inverstorId :"" ,
+      ratio :0 ,
+      groupName :""
 
 
 
@@ -78,6 +80,8 @@ export class AccountComponent implements OnInit {
       isauth :"",
       userProductInfo  : "",
       inverstorId :"" ,
+      ratio :0 ,
+      groupName :""
 
     };
 

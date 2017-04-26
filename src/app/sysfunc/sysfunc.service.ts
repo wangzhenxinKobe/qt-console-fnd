@@ -3,12 +3,12 @@ import { Headers, Http, Response } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import {Sysfunc,SysfuncPage} from "./sysfunc";
 import {ParamConfig} from "../common/param.config";
-
+import {generateRequestId} from "../app.module";
 @Injectable()
 export class SysfuncService {
-  private hostUrl = 'http://192.168.0.18/handler'; //URL to web api
+  private hostUrl = ParamConfig.HTTP_HOST_URL; //URL to web api
   private headers = new Headers({'Content-Type': 'application/json'});
-  private requestId = '';
+  private request_id = generateRequestId();
 
 
   constructor(private http : Http) { }
@@ -21,7 +21,7 @@ export class SysfuncService {
       funcName : funcName,
       pageSize : ParamConfig.DATA_LIST_PAGE_SIZE,
       currentPage : currentPage,
-      requestId : this.requestId,
+      requestId : this.request_id,
       serviceCode : 'FS067'
 
     });
@@ -65,7 +65,7 @@ export class SysfuncService {
 
 
     let request = JSON.stringify({
-
+      requestId : this.request_id,
       //后台生成funcId : sysfunc.funcId,
       funcId : sysfunc.funcId,
       pFuncId :sysfunc.pFuncId,
@@ -102,7 +102,7 @@ export class SysfuncService {
 
     let request = JSON.stringify({
 
-
+      requestId : this.request_id,
       funcId : sysfunc.funcId,
       pFuncId :sysfunc.pFuncId,
       funcName : sysfunc.funcName,
@@ -138,6 +138,7 @@ export class SysfuncService {
 
     let request = JSON.stringify({
       funcId : sysfunc.funcId,
+      requestId : this.request_id,
       serviceCode : 'FS070'
 
     });

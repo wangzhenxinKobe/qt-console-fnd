@@ -3,12 +3,12 @@ import { Headers, Http, Response } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import {Tplatform, TplatformPage} from "./tplatform";
 import {ParamConfig} from "../common/param.config";
-
+import {generateRequestId} from "../app.module";
 @Injectable()
 export class TplatformService{
-  private hostUrl = 'http://192.168.0.18/handler'; //URL to web api
+  private hostUrl = ParamConfig.HTTP_HOST_URL; //URL to web api
   private headers = new Headers({'Content-Type': 'application/json'});
-  private requestId = '';
+  private request_id = generateRequestId();
 
   constructor(private http : Http) { }
 
@@ -20,7 +20,7 @@ export class TplatformService{
       deploySite : deploySite,
       pageSize : ParamConfig.DATA_LIST_PAGE_SIZE,
       currentPage : currentPage,
-      requestId : this.requestId,
+      requestId : this.request_id,
       serviceCode : 'FS057'
 
     });
@@ -67,7 +67,7 @@ export class TplatformService{
 
 
     let request = JSON.stringify({
-
+      requestId : this.request_id,
       platId : tplatform.platId,
       ip : tplatform.ip,
       port : tplatform.port,
@@ -103,7 +103,7 @@ export class TplatformService{
 
 
     let request = JSON.stringify({
-
+      requestId : this.request_id,
       platId : tplatform.platId,
       ip : tplatform.ip,
       port : tplatform.port,
@@ -139,6 +139,7 @@ export class TplatformService{
 
     let request = JSON.stringify({
       platId : tplatform.platId,
+      requestId : this.request_id,
       serviceCode : 'FS061'
 
     });

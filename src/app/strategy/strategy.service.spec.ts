@@ -3,7 +3,7 @@
 import { TestBed, async, inject } from '@angular/core/testing';
 import { HttpModule } from '@angular/http';
 
-import { StrategyService } from './strategy.service.ts';
+import { StrategyService } from './strategy.service';
 import {Strategy, StrategyPage} from "./strategy";
 
 declare var $ ;

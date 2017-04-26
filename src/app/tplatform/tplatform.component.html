@@ -16,12 +16,15 @@
 
             <div class="col-md-3 col-sm-4">
               <div class="r_boxToolPad">
-                <select class="form-control" [(ngModel)]="searchPlatId" (change)="search()">
-                  <option value="">全部交易平台管理</option>
-                  <option value="本地">全部交易平台管理-101</option>
-                  <option value="银行">全部交易平台管理-102</option>
-
-                </select>
+                <!--<select class="form-control" [(ngModel)]="searchPlatId" (change)="search()">-->
+                  <!--<option value="">全部交易平台管理</option>-->
+                  <!--<option value="本地">全部交易平台管理-101</option>-->
+                  <!--<option value="银行">全部交易平台管理-102</option>-->
+                <!--</select>-->
+                <div class="input-group">
+                  <input type="text" class="form-control pull-right" placeholder="按部署地点搜索"  [(ngModel)]="searchPlatId" (change)="search()">
+                  <span class="input-group-addon" ><i class="fa fa-search"></i></span>
+                </div>
               </div>
             </div>
 
@@ -83,10 +86,11 @@
           <div class="form-group">
             <label class="col-sm-3 control-label">服务器IP:</label>
             <div class="col-sm-9">
-              <select class="form-control" [(ngModel)]="curTplatform.ip"><!--禁用添加disabled-->
-                <option>1</option>
-                <option>2</option>
-              </select>
+              <!--<select class="form-control" [(ngModel)]="curTplatform.ip">&lt;!&ndash;禁用添加disabled&ndash;&gt;-->
+                <!--<option>1</option>-->
+                <!--<option>2</option>-->
+              <!--</select>-->
+              <input type="text" class="form-control"  placeholder="请输入IP" [(ngModel)]="curTplatform.ip">
             </div>
           </div>
           <div class="form-group">
@@ -104,10 +108,11 @@
           <div class="form-group">
             <label class="col-sm-3 control-label">备注:</label>
             <div class="col-sm-9">
-              <select class="form-control" [(ngModel)]="curTplatform.comment">
-                <option>1</option>
-                <option>2</option>
-              </select>
+              <!--<select class="form-control" [(ngModel)]="curTplatform.comment">-->
+                <!--<option>1</option>-->
+                <!--<option>2</option>-->
+              <!--</select>-->
+              <input type="text" class="form-control"  placeholder="请输入备注" [(ngModel)]="curTplatform.comment">
             </div>
           </div>
 

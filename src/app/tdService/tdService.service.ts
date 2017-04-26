@@ -6,12 +6,12 @@ import { Headers, Http, Response } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import {TdService,TdServicePage} from "./tdService";
 import {ParamConfig} from "../common/param.config";
-
+import {generateRequestId} from "../app.module";
 @Injectable()
 export class TdServiceService {
-  private hostUrl = 'http://192.168.0.36:8081/handler'; //URL to web api
+  private hostUrl = ParamConfig.HTTP_HOST_URL; //URL to web api
   private headers = new Headers({'Content-Type': 'application/json'});
-  private requestId = '';
+  private request_id = generateRequestId();
 
 
   constructor(private http : Http) { }
@@ -24,7 +24,7 @@ export class TdServiceService {
       platId : platId,
       pageSize : ParamConfig.DATA_LIST_PAGE_SIZE,
       currentPage : currentPage,
-      requestId : this.requestId,
+      requestId : this.request_id,
       serviceCode : 'FS036'
 
     });
@@ -68,7 +68,7 @@ export class TdServiceService {
 
 
     let request = JSON.stringify({
-
+      requestId : this.request_id,
       platId : tdService.platId ,
       ip : tdService.ip,
       port : tdService.port,
@@ -104,7 +104,7 @@ export class TdServiceService {
 
 
     let request = JSON.stringify({
-
+      requestId : this.request_id,
       platId : tdService.platId ,
       ip : tdService.ip,
       port : tdService.port,
@@ -141,6 +141,7 @@ console.info(res);
 
     let request = JSON.stringify({
       serviceId : tdService.serviceId,
+      requestId : this.request_id,
       serviceCode : 'FS040'
 
     });

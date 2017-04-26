@@ -68,6 +68,7 @@ export class MarketDataService {
     let request = JSON.stringify({
 
       platId : marketData.platId ,
+      requestId : this.request_id,
       symbolId : marketData.symbolId,
       symbolType : marketData.symbolType,
       serviceCode : 'FS031'
@@ -101,6 +102,7 @@ export class MarketDataService {
     let request = JSON.stringify({
 
         platId : marketData.platId ,
+        requestId : this.request_id,
         symbolId : marketData.symbolId,
         symbolType : marketData.symbolType,
         serviceCode : 'FS032'
@@ -133,6 +135,7 @@ export class MarketDataService {
 
     let request = JSON.stringify({
       symbolId : marketData.symbolId,
+      requestId : this.request_id,
       serviceCode : 'FS033'
 
     });

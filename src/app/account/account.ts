@@ -15,6 +15,10 @@ export class Account {
   public userProductInfo  : string; //最小价格变动单位
   public inverstorId : string;       //计费方式
   public tradePassword : string;
+  public groupId : string;
+  public ratio : number;
+  public groupName : string;
+
 
 
   constructor() {}

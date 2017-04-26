@@ -39,6 +39,8 @@ import {TdServiceComponent} from "./tdService/tdService.component";
 import {TdServiceService} from "./tdService/tdService.service";
 import {TplatformComponent} from "./tplatform/tplatform.component";
 import {TplatformService} from "./tplatform/tplatform.service";
+import {AgroupComponent} from "./agroup/agroup.component";
+import {AgroupService} from "./agroup/agroup.service";
 
 
 @NgModule({
@@ -60,8 +62,8 @@ import {TplatformService} from "./tplatform/tplatform.service";
     SindexComponent,
     SysfuncComponent,
     TdServiceComponent,
-    TplatformComponent
-
+    TplatformComponent,
+    AgroupComponent
   ],
   imports: [
     BrowserModule,
@@ -73,7 +75,7 @@ import {TplatformService} from "./tplatform/tplatform.service";
 
   ],
   providers: [ StrategyService, MarketDataService, TradeUnitService, AccountService, BinfoService, FuturesService, MdServiceService,
-    SbasketService, SindexService, SysfuncService, TdServiceService, TplatformService
+    SbasketService, SindexService, SysfuncService, TdServiceService, TplatformService, AgroupService
   ]
 
 })

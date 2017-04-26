@@ -3,12 +3,13 @@ import { Headers, Http, Response } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import {Account,AccountPage} from "./account";
 import {ParamConfig} from "../common/param.config";
+import {generateRequestId} from "../app.module";
 
 @Injectable()
 export class AccountService {
-  private hostUrl = 'http://192.168.0.18/handler'; //URL to web api
+  private hostUrl = ParamConfig.HTTP_HOST_URL; //URL to web api
   private headers = new Headers({'Content-Type': 'application/json'});
-  private requestId = '';
+  private request_id = generateRequestId();
 
   constructor(private http : Http) { }
 
@@ -20,7 +21,7 @@ export class AccountService {
       accountId : accountId,
       pageSize : ParamConfig.DATA_LIST_PAGE_SIZE,
       currentPage : currentPage,
-      requestId : this.requestId,
+      requestId : this.request_id,
       serviceCode : 'FS046'
 
     });
@@ -71,6 +72,7 @@ export class AccountService {
     let request = JSON.stringify({
       accountId : account.accountId, //测试ID
       platId : account.platId,    //平台ID
+      requestId : this.request_id,
       serviceId :account.serviceId,    //服务编号
       userId : account.userId,
       fundCode : account.fundCode,   //产品编号
@@ -81,6 +83,8 @@ export class AccountService {
       userProductInfo : account.userProductInfo,
       inverstorId : account.inverstorId,
       tradePassword : account.tradePassword,
+      ratio : account.ratio,
+      groupName : account.groupName,
       serviceCode : 'FS047'
 
     });
@@ -112,6 +116,7 @@ export class AccountService {
 
       accountId : account.accountId,
       platId : account.platId,    //平台ID
+      requestId : this.request_id,
       serviceId :account.serviceId,    //服务编号
       userId : account.userId,
       fundCode : account.fundCode,   //产品编号
@@ -122,6 +127,9 @@ export class AccountService {
       userProductInfo : account.userProductInfo,
       inverstorId : account.inverstorId,
       tradePassword : account.tradePassword,
+      ratio : account.ratio,
+      groupName : account.groupName,
+      groupId : account.groupId,
       serviceCode : 'FS049'
 
     });
@@ -150,6 +158,7 @@ export class AccountService {
 
     let request = JSON.stringify({
       accountId : account.accountId,
+      requestId : this.request_id,
       serviceCode : 'FS050'
 
     });

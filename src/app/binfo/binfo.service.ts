@@ -3,12 +3,12 @@ import { Headers, Http, Response } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import {Binfo, BinfoPage} from "./binfo";
 import {ParamConfig} from "../common/param.config";
-
+import {generateRequestId} from "../app.module";
 @Injectable()
 export class BinfoService{
-  private hostUrl = 'http://192.168.0.62:8077/handler'; //URL to web api
+  private hostUrl = ParamConfig.HTTP_HOST_URL; //URL to web api
   private headers = new Headers({'Content-Type': 'application/json'});
-  private requestId = '';
+  private request_id = generateRequestId();
 
   constructor(private http : Http) { }
 
@@ -20,7 +20,7 @@ export class BinfoService{
       stockName : stockName,
       pageSize : ParamConfig.DATA_LIST_PAGE_SIZE,
       currentPage : currentPage,
-      requestId :this.requestId,
+      requestId :this.request_id,
       serviceCode : 'FS006'
 
     });
@@ -74,6 +74,7 @@ export class BinfoService{
       allVolume : binfo.allVolume,
       isFund : binfo.isFund,
       isIndex : binfo.isIndex,
+      requestId : this.request_id,
       serviceCode : 'FS007'
 
     });
@@ -114,6 +115,7 @@ export class BinfoService{
       allVolume : binfo.allVolume,
       isFund : binfo.isFund,
       isIndex : binfo.isIndex,
+      requestId : this.request_id,
       serviceCode : 'FS008'
 
     });
@@ -144,6 +146,7 @@ export class BinfoService{
 
     let request = JSON.stringify({
       stockCode : binfo.stockCode,
+      requestId : this.request_id,
       serviceCode : 'FS009'
 
     });

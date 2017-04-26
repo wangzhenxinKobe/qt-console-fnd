@@ -3,12 +3,12 @@ import { Headers, Http, Response } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import {Futures,FuturesPage} from "./futures";
 import {ParamConfig} from "../common/param.config";
-
+import {generateRequestId} from "../app.module";
 @Injectable()
 export class FuturesService {
-  private hostUrl = 'http://192.168.0.18/handler'; //URL to web api
+  private hostUrl = ParamConfig.HTTP_HOST_URL; //URL to web api
   private headers = new Headers({'Content-Type': 'application/json'});
-  private requestId = '';
+  private request_id = generateRequestId();
 
   constructor(private http : Http) { }
 
@@ -20,7 +20,7 @@ export class FuturesService {
       productName : productName,
       pageSize : ParamConfig.DATA_LIST_PAGE_SIZE,
       currentPage : currentPage,
-      requestId : this.requestId,
+      requestId : this.request_id,
       serviceCode : 'FS024'
 
     });
@@ -64,7 +64,7 @@ export class FuturesService {
 
 
     let request = JSON.stringify({
-
+      requestId : this.request_id,
       exchangeId : futures.exchangeId,
       productId : futures.productId,
       productName : futures.productName,
@@ -102,7 +102,7 @@ export class FuturesService {
 
 
     let request = JSON.stringify({
-
+      requestId : this.request_id,
       exchangeId : futures.exchangeId,
       productId : futures.productId,
       productName : futures.productName,
@@ -140,6 +140,7 @@ export class FuturesService {
 
     let request = JSON.stringify({
       productId : futures.productId,
+      requestId : this.request_id,
       serviceCode : 'FS027'
 
     });

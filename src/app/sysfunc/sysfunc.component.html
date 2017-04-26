@@ -15,11 +15,10 @@
           <div class="row">
             <div class="col-md-3 col-sm-4">
               <div class="r_boxToolPad">
-                <select class="form-control" [(ngModel)]="searchPlatId" (change)="search()">
-                  <option value="">功能权限配置</option>
-                  <option value="策略">功能权限配置-101</option>
-                  <option value="账户">功能权限配置-102</option>
-                </select>
+                <div class="input-group">
+                  <input type="text" class="form-control pull-right" placeholder="按权限名称搜索"  [(ngModel)]="searchPlatId" (change)="search()">
+                  <span class="input-group-addon" ><i class="fa fa-search"></i></span>
+                </div>
               </div>
             </div>
 

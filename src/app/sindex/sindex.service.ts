@@ -3,12 +3,12 @@ import { Headers, Http, Response } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import {Sindex, SindexPage} from "./sindex";
 import {ParamConfig} from "../common/param.config";
-
+import {generateRequestId} from "../app.module";
 @Injectable()
 export class SindexService{
-  private hostUrl = 'http://192.168.0.62:8077/handler'; //URL to web api
+  private hostUrl = ParamConfig.HTTP_HOST_URL; //URL to web api
   private headers = new Headers({'Content-Type': 'application/json'});
-  private requestId = '';
+  private request_id = generateRequestId();
 
   constructor(private http : Http) { }
 
@@ -20,7 +20,7 @@ export class SindexService{
       indexName : indexName,
       pageSize : ParamConfig.DATA_LIST_PAGE_SIZE,
       currentPage : currentPage,
-      requestId : this.requestId,
+      requestId : this.request_id,
       serviceCode : 'FS012'
 
     });
@@ -65,7 +65,7 @@ export class SindexService{
 
 
     let request = JSON.stringify({
-
+      requestId : this.request_id,
       exchangeId : sindex.exchangeId,
       stockCode : sindex.stockCode,
       stockName : sindex.stockName,
@@ -100,12 +100,12 @@ export class SindexService{
   }
 
 
-  修改
+ // 修改
   updateSindex(sindex : Sindex) : Promise<[boolean]> {
 
 
     let request = JSON.stringify({
-
+      requestId : this.request_id,
       exchangeId : sindex.exchangeId,
       stockCode : sindex.stockCode,
       stockName : sindex.stockName,
@@ -145,6 +145,7 @@ export class SindexService{
 
     let request = JSON.stringify({
       indexName : sindex.indexName,
+      requestId : this.request_id,
       serviceCode : 'FS015'
 
     });

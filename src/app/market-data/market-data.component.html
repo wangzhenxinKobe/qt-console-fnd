@@ -17,10 +17,10 @@
             <div class="col-md-3 col-sm-4">
               <div class="r_boxToolPad">
                 <select class="form-control" [(ngModel)]="searchPlatId" (change)="search()">
-                  <option value="">全部交易平台</option>
-                  <option value="101">交易平台-101</option>
-                  <option value="102">交易平台-102</option>
-                  <option value="103">交易平台-103</option>
+                  <option value="">全部行情</option>
+                  <option value="101">行情-101</option>
+                  <option value="102">行情-102</option>
+                  <option value="103">行情-103</option>
                 </select>
               </div>
             </div>
@@ -51,7 +51,9 @@
               <tr *ngFor="let market of marketDataPage?.marketData">
                 <td>{{market.platId}}</td>
                 <td>{{market.symbolId}}</td>
-                <td>{{market.symbolType}}</td>
+                <td>
+                  <app-cust-select dataType="market_data" viewType="readonly" [value]="market.symbolType" ></app-cust-select>
+                </td>
                 <td style="text-align: center;">
                   <div class="tabledit-toolbar btn-toolbar" style=" display: inline-block;">
                     <div class="btn-group btn-group-sm" >

@@ -65,7 +65,7 @@ export class TradeUnitService {
 
 
     let request = JSON.stringify({
-
+      requestId : this.request_id,
       platId : tradeUnit.platId ,
       serviceCode : 'FS031'
 

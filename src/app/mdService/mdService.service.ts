@@ -6,12 +6,12 @@ import { Headers, Http, Response } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import {MdService,MdServicePage} from "./mdService";
 import {ParamConfig} from "../common/param.config";
-
+import {generateRequestId} from "../app.module";
 @Injectable()
 export class MdServiceService {
-  private hostUrl = 'http://192.168.0.18/handler'; //URL to web api
+  private hostUrl = ParamConfig.HTTP_HOST_URL; //URL to web api
   private headers = new Headers({'Content-Type': 'application/json'});
-  private requestId = '';
+  private request_id = generateRequestId();
 
   constructor(private http : Http) { }
 
@@ -23,7 +23,7 @@ export class MdServiceService {
       platId : platId,
       pageSize : ParamConfig.DATA_LIST_PAGE_SIZE,
       currentPage : currentPage,
-      requestId : this.requestId,
+      requestId : this.request_id,
       serviceCode : 'FS041'
 
     });
@@ -67,7 +67,7 @@ export class MdServiceService {
 
 
     let request = JSON.stringify({
-
+      requestId : this.request_id,
       platId : mdService.platId ,
       ip : mdService.ip,
       port : mdService.port,
@@ -101,7 +101,7 @@ export class MdServiceService {
 
 
     let request = JSON.stringify({
-
+      requestId : this.request_id,
       platId : mdService.platId ,
       ip : mdService.ip,
       port : mdService.port,
@@ -136,6 +136,7 @@ export class MdServiceService {
 
     let request = JSON.stringify({
       serviceId : mdService.serviceId,
+      requestId : this.request_id,
       serviceCode : 'FS045'
 
     });
