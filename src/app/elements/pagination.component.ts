@@ -43,10 +43,9 @@ export class PaginationComponent implements OnChanges {
 
       if(propName == 'totalPages') {
 
+
         let chng = changes[propName];
-
-        if(!chng.currentValue) return;
-
+        
         this.pages = [];
         for(let i = 0; i < chng.currentValue; i++) {
           this.pages[i] = i + 1;
