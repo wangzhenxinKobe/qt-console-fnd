@@ -2,6 +2,7 @@
 import {Component} from '@angular/core';
 import {Strategy, StrategyParam} from "./strategy";
 import {StrategyService} from "./strategy.service";
+import {BaseComponent} from "../common/base.component";
 
 declare var $;
 
@@ -10,7 +11,7 @@ declare var $;
   templateUrl: './strategy-editor.component.html'
 })
 
-export class StrategyEditorComponent {
+export class StrategyEditorComponent extends BaseComponent {
 
   strategy : Strategy;
 
@@ -18,7 +19,7 @@ export class StrategyEditorComponent {
   displayParam : boolean;
   isAdd : boolean;
 
-  constructor( private strategyService : StrategyService ){}
+  constructor( private strategyService : StrategyService ){ super(); }
 
   show() {
 
@@ -51,6 +52,73 @@ export class StrategyEditorComponent {
 
   onLoadParam(name) {
 
+    this.strategyService.syncStrategyParam(name)
+      .then( res => {
+
+        if(res[0]) {
+
+          this.asyncLoad( () => {
+
+            return this.strategyService.loadStrategyParam(name)
+              .then( res => { //参数导入成功
+
+                if(res[0]) {
+
+                  this.strategy = {
+                    strategyName : name,
+                    platId : '',
+                    strategyType : '',
+                    winFile : '',
+                    strategyVer : 'v1.0.0',
+                    author : '',
+                    comment : '',
+                    fieldList : res[1]
+                  };
+                  this.displayParam = true;
+                  return true;
+
+                } else {
+
+                  return false;
+
+                }
+
+              })
+              .catch( () => {return false;});
+
+          });
+
+        } else {
+
+          this.alert.error(res[1]);
+
+        }
+
+      })
+      .catch(error => this.alert.error(error[1]));
+
+  }
+
+  saveStrategy() {
+
+    console.info(this.strategy);
+    this.strategyService.addStrategy(this.strategy)
+      .then( res => {
+
+        if(res[0]) {
+
+          this.alert.info("策略新增成功！");
+          this.isAdd = false;
+
+        } else {
+
+          this.alert.error(res[1]);
+
+        }
+
+      })
+      .catch(error => this.alert.error(error[1]));
+
   }
 
   saveParam(param : StrategyParam) {
@@ -61,11 +129,11 @@ export class StrategyEditorComponent {
       .then( result => {
         if(result) {
 
-          alert("保存成功！");
+          this.alert.info("保存成功！");
 
         } else {
 
-          alert("保存失败!");
+          this.alert.error("保存失败!");
 
           //更新记录
           this.strategyService.getStrategyByName(this.strategy.strategyName)

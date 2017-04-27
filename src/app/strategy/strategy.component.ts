@@ -19,17 +19,13 @@ export class StrategyComponent implements OnInit {
   curPage : number = 1;
 
   strategyPage : StrategyPage;
-  curStrategy : Strategy;
 
   constructor( private strategyService : StrategyService ) { }
 
   ngOnInit() {
-    console.info("StrategyComponent ----- in ngOnInit() ");
   }
 
   private queryList() {
-
-    console.info(`curPlatId[${this.searchPlatId}], curStrategyType[${this.searchStrategyType}], curStrategyName[${this.searchStrategyName}], curPage[${this.curPage}]`);
 
     this.strategyService.getStrategies(this.searchPlatId, this.searchStrategyType, this.searchStrategyName, this.curPage)
       .then( page => this.strategyPage = page );

@@ -15,23 +15,11 @@
           <div class="row">
             <div class="col-md-3 col-sm-4">
               <div class="r_boxToolPad">
-                <select class="form-control" [(ngModel)]="searchPlatId" (change)="search()">
-                  <option value="">全部交易平台</option>
-                  <option value="101">交易平台-101</option>
-                  <option value="102">交易平台-102</option>
-                  <option value="103">交易平台-103</option>
-                </select>
+                <app-platform-sel viewType="select_all" [(value)]="searchPlatId" (change)="search()"></app-platform-sel>
               </div>
             </div>
             <div class="col-md-3 col-sm-4">
               <div class="r_boxToolPad">
-                <!--
-                <select class="form-control" [(ngModel)]="searchStrategyType" (change)="search()">
-                  <option value="">全部策略类型</option>
-                  <option value="0">类型-0</option>
-                  <option value="1">类型-1</option>
-                </select>
-                -->
                 <app-cust-select dataType="strategy_type" viewType="select_all" [(value)]="searchStrategyType" (change)="search()"></app-cust-select>
               </div>
             </div>
@@ -68,7 +56,9 @@
               <tbody>
               <tr *ngFor="let strategy of strategyPage?.strategies">
                 <td>{{strategy.strategyName}}</td>
-                <td>{{strategy.platId}}</td>
+                <td>
+                  <app-platform-sel viewType="readonly" [value]="strategy.platId" ></app-platform-sel>
+                </td>
                 <td>
                   <app-cust-select dataType="strategy_type" viewType="readonly" [value]="strategy.strategyType" ></app-cust-select>
                 </td>

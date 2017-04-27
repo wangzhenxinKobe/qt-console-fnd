@@ -1,7 +1,8 @@
-
+<app-loading></app-loading>
 <div id="addCelue" class="modal fade" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
+      <app-alert></app-alert>
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" >{{title}}</h4>
@@ -12,7 +13,7 @@
           <div class="col-md-10">
             <div class="r_boxToolPad"><input class="form-control" type="text" placeholder="策略名称" #strategyName></div>
           </div>
-          <div class="col-md-2"><div class="r_boxToolPad"><button class="btn btn-default btn-block" (click)="onLoadParam(strategyName)">导入</button></div></div>
+          <div class="col-md-2"><div class="r_boxToolPad"><button class="btn btn-default btn-block" (click)="onLoadParam(strategyName.value)">导入</button></div></div>
         </div>
 
         <div class="table-responsive" *ngIf="strategy">
@@ -28,11 +29,19 @@
             </thead>
             <tbody>
             <tr>
-              <td>{{strategy?.strategyName}}</td>
-              <td>{{strategy?.platId}}</td>
-              <td>{{strategy?.winFile}}</td>
-              <td><app-cust-select dataType="strategy_type" viewType="readonly" [value]="strategy?.strategyType" ></app-cust-select></td>
-              <td>{{strategy?.author}}</td>
+              <td>{{strategy.strategyName}}</td>
+              <td>
+                <app-platform-sel [(value)]="strategy.platId"></app-platform-sel>
+              </td>
+              <td>
+                <input type="text" class="form-control" [(ngModel)]="strategy.winFile" >
+              </td>
+              <td>
+                <app-cust-select dataType="strategy_type" [(value)]="strategy.strategyType"></app-cust-select>
+              </td>
+              <td>
+                <input type="text" class="form-control" [(ngModel)]="strategy.author" >
+              </td>
             </tr>
 
             </tbody>
@@ -72,7 +81,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" *ngIf="isAdd">保存</button>
+        <button type="button" class="btn btn-primary" *ngIf="isAdd && displayParam" (click)="saveStrategy()">保存</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 
       </div>

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Headers, Http, Response } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
-import {Strategy, StrategyPage} from "./strategy";
+import {Strategy, StrategyPage, StrategyParam} from "./strategy";
 import {ParamConfig} from "../common/param.config";
 import {generateRequestId} from "../app.module";
 
@@ -102,17 +102,13 @@ export class StrategyService {
 
   }
 
-  /**
-   * 用于策略新增时，导入策略参数列表
-   * @param strategy
-     */
-  loadStrategyParam(name : string) : Promise<any> {
+  syncStrategyParam(name : string) : Promise<[boolean, any]> {
 
     let request = JSON.stringify({
 
-      strategyName : name,
+      name : name,
       requestId : this.request_id,
-      serviceCode : 'FS001'
+      serviceCode : 'FS084'
 
     });
 
@@ -122,6 +118,90 @@ export class StrategyService {
       .then( res => {
 
         let body = res.json();
+        if(body.errCode == '000000') {
+
+          return [true, "success"];
+
+        } else {
+
+          console.error("请求失败：" + body.errMsg);
+          return [false, body.errMsg];
+
+        }
+
+      })
+      .catch(this.handleError);
+
+  }
+
+  /**
+   * 用于策略新增时，导入策略参数列表
+   * @param name
+     */
+  loadStrategyParam(name : string) : Promise<[boolean, any]> {
+
+    let request = JSON.stringify({
+
+      strategyName : name,
+      requestId : this.request_id,
+      serviceCode : 'FS115'
+
+    });
+
+    return this.http
+      .post(this.hostUrl, request, {headers: this.headers})
+      .toPromise()
+      .then( res => {
+
+        let body = res.json();
+
+        if(body.errCode == '000000') {
+
+          return [ true, body.fieldList as StrategyParam[] ]
+
+        } else {
+
+          console.error("请求失败：" + body.errMsg);
+          return [false, body.errMsg];
+
+        }
+
+      })
+      .catch(this.handleError);
+
+  }
+
+  addStrategy(strategy : Strategy) : Promise<[boolean, any]> {
+
+    let request = JSON.stringify({
+
+      strategyName : strategy.strategyName,
+      platId : strategy.platId,
+      winFile : strategy.winFile,
+      strategyVer : strategy.strategyVer,
+      strategyType : strategy.strategyType,
+      author : strategy.author,
+      comment : strategy.comment,
+      paraList : JSON.stringify(strategy.fieldList),
+      requestId : this.request_id,
+      serviceCode : 'FS002'
+
+    });
+
+    return this.http
+      .post(this.hostUrl, request, {headers: this.headers})
+      .toPromise()
+      .then( res => {
+
+        let body = res.json();
+
+        if(body.errCode == '000000') {
+          return [true, "success"] ;
+        }
+        else {
+          console.error("请求失败：" + body.errMsg);
+          return [false, body.errMsg];
+        }
 
       })
       .catch(this.handleError);
@@ -160,9 +240,9 @@ export class StrategyService {
 
   }
 
-  private handleError(error: any): Promise<any> {
+  private handleError(error: any): Promise<[boolean, any]> {
     console.error('An error occurred', error); // for demo purposes only
-    return null;
+    return Promise.reject([false, error.toString()]);
   }
 
 

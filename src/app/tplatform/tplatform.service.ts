@@ -10,6 +10,8 @@ export class TplatformService{
   private headers = new Headers({'Content-Type': 'application/json'});
   private request_id = generateRequestId();
 
+  private allTransPlatform = null;
+
   constructor(private http : Http) { }
 
 //交易平台查询
@@ -35,8 +37,6 @@ export class TplatformService{
 
   private extractTpatformPage(res : Response) {
 
-    console.info(res);
-
     let body = res.json();
 
     if(body.errCode == '000000') {
@@ -60,6 +60,44 @@ export class TplatformService{
   }
 
 
+  getAllTransPlatform() : Promise<Tplatform[]> {
+
+    if(!!this.allTransPlatform) return Promise.resolve(this.allTransPlatform);
+
+    let request = JSON.stringify({
+
+      deploySite : '',
+      pageSize : 1000,
+      currentPage : 1,
+      requestId : this.request_id,
+      serviceCode : 'FS057'
+
+    });
+
+    return this.http
+      .post(this.hostUrl, request, {headers: this.headers})
+      .toPromise()
+      .then( (res : Response) => {
+
+        let body = res.json();
+
+        if(body.errCode == '000000') {
+
+          this.allTransPlatform = body.fieldList as Tplatform[];
+
+          return this.allTransPlatform;
+
+        } else {
+
+          console.error("请求失败：" + body.errMsg);
+          return null;
+
+        }
+
+      })
+      .catch(this.handleError);
+
+  }
 
 
   //增加
