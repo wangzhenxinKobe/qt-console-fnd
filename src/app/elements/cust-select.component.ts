@@ -22,7 +22,7 @@ export class CustSelectComponent implements OnInit {
   @Input() value : string;
   @Output() valueChange = new EventEmitter<string>();
 
-  @Output() change = new EventEmitter()
+  @Output() change = new EventEmitter();
 
   @Input() viewType : string;
   @Input() dataType : string;
