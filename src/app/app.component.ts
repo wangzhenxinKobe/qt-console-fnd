@@ -25,8 +25,6 @@ export class AppComponent implements OnInit{
 
     authService.loginStatus$.subscribe( status => {
 
-      console.info(`loginStatus change to [${status}]`);
-
       if(!status) { //登出或者Token失效
 
         this.setBodyClass(true);
@@ -48,15 +46,12 @@ export class AppComponent implements OnInit{
     this.userService.getUser()
       .then( res => {
 
-        if(res) {
+        if(res[0]) {
 
-          console.info(res);
           this.setBodyClass(false);
           this.router.navigate(['/business']);
 
         } else {
-
-          console.info(res);
 
           this.setBodyClass(true);
           this.router.navigate(['/login']);
@@ -65,8 +60,6 @@ export class AppComponent implements OnInit{
 
       })
       .catch( res => {
-
-        console.info(res);
 
         this.setBodyClass(true);
         this.router.navigate(['/login']);
