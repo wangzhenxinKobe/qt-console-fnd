@@ -265,7 +265,7 @@ body,html{
 }
 .btnFile{
   position: relative;
-
+  overflow: hidden;
 }
 .btnFile input{
   position: absolute;
