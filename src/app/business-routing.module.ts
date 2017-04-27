@@ -17,6 +17,8 @@ import {SbasketComponent} from "./sbasket/sbasket.component";
 import {AgroupComponent} from "./agroup/agroup.component";
 import {OproleComponent} from "./oprole/oprole.component";
 import {OproleDetailComponent} from "./oprole/oprole-detail.component";
+import {OperMngComponent} from "./oper-mng/opermng.component";
+import {OperDetailComponent} from "./oper-mng/oper-detail.component";
 
 
 const childrenRoutes: Routes = [
@@ -34,7 +36,9 @@ const childrenRoutes: Routes = [
   { path: 'sbasket',  component: SbasketComponent },
   { path: 'agroup',  component: AgroupComponent },
   { path: 'oprole',  component: OproleComponent },
-  { path: 'oprole-detail',  component: OproleDetailComponent }
+  { path: 'oprole-detail',  component: OproleDetailComponent },
+  { path: 'opermng',  component: OperMngComponent },
+  { path: 'opermng-detail',  component: OperDetailComponent }
 ];
 
 const businessRoutes : Routes = [{

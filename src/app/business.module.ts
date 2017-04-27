@@ -44,6 +44,10 @@ import {AgroupService} from "./agroup/agroup.service";
 import {OproleComponent} from "./oprole/oprole.component";
 import {OproleService} from "./oprole/oprole.service";
 import {OproleDetailComponent} from "./oprole/oprole-detail.component";
+import {PlatformSelComponent} from "./elements/tplatform-sel.component";
+import {OperMngComponent} from "./oper-mng/opermng.component";
+import {OperMngService} from "./oper-mng/opermng.service";
+import {OperDetailComponent} from "./oper-mng/oper-detail.component";
 
 
 @NgModule({
@@ -68,7 +72,10 @@ import {OproleDetailComponent} from "./oprole/oprole-detail.component";
     TplatformComponent,
     AgroupComponent,
     OproleComponent,
-    OproleDetailComponent
+    OproleDetailComponent,
+    PlatformSelComponent,
+    OperMngComponent,
+    OperDetailComponent
 
   ],
   imports: [
@@ -81,7 +88,7 @@ import {OproleDetailComponent} from "./oprole/oprole-detail.component";
 
   ],
   providers: [ StrategyService, MarketDataService, TradeUnitService, AccountService, BinfoService, FuturesService, MdServiceService,
-    SbasketService, SindexService, SysfuncService, TdServiceService, TplatformService, AgroupService, OproleService
+    SbasketService, SindexService, SysfuncService, TdServiceService, TplatformService, AgroupService, OproleService, OperMngService
   ]
 
 })
