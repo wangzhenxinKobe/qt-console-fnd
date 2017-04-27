@@ -7,10 +7,13 @@ import {generateRequestId} from "../app.module";
 @Injectable()
 export class BinfoService{
   private hostUrl = ParamConfig.HTTP_HOST_URL; //URL to web api
+  private fileBaseUrl = 'http://192.168.0.65:8077/';
   private headers = new Headers({'Content-Type': 'application/json'});
   private request_id = generateRequestId();
 
   constructor(private http : Http) { }
+
+
 
 //股票信息查询
   getBinfoPage(stockName,currentPage) : Promise<BinfoPage> {
@@ -61,7 +64,7 @@ export class BinfoService{
 
 
   //增加
-  addBinfo(binfo : Binfo) : Promise<[boolean ]> {
+  addBinfo(binfo : Binfo) : Promise<[boolean]> {
 
 
     let request = JSON.stringify({
@@ -163,6 +166,34 @@ export class BinfoService{
         else {
           console.error("请求失败：" + body.errMsg);
           return false;
+        }
+
+      })
+      .catch(this.handleError);
+  }
+
+  //股票基本信息导出
+  exportBinfo(binfo : Binfo) : Promise<[boolean, any]> {
+
+
+    let request = JSON.stringify({
+      stockName : binfo.stockName,
+      requestId : this.request_id,
+      serviceCode : 'FS011'
+
+    });
+
+    return this.http
+      .post(this.hostUrl, request, {headers: this.headers})
+      .toPromise()
+      .then( res => {
+        let body = res.json();
+        if(body.errCode == '000000') {
+          return [true, this.fileBaseUrl + body.excel] ;
+        }
+        else {
+          console.error("请求失败：" + body.errMsg);
+          return [false, body.errMsg];
         }
 
       })

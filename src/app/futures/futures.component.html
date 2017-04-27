@@ -16,7 +16,7 @@
             <div class="col-md-4 col-sm-5 ">
               <div class="r_boxToolPad">
                 <div class="input-group">
-                  <input type="text" class="form-control pull-right" placeholder="按期货品质名称搜索"  [(ngModel)]="searchPlatId" (change)="search()">
+                  <input type="text" class="form-control pull-right" placeholder="按期货品质名称搜索"  [(ngModel)]="searchPlatId" (keyup.enter)="search()">
                   <span class="input-group-addon" ><i class="fa fa-search"></i></span>
                 </div>
               </div>
@@ -25,7 +25,8 @@
         </div>
         <div class="r_boxToolFRl">
 
-          <button type="button" class="btn btn-default">导入</button>
+          <a href=" " class="btn btn-default btnFile "><input type="file" ng2FileSelect [uploader]="uploader" (change)="selectedFileOnChanged($event)"/>导入</a>
+
           <button type="button" class="btn btn-default">导出</button>
           <button type="button" class="btn btn-primary" (click)="onAddFutures()"><i class="fa fa-plus"></i> 新增</button>
 
