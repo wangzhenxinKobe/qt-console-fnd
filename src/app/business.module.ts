@@ -48,6 +48,7 @@ import {PlatformSelComponent} from "./elements/tplatform-sel.component";
 import {OperMngComponent} from "./oper-mng/opermng.component";
 import {OperMngService} from "./oper-mng/opermng.service";
 import {OperDetailComponent} from "./oper-mng/oper-detail.component";
+import {LoadingComponent} from "./elements/loading.component";
 
 
 @NgModule({
@@ -75,7 +76,8 @@ import {OperDetailComponent} from "./oper-mng/oper-detail.component";
     OproleDetailComponent,
     PlatformSelComponent,
     OperMngComponent,
-    OperDetailComponent
+    OperDetailComponent,
+    LoadingComponent
 
   ],
   exports: [
