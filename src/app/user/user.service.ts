@@ -21,7 +21,7 @@ export class UserService {
     private authService : AuthService
   ) { }
 
-  getUser() : Promise<User> {
+  getUser() : Promise<[boolean, any]> {
 
     if( this.user ) return Promise.resolve(this.user);
 
@@ -58,19 +58,19 @@ export class UserService {
           if(!this.authService.authorities || this.authService.authorities.length == 0) {
 
             console.error("请求失败：用户权限为空");
-            return null;
+            return [false, "请求失败：用户权限为空"];
 
           }
 
           //设置登录信息
           this.authService.sendLoginStatus(true);
 
-          return this.user;
+          return [true, this.user];
 
         } else {
 
           console.error("请求失败：" + body.errMsg);
-          return null;
+          return [false, body.errMsg];
 
         }
 
@@ -88,7 +88,7 @@ export class UserService {
   }
 
   // 登陆
-  login(account : string, password : string, chkCode : string) : Promise<any> {
+  login(account : string, password : string, chkCode : string) : Promise<[boolean, any]> {
 
     let request = JSON.stringify({
 
@@ -120,7 +120,7 @@ export class UserService {
           if(!this.authService.authorities || this.authService.authorities.length == 0) {
 
             console.error("请求失败：用户权限为空");
-            return false;
+            return [false, "请求失败：用户权限为空"];
 
           }
 
@@ -128,12 +128,12 @@ export class UserService {
           this.authService.setTokenId(body.tokenId);
           this.authService.sendLoginStatus(true);
 
-          return true;
+          return [true, "success"];
 
         } else {
 
           console.error("请求失败：" + body.errMsg);
-          return false;
+          return [false, body.errMsg];
 
         }
 
@@ -154,9 +154,9 @@ export class UserService {
      */
   }
 
-  private handleError(error: any): Promise<any> {
+  private handleError(error: any): Promise<[boolean, any]> {
     console.error('An error occurred', error); // for demo purposes only
-    return null;
+    return Promise.reject([false, error.toString()]);
   }
 
 }

@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
 import {Md5} from "ts-md5/dist/md5";
 
 import {UserService} from "./user.service";
+import {AlertComponent} from "../elements/alert.component";
 
 declare var $ : any;
 
@@ -13,6 +14,9 @@ declare var $ : any;
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+
+  @ViewChild(AlertComponent)
+  private readonly alert : AlertComponent;
 
   chkCodeRequest : string;
 
@@ -42,21 +46,22 @@ export class LoginComponent implements OnInit {
 
   onLogin() {
 
-    if(this.password == '') return ;
+    if( !this.password ) return ;
 
     let pwdMd5 = Md5.hashStr(this.password).toString();
 
-    console.info(`UserName[${this.userNo}], Password[${this.password}], MD5[${pwdMd5}], chkCode[${this.chkCode}]`);
-
     this.userService.login(this.userNo, pwdMd5, this.chkCode)
-      .then( (res : boolean) => {
+      .then( res => {
 
-        if(res) {
+        if(res[0]) {
           this.router.navigate(['/business']);
+        } else {
+          this.alert.error(res[1]);
         }
 
-      });
-    
+      })
+      .catch( error => this.alert.error(error));
+
   }
 
 }

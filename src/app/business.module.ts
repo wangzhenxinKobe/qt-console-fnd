@@ -78,6 +78,9 @@ import {OperDetailComponent} from "./oper-mng/oper-detail.component";
     OperDetailComponent
 
   ],
+  exports: [
+    AlertComponent
+  ],
   imports: [
     BrowserModule,
     FormsModule,
