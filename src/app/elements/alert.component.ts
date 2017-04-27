@@ -44,6 +44,8 @@ export class AlertComponent {
     this.typeIndex = 2;
     this.showMe();
 
+    setTimeout(() => this.close(), 2000);
+
   }
 
   warn(msg : string) {
@@ -52,6 +54,8 @@ export class AlertComponent {
     this.typeIndex = 1;
     this.showMe();
 
+    setTimeout(() => this.close(), 2000);
+
   }
 
   info(msg : string) {
@@ -59,6 +63,8 @@ export class AlertComponent {
     this.message = msg;
     this.typeIndex = 0;
     this.showMe();
+
+    setTimeout(() => this.close(), 1000);
 
   }
 
