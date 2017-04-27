@@ -22,8 +22,6 @@ export class CustSelectComponent implements OnInit {
   @Input() value : string;
   @Output() valueChange = new EventEmitter<string>();
 
-  @Output() change = new EventEmitter();
-
   @Input() viewType : string;
   @Input() dataType : string;
 
@@ -33,7 +31,6 @@ export class CustSelectComponent implements OnInit {
   onChange() {
 
     this.valueChange.emit(this.value);
-    this.change.emit();
 
   }
 
