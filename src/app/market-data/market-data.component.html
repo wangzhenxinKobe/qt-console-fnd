@@ -29,7 +29,7 @@
         </div>
         <div class="r_boxToolFRl">
 
-          <button type="button" class="btn btn-default">导入</button>
+          <a href=" " class="btn btn-default btnFile"><input type="file" ng2FileSelect [uploader]="uploader" (change)="selectedFileOnChanged($event)"/>导入</a>
           <button type="button" class="btn btn-default">导出</button>
           <button type="button" class="btn btn-primary" (click)="onAddMarketData()"><i class="fa fa-plus"></i> 新增</button>
 

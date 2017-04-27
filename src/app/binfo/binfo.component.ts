@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {BinfoService} from "./binfo.service";
 import {BinfoPage,Binfo} from "./binfo";
+import { FileUploader } from 'ng2-file-upload';
 
 declare var $ : any;
 
@@ -11,17 +12,19 @@ declare var $ : any;
 })
 export class BinfoComponent implements OnInit {
   searchPlatId : string = '';
-
   curPage : number = 1;
-
-
   binfoPage : BinfoPage;
-
   curBinfo : Binfo;
   editorTitle : string = '';
   isAddEditor : boolean;
+  downloadRequesting : boolean;
+  fileUrl : string;
 
-
+  uploader : FileUploader = new FileUploader({
+    url: "http://192.168.0.61:8077/handler",
+    method: "POST",
+    itemAlias: "file"
+  });
 
   constructor(
     private binfoService : BinfoService
@@ -41,8 +44,70 @@ export class BinfoComponent implements OnInit {
 
 
     };
+  }
+
+//文件导入
+  selectedFileOnChanged(event:any) {
+
+    console.log(event.target.value);
+    // 这里是文件选择完成后的操作处理
+    this.uploader.queue[0].onSuccess = (response, status, headers) => {
+
+      // 上传文件成功
+      if (status == 200) {
+        // 上传文件后获取服务器返回的数据
+        let tempRes = JSON.parse(response);
+        console.info(tempRes);
+        alert(tempRes.errMsg);
+      }else {
+        // 上传文件后获取服务器返回的数据错误
+      }
+    };
+    this.uploader.queue[0].upload(); // 开始上传
 
   }
+
+  //文件导出中
+   downloadFile(value : Binfo) {
+     this.downloadRequesting = true;
+     $('#requesting').modal('show'); //显示编辑对话框
+        this.downloadRequesting=false;
+          this.binfoService.exportBinfo(this.curBinfo)
+            .then( result => {
+              if(result[0]) {
+                this.fileUrl = result[1];
+              }
+              else {
+                alert(result[1]);
+              }
+            });
+   }
+// //   try{
+// //     var elemIF = document.createElement("iframe");
+// //     elemIF.src = url;
+// //     elemIF.style.display = "none";
+// //     document.body.appendChild(elemIF);
+// //
+// //   }catch(e){
+// //   alert("导出出错");
+// //   }
+
+ //文件下载中
+  download(){
+   // console.info(1212121)
+   //  this.binfoService.exportBinfo(this.curBinfo)
+   //    .then( result => result ? this.queryList() : alert("数据修改失败，请重试！") );
+    //   try{
+//     var elemIF = document.createElement("iframe");
+//     elemIF.src = url;
+//     elemIF.style.display = "none";
+//     document.body.appendChild(elemIF);
+//
+//   }catch(e){
+//   alert("导出出错");
+//   }
+  }
+
 
   search() {
 

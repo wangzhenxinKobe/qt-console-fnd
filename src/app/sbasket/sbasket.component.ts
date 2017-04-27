@@ -12,17 +12,14 @@ declare var $ : any;
 })
 export class SbasketComponent implements OnInit {
   searchPlatId : string = '';
-
   curPage : number = 1;
-
   sbasketPage : SbasketPage;
-
   curSbasket : Sbasket;
   editorTitle : string = '';
   isAddEditor : boolean;
 
   uploader : FileUploader = new FileUploader({
-    url: "http://192.168.0.65:8077/upload",
+    url: "http://192.168.0.65:8077/upload?serviceCode=FS022",
     method: "POST",
     itemAlias: "file"
   });

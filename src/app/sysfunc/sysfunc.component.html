@@ -16,7 +16,7 @@
             <div class="col-md-3 col-sm-4">
               <div class="r_boxToolPad">
                 <div class="input-group">
-                  <input type="text" class="form-control pull-right" placeholder="按权限名称搜索"  [(ngModel)]="searchPlatId" (change)="search()">
+                  <input type="text" class="form-control pull-right" placeholder="按权限名称搜索"  [(ngModel)]="searchPlatId" (keyup.enter)="search()">
                   <span class="input-group-addon" ><i class="fa fa-search"></i></span>
                 </div>
               </div>

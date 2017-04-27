@@ -22,7 +22,7 @@
                   <!--<option value="银行">全部交易平台管理-102</option>-->
                 <!--</select>-->
                 <div class="input-group">
-                  <input type="text" class="form-control pull-right" placeholder="按部署地点搜索"  [(ngModel)]="searchPlatId" (change)="search()">
+                  <input type="text" class="form-control pull-right" placeholder="按部署地点搜索"  [(ngModel)]="searchPlatId" (keyup.enter)="search()">
                   <span class="input-group-addon" ><i class="fa fa-search"></i></span>
                 </div>
               </div>

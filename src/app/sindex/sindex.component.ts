@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {SindexService} from "./sindex.service";
 import {SindexPage,Sindex} from "./sindex";
+import { FileUploader } from 'ng2-file-upload';
 
 declare var $ : any;
 
@@ -20,7 +21,11 @@ export class SindexComponent implements OnInit {
   editorTitle : string = '';
   isAddEditor : boolean;
 
-
+  uploader : FileUploader = new FileUploader({
+    url: "http://192.168.0.65:8077/upload?FS016",
+    method: "POST",
+    itemAlias: "file"
+  });
 
   constructor(
     private sindexService : SindexService
@@ -42,6 +47,28 @@ export class SindexComponent implements OnInit {
     };
 
   }
+
+
+  selectedFileOnChanged(event:any) {
+
+    console.log(event.target.value);
+    // 这里是文件选择完成后的操作处理
+    this.uploader.queue[0].onSuccess = (response, status, headers) => {
+
+      // 上传文件成功
+      if (status == 200) {
+        // 上传文件后获取服务器返回的数据
+        let tempRes = JSON.parse(response);
+        console.info(tempRes);
+        alert(tempRes.errMsg);
+      }else {
+        // 上传文件后获取服务器返回的数据错误
+      }
+    };
+    this.uploader.queue[0].upload(); // 开始上传
+
+  }
+
 
   search() {
 
@@ -115,6 +142,7 @@ export class SindexComponent implements OnInit {
 
 
   }
+
 
   delete() {
 
