@@ -49,35 +49,7 @@ export class StrategyEditorComponent extends BaseComponent {
 
 
   }
-
-  private asyncTimer( runner : ()=> Promise<boolean>) {
-
-    let i = 0;
-
-    let interval = setInterval(() => {
-
-      console.info(`------i am in loading for [${i}] times`);
-
-      if(i >= 3) {
-        this.loading.hide();
-        clearInterval(interval);
-      }
-      runner().then(res => {
-
-        if(res) {
-
-          this.loading.hide();
-          clearInterval(interval);
-
-        }
-      });
-
-      i++;
-
-    }, 1000);
-
-  }
-
+  
   onLoadParam(name) {
 
     this.loading.show();
