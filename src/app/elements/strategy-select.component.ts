@@ -1,45 +1,62 @@
-
-import {Component, Output, Input, OnInit, EventEmitter} from '@angular/core';
-import {Strategy} from "../strategy/strategy";
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import {StrategyService} from "../strategy/strategy.service";
 
 @Component({
-    selector: 'app-strategy-select',
-    template: `
+  selector: 'app-strategy-sel',
+  template: `
     
-    <select [(ngModel)]="value" class="form-control" (change)="onChange()">
-      <option value="{{obj.value}}">{{obj.text}}</option>
+    <select *ngIf="viewType != 'readonly'" [(ngModel)]="value" class="form-control " (change)="onChange()">
+      <option *ngFor="let item of strategyList" value="{{item.value}}">{{item.text}}</option>
     </select>
+
+    <div *ngIf="viewType == 'readonly'">{{curStrategy?.text}}</div>
     
     `
 })
+export class StrategySelComponent implements OnInit{
 
-export class StrategySelectComponent implements OnInit {
-
-  strategies : Strategy[];
-
-  @Input() value : string;
-  @Output() valueChange = new EventEmitter<string>();
-
-  @Output() change = new EventEmitter();
+  @Input()
+  value:string;
+  @Output()
+  valueChange = new EventEmitter<string>();
 
   @Input() viewType : string;
+
+  strategyList : any[] = [];
+  curStrategy : any;
+
+  constructor(private strategyService : StrategyService){}
 
   onChange() {
 
     this.valueChange.emit(this.value);
-    this.change.emit();
 
   }
 
   ngOnInit() {
 
-    //获取全部策略列表
+    this.strategyService.getAllStrategies().then( res => {
 
-/*
-    if (this.viewType == 'select_all') {
-      this.strategies.unshift({value: '', text: '全部策略'});
-    }
-*/
+      for(let strategy of res) {
+
+        this.strategyList.push({ value : strategy.strategyName, text : strategy.strategyName });
+
+      }
+
+      if(this.viewType == 'select_all') {
+
+        this.strategyList.unshift({value:'', text:'全部策略'});
+
+      }
+
+      if(this.viewType == 'readonly') {
+
+        this.curStrategy = this.strategyList.find(data => data.value == this.value);
+
+      }
+
+    });
+
   }
 
 }

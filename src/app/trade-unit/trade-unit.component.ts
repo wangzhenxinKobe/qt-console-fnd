@@ -3,6 +3,7 @@ import {TradeUnitPage, TradeUnit, TradeUnitParam} from "./trade-unit";
 import {TradeUnitService} from "./trade-unit.service";
 import {StrategyService} from "../strategy/strategy.service";
 import {Strategy} from "../strategy/strategy";
+import {BaseComponent} from "../common/base.component";
 
 declare var $ : any;
 
@@ -11,7 +12,7 @@ declare var $ : any;
   templateUrl: './trade-unit.component.html',
   styleUrls: ['./trade-unit.component.css']
 })
-export class TradeUnitComponent implements OnInit {
+export class TradeUnitComponent extends BaseComponent implements OnInit {
 
   //查询条件
   searchPlatId : string = '';
@@ -31,7 +32,7 @@ export class TradeUnitComponent implements OnInit {
   constructor(
     private tradeUnitService : TradeUnitService,
     private strategyService : StrategyService
-  ) { }
+  ) { super(); }
 
   ngOnInit() {
   }
@@ -54,6 +55,7 @@ export class TradeUnitComponent implements OnInit {
 
     this.isAddEditor = true;
     this.editorTitle = '新增交易单元';
+    this.isLoaded = false;
 
     this.curTradeUnit = { //初始化行情数据
       tradeUnitId : '',
@@ -62,7 +64,7 @@ export class TradeUnitComponent implements OnInit {
       strategyName : '',
       author : '',
       status : '',
-      paraNameList : [],
+      paramList : [],
       accountList : []
     };
 
@@ -80,15 +82,17 @@ export class TradeUnitComponent implements OnInit {
         this.curTradeUnit.strategyName = res.strategyName;
         this.curTradeUnit.strategyType = res.strategyType;
 
+        this.curTradeUnit.paramList = [];
+
         for(let strategyParam of res.fieldList) {
 
           let param : TradeUnitParam = new TradeUnitParam();
 
           param.paraName = strategyParam.paraName;
           param.paraType = strategyParam.paraType;
-          param.paraDefaultValue = strategyParam.paraValue;
+          param.defaultValue = strategyParam.paraValue;
 
-          this.curTradeUnit.paraNameList.push(param) ;
+          this.curTradeUnit.paramList.push(param) ;
         }
 
         this.curTradeUnit.status = '1';
@@ -143,10 +147,9 @@ export class TradeUnitComponent implements OnInit {
 
   private queryList() {
 
-    console.info(`searchPlatId[${this.searchPlatId}], searchStrategyName[${this.searchStrategyName}], searchTradeUnitName[${this.searchTradeUnitName}], curPage[${this.curPage}]`);
-
     this.tradeUnitService.getTradeUnits(this.searchPlatId, this.searchStrategyName, this.searchTradeUnitName, this.curPage)
-      .then( page => this.tradeUnitPage = page );
+      .then( res => res[0] ? this.tradeUnitPage = res[1] : this.alert.error(res[1]) )
+      .catch( error => this.alert.error(error));
 
   }
 

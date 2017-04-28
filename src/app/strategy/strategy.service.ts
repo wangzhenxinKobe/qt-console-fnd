@@ -14,6 +14,8 @@ export class StrategyService {
   private headers = new Headers({'Content-Type': 'application/json'});
   private request_id = '';
 
+  private allStrategies : Strategy[];
+
   constructor(private http : Http) {
 
     this.request_id = generateRequestId();
@@ -66,6 +68,50 @@ export class StrategyService {
   }
 
   /**
+   * 获取全部策略
+   * @returns {any}
+     */
+  getAllStrategies() : Promise<Strategy[]> {
+
+    if(!!this.allStrategies) return Promise.resolve(this.allStrategies);
+
+    let request = JSON.stringify({
+
+      platId : '',
+      strategyType : '',
+      strategyName : '',
+      pageSize : 2000,
+      currentPage : 1,
+      requestId : this.request_id,
+      serviceCode : 'FS001'
+
+    });
+
+    return this.http
+      .post(this.hostUrl, request, {headers: this.headers})
+      .toPromise()
+      .then( (res : Response) => {
+
+        let body = res.json();
+
+        if(body.errCode == '000000') {
+
+          this.allStrategies = body.fieldList as Strategy[];
+
+          return this.allStrategies;
+
+        } else {
+
+          console.error("请求失败：" + body.errMsg);
+          return null;
+
+        }
+
+      }).catch(this.handleError);
+
+  }
+
+  /**
    * 根据策略名称获取策略信息
    * @param name
      */
@@ -97,8 +143,7 @@ export class StrategyService {
 
         }
 
-      })
-      .catch(this.handleError);
+      }).catch(this.handleError);
 
   }
 

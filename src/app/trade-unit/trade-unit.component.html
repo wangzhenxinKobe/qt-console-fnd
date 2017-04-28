@@ -1,7 +1,7 @@
 <div class="r_crumbs">
   <a href="#">首页</a>
-  <a href="#">业务信息管理</a>
-  策略维护
+  <a href="#">交易管理</a>
+  交易单元维护
 </div>
 <div class="r_main">
   <app-alert></app-alert>
@@ -16,18 +16,14 @@
           <div class="row">
             <div class="col-md-3 col-sm-4">
               <div class="r_boxToolPad">
-                <select class="form-control" [(ngModel)]="searchPlatId" (change)="search()">
-                  <option value="">全部交易平台</option>
-                  <option value="101">交易平台-101</option>
-                  <option value="102">交易平台-102</option>
-                  <option value="103">交易平台-103</option>
-                </select>
+                <app-platform-sel viewType="select_all" [(value)]="searchPlatId" (change)="search()"></app-platform-sel>
               </div>
             </div>
             <div class="col-md-3 col-sm-4">
               <div class="r_boxToolPad">
                 <div class="input-group">
-                  <input type="text" class="form-control pull-right" placeholder="输入策略名称" (keyup.enter)="search()" [(ngModel)]="searchStrategyName">
+                  <input type="text" class="form-control" placeholder="按策略名称搜索" (keyup.enter)="search()" [(ngModel)]="searchStrategyName">
+                  <span class="input-group-addon" ><i class="fa fa-search"></i></span>
                 </div>
               </div>
             </div>
@@ -62,7 +58,9 @@
               <tbody>
               <tr *ngFor="let trade_unit of tradeUnitPage?.tradeUnits">
                 <td>{{trade_unit.tradeUnitId}}</td>
-                <td>{{trade_unit.platId}}</td>
+                <td>
+                  <app-platform-sel viewType="readonly" [value]="trade_unit.platId" ></app-platform-sel>
+                </td>
                 <td>{{trade_unit.strategyName}}</td>
                 <td>
                   <app-cust-select dataType="strategy_type" viewType="readonly" [value]="trade_unit.strategyType" ></app-cust-select>
@@ -74,9 +72,9 @@
                 <td>
                   <div class="tabledit-toolbar btn-toolbar">
                     <div class="btn-group btn-group-sm">
-                      <button type="button"  data-toggle="modal" data-target="#addCelue" class="tabledit-edit-button btn btn-sm btn-default">策略配置</button>
+                      <button type="button"  data-toggle="modal" data-target="#addCelue" class="tabledit-edit-button btn btn-sm btn-default">交易单元配置</button>
                       <button type="button" class="tabledit-delete-button btn btn-sm btn-default">启动</button>
-                      <button type="button" class="tabledit-delete-button btn btn-sm btn-default">删除</button>
+                      <button type="button" class="tabledit-delete-button btn btn-sm btn-default">停止</button>
                     </div>
                   </div>
                 </td>
@@ -103,10 +101,13 @@
       <div class="modal-body">
 
         <div class="input-group" *ngIf="isAddEditor">
+          <app-strategy-sel [(value)]="curTradeUnit.strategyName" (change)="loadStrategyInfo()"></app-strategy-sel>
+<!--
           <input type="text" class="form-control pull-right" [(ngModel)]="curTradeUnit.strategyName" placeholder="请输入策略名称">
           <div class="input-group-btn">
             <button class="btn btn-default" (click)="loadStrategyInfo()">导入</button>
           </div>
+-->
         </div>
 
         <br>
@@ -139,12 +140,7 @@
               <td>{{curTradeUnit.strategyName}}</td>
               <td><input class="form-control input-sm" type="text" [(ngModel)]="curTradeUnit.tradeUnitId"/></td>
               <td>
-                <select class="form-control" [(ngModel)]="curTradeUnit.platId">
-                  <option value="">全部交易平台</option>
-                  <option value="101">交易平台-101</option>
-                  <option value="102">交易平台-102</option>
-                  <option value="103">交易平台-103</option>
-                </select>
+                <app-platform-sel [(value)]="curTradeUnit.platId"></app-platform-sel>
               </td>
               <td>
                 <app-cust-select dataType="strategy_type" viewType="readonly" [value]="curTradeUnit.strategyType" ></app-cust-select>
@@ -190,12 +186,12 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let param of curTradeUnit.paraNameList">
+            <tr *ngFor="let param of curTradeUnit.paramList">
               <td>{{param.paraName}}</td>
               <td>
                 <app-cust-select dataType="strategy_param_type" viewType="readonly" [value]="param.paraType" ></app-cust-select>
               </td>
-              <td>{{param.paraDefaultValue}}</td>
+              <td>{{param.defaultValue}}</td>
               <td><input class="form-control input-sm" type="text" style="width: 40px;" [(ngModel)]="param.paraValue"/></td>
               <td><input class="form-control input-sm" type="text" [(ngModel)]="param.comment"/></td>
             </tr>
