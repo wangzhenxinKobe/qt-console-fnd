@@ -50,6 +50,7 @@ import {OperMngService} from "./oper-mng/opermng.service";
 import {OperDetailComponent} from "./oper-mng/oper-detail.component";
 import {LoadingComponent} from "./elements/loading.component";
 import {StrategySelComponent} from "./elements/strategy-select.component";
+import {BaseComponent} from "./common/base.component";
 
 
 @NgModule({
@@ -79,11 +80,13 @@ import {StrategySelComponent} from "./elements/strategy-select.component";
     OperMngComponent,
     OperDetailComponent,
     LoadingComponent,
-    StrategySelComponent
+    StrategySelComponent,
+    BaseComponent
 
   ],
   exports: [
-    AlertComponent
+    AlertComponent,
+    BaseComponent
   ],
   imports: [
     BrowserModule,

@@ -37,7 +37,7 @@ export class StrategySelComponent implements OnInit{
 
     this.strategyService.getAllStrategies().then( res => {
 
-      for(let strategy of res) {
+      for(let strategy of res[1]) {
 
         this.strategyList.push({ value : strategy.strategyName, text : strategy.strategyName });
 

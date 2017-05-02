@@ -1,18 +1,18 @@
 import {Component, ViewChild} from '@angular/core';
-import { Headers, Http, Response } from '@angular/http';
 
 import {AlertComponent} from "../elements/alert.component";
 import {LoadingComponent} from "../elements/loading.component";
-import {ParamConfig} from "./param.config";
 
-@Component({})
+@Component({
+  template: ''
+})
 export class BaseComponent {
 
   @ViewChild(AlertComponent)
-  protected readonly alert : AlertComponent;
+  public alert : AlertComponent;
 
   @ViewChild(LoadingComponent)
-  protected readonly loading : LoadingComponent;
+  public loading : LoadingComponent;
 
   constructor() {}
 

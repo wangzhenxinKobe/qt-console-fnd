@@ -4,19 +4,20 @@
     <img src="assets/images/loginLogo.png" />
   </div>
   <div class="login-box-body">
+    <form>
       <div class="form-group has-feedback">
-        <input type="text" class="form-control" placeholder="账号" [(ngModel)]="userNo">
+        <input type="text" class="form-control" placeholder="账号" [(ngModel)]="userNo" name="userNo">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="密码" [(ngModel)]="password">
+        <input type="password" class="form-control" placeholder="密码" [(ngModel)]="password" name="password">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">
         <!-- /.col -->
         <div class="col-xs-8">
           <div class="form-group has-feedback">
-            <input type="text" class="form-control" placeholder="验证码" [(ngModel)]="chkCode">
+            <input type="text" class="form-control" placeholder="验证码" [(ngModel)]="chkCode" name="chkCode">
             <span class="glyphicon glyphicon-th-large form-control-feedback"></span>
           </div>
         </div>
@@ -33,6 +34,7 @@
         </div>
         <!-- /.col -->
       </div>
+    </form>
   </div>
   <!-- /.login-box-body -->
 </div>

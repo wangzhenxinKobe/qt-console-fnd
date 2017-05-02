@@ -77,29 +77,35 @@ export class TradeUnitComponent extends BaseComponent implements OnInit {
     if(!this.isAddEditor || this.curTradeUnit.strategyName == '') return ;
 
     this.strategyService.getStrategyByName(this.curTradeUnit.strategyName)
-      .then( (res : Strategy) => {
+      .then( (res) => {
 
-        this.curTradeUnit.strategyName = res.strategyName;
-        this.curTradeUnit.strategyType = res.strategyType;
+        if(res[0]) {
 
-        this.curTradeUnit.paramList = [];
+          this.curTradeUnit.strategyName = res[1].strategyName;
+          this.curTradeUnit.strategyType = res[1].strategyType;
 
-        for(let strategyParam of res.fieldList) {
+          this.curTradeUnit.paramList = [];
 
-          let param : TradeUnitParam = new TradeUnitParam();
+          for(let strategyParam of res[1].fieldList) {
 
-          param.paraName = strategyParam.paraName;
-          param.paraType = strategyParam.paraType;
-          param.defaultValue = strategyParam.paraValue;
+            let param : TradeUnitParam = new TradeUnitParam();
 
-          this.curTradeUnit.paramList.push(param) ;
+            param.paraName = strategyParam.paraName;
+            param.paraType = strategyParam.paraType;
+            param.defaultValue = strategyParam.paraValue;
+
+            this.curTradeUnit.paramList.push(param) ;
+          }
+
+          this.curTradeUnit.status = '1';
+
+          this.isLoaded = true;
+
+        } else {
+          this.alert.error(res[1]);
         }
 
-        this.curTradeUnit.status = '1';
-
-        this.isLoaded = true;
-
-      });
+      }).catch(error => this.alert.error(error));
 
   }
 
