@@ -64,7 +64,7 @@ export class BinfoService{
 
 
   //增加
-  addBinfo(binfo : Binfo) : Promise<[boolean]> {
+  addBinfo(binfo : Binfo) : Promise<boolean> {
 
 
     let request = JSON.stringify({
@@ -105,7 +105,7 @@ export class BinfoService{
 
 
   //修改
-  updateBinfo(binfo : Binfo) : Promise<[boolean]> {
+  updateBinfo(binfo : Binfo) : Promise<boolean> {
 
 
     let request = JSON.stringify({
@@ -144,7 +144,7 @@ export class BinfoService{
 
 
   //删除
-  removeBinfo(binfo : Binfo) : Promise<[boolean]> {
+  removeBinfo(binfo : Binfo) : Promise<boolean> {
 
 
     let request = JSON.stringify({

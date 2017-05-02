@@ -62,7 +62,7 @@ export class SbasketService{
 
 
   //增加
-  addSbasket(sbasket : Sbasket) : Promise<[boolean]> {
+  addSbasket(sbasket : Sbasket) : Promise<boolean> {
 
 
     let request = JSON.stringify({
@@ -101,7 +101,7 @@ export class SbasketService{
 
 
   //修改
-  updateSbasket(sbasket : Sbasket) : Promise<[boolean]> {
+  updateSbasket(sbasket : Sbasket) : Promise<boolean> {
 
 
     let request = JSON.stringify({
@@ -136,7 +136,7 @@ export class SbasketService{
 
 
   //删除
-  removeSbasket(sbasket : Sbasket) : Promise<[boolean]> {
+  removeSbasket(sbasket : Sbasket) : Promise<boolean> {
 
 
     let request = JSON.stringify({
