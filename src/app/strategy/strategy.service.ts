@@ -73,7 +73,7 @@ export class StrategyService {
      */
   getAllStrategies() : Promise<[ boolean, any ]> {
 
-    if(!!this.allStrategies) return Promise.resolve(this.allStrategies);
+    if(!!this.allStrategies) return Promise.resolve([true, this.allStrategies]);
 
     let request = JSON.stringify({
 

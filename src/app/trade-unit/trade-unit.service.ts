@@ -384,7 +384,7 @@ export class TradeUnitService {
    * @param request_id
    * @returns
    */
-  private getServerResponse(request_id) : Promise<[boolean, any]> {
+  public getServerResponse(request_id) : Promise<[boolean, any]> {
 
     let request = JSON.stringify({
 

@@ -18,13 +18,15 @@ export class BaseComponent {
 
   protected asyncTimer( runner : ()=> Promise<boolean>) {
 
+    this.loading.show();
+
     let i = 0;
 
     let interval = setInterval(() => {
 
       console.info(`------i am in loading for the [${i}]th times`);
 
-      if(i >= 3) {
+      if(i > 2) {
         this.loading.hide();
         clearInterval(interval);
       }

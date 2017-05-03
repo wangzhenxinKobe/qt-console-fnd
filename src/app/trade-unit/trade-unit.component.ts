@@ -27,6 +27,7 @@ export class TradeUnitComponent extends BaseComponent implements OnInit {
   editorTitle : string = '';
   isAddEditor : boolean;
   isLoaded : boolean = false;
+  isDialogShowing : boolean = false;
 
 
   constructor(
@@ -35,6 +36,20 @@ export class TradeUnitComponent extends BaseComponent implements OnInit {
   ) { super(); }
 
   ngOnInit() {
+    this.curTradeUnit = { //初始化行情数据
+      tradeUnitId : '',
+      platId : '',
+      strategyType : '',
+      strategyName : '',
+      author : '',
+      status : '',
+      paramList : [],
+      accountList : []
+    };
+
+    $('#data_editor').on('show.bs.modal', () => {this.isDialogShowing = true;});
+    $('#data_editor').on('hide.bs.modal', () => {this.isDialogShowing = false;});
+
   }
 
   search() {
@@ -56,17 +71,8 @@ export class TradeUnitComponent extends BaseComponent implements OnInit {
     this.isAddEditor = true;
     this.editorTitle = '新增交易单元';
     this.isLoaded = false;
+    this.isDialogShowing = true;
 
-    this.curTradeUnit = { //初始化行情数据
-      tradeUnitId : '',
-      platId : '',
-      strategyType : '',
-      strategyName : '',
-      author : '',
-      status : '',
-      paramList : [],
-      accountList : []
-    };
 
     $('#data_editor').modal('show'); //显示编辑对话框
 
@@ -106,6 +112,41 @@ export class TradeUnitComponent extends BaseComponent implements OnInit {
         }
 
       }).catch(error => this.alert.error(error));
+
+  }
+
+  onSaveTradeUnit() {
+
+    if(!this.isAddEditor) return;
+
+    this.loading.show();
+
+    this.tradeUnitService.addTradeUnit(this.curTradeUnit)
+      .then(res => {
+        if(res[0]) {
+
+          this.asyncTimer(()=>{
+
+            return this.tradeUnitService.getServerResponse(res[1])
+              .then( res => {
+
+                if(res[0]){
+                  this.alert.info("交易单元新增成功");
+                  this.isAddEditor = false;
+                  return true;
+                } else {
+                  this.alert.error(`数据新增失败！[${res[1]}]`);
+                  return false;
+                }
+
+              }).catch(error => {this.alert.error(`数据新增失败！[${error}]`); return false;});
+
+          });
+
+        } else {
+          this.alert.error(`数据新增失败！[${res[1]}]`);
+        }
+      }).catch(error => this.alert.error(`数据新增失败！[${error}]`));
 
   }
 
