@@ -16,12 +16,11 @@
 
             <div class="col-md-3 col-sm-4">
               <div class="r_boxToolPad">
-                <select class="form-control" [(ngModel)]="searchPlatId" (change)="search()">
-                  <option value="">全部交易平台</option>
-                  <option value="2">交易平台-101</option>
-                  <option value="3">交易平台-102</option>
-                  <option value="4">交易平台-103</option>
-                </select>
+
+                <div class="input-group">
+                  <input type="text" class="form-control pull-right" placeholder="按账户编号/所属分组搜索"  [(ngModel)]="searchPlatId" (keyup.enter)="search()">
+                  <span class="input-group-addon" ><i class="fa fa-search"></i></span>
+                </div>
               </div>
             </div>
 
@@ -133,11 +132,11 @@
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
-              <label class="col-sm-4 control-label">账户编号：</label>
+              <label class="col-sm-4 control-label">产品名称：</label>
               <div class="col-sm-8">
                 <select class="form-control" [(ngModel)]="curAccount.accountId">
-                  <option value="1">账户编号1</option>
-                  <option value="2">账户编号2</option>
+                  <option value="1">产品名称1</option>
+                  <option value="2">产品名称2</option>
                 </select>
               </div>
             </div>
@@ -183,9 +182,9 @@
           </div>
           <div class="col-md-6">
             <div class="form-group">
-              <label class="col-sm-4 control-label">产品编号：</label>
+              <label class="col-sm-4 control-label">认证码：</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control" placeholder="产品编号" [(ngModel)]="curAccount.fundCode">
+                <input type="text" class="form-control" placeholder="认证码" [(ngModel)]="curAccount.fundCode">
               </div>
             </div>
           </div>
@@ -224,54 +223,14 @@
               <label class="col-sm-4 control-label">所属分组：</label>
               <div class="col-sm-8">
                 <input type="text" class="form-control" placeholder="所属分组" [(ngModel)]="curAccount.groupName">
+                  <!--<input type="hidden" class="form-control" placeholder="所属分组" [(ngModel)]="curAccount.groupId">-->
               </div>
             </div>
           </div>
 
 
         </div>
-          <!--<div class="form-group">-->
-            <!--<label class="col-sm-3 control-label">账户编号:</label>-->
-            <!--<div class="col-sm-9">-->
-              <!--<select class="form-control" [(ngModel)]="curAccount.accountId">&lt;!&ndash;禁用添加disabled&ndash;&gt;-->
-                <!--<option>1</option>-->
-                <!--<option>2</option>-->
-              <!--</select>-->
-            <!--</div>-->
-          <!--</div>-->
-          <!--<div class="form-group">-->
-            <!--<label class="col-sm-3 control-label">交易平台:</label>-->
-            <!--<div class="col-sm-9">-->
-              <!--<input type="text" class="form-control"  placeholder="请输入交易平台" [(ngModel)]="curAccount.platId">-->
-            <!--</div>-->
-          <!--</div>-->
-          <!--<div class="form-group">-->
-            <!--<label class="col-sm-3 control-label">所属柜台系统:</label>-->
-            <!--<div class="col-sm-9">-->
-              <!--<input type="text" class="form-control"  placeholder="请输入所属柜台系统" [(ngModel)]="curAccount.serviceId">-->
-            <!--</div>-->
-          <!--</div>-->
-          <!--<div class="form-group">-->
-            <!--<label class="col-sm-3 control-label">用户代码:</label>-->
-            <!--<div class="col-sm-9">-->
-              <!--<select class="form-control" [(ngModel)]="curAccount.userId">-->
-                <!--<option>1</option>-->
-                <!--<option>2</option>-->
-              <!--</select>-->
-            <!--</div>-->
-          <!--</div>-->
-          <!--<div class="form-group">-->
-            <!--<label class="col-sm-3 control-label">投资者代码:</label>-->
-            <!--<div class="col-sm-9">-->
-              <!--<input type="text" class="form-control"  placeholder="请输入投资者代码" [(ngModel)]="curAccount.inverstorId">-->
-            <!--</div>-->
-          <!--</div>-->
-          <!--<div class="form-group">-->
-            <!--<label class="col-sm-3 control-label">交易密码:</label>-->
-            <!--<div class="col-sm-9">-->
-              <!--<input type="password" class="form-control"  placeholder="请输入交易密码" [(ngModel)]="curAccount.tradePassword">-->
-            <!--</div>-->
-          <!--</div>-->
+
 
 
 
@@ -299,19 +258,34 @@
         <div class="row">
           <div class="col-xs-offset-1 col-xs-11"><p class="lead">是否确定<strong>删除</strong>该行情订阅记录？</p></div>
         </div>
-        <!--<div class="row">-->
-          <!--<div class="col-xs-offset-1 col-xs-11">-->
-            <!--<dl class="dl-horizontal" style="margin-bottom: 8px;">-->
-              <!--<dt>交易平台</dt><dd>{{curMarketData?.platId}}</dd>-->
-            <!--</dl>-->
-            <!--<dl class="dl-horizontal" style="margin-bottom: 8px;">-->
-              <!--<dt>合约代码</dt><dd>{{curMarketData?.symbolId}}</dd>-->
-            <!--</dl>-->
-            <!--<dl class="dl-horizontal" >-->
-              <!--<dt>代码类型</dt><dd>{{curMarketData?.symbolType}}</dd>-->
-            <!--</dl>-->
-          <!--</div>-->
-        <!--</div>-->
+        <div class="row">
+          <div class="col-xs-offset-1 col-xs-11">
+            <dl class="dl-horizontal" style="margin-bottom: 8px;">
+              <dt>账户编号</dt><dd>{{curAccount.accountId}}</dd>
+            </dl>
+            <dl class="dl-horizontal" style="margin-bottom: 8px;">
+              <dt>交易平台</dt><dd>{{curAccount.platId}}</dd>
+            </dl>
+            <dl class="dl-horizontal" style="margin-bottom: 8px;">
+              <dt>所属柜台系统</dt><dd>{{curAccount.serviceId}}</dd>
+            </dl>
+            <dl class="dl-horizontal" style="margin-bottom: 8px;">
+              <dt>用户代码</dt><dd>{{curAccount.userId}}</dd>
+            </dl>
+            <dl class="dl-horizontal" style="margin-bottom: 8px;">
+              <dt>投资者代码</dt><dd>{{curAccount.inverstorId}}</dd>
+            </dl>
+            <dl class="dl-horizontal" style="margin-bottom: 8px;">
+              <dt>交易密码</dt><dd>{{curAccount.tradePassword}}</dd>
+            </dl>
+            <dl class="dl-horizontal" style="margin-bottom: 8px;">
+              <dt>系数</dt><dd>{{curAccount.ratio}}</dd>
+            </dl>
+            <dl class="dl-horizontal" >
+              <dt>所属分组</dt><dd>{{curAccount.groupName}}</dd>
+            </dl>
+          </div>
+        </div>
       </div>
 
       <div class="modal-footer" style="text-align: right;">

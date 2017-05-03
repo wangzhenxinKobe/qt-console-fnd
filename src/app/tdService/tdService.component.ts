@@ -34,7 +34,9 @@ export class TdServiceComponent implements OnInit {
     adapterType : 0,
     userId : "",
     tradePassword : "",
-      serviceId : 0
+      serviceType:0,
+      serviceId : 0,
+      accountId : 0,
     };
 
   }
@@ -65,7 +67,9 @@ export class TdServiceComponent implements OnInit {
       adapterType : 0,
       userId : "",
       tradePassword : "",
-      serviceId : 0
+      serviceType:0,
+      serviceId : 0,
+      accountId : 0,
 
     };
 
@@ -77,11 +81,8 @@ export class TdServiceComponent implements OnInit {
 
     this.isAddEditor = false;
     this.editorTitle = '编辑行情源配置';
-
     this.curTdService = value;
-
     $('#data_editor').modal('show'); //显示编辑对话框
-
   }
 
   onDeleteTdService(value : TdService) {

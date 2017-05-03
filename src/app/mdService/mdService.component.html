@@ -16,12 +16,11 @@
 
             <div class="col-md-3 col-sm-4">
               <div class="r_boxToolPad">
-                <select class="form-control" [(ngModel)]="searchPlatId" (change)="search()">
-                  <option value="1">全部交易平台</option>
-                  <option value="101">交易平台-101</option>
-                  <option value="102">交易平台-102</option>
-                  <option value="103">交易平台-103</option>
-                </select>
+
+                <div class="input-group">
+                  <input type="text" class="form-control pull-right" placeholder="按平台编号搜索"  [(ngModel)]="searchPlatId" (keyup.enter)="search()">
+                  <span class="input-group-addon" ><i class="fa fa-search"></i></span>
+                </div>
               </div>
             </div>
 
@@ -40,6 +39,7 @@
                 <th>交易平台</th>
                 <th>IP</th>
                 <th>端口</th>
+                <th>服务类型</th>
                 <th>适配器类型</th>
                 <th width="120">操作</th>
               </tr>
@@ -49,8 +49,8 @@
                 <td>{{item.platId}}</td>
                 <td>{{item.ip}}</td>
                 <td>{{item.port}}</td>
-                <td>{{item.adapterType}}</td>
-
+                <td><app-cust-select dataType="mdService" viewType="readonly" [value]="item.serviceType" ></app-cust-select></td>
+                <td><app-cust-select dataType="mdlei" viewType="readonly" [value]="item.adapterType" ></app-cust-select></td>
                 <td style="text-align: center;">
                   <div class="tabledit-toolbar btn-toolbar" style=" display: inline-block;">
                     <div class="btn-group btn-group-sm" >
@@ -83,9 +83,9 @@
           <div class="form-group">
             <label class="col-sm-3 control-label">交易平台:</label>
             <div class="col-sm-9">
-              <select class="form-control" [(ngModel)]="curMdService.platId"><!--禁用添加disabled-->
-                <option>1</option>
-                <option>2</option>
+              <select class="form-control" [(ngModel)]="curMdService.platId">
+                <option value="101">1</option>
+                <option value="102">2</option>
               </select>
             </div>
           </div>
@@ -101,12 +101,24 @@
               <input type="text" class="form-control"  placeholder="请输入端口" [(ngModel)]="curMdService.port">
             </div>
           </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label">服务类型:</label>
+          <div class="col-sm-9">
+
+            <select class="form-control" [(ngModel)]="curMdService.serviceType">
+              <option value="1">期货行情</option>
+              <option value="2">期货交易</option>
+              <option value="3">股票行情</option>
+              <option value="4">股票交易</option>
+            </select>
+          </div>
+        </div>
           <div class="form-group">
             <label class="col-sm-3 control-label">适配器类型:</label>
             <div class="col-sm-9">
               <select class="form-control" [(ngModel)]="curMdService.adapterType">
-                <option>1</option>
-                <option>2</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
               </select>
             </div>
           </div>
@@ -136,19 +148,25 @@
         <div class="row">
           <div class="col-xs-offset-1 col-xs-11"><p class="lead">是否确定<strong>删除</strong>该行情订阅记录？</p></div>
         </div>
-        <!--<div class="row">-->
-          <!--<div class="col-xs-offset-1 col-xs-11">-->
-            <!--<dl class="dl-horizontal" style="margin-bottom: 8px;">-->
-              <!--<dt>交易平台</dt><dd>{{curMarketData?.platId}}</dd>-->
-            <!--</dl>-->
-            <!--<dl class="dl-horizontal" style="margin-bottom: 8px;">-->
-              <!--<dt>合约代码</dt><dd>{{curMarketData?.symbolId}}</dd>-->
-            <!--</dl>-->
-            <!--<dl class="dl-horizontal" >-->
-              <!--<dt>代码类型</dt><dd>{{curMarketData?.symbolType}}</dd>-->
-            <!--</dl>-->
-          <!--</div>-->
-        <!--</div>-->
+        <div class="row">
+          <div class="col-xs-offset-1 col-xs-11">
+            <dl class="dl-horizontal" style="margin-bottom: 8px;">
+              <dt>交易平台</dt><dd>{{curMdService.platId}}</dd>
+            </dl>
+            <dl class="dl-horizontal" style="margin-bottom: 8px;">
+              <dt>IP</dt><dd>{{curMdService.ip}}</dd>
+            </dl>
+            <dl class="dl-horizontal" style="margin-bottom: 8px;">
+              <dt>端口</dt><dd>{{curMdService.port}}</dd>
+            </dl>
+            <dl class="dl-horizontal" style="margin-bottom: 8px;">
+              <dt>服务类型</dt><dd>{{curMdService.serviceType}}</dd>
+            </dl>
+            <dl class="dl-horizontal" >
+              <dt>适配器类型</dt><dd>{{curMdService.adapterType}}</dd>
+            </dl>
+          </div>
+        </div>
       </div>
 
       <div class="modal-footer" style="text-align: right;">

@@ -7,7 +7,7 @@ import {generateRequestId} from "../app.module";
 @Injectable()
 export class BinfoService{
   private hostUrl = ParamConfig.HTTP_HOST_URL; //URL to web api
-  private fileBaseUrl = 'http://192.168.0.65:8077/';
+  private url = '';
   private headers = new Headers({'Content-Type': 'application/json'});
   private request_id = generateRequestId();
 
@@ -38,20 +38,17 @@ export class BinfoService{
 
   private extractBinfoData(res : Response){
 
-    console.info(res);
+    // console.info(res);
 
     let body = res.json();
 
     if(body.errCode == '000000') {
 
       var pagedata = new BinfoPage();
-
       pagedata.binfo = body.fieldList as Binfo[];
       pagedata.totalPages = body.totalPages;
       pagedata.totalRows = body.totalRows;
-
       return pagedata;
-
     } else {
 
       console.error("请求失败：" + body.errMsg);
@@ -189,7 +186,8 @@ export class BinfoService{
       .then( res => {
         let body = res.json();
         if(body.errCode == '000000') {
-          return [true, this.fileBaseUrl + body.excel] ;
+          console.info(body);
+          return [true, body.url] ;
         }
         else {
           console.error("请求失败：" + body.errMsg);

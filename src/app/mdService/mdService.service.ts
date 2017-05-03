@@ -64,18 +64,16 @@ export class MdServiceService {
 
   //增加
   addMdService(mdService : MdService) : Promise<boolean> {
-
-
     let request = JSON.stringify({
       requestId : this.request_id,
       platId : mdService.platId ,
+      serviceId : mdService.serviceId,
+      serviceType : mdService.serviceType,
       ip : mdService.ip,
       port : mdService.port,
       adapterType : mdService.adapterType ,
       serviceCode : 'FS042'
-
     });
-
     return this.http
       .post(this.hostUrl, request, {headers: this.headers})
       .toPromise()
@@ -89,10 +87,8 @@ export class MdServiceService {
           console.error("请求失败：" + body.errMsg);
           return false;
         }
-
       })
       .catch(this.handleError);
-
   }
 
 
@@ -102,10 +98,12 @@ export class MdServiceService {
 
     let request = JSON.stringify({
       requestId : this.request_id,
+      serviceId : mdService.serviceId,
       platId : mdService.platId ,
       ip : mdService.ip,
       port : mdService.port,
       adapterType : mdService.adapterType ,
+      serviceType : mdService.serviceType ,
       serviceCode : 'FS044'
 
     });

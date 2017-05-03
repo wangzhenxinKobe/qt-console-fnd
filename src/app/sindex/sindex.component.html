@@ -11,7 +11,13 @@
     <div class="r_boxContent">
       <div class="r_boxTool clearfix">
         <div class="row">
-          <div class="col-md-4 col-md-offset-8">
+          <div class="col-md-3">
+            <div class="input-group">
+              <input type="text" class="form-control pull-right" placeholder="按股票名称搜索"  [(ngModel)]="searchPlatId" (keyup.enter)="search()">
+              <span class="input-group-addon" ><i class="fa fa-search"></i></span>
+            </div>
+          </div>
+          <div class="col-md-4 col-md-offset-4">
             <div class="row">
               <div class="col-md-8">
                 <div class="r_boxToolPad">
@@ -106,11 +112,11 @@
           <label class="col-sm-3 control-label">交易所代码:</label>
           <div class="col-sm-9">
             <select class="form-control" [(ngModel)]="curSindex.exchangeId">
-              <option>32131</option>
-              <option>32132</option>
-              <option>32133</option>
-              <option>3214</option>
-              <option>3215</option>
+              <option value="1">32131</option>
+              <option value="1">32132</option>
+              <option value="1">32133</option>
+              <option value="1">3214</option>
+              <option value="1">3215</option>
             </select>
           </div>
         </div>

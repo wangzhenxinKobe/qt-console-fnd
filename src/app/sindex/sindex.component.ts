@@ -22,7 +22,7 @@ export class SindexComponent implements OnInit {
   isAddEditor : boolean;
 
   uploader : FileUploader = new FileUploader({
-    url: "http://192.168.0.65:8077/upload?FS016",
+    url: "http://192.168.0.65:8077/upload?serviceCode=FS016",
     method: "POST",
     itemAlias: "file"
   });

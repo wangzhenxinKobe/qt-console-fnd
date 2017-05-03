@@ -72,7 +72,7 @@ export class SbasketService{
       basketName : sbasket.basketName,
       weight : sbasket.weight,
       volume : sbasket.volume,
-      errCode1 : sbasket.errCode1,
+      code1 : sbasket.code1,
       volume1 : sbasket.volume1,
 
       serviceCode : 'FS019'
@@ -110,7 +110,7 @@ export class SbasketService{
       basketName : sbasket.basketName,
       weight : sbasket.weight,
       volume : sbasket.volume,
-      errCode1 : sbasket.errCode1,
+      code1 : sbasket.code1,
       volume1 : sbasket.volume1,
       serviceCode : 'FS020'
     });

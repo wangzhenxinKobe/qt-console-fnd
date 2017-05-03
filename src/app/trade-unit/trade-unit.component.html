@@ -102,108 +102,180 @@
       </div>
       <div class="modal-body">
 
-        <div class="input-group" *ngIf="isAddEditor">
-          <input type="text" class="form-control pull-right" [(ngModel)]="curTradeUnit.strategyName" placeholder="请输入策略名称">
-          <div class="input-group-btn">
-            <button class="btn btn-default" (click)="loadStrategyInfo()">导入</button>
+        <div class="row">
+          <div class="col-md-10">
+            <div class="r_boxToolPad"><input class="form-control" type="text" placeholder="请输入策略名称"></div>
+          </div>
+          <div class="col-md-2"><div class="r_boxToolPad"><button type="submit" id="search" class="btn btn-default btn-block">搜索</button></div></div>
+        </div>
+        <div id="searchBox" style="display: none;">
+          <br />
+          <div><b>交易单元信息</b></div>
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+              <tr>
+                <th>
+                  交易单元名称
+                </th>
+                <th>
+                  交易平台
+                </th>
+                <th>
+                  策略类型
+                </th>
+                <th>
+                  创建者
+                </th>
+                <th width="120">
+                  操作
+                </th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td><input class="form-control input-sm" type="text"></td>
+                <td><input class="form-control input-sm" type="text"></td>
+                <td>
+                  <select class="form-control input-sm">
+                    <option>策略类型</option>
+                    <option>全部策略类型</option>
+                    <option>类型一</option>
+                    <option>类型一</option>
+                    <option>类型一</option>
+                  </select>
+                </td>
+                <td><input class="form-control input-sm" type="text"></td>
+                <td>
+                  <div class="tabledit-toolbar btn-toolbar">
+                    <div class="btn-group btn-group-sm">
+                      <button type="button" class="tabledit-edit-button btn btn-sm btn-primary">保存</button>
+                      <button type="button" class="tabledit-delete-button btn btn-sm btn-default">取消</button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+
+              </tbody>
+            </table>
+          </div>
+          <div><b>交易账户</b></div>
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+              <tr>
+                <th>
+                  产品名称
+                </th>
+                <th>
+                  用户代码
+                </th>
+                <th>
+                  投资者代码
+                </th>
+                <th>
+                  账户类型
+                </th>
+                <th>
+                  经纪公司名称
+                </th>
+                <th width="120">操作</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td><input class="form-control input-sm" type="text"></td>
+                <td><input class="form-control input-sm" type="text"></td>
+                <td><input class="form-control input-sm" type="text"></td>
+                <td><input class="form-control input-sm" type="text"></td>
+                <td><input class="form-control input-sm" type="text"></td>
+                <td>
+                  <div class="tabledit-toolbar btn-toolbar">
+                    <div class="btn-group btn-group-sm">
+                      <button type="button" class="tabledit-edit-button btn btn-sm btn-primary">保存</button>
+                      <button type="button" class="tabledit-delete-button btn btn-sm btn-default">取消</button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td><input class="form-control input-sm" type="text"></td>
+                <td><input class="form-control input-sm" type="text"></td>
+                <td><input class="form-control input-sm" type="text"></td>
+                <td><input class="form-control input-sm" type="text"></td>
+                <td><input class="form-control input-sm" type="text"></td>
+                <td>
+                  <div class="tabledit-toolbar btn-toolbar">
+                    <div class="btn-group btn-group-sm">
+                      <button type="button" class="tabledit-edit-button btn btn-sm btn-primary">保存</button>
+                      <button type="button" class="tabledit-delete-button btn btn-sm btn-default">取消</button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <div><b>策略参数</b></div>
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+              <tr>
+                <th>
+                  参数名
+                </th>
+                <th>
+                  数据类型
+                </th>
+                <th>
+                  默认值
+                </th>
+                <th>
+                  参数值
+                </th>
+                <th>
+                  备注
+                </th>
+                <th width="120">
+                  操作
+                </th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>name1</td>
+                <td>int</td>
+                <td>d5</td>
+                <td><input class="form-control input-sm" type="text"></td>
+                <td><input class="form-control input-sm" type="text" /></td>
+                <td>
+                  <div class="tabledit-toolbar btn-toolbar">
+                    <div class="btn-group btn-group-sm">
+                      <button type="button" class="tabledit-edit-button btn btn-sm btn-primary">保存</button>
+                      <button type="button" class="tabledit-delete-button btn btn-sm btn-default">取消</button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>name1</td>
+                <td>int</td>
+                <td>d5</td>
+                <td><input class="form-control input-sm" type="text" ></td>
+                <td><input class="form-control input-sm" type="text" /></td>
+                <td>
+                  <div class="tabledit-toolbar btn-toolbar">
+                    <div class="btn-group btn-group-sm">
+                      <button type="button" class="tabledit-edit-button btn btn-sm btn-primary">保存</button>
+                      <button type="button" class="tabledit-delete-button btn btn-sm btn-default">取消</button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              </tbody>
+            </table>
           </div>
         </div>
-
-        <br>
-
-        <div *ngIf="isLoaded">
-
-        <div>交易单元信息</div>
-        <div class="table-responsive">
-          <table class="table table-bordered">
-            <thead>
-            <tr>
-              <th>交易策略名</th>
-              <th>交易单元名</th>
-              <th>交易平台</th>
-              <th>策略类型</th>
-              <th>创建者</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngIf="!isAddEditor">
-              <td>{{curTradeUnit.strategyName}}</td>
-              <td>{{curTradeUnit.tradeUnitId}}</td>
-              <td>{{curTradeUnit.platId}}</td>
-              <td>
-                <app-cust-select dataType="strategy_type" viewType="readonly" [value]="curTradeUnit.strategyType" ></app-cust-select>
-              </td>
-              <td>{{curTradeUnit.author}}</td>
-            </tr>
-            <tr *ngIf="isAddEditor">
-              <td>{{curTradeUnit.strategyName}}</td>
-              <td><input class="form-control input-sm" type="text" [(ngModel)]="curTradeUnit.tradeUnitId"/></td>
-              <td>
-                <select class="form-control" [(ngModel)]="curTradeUnit.platId">
-                  <option value="">全部交易平台</option>
-                  <option value="101">交易平台-101</option>
-                  <option value="102">交易平台-102</option>
-                  <option value="103">交易平台-103</option>
-                </select>
-              </td>
-              <td>
-                <app-cust-select dataType="strategy_type" viewType="readonly" [value]="curTradeUnit.strategyType" ></app-cust-select>
-              </td>
-              <td><input class="form-control input-sm" type="text" [(ngModel)]="curTradeUnit.author"/></td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div>交易账户</div>
-        <div class="table-responsive">
-          <table class="table table-bordered">
-            <thead>
-            <tr>
-              <th>用户代码</th>
-              <th>产品名称</th>
-              <th>投资者代码</th>
-              <th>经纪公司名称</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let acct of curTradeUnit.accountList">
-              <td>{{acct.userId}}</td>
-              <td>{{acct.fundCode}}</td>
-              <td>{{acct.inverstorId}}</td>
-              <td>{{acct.brokerName}}</td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div>策略参数</div>
-        <div class="table-responsive">
-          <table class="table table-bordered">
-            <thead>
-            <tr>
-              <th>参数名</th>
-              <th>数据类型</th>
-              <th>默认值</th>
-              <th>参数值</th>
-              <th>备注</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let param of curTradeUnit.paraNameList">
-              <td>{{param.paraName}}</td>
-              <td>
-                <app-cust-select dataType="strategy_param_type" viewType="readonly" [value]="param.paraType" ></app-cust-select>
-              </td>
-              <td>{{param.paraDefaultValue}}</td>
-              <td><input class="form-control input-sm" type="text" style="width: 40px;" [(ngModel)]="param.paraValue"/></td>
-              <td><input class="form-control input-sm" type="text" [(ngModel)]="param.comment"/></td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
-        </div> <!-- ./*ngIf="curTradeUnit.strategyName"-->
-
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" >保存</button>

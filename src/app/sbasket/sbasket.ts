@@ -8,7 +8,7 @@ export class Sbasket {
     public basketName : string;       //篮子名称
     public weight : string; //权重
     public volume : number;      //股数
-    public errCode1  : string; //备选代码
+    public code1  : string; //备选代码
     public volume1 : number;       //备选股数
 
 

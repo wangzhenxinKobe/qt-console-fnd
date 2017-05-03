@@ -1,7 +1,7 @@
 <div class="r_crumbs">
   <a href="#">首页</a>
   <a href="#">业务信息管理</a>
-  策略维护
+  行情订阅信息维护
 </div>
 <div class="r_main">
   <div class="r_box">
@@ -16,12 +16,17 @@
 
             <div class="col-md-3 col-sm-4">
               <div class="r_boxToolPad">
-                <select class="form-control" [(ngModel)]="searchPlatId" (change)="search()">
-                  <option value="">全部行情</option>
-                  <option value="101">行情-101</option>
-                  <option value="102">行情-102</option>
-                  <option value="103">行情-103</option>
-                </select>
+                <!--<select class="form-control" [(ngModel)]="searchPlatId" (change)="search()">-->
+                  <!--<option value="">全部行情</option>-->
+                  <!--<option value="101">行情-101</option>-->
+                  <!--<option value="102">行情-102</option>-->
+                  <!--<option value="103">行情-103</option>-->
+                <!--</select>-->
+
+                <div class="input-group">
+                  <input type="text" class="form-control pull-right" placeholder="按平台编号搜索"  [(ngModel)]="searchPlatId" (keyup.enter)="search()">
+                  <span class="input-group-addon" ><i class="fa fa-search"></i></span>
+                </div>
               </div>
             </div>
 

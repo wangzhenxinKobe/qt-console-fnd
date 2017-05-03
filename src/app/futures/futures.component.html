@@ -10,7 +10,6 @@
     </div>
     <div class="r_boxContent">
       <div class="r_boxTool clearfix">
-
         <div class="r_boxToolFl">
           <div class="row">
             <div class="col-md-4 col-sm-5 ">
@@ -39,9 +38,9 @@
             <table class="table table-striped table-bordered table-hover" id="futures-table">
               <thead>
               <tr>
+                <th>交易所代码</th>
                 <th>期货品种代码</th>
                 <th>期货品种名称</th>
-                <th>交易所代码</th>
                 <th>合约乘数</th>
                 <th>最小价格变动单位</th>
                 <th>计费方式</th>
@@ -51,9 +50,9 @@
               <tbody>
 
               <tr *ngFor="let item of futuresPage?.futures">
+                <td>{{item.exchangeId}}</td>
                 <td>{{item.productId}}</td>
                 <td>{{item.productName}}</td>
-                <td>{{item.exchangeId}}</td>
                 <td>{{item.volumeMultiple}}</td>
                 <td>{{item.priceTick}}</td>
                 <td>{{item.feeMode}}</td>
@@ -119,17 +118,15 @@
           <div class="form-group">
             <label class="col-sm-3 control-label">最小价格变动单位:</label>
             <div class="col-sm-9">
-              <select class="form-control" placeholder="请输入最小价格变动单位" [(ngModel)]="curFutures.priceTick">
-                <option>18.25</option>
-
-              </select>
+                <input type="text" class="form-control"  placeholder="请输入最小价格变动单位" [(ngModel)]="curFutures.priceTick">
             </div>
           </div>
           <div class="form-group">
             <label class="col-sm-3 control-label">	计费方式:</label>
             <div class="col-sm-9">
               <select class="form-control" placeholder="请输入计费方式" [(ngModel)]="curFutures.feeMode">
-                <option>1</option>
+                <option>单位手</option>
+                <option>成交额</option>
               </select>
             </div>
           </div>
@@ -157,28 +154,28 @@
         <div class="row">
           <div class="col-xs-offset-1 col-xs-11"><p class="lead">是否确定<strong>删除</strong>该行情订阅记录？</p></div>
         </div>
-        <!--<div class="row">-->
-          <!--<div class="col-xs-offset-1 col-xs-11">-->
-            <!--<dl class="dl-horizontal" style="margin-bottom: 2px;">-->
-              <!--<dt>交易所代码</dt><dd>{{curFutures?.exchangeId}}</dd>-->
-            <!--</dl>-->
-            <!--dl class="dl-horizontal" style="margin-bottom: 2px;">-->
-            <!--<dt>代码</dt><dd>{{curFutures?.productId}}</dd>-->
-            <!--</dl>-->
-            <!--dl class="dl-horizontal" style="margin-bottom: 2px;">-->
-            <!--<dt>名称</dt><dd>{{curFutures?.productName}}</dd>-->
-            <!--</dl>-->
-            <!--dl class="dl-horizontal" style="margin-bottom: 2px;">-->
-            <!--<dt>合约乘数</dt><dd>{{curFutures?.volumeMultiple}}</dd>-->
-            <!--</dl>-->
-            <!--dl class="dl-horizontal" style="margin-bottom: 2px;">-->
-            <!--<dt>最小价格变动单位</dt><dd>{{curFutures?.priceTick}}</dd>-->
-            <!--</dl>-->
-            <!--dl class="dl-horizontal">-->
-            <!--<dt>计费方式</dt><dd>{{curFutures?.feeMode}}</dd>-->
-            <!--</dl>-->
-          <!--</div>-->
-        <!--</div>-->
+       <div class="row">
+        <div class="col-xs-offset-1 col-xs-11">
+          <dl class="dl-horizontal" style="margin-bottom: 2px;">
+              <dt>交易所代码</dt><dd>{{curFutures?.exchangeId}}</dd>
+          </dl>
+            <dl class="dl-horizontal" style="margin-bottom: 2px;">
+           <dt>代码</dt><dd>{{curFutures?.productId}}</dd>
+            </dl>
+            <dl class="dl-horizontal" style="margin-bottom: 2px;">
+            <dt>名称</dt><dd>{{curFutures?.productName}}</dd>
+            </dl>
+            <dl class="dl-horizontal" style="margin-bottom: 2px;">
+           <dt>合约乘数</dt><dd>{{curFutures?.volumeMultiple}}</dd>
+            </dl>
+            <dl class="dl-horizontal" style="margin-bottom: 2px;">
+            <dt>最小价格变动单位</dt><dd>{{curFutures?.priceTick}}</dd>
+            </dl>
+            <dl class="dl-horizontal">
+            <dt>计费方式</dt><dd>{{curFutures?.feeMode}}</dd>
+            </dl>
+          </div>
+        </div>
       </div>
 
       <div class="modal-footer" style="text-align: right;">

@@ -17,7 +17,7 @@
                 <div class="r_boxToolPad">
                   <select class="form-control" [(ngModel)]="searchPlatId" (change)="search()">
                     <option value="篮">请选择篮子名称</option>
-                    <option value="篮子名称1">名称一</option>
+                    <option value="篮9696">名称一</option>
                     <option value="篮子名称2">名称二</option>
                   </select>
                 </div>
@@ -50,12 +50,11 @@
               <tr *ngFor="let item of sbasketPage?.sbasket">
                 <td>{{item.weight}}</td>
                 <td>{{item.volume}}</td>
-                <td>{{item.errCode1}}</td>
+                <td>{{item.code1}}</td>
                 <td>{{item.volume1}}</td>
-
                 <td style="text-align: center;">
                   <div class="tabledit-toolbar btn-toolbar" style=" display: inline-block;">
-                    <div class="btn-group btn-group-sm" >
+                    <div class="btn-group btn-group-sm">
                       <button class="tabledit-edit-button btn btn-sm btn-default" type="button" (click)="onEditSbasket(item)" >编辑</button>
                       <button class="tabledit-delete-button btn btn-sm btn-default" type="button" (click)="onDeleteSbasket(item)">删除</button>
                     </div>
@@ -97,7 +96,7 @@
           <div class="form-group">
             <label class="col-sm-3 control-label">备选代码:</label>
             <div class="col-sm-9">
-              <input type="text" class="form-control"  placeholder="请输入备选代码" [(ngModel)]="curSbasket.errCode1">
+              <input type="text" class="form-control"  placeholder="请输入备选代码" [(ngModel)]="curSbasket.code1">
             </div>
           </div>
           <div class="form-group">
@@ -106,12 +105,6 @@
               <input type="text" class="form-control"  placeholder="请输入备选股数" [(ngModel)]="curSbasket.volume1">
             </div>
           </div>
-
-
-
-
-
-
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" (click)="save()">保存</button>
@@ -135,28 +128,22 @@
         <div class="row">
           <div class="col-xs-offset-1 col-xs-11"><p class="lead">是否确定<strong>删除</strong>该行情订阅记录？</p></div>
         </div>
-        <!--<div class="row">-->
-        <!--<div class="col-xs-offset-1 col-xs-11">-->
-        <!--<dl class="dl-horizontal" style="margin-bottom: 2px;">-->
-        <!--<dt>交易所代码</dt><dd>{{curFutures?.exchangeId}}</dd>-->
-        <!--</dl>-->
-        <!--dl class="dl-horizontal" style="margin-bottom: 2px;">-->
-        <!--<dt>代码</dt><dd>{{curFutures?.productId}}</dd>-->
-        <!--</dl>-->
-        <!--dl class="dl-horizontal" style="margin-bottom: 2px;">-->
-        <!--<dt>名称</dt><dd>{{curFutures?.productName}}</dd>-->
-        <!--</dl>-->
-        <!--dl class="dl-horizontal" style="margin-bottom: 2px;">-->
-        <!--<dt>合约乘数</dt><dd>{{curFutures?.volumeMultiple}}</dd>-->
-        <!--</dl>-->
-        <!--dl class="dl-horizontal" style="margin-bottom: 2px;">-->
-        <!--<dt>最小价格变动单位</dt><dd>{{curFutures?.priceTick}}</dd>-->
-        <!--</dl>-->
-        <!--dl class="dl-horizontal">-->
-        <!--<dt>计费方式</dt><dd>{{curFutures?.feeMode}}</dd>-->
-        <!--</dl>-->
-        <!--</div>-->
-        <!--</div>-->
+       <div class="row">
+       <div class="col-xs-offset-1 col-xs-11">
+         <dl class="dl-horizontal" style="margin-bottom: 8px;">
+           <dt>权重</dt><dd>{{curSbasket.weight}}</dd>
+         </dl>
+         <dl class="dl-horizontal" style="margin-bottom: 8px;">
+           <dt>股数</dt><dd>{{curSbasket.volume}}</dd>
+         </dl>
+         <dl class="dl-horizontal" style="margin-bottom: 8px;">
+           <dt>备选代码</dt><dd>{{curSbasket.code1}}</dd>
+         </dl>
+         <dl class="dl-horizontal" style="margin-bottom: 8px;">
+           <dt>备选股数</dt><dd>{{curSbasket.volume1}}</dd>
+         </dl>
+       </div>
+        </div>
       </div>
 
       <div class="modal-footer" style="text-align: right;">
