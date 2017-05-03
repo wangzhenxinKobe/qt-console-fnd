@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import {InterceptorService} from "ng2-interceptors/index";
 import { Http, XHRBackend, RequestOptions } from '@angular/http';
+import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 
 import {BusinessModule} from "./business.module";
 import {AppRoutingModule} from "./app-routing.module";
@@ -53,7 +54,7 @@ export function interceptorFactory(xhrBackend: XHRBackend, requestOptions: Reque
     AppRoutingModule
 
   ],
-  providers: [ HttpInterceptor, AuthService, UserService,
+  providers: [ HttpInterceptor, AuthService, UserService, {provide: LocationStrategy, useClass: HashLocationStrategy},
     {
       provide: Http,
       useFactory: interceptorFactory,
