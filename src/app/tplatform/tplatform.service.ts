@@ -137,7 +137,7 @@ export class TplatformService{
 
 
   //修改
-  updateTplatform(tplatform : Tplatform) : Promise<[boolean ,string]> {
+  updateTplatform(tplatform : Tplatform) : Promise<boolean> {
 
 
     let request = JSON.stringify({
@@ -172,7 +172,7 @@ export class TplatformService{
 
 
   //删除
-  removeTplatform(tplatform : Tplatform) : Promise<[boolean ,string]> {
+  removeTplatform(tplatform : Tplatform) : Promise<boolean> {
 
 
     let request = JSON.stringify({

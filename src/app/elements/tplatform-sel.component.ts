@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import {Tplatform} from "../tplatform/tplatform";
 import {TplatformService} from "../tplatform/tplatform.service";
 
 @Component({

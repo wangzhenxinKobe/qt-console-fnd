@@ -60,7 +60,7 @@ export class FuturesService {
   }
 
   //增加
-  addFutures(futures : Futures) : Promise<[boolean]> {
+  addFutures(futures : Futures) : Promise<boolean> {
 
 
     let request = JSON.stringify({
@@ -98,7 +98,7 @@ export class FuturesService {
 
 
   //修改
-  updateFutures(futures : Futures) : Promise<[boolean]> {
+  updateFutures(futures : Futures) : Promise<boolean> {
 
 
     let request = JSON.stringify({
@@ -135,7 +135,7 @@ export class FuturesService {
 
 
 //删除
-  removeFutures(futures : Futures) : Promise<[boolean]> {
+  removeFutures(futures : Futures) : Promise<boolean> {
 
 
     let request = JSON.stringify({

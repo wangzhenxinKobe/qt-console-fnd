@@ -61,7 +61,7 @@ export class SindexService{
 
 
   //增加
-  addSindex(sindex : Sindex) : Promise<[boolean]> {
+  addSindex(sindex : Sindex) : Promise<boolean> {
 
 
     let request = JSON.stringify({
@@ -101,7 +101,7 @@ export class SindexService{
 
 
  // 修改
-  updateSindex(sindex : Sindex) : Promise<[boolean]> {
+  updateSindex(sindex : Sindex) : Promise<boolean> {
 
 
     let request = JSON.stringify({
@@ -140,7 +140,7 @@ export class SindexService{
 
 
   //删除
-  removeSindex(sindex : Sindex) : Promise<[boolean]> {
+  removeSindex(sindex : Sindex) : Promise<boolean> {
 
 
     let request = JSON.stringify({

@@ -31,12 +31,16 @@ export class StrategyEditorComponent extends BaseComponent {
 
       //获取策略参数列表
       this.strategyService.getStrategyByName(this.strategy.strategyName)
-        .then( stratety => {
+        .then( res => {
 
-          this.strategy = stratety;
-          $('#addCelue').modal();
+          if(res[0]) {
+            this.strategy = res[1];
+            $('#addCelue').modal();
+          } else {
+            this.alert.error(res[1]);
+          }
 
-        });
+        }).catch(error => this.alert.error(error));
 
     } else { //新增策略
 
@@ -52,12 +56,14 @@ export class StrategyEditorComponent extends BaseComponent {
 
   onLoadParam(name) {
 
+    this.loading.show();
+
     this.strategyService.syncStrategyParam(name)
       .then( res => {
 
         if(res[0]) {
 
-          this.asyncLoad( () => {
+          this.asyncTimer( () => {
 
             return this.strategyService.loadStrategyParam(name)
               .then( res => { //参数导入成功
@@ -79,12 +85,16 @@ export class StrategyEditorComponent extends BaseComponent {
 
                 } else {
 
+                  this.alert.error(res[1]);
                   return false;
 
                 }
 
               })
-              .catch( () => {return false;});
+              .catch( error => {
+                this.alert.error(error);
+                return false;
+              });
 
           });
 
@@ -95,7 +105,7 @@ export class StrategyEditorComponent extends BaseComponent {
         }
 
       })
-      .catch(error => this.alert.error(error[1]));
+      .catch(error => this.alert.error(error));
 
   }
 
@@ -117,7 +127,7 @@ export class StrategyEditorComponent extends BaseComponent {
         }
 
       })
-      .catch(error => this.alert.error(error[1]));
+      .catch(error => this.alert.error(error));
 
   }
 
@@ -127,17 +137,17 @@ export class StrategyEditorComponent extends BaseComponent {
 
     this.strategyService.updateStrategyParam(this.strategy.strategyName, param.paraName, param.paraValue)
       .then( result => {
-        if(result) {
+        if(result[0]) {
 
           this.alert.info("保存成功！");
 
         } else {
 
-          this.alert.error("保存失败!");
+          this.alert.error(`保存失败![${result[1]}]`);
 
           //更新记录
           this.strategyService.getStrategyByName(this.strategy.strategyName)
-            .then( stratety => this.strategy = stratety );
+            .then( stratety => this.strategy = stratety[1] );
 
         }
       });

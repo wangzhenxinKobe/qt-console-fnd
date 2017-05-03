@@ -10,7 +10,7 @@ declare var $ ;
 
 describe('StrategyService', () => {
 
-
+/*
   beforeEach(() => { TestBed.configureTestingModule({ imports: [HttpModule], providers: [StrategyService] }); });
 
 
@@ -41,7 +41,7 @@ describe('StrategyService', () => {
     });
 
   })));
-
+*/
 
 });
 

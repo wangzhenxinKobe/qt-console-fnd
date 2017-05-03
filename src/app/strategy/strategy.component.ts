@@ -1,17 +1,18 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {StrategyEditorComponent} from "./strategy-editor.component";
-import {Strategy, StrategyPage} from "./strategy";
+import {StrategyPage} from "./strategy";
 import {StrategyService} from "./strategy.service";
+import {BaseComponent} from "../common/base.component";
 
 @Component({
   selector: 'app-strategy',
   templateUrl: './strategy.component.html',
   styleUrls: ['./strategy.component.css']
 })
-export class StrategyComponent implements OnInit {
+export class StrategyComponent extends BaseComponent implements OnInit {
 
   @ViewChild(StrategyEditorComponent)
-  public readonly strategyEditorModal : StrategyEditorComponent;
+  public strategyEditorModal : StrategyEditorComponent;
 
   searchPlatId : string = '';
   searchStrategyType : string = '';
@@ -20,15 +21,24 @@ export class StrategyComponent implements OnInit {
 
   strategyPage : StrategyPage;
 
-  constructor( private strategyService : StrategyService ) { }
+  constructor( private strategyService : StrategyService ) { super(); }
 
   ngOnInit() {
+
+    this.search();
+
   }
 
   private queryList() {
 
     this.strategyService.getStrategies(this.searchPlatId, this.searchStrategyType, this.searchStrategyName, this.curPage)
-      .then( page => this.strategyPage = page );
+      .then( res => {
+        if(res[0]) {
+          this.strategyPage = res[1];
+        } else {
+          this.alert.error(res[1]);
+        }
+      }).catch(error => this.alert.error(error));
 
   }
 

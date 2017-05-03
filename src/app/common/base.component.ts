@@ -1,27 +1,28 @@
 import {Component, ViewChild} from '@angular/core';
+
 import {AlertComponent} from "../elements/alert.component";
 import {LoadingComponent} from "../elements/loading.component";
 
-@Component({})
+@Component({
+  template: ''
+})
 export class BaseComponent {
 
   @ViewChild(AlertComponent)
-  protected readonly alert : AlertComponent;
+  public alert : AlertComponent;
 
   @ViewChild(LoadingComponent)
-  protected readonly loading : LoadingComponent;
+  public loading : LoadingComponent;
 
   constructor() {}
 
-  asyncLoad( runner : ()=> Promise<boolean>) {
+  protected asyncTimer( runner : ()=> Promise<boolean>) {
 
     let i = 0;
 
-    this.loading.show();
-
     let interval = setInterval(() => {
 
-      console.info(`------i am in loading for [${i}] times`);
+      console.info(`------i am in loading for the [${i}]th times`);
 
       if(i >= 3) {
         this.loading.hide();
@@ -35,11 +36,11 @@ export class BaseComponent {
           clearInterval(interval);
 
         }
-        });
+      });
 
       i++;
 
-    }, 1000);
+    }, 2000);
 
   }
 

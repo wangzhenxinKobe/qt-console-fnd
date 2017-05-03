@@ -20,9 +20,9 @@ export class LoginComponent implements OnInit {
 
   chkCodeRequest : string;
 
-  password : string;
-  userNo : string;
-  chkCode : string;
+  password : string = '';
+  userNo : string = '';
+  chkCode : string = '';
 
   constructor(
     private userService : UserService,

@@ -23,7 +23,7 @@ export class UserService {
 
   getUser() : Promise<[boolean, any]> {
 
-    if( this.user ) return Promise.resolve(this.user);
+    if( this.user ) return Promise.resolve([true, this.user]);
 
     let tokenId = this.authService.getTokenId();
     if( !tokenId ) return Promise.reject('TokenId失效');

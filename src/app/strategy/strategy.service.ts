@@ -14,13 +14,15 @@ export class StrategyService {
   private headers = new Headers({'Content-Type': 'application/json'});
   private request_id = '';
 
+  private allStrategies : Strategy[];
+
   constructor(private http : Http) {
 
     this.request_id = generateRequestId();
 
   }
 
-  getStrategies(plat_id, strategy_type, strategy_name, current_page) : Promise<StrategyPage> {
+  getStrategies(plat_id, strategy_type, strategy_name, current_page) : Promise<[boolean, any]> {
 
     let request = JSON.stringify({
 
@@ -54,14 +56,58 @@ export class StrategyService {
       pagedata.totalPages = body.totalPages;
       pagedata.totalRows = body.totalRows;
 
-      return pagedata;
+      return [true, pagedata];
 
     } else {
 
       console.error("请求失败：" + body.errMsg);
-      return null;
+      return [false , body.errMsg];
 
     }
+
+  }
+
+  /**
+   * 获取全部策略
+   * @returns {any}
+     */
+  getAllStrategies() : Promise<[ boolean, any ]> {
+
+    if(!!this.allStrategies) return Promise.resolve(this.allStrategies);
+
+    let request = JSON.stringify({
+
+      platId : '',
+      strategyType : '',
+      strategyName : '',
+      pageSize : 2000,
+      currentPage : 1,
+      requestId : this.request_id,
+      serviceCode : 'FS001'
+
+    });
+
+    return this.http
+      .post(this.hostUrl, request, {headers: this.headers})
+      .toPromise()
+      .then( (res : Response) => {
+
+        let body = res.json();
+
+        if(body.errCode == '000000') {
+
+          this.allStrategies = body.fieldList as Strategy[];
+
+          return [true, this.allStrategies];
+
+        } else {
+
+          console.error("请求失败：" + body.errMsg);
+          return [false, null];
+
+        }
+
+      }).catch(this.handleError);
 
   }
 
@@ -69,7 +115,7 @@ export class StrategyService {
    * 根据策略名称获取策略信息
    * @param name
      */
-  getStrategyByName(name : string) : Promise<Strategy> {
+  getStrategyByName(name : string) : Promise<[boolean, any]> {
 
     let request = JSON.stringify({
 
@@ -88,17 +134,16 @@ export class StrategyService {
 
         if(body.errCode == '000000') {
 
-          return body as Strategy;
+          return [true, body as Strategy];
 
         } else {
 
           console.error("请求失败：" + body.errMsg);
-          return null;
+          return [false, body.errMsg];
 
         }
 
-      })
-      .catch(this.handleError);
+      }).catch(this.handleError);
 
   }
 
@@ -208,7 +253,7 @@ export class StrategyService {
 
   }
 
-  updateStrategyParam(strategyName : string, paraName : string, paraValue : string) {
+  updateStrategyParam(strategyName : string, paraName : string, paraValue : string) : Promise<[boolean, any]> {
 
     let request = JSON.stringify({
 
@@ -228,11 +273,11 @@ export class StrategyService {
         let body = res.json();
 
         if(body.errCode == '000000') {
-          return true ;
+          return [true, "success"] ;
         }
         else {
           console.error("请求失败：" + body.errMsg);
-          return false;
+          return [false, body.errMsg];
         }
 
       })
@@ -240,9 +285,9 @@ export class StrategyService {
 
   }
 
-  private handleError(error: any): Promise<[boolean, any]> {
+  private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
-    return Promise.reject([false, error.toString()]);
+    return Promise.reject(error.toString());
   }
 
 

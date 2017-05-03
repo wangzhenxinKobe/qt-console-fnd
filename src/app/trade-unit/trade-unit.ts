@@ -8,7 +8,7 @@ export class TradeUnit {
   public author : string;       //开发者
   public status : string;       //状态
 
-  public paraNameList :TradeUnitParam[];
+  public paramList :TradeUnitParam[];
 
   public accountList : TradeUnitAcct[];
 
@@ -20,7 +20,7 @@ export class TradeUnitParam {
   paraName  : string;         //参数名
   paraType  : string;         //数据类型
   paraValue : string;         //参数值
-  paraDefaultValue : string;  //参数默认值
+  defaultValue : string;  //参数默认值
   comment : string;           //备注信息
 }
 
@@ -29,6 +29,7 @@ export class TradeUnitAcct {
   userId : string;        //用户代码
   inverstorId : string;   //投资代码
   brokerName : string;    //经济公司名称
+  accountType : string;   //账户类型
 }
 /**
  *
