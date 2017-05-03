@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject }    from 'rxjs/Subject';
 import {Authority} from "./user";
-import {CookieService} from "angular2-cookie/core";
+import {Cookie} from "ng2-cookies/ng2-cookies";
 
 @Injectable()
 export class AuthService {
@@ -15,7 +15,7 @@ export class AuthService {
 
   authorities : Authority[] = null;
 
-  constructor(private cookieService : CookieService){}
+  constructor(){}
 
   sendLoginStatus(status : boolean) {
 
@@ -30,14 +30,14 @@ export class AuthService {
 
   setTokenId(tokenId : string) {
 
-    this.cookieService.put('qt-console-cookie-tokenid', tokenId);
+    Cookie.set('qt-console-cookie-tokenid', tokenId);
     this.tokenId = tokenId;
 
   }
 
   getTokenId() {
 
-    this.tokenId = this.cookieService.get('qt-console-cookie-tokenid');
+    this.tokenId = Cookie.get('qt-console-cookie-tokenid');
     return this.tokenId;
 
   }
