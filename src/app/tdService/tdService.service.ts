@@ -73,8 +73,11 @@ export class TdServiceService {
       ip : tdService.ip,
       port : tdService.port,
       adapterType : tdService.adapterType ,
-      userId : tdService.userId,
-      tradePassword : tdService.tradePassword,
+
+
+      serviceType : tdService.serviceType,
+
+
       serviceCode : 'FS037'
 
     });
@@ -107,10 +110,14 @@ export class TdServiceService {
       requestId : this.request_id,
       platId : tdService.platId ,
       ip : tdService.ip,
+
       port : tdService.port,
       adapterType : tdService.adapterType ,
       userId : tdService.userId,
       tradePassword : tdService.tradePassword,
+      serviceType : tdService.serviceType,
+      serviceId : tdService.serviceId,
+      accountId : tdService.accountId,
       serviceCode : 'FS039'
 
     });

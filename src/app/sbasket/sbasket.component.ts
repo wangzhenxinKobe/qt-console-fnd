@@ -11,7 +11,7 @@ declare var $ : any;
   styleUrls: ['./sbasket.component.css']
 })
 export class SbasketComponent implements OnInit {
-  searchPlatId : string = '';
+  searchPlatId : string = '篮';
   curPage : number = 1;
   sbasketPage : SbasketPage;
   curSbasket : Sbasket;
@@ -34,7 +34,7 @@ export class SbasketComponent implements OnInit {
    basketName : "",
    weight : "",
    volume : 0,
-   errCode1  : "",
+     code1  : "",
    volume1 : 0
     };
 
@@ -89,7 +89,7 @@ export class SbasketComponent implements OnInit {
       basketName : "",
       weight : "",
       volume : 0,
-      errCode1  : "",
+      code1  : "",
       volume1 : 0
     };
 

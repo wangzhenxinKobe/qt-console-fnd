@@ -21,7 +21,7 @@ export class BinfoComponent implements OnInit {
   fileUrl : string;
 
   uploader : FileUploader = new FileUploader({
-    url: "http://192.168.0.61:8077/handler",
+    url: "http://192.168.0.65:8077/upload?serviceCode=FS010",
     method: "POST",
     itemAlias: "file"
   });
@@ -74,8 +74,10 @@ export class BinfoComponent implements OnInit {
         this.downloadRequesting=false;
           this.binfoService.exportBinfo(this.curBinfo)
             .then( result => {
+              console.info(result);
               if(result[0]) {
                 this.fileUrl = result[1];
+                alert(result[1]);
               }
               else {
                 alert(result[1]);
@@ -92,21 +94,8 @@ export class BinfoComponent implements OnInit {
 // //   alert("导出出错");
 // //   }
 
- //文件下载中
-  download(){
-   // console.info(1212121)
-   //  this.binfoService.exportBinfo(this.curBinfo)
-   //    .then( result => result ? this.queryList() : alert("数据修改失败，请重试！") );
-    //   try{
-//     var elemIF = document.createElement("iframe");
-//     elemIF.src = url;
-//     elemIF.style.display = "none";
-//     document.body.appendChild(elemIF);
-//
-//   }catch(e){
-//   alert("导出出错");
-//   }
-  }
+
+
 
 
   search() {
@@ -202,3 +191,4 @@ export class BinfoComponent implements OnInit {
 
 
 }
+

@@ -84,7 +84,7 @@ export class AccountService {
       inverstorId : account.inverstorId,
       tradePassword : account.tradePassword,
       ratio : account.ratio,
-      groupName : account.groupName,
+      groupId : account.groupId,
       serviceCode : 'FS047'
 
     });
@@ -128,7 +128,6 @@ export class AccountService {
       inverstorId : account.inverstorId,
       tradePassword : account.tradePassword,
       ratio : account.ratio,
-      groupName : account.groupName,
       groupId : account.groupId,
       serviceCode : 'FS049'
 

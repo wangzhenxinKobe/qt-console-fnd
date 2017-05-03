@@ -32,7 +32,8 @@ export class MdServiceComponent implements OnInit {
     ip : "",
     port : 0,
     adapterType : 0,
-      serviceId : 0
+      serviceId : 0,
+      serviceType : 0
     };
 
   }
@@ -52,22 +53,17 @@ export class MdServiceComponent implements OnInit {
   }
 
   onAddMdService() {
-
     this.isAddEditor = true;
     this.editorTitle = '新增柜台系统';
-
     this.curMdService = { //初始化行情数据
       platId : 0,
       ip : "",
       port : 0,
       adapterType : 0,
-
+      serviceType : 0,
       serviceId : 0
-
     };
-
     $('#data_editor').modal('show'); //显示编辑对话框
-
   }
 
   onEditMdService(value : MdService) {

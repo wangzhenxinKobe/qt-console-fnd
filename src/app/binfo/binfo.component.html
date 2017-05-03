@@ -15,12 +15,10 @@
           <div class="row">
             <div class="col-md-4 col-sm-5 ">
               <div class="r_boxToolPad">
-                <select class="form-control" [(ngModel)]="searchPlatId" (change)="search()">
-                  <option value="股">股票基本信息</option>
-                  <option value="股票6">股票基本信息-101</option>
-                  <option value="股票1">股票基本信息-102</option>
-                  <option value="股票2">股票基本信息-103</option>
-                </select>
+                <div class="input-group">
+                  <input type="text" class="form-control pull-right" placeholder="按股票名称搜索"  [(ngModel)]="searchPlatId" (keyup.enter)="search()">
+                  <span class="input-group-addon" ><i class="fa fa-search"></i></span>
+                </div>
               </div>
             </div>
           </div>
@@ -61,8 +59,8 @@
                 <td>{{item.flowVolume}}</td>
                 <td>{{item.allVolume}}</td>
                 <td>{{item.stockBoard}}</td>
-                <td>{{item.isFund}}</td>
-                <td>{{item.isIndex}}</td>
+                <td><app-cust-select dataType="binfo" viewType="readonly" [value]="item.isFund" ></app-cust-select></td>
+                <td><app-cust-select dataType="binfo" viewType="readonly" [value]="item.isIndex" ></app-cust-select></td>
                 <td style="text-align: center;">
                   <div class="tabledit-toolbar btn-toolbar" style=" display: inline-block;">
                     <div class="btn-group btn-group-sm" >
@@ -131,7 +129,11 @@
           <div class="form-group">
             <label class="col-sm-3 control-label">板块:</label>
             <div class="col-sm-9">
-              <input type="text" class="form-control"  placeholder="板块" [(ngModel)]="curBinfo.stockBoard">
+              <select class="form-control" [(ngModel)]="curBinfo.stockBoard">
+                <option value="0">主板</option>
+                <option value="1">中小板</option>
+                <option value="2">创业板</option>
+              </select>
             </div>
           </div>
           <div class="form-group">
@@ -139,23 +141,23 @@
             <div class="col-sm-9">
               <div class="  ">
                 <label class="radio-inline">
-                  <input type="radio" name="a1" [(ngModel)]="curBinfo.isFund" value="1"> 是
+                  <input type="radio" name="a1" [(ngModel)]="curBinfo.isFund" value="1"/> 是
                 </label>
-                <label class="radio-inline">
-                  <input type="radio" name="a1" [(ngModel)]="curBinfo.isFund" value="0"> 否
+                <label class="radio-inline" >
+                  <input type="radio" name="a1" [(ngModel)]="curBinfo.isFund" value="0" /> 否
                 </label>
               </div>
             </div>
           </div>
           <div class="form-group">
-            <label class="col-sm-3 control-label">是否是指数:</label>
+            <label class="col-sm-3 control-label" >是否是指数:</label>
             <div class="col-sm-9">
               <div class=" ">
                 <label class="radio-inline">
-                  <input type="radio" name="a2" [(ngModel)]="curBinfo.isIndex" value="1"> 是
+                  <input type="radio" name="a2" [(ngModel)]="curBinfo.isIndex" value="1"/> 是
                 </label>
-                <label class="radio-inline">
-                  <input type="radio" name="a2" [(ngModel)]="curBinfo.isIndex" value="0"> 否
+                <label class="radio-inline" >
+                  <input type="radio" name="a2" [(ngModel)]="curBinfo.isIndex" value="0" /> 否
                 </label>
 
               </div>
@@ -185,30 +187,35 @@
         <div class="row">
           <div class="col-xs-offset-1 col-xs-11"><p class="lead">是否确定<strong>删除</strong>该行情订阅记录？</p></div>
         </div>
-        <!--<div class="row">-->
-          <!--<div class="col-xs-offset-1 col-xs-11">-->
-            <!--<dl class="dl-horizontal" style="margin-bottom: 2px;">-->
-              <!--<dt>交易所代码</dt><dd>{{curFutures?.exchangeId}}</dd>-->
-            <!--</dl>-->
-            <!--dl class="dl-horizontal" style="margin-bottom: 2px;">-->
-            <!--<dt>代码</dt><dd>{{curFutures?.productId}}</dd>-->
-            <!--</dl>-->
-            <!--dl class="dl-horizontal" style="margin-bottom: 2px;">-->
-            <!--<dt>名称</dt><dd>{{curFutures?.productName}}</dd>-->
-            <!--</dl>-->
-            <!--dl class="dl-horizontal" style="margin-bottom: 2px;">-->
-            <!--<dt>合约乘数</dt><dd>{{curFutures?.volumeMultiple}}</dd>-->
-            <!--</dl>-->
-            <!--dl class="dl-horizontal" style="margin-bottom: 2px;">-->
-            <!--<dt>最小价格变动单位</dt><dd>{{curFutures?.priceTick}}</dd>-->
-            <!--</dl>-->
-            <!--dl class="dl-horizontal">-->
-            <!--<dt>计费方式</dt><dd>{{curFutures?.feeMode}}</dd>-->
-            <!--</dl>-->
-          <!--</div>-->
-        <!--</div>-->
+        <div class="row">
+          <div class="col-xs-offset-1 col-xs-11">
+            <dl class="dl-horizontal" style="margin-bottom: 8px;">
+              <dt>股票代码</dt><dd>{{curBinfo?.stockCode}}</dd>
+            </dl>
+            <dl class="dl-horizontal" style="margin-bottom: 8px;">
+          <dt>股票名称</dt><dd>{{curBinfo?.stockName}}</dd>
+            </dl>
+            <dl class="dl-horizontal" style="margin-bottom: 8px;">
+            <dt>交易所代码</dt><dd>{{curBinfo?.exchangeId}}</dd>
+            </dl>
+            <dl class="dl-horizontal" style="margin-bottom: 8px;">
+            <dt>流通股本</dt><dd>{{curBinfo?.flowVolume}}</dd>
+            </dl>
+            <dl class="dl-horizontal" style="margin-bottom: 8px;">
+            <dt>总股本</dt><dd>{{curBinfo?.allVolume}}</dd>
+            </dl>
+            <dl class="dl-horizontal" style="margin-bottom: 8px;">
+            <dt>板块</dt><dd>{{curBinfo?.stockBoard}}</dd>
+            </dl>
+            <dl class="dl-horizontal" style="margin-bottom: 8px;">
+              <dt>是否是基金</dt><dd>{{curBinfo?.isFund}}</dd>
+            </dl>
+            <dl class="dl-horizontal" style="margin-bottom: 8px;">
+              <dt>是否是指数</dt><dd>{{curBinfo?.isIndex}}</dd>
+            </dl>
+          </div>
+        </div>
       </div>
-
       <div class="modal-footer" style="text-align: right;">
         <button type="button" class="btn btn-primary" (click)="delete()">确定</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>

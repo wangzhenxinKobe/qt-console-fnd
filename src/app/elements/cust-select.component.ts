@@ -38,6 +38,27 @@ export class CustSelectComponent implements OnInit {
 
     switch (this.dataType) { //准备数据
 
+      case 'bankuai':
+        this.dataList = [
+          {value:'0', text:'主板'},
+          {value:'1', text:'中小板'},
+          {value:'2', text:'创业板'}
+        ];
+
+        break;
+
+
+      case 'binfo':
+        this.dataList = [
+          {value:'0', text:'否'},
+          {value:'1', text:'是'}
+        ];
+        if(this.viewType == 'select_all') {
+          this.dataList.unshift( {value:'', text:'全部股票信息'} );
+        }
+        break;
+
+
       case 'market_data':
         this.dataList = [
           {value:'0', text:'股票'},
@@ -58,6 +79,8 @@ export class CustSelectComponent implements OnInit {
         }
         break;
 
+
+
       case 'trade_unit_status':
         this.dataList = [
           {value:'1', text:'已创建'},
@@ -67,6 +90,40 @@ export class CustSelectComponent implements OnInit {
         ];
         if(this.viewType == 'select_all') {
           this.dataList.unshift( {value:'', text:'全部交易单元状态'} );
+        }
+        break;
+
+      case 'mdService':
+        this.dataList = [
+          {value:'1', text:'期货行情'},
+          {value:'2', text:'期货交易'},
+          {value:'3', text:'股票行情'},
+          {value:'4', text:'股票交易'}
+        ];
+        if(this.viewType == 'select_all') {
+          this.dataList.unshift( {value:'', text:'全部'} );
+        }
+        break;
+
+      case 'tdService':
+        this.dataList = [
+          {value:'1', text:'期货行情'},
+          {value:'2', text:'期货交易'},
+          {value:'3', text:'股票行情'},
+          {value:'4', text:'股票交易'}
+        ];
+        if(this.viewType == 'select_all') {
+          this.dataList.unshift( {value:'', text:'全部'} );
+        }
+        break;
+
+      case 'mdlei':
+        this.dataList = [
+          {value:'0', text:'类1'},
+          {value:'1', text:'类2'}
+        ];
+        if(this.viewType == 'select_all') {
+          this.dataList.unshift( {value:'', text:'全部类型'} );
         }
         break;
 

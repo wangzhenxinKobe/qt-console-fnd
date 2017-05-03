@@ -10,6 +10,7 @@ export class MdService{
   public adapterType : number; //适配器类型
 
   public serviceId : number;     //服务编号
+  public serviceType : number;     //服务类型
   constructor() {}
 
 }

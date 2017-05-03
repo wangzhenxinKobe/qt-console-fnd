@@ -12,6 +12,8 @@ export class TdService{
   public tradePassword : string; //交易密码
   // public accountId : number; //账户编号
   public serviceId : number;     //服务编号
+  public serviceType : number;//服务类型
+  public accountId : number;//服务类型
   constructor() {}
 
 }
@@ -20,9 +22,7 @@ export class TdService{
  *返回参数
  */
 export class TdServicePage {
-
   public tdService : TdService[];
   public totalPages : string;
   public totalRows : string;
-
 }
