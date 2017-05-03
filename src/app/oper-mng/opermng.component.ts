@@ -4,6 +4,7 @@ import {Router,ActivatedRoute} from '@angular/router';
 import {AlertComponent} from "../elements/alert.component";
 import {OperMngService} from "./opermng.service";
 import {OperatorPage, Operator} from "./operator";
+import {BaseComponent} from "../common/base.component";
 
 declare var $ : any;
 
@@ -12,10 +13,7 @@ declare var $ : any;
   templateUrl: './opermng.component.html'
 })
 
-export class OperMngComponent implements OnInit {
-
-  @ViewChild(AlertComponent)
-  private readonly alert:AlertComponent;
+export class OperMngComponent extends BaseComponent implements OnInit {
 
   searchOperName:string = '';
 
@@ -26,8 +24,7 @@ export class OperMngComponent implements OnInit {
 
   constructor(private operService : OperMngService,
               private route:ActivatedRoute,
-              private router:Router) {
-  }
+              private router:Router) { super(); }
 
   ngOnInit() {
 

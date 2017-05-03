@@ -4,6 +4,7 @@ import {Router,ActivatedRoute} from '@angular/router';
 import {RolePage, Role} from "./role";
 import {OproleService} from "./oprole.service";
 import {AlertComponent} from "../elements/alert.component";
+import {BaseComponent} from "../common/base.component";
 
 declare var $ : any;
 
@@ -12,10 +13,7 @@ declare var $ : any;
     templateUrl: './oprole.component.html'
 })
 
-export class OproleComponent implements OnInit{
-
-  @ViewChild(AlertComponent)
-  private readonly alert : AlertComponent;
+export class OproleComponent extends BaseComponent implements OnInit{
 
   searchRoleName : string = '';
 
@@ -26,7 +24,7 @@ export class OproleComponent implements OnInit{
 
   constructor(private oproleService : OproleService,
               private route : ActivatedRoute,
-              private router : Router){}
+              private router : Router){ super(); }
 
   ngOnInit() {
 

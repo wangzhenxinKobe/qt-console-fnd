@@ -40,9 +40,7 @@ export class BinfoComponent implements OnInit {
       allVolume : 0,
       stockBoard : 0,
       isFund : "",
-      isIndex : "",
-
-
+      isIndex : ""
     };
   }
 
@@ -68,11 +66,11 @@ export class BinfoComponent implements OnInit {
   }
 
   //文件导出中
-   downloadFile(value : Binfo) {
+   downloadFile() {
      this.downloadRequesting = true;
      $('#requesting').modal('show'); //显示编辑对话框
-        this.downloadRequesting=false;
-          this.binfoService.exportBinfo(this.curBinfo)
+     this.downloadRequesting=false;
+     this.binfoService.exportBinfo(this.curBinfo)
             .then( result => {
               console.info(result);
               if(result[0]) {
@@ -84,18 +82,6 @@ export class BinfoComponent implements OnInit {
               }
             });
    }
-// //   try{
-// //     var elemIF = document.createElement("iframe");
-// //     elemIF.src = url;
-// //     elemIF.style.display = "none";
-// //     document.body.appendChild(elemIF);
-// //
-// //   }catch(e){
-// //   alert("导出出错");
-// //   }
-
-
-
 
 
   search() {
@@ -125,7 +111,7 @@ export class BinfoComponent implements OnInit {
       allVolume : 0,
       stockBoard : 0,
       isFund : "",
-      isIndex : "",
+      isIndex : ""
 
     };
 

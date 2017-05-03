@@ -5,6 +5,7 @@ import {Md5} from "ts-md5/dist/md5";
 
 import {UserService} from "./user.service";
 import {AlertComponent} from "../elements/alert.component";
+import {BaseComponent} from "../common/base.component";
 
 declare var $ : any;
 
@@ -13,10 +14,7 @@ declare var $ : any;
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
-
-  @ViewChild(AlertComponent)
-  private readonly alert : AlertComponent;
+export class LoginComponent extends BaseComponent implements OnInit {
 
   chkCodeRequest : string;
 
@@ -27,7 +25,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private userService : UserService,
     private router : Router
-  ) { }
+  ) { super(); }
 
   ngOnInit() {
 

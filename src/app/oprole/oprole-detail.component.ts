@@ -7,6 +7,7 @@ import 'rxjs/add/operator/switchMap';
 import {Role, SysParentFunc, RoleFunc} from "./role";
 import {OproleService} from "./oprole.service";
 import {AlertComponent} from "../elements/alert.component";
+import {BaseComponent} from "../common/base.component";
 
 declare var $ : any;
 
@@ -15,10 +16,7 @@ declare var $ : any;
   templateUrl: './oprole-detail.component.html'
 })
 
-export class OproleDetailComponent implements OnInit {
-
-  @ViewChild(AlertComponent)
-  private readonly alert:AlertComponent;
+export class OproleDetailComponent extends BaseComponent implements OnInit {
 
   title : string;
   role : Role;
@@ -31,7 +29,7 @@ export class OproleDetailComponent implements OnInit {
     private route : ActivatedRoute,
     private location : Location,
     private router : Router
-  ) {}
+  ) { super(); }
 
   ngOnInit() {
 

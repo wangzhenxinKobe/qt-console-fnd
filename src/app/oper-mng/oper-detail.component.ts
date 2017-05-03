@@ -6,6 +6,7 @@ import 'rxjs/add/operator/switchMap';
 
 import {AlertComponent} from "../elements/alert.component";
 import {OperMngService} from "./opermng.service";
+import {BaseComponent} from "../common/base.component";
 
 declare var $ : any;
 
@@ -14,10 +15,7 @@ declare var $ : any;
   templateUrl: './oper-detail.component.html'
 })
 
-export class OperDetailComponent implements OnInit {
-
-  @ViewChild(AlertComponent)
-  private readonly alert:AlertComponent;
+export class OperDetailComponent extends BaseComponent implements OnInit {
 
   title:string;
 
@@ -28,7 +26,7 @@ export class OperDetailComponent implements OnInit {
     private route : ActivatedRoute,
     private location : Location,
     private router : Router
-  ) {}
+  ) { super(); }
 
   ngOnInit() {
 
