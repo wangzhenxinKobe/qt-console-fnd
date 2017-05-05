@@ -255,6 +255,21 @@ body,html{
     opacity: 1;
   }
 }
+.r_main .input-group{
+  position: relative;
+  display: block;
+}
+.r_main .input-group .input-group-addon{
+  border: none;
+  position: absolute;
+  right:12px;
+  top:4px;
+  z-index: 9;
+}
+.r_wm{
+  max-width: 320px;
+  margin: 0 auto;
+}
 @keyframes twinkling{
   0%{
     background: #fff;

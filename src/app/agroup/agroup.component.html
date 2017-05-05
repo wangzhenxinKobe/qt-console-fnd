@@ -103,28 +103,32 @@
 
 <!-- 删除 -->
 <div id="delete_confirm" class="modal fade bs-example-modal-sm" role="dialog">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
 
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" >删除</h4>
+        <h4 class="modal-title" >是否确定删除该信息？</h4>
       </div>
 
       <div class="modal-body">
-        <div class="row">
-          <div class="col-xs-offset-1 col-xs-11"><p class="lead">是否确定<strong>删除</strong>该行情订阅记录？</p></div>
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <thead>
+            <tr>
+              <th>组名</th>
+              <th>描述</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>{{curAgroup.groupName}}</td>
+              <td>{{curAgroup.comment}}</td>
+            </tr>
+            </tbody>
+          </table>
         </div>
-        <div class="row">
-          <div class="col-xs-offset-1 col-xs-11">
-            <dl class="dl-horizontal" style="margin-bottom: 8px;">
-              <dt>组名</dt><dd>{{curAgroup.groupName}}</dd>
-            </dl>
-            <dl class="dl-horizontal" >
-              <dt>描述</dt><dd>{{curAgroup.comment}}</dd>
-            </dl>
-          </div>
-        </div>
+
       </div>
 
       <div class="modal-footer" style="text-align: right;">
