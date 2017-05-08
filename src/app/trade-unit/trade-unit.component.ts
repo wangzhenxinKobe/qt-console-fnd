@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {TradeUnitPage, TradeUnit, TradeUnitParam} from "./trade-unit";
+import {TradeUnitPage, TradeUnit, TradeUnitParam, TradeUnitAcct} from "./trade-unit";
 import {TradeUnitService} from "./trade-unit.service";
 import {StrategyService} from "../strategy/strategy.service";
 import {Strategy} from "../strategy/strategy";
@@ -135,62 +135,236 @@ export class TradeUnitComponent extends BaseComponent implements OnInit {
                   this.isAddEditor = false;
                   return true;
                 } else {
-                  this.alert.error(`数据新增失败！[${res[1]}]`);
+                  this.alert.error(`交易单元新增失败！[${res[1]}]`);
                   return false;
                 }
 
-              }).catch(error => {this.alert.error(`数据新增失败！[${error}]`); return false;});
+              }).catch(error => {this.alert.error(`交易单元新增失败！[${error}]`); return false;});
 
           });
 
         } else {
-          this.alert.error(`数据新增失败！[${res[1]}]`);
+          this.alert.error(`交易单元新增失败！[${res[1]}]`);
         }
-      }).catch(error => this.alert.error(`数据新增失败！[${error}]`));
+      }).catch(error => this.alert.error(`交易单元新增失败！[${error}]`));
 
   }
 
-  save() {
-/*
-    if(this.isAddEditor) { //新增交易单元
+  onEditTradeUnit(trade_unit : TradeUnit) {
 
-      this(this.curMarketData)
-        .then(result => {
-          if(result) {
+    this.tradeUnitService.getTrandUnit(trade_unit.tradeUnitId)
+      .then( res => {
 
-            this.curPage = 1;
-            this.searchPlatId = this.curMarketData.platId;
-            this.queryList();
+        if(res[0]) {
+          this.curTradeUnit = res[1];
 
-          } else {
-            alert("数据新增失败，请重试！");
-          }
-        });
+          this.isAddEditor = false;
+          this.editorTitle = '编辑交易单元';
+          this.isLoaded = true;
+          this.isDialogShowing = true;
 
-    } else { //修改行情数据
 
-      this.marketDataService.updateMarketData(this.curMarketData)
-        .then( result => {
+          $('#data_editor').modal('show'); //显示编辑对话框
 
-          if(result) {
+        } else {
+          this.alert.error(res[1]);
+        }
 
-            this.searchPlatId = this.curMarketData.platId;
-            this.queryList();
+      }).catch(error => this.alert.error(error));
 
-          } else {
+  }
 
-            alert("数据修改失败，请重试！");
+  onStartTradeUnit(trade_unit : TradeUnit) {
 
-          }
+    if(!trade_unit) return;
 
-        });
+    this.loading.show();
 
+    this.tradeUnitService.startTradeUnit(trade_unit.tradeUnitId)
+      .then(res => {
+        if(res[0]) {
+
+          this.asyncTimer(()=>{
+
+            return this.tradeUnitService.getServerResponse(res[1])
+              .then( res => {
+
+                if(res[0]){
+                  this.alert.info("交易单元启动成功");
+                  return true;
+                } else {
+                  this.alert.error(`交易单元启动失败！[${res[1]}]`);
+                  return false;
+                }
+
+              }).catch(error => {this.alert.error(`交易单元启动失败！[${error}]`); return false;});
+
+          });
+
+        } else {
+          this.alert.error(`交易单元启动失败！[${res[1]}]`);
+        }
+      }).catch(error => this.alert.error(`交易单元启动失败！[${error}]`));
+
+  }
+
+  onStopTrandeUnit(trade_unit : TradeUnit) {
+
+    if(!trade_unit) return;
+
+    this.loading.show();
+
+    this.tradeUnitService.stopTradeUnit(trade_unit.tradeUnitId)
+      .then(res => {
+        if(res[0]) {
+
+          this.asyncTimer(()=>{
+
+            return this.tradeUnitService.getServerResponse(res[1])
+              .then( res => {
+
+                if(res[0]){
+                  this.alert.info("交易单元停止成功");
+                  return true;
+                } else {
+                  this.alert.error(`交易单元停止失败！[${res[1]}]`);
+                  return false;
+                }
+
+              }).catch(error => {this.alert.error(`交易单元停止失败！[${error}]`); return false;});
+
+          });
+
+        } else {
+          this.alert.error(`交易单元停止失败！[${res[1]}]`);
+        }
+      }).catch(error => this.alert.error(`交易单元停止失败！[${error}]`));
+
+  }
+
+  onNewAccount() {
+
+    let acct = new TradeUnitAcct();
+    acct.isSaved = false;
+    this.curTradeUnit.accountList.push(acct);
+
+  }
+
+  onSaveAccount(index) {
+
+    let acct : TradeUnitAcct = this.curTradeUnit.accountList[index];
+
+    if(acct.userId.trim().length == 0 || acct.accountType.trim().length == 0) {
+      this.alert.warn("用户代码或账户类型不能为空！");
+      return;
     }
 
-    $('#data_editor').modal('hide');
-*/
+    this.loading.show();
+
+    this.tradeUnitService.addTradeUnitAccounts(this.curTradeUnit.tradeUnitId, [acct])
+      .then(res => {
+        if(res[0]) {
+
+          this.asyncTimer(()=>{
+
+            return this.tradeUnitService.getServerResponse(res[1])
+              .then( res => {
+
+                if(res[0]){
+                  this.alert.info("交易账户新增成功");
+                  acct.isSaved = true;
+                  return true;
+                } else {
+                  this.alert.error(`交易账户新增失败！[${res[1]}]`);
+                  return false;
+                }
+
+              }).catch(error => {this.alert.error(`交易账户新增失败！[${error}]`); return false;});
+
+          });
+
+        } else {
+          this.alert.error(`交易账户新增失败！[${res[1]}]`);
+        }
+      }).catch(error => this.alert.error(`交易账户新增失败！[${error}]`));
+
   }
 
+  onDeleteAccount(index) {
+
+    let acct : TradeUnitAcct = this.curTradeUnit.accountList[index];
+
+    if(!acct) {
+      this.alert.warn("无账户记录!");
+      return;
+    }
+
+    if(!acct.isSaved) { //对于未保存的账户记录，直接删除
+      this.curTradeUnit.accountList.splice(index, 1);
+      return;
+    }
+
+    this.loading.show();
+
+    this.tradeUnitService.deleteTradeUnitAccounts(this.curTradeUnit.tradeUnitId, [acct])
+      .then(res => {
+        if(res[0]) {
+
+          this.asyncTimer(()=>{
+
+            return this.tradeUnitService.getServerResponse(res[1])
+              .then( res => {
+
+                if(res[0]){
+                  this.alert.info("交易账户删除成功");
+                  this.curTradeUnit.accountList.splice(index, 1);
+                  return true;
+                } else {
+                  this.alert.error(`交易账户删除失败！[${res[1]}]`);
+                  return false;
+                }
+
+              }).catch(error => {this.alert.error(`交易账户删除失败！[${error}]`); return false;});
+
+          });
+
+        } else {
+          this.alert.error(`交易账户删除失败！[${res[1]}]`);
+        }
+      }).catch(error => this.alert.error(`交易账户删除失败！[${error}]`));
+  }
+
+  onSaveParam(param : TradeUnitParam) {
+
+    this.loading.show();
+
+    this.tradeUnitService.updateTradeUnitParam(this.curTradeUnit.tradeUnitId, [param])
+      .then(res => {
+        if(res[0]) {
+
+          this.asyncTimer(()=>{
+
+            return this.tradeUnitService.getServerResponse(res[1])
+              .then( res => {
+
+                if(res[0]){
+                  this.alert.info("参数保存成功");
+                  return true;
+                } else {
+                  this.alert.error(`参数保存失败！[${res[1]}]`);
+                  return false;
+                }
+
+              }).catch(error => {this.alert.error(`参数保存失败！[${error}]`); return false;});
+
+          });
+
+        } else {
+          this.alert.error(`参数保存失败！[${res[1]}]`);
+        }
+      }).catch(error => this.alert.error(`参数保存失败！[${error}]`));
+
+  }
 
   private queryList() {
 

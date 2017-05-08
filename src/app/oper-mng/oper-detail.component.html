@@ -50,54 +50,113 @@
 
   <div class="r_box r_boxNoBorder">
     <div class="r_boxHead">
-      <h2>全部交易账户</h2>
-      <div class="r_boxToolFRl">
-        <div class="input-group">
-          <input name="table_search" class="form-control pull-right" placeholder="按期货品质名称搜索" type="text">
-          <div class="input-group-btn">
-            <button type="submit" class="btn btn-default">
-              <i class="fa fa-search"></i>
-            </button>
-          </div>
-        </div>
-      </div>
+      <h2>交易账户配置</h2>
     </div>
     <div class="r_boxContent">
       <div class="r_boxPad">
-        <div class="table-responsive form-inline">
-          <table class="table  table-bordered table-hover">
-            <thead>
-            <tr>
-              <th>交易账户ID</th>
-              <th>交易账户名称</th>
-              <th>交易平台</th>
-            </tr>
-            </thead>
-            <tbody class="r_tableChoose">
-            <tr>
-              <td>1001</td>
-              <td>admina</td>
-              <td>0321</td>
-            </tr>
-            <tr>
-              <td>1001</td>
-              <td>admina</td>
-              <td>0321</td>
-            </tr>
-            <tr>
-              <td>1001</td>
-              <td>admina</td>
-              <td>0321</td>
-            </tr>
-            <tr>
-              <td>1001</td>
-              <td>admina</td>
-              <td>0321</td>
-            </tr>
 
-            </tbody>
-          </table>
+        <div class="selectRow clearfix">
+          <div class="selectLeft">
+            <b>全部交易账户：</b>
+            <div class="selectBar">
+              <div class="table-responsive">
+                <table class="table  table-bordered table-hover">
+                  <thead>
+                  <tr>
+                    <th>交易账户ID</th>
+                    <th>交易账户名称</th>
+                    <th>交易平台</th>
+                  </tr>
+                  </thead>
+                  <tbody class="r_tableChoose" id="left">
+                  <tr>
+                    <td>1001</td>
+                    <td>admina</td>
+                    <td>0321</td>
+                  </tr>
+                  <tr >
+                    <td>1002</td>
+                    <td>admina</td>
+                    <td>0321</td>
+                  </tr>
+                  <tr>
+                    <td>1003</td>
+                    <td>admina</td>
+                    <td>0321</td>
+                  </tr>
+                  <tr>
+                    <td>1004</td>
+                    <td>admina</td>
+                    <td>0321</td>
+                  </tr>
+                  <tr>
+                    <td>1005</td>
+                    <td>admina</td>
+                    <td>0321</td>
+                  </tr>
+                  <tr>
+                    <td>1006</td>
+                    <td>admina</td>
+                    <td>0321</td>
+                  </tr>
+                  <tr>
+                    <td>1007</td>
+                    <td>admina</td>
+                    <td>0321</td>
+                  </tr>
+                  <tr>
+                    <td>1008</td>
+                    <td>admina</td>
+                    <td>0321</td>
+                  </tr>
+                  <tr>
+                    <td>1009</td>
+                    <td>admina</td>
+                    <td>0321</td>
+                  </tr>
+                  <tr>
+                    <td>10010</td>
+                    <td>admina</td>
+                    <td>0321</td>
+                  </tr>
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="selectTool">
+            <a href="javascript:;" id="addBtn" class="btn btn-default btn-block">A</a>
+            <a href="javascript:;" id="addAllBtn" class="btn btn-default btn-block">AA</a>
+            <a href="javascript:;" id="removeBtn" class="btn btn-default btn-block">删除</a>
+          </div>
+          <div class="selectRight">
+            <b>该操作员可操作的交易账户：</b>
+            <div class="selectBar">
+              <div class="table-responsive">
+                <table class="table  table-bordered table-hover">
+                  <thead>
+                  <tr>
+
+                    <th>交易账户ID</th>
+                    <th>交易账户名称</th>
+                    <th>交易平台</th>
+                  </tr>
+                  </thead>
+                  <tbody class="r_tableChoose" id="right">
+                  <tr>
+                    <td>1004</td>
+                    <td>admina</td>
+                    <td>0321</td>
+                  </tr>
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
         </div>
+
       </div>
 
 

@@ -70,9 +70,9 @@
                 <td>
                   <div class="tabledit-toolbar btn-toolbar">
                     <div class="btn-group btn-group-sm">
-                      <button type="button"  data-toggle="modal" data-target="#addCelue" class="tabledit-edit-button btn btn-sm btn-default">交易单元配置</button>
-                      <button type="button" class="tabledit-delete-button btn btn-sm btn-default">启动</button>
-                      <button type="button" class="tabledit-delete-button btn btn-sm btn-default">停止</button>
+                      <button type="button"  data-toggle="modal" data-target="#addCelue" class="tabledit-edit-button btn btn-sm btn-default" (click)="onEditTradeUnit(trade_unit)">交易单元配置</button>
+                      <button type="button" class="tabledit-delete-button btn btn-sm btn-default" (click)="onStartTradeUnit(trade_unit)">启动</button>
+                      <button type="button" class="tabledit-delete-button btn btn-sm btn-default" (click)="onStopTrandeUnit(trade_unit)">停止</button>
                     </div>
                   </div>
                 </td>
@@ -147,7 +147,11 @@
               </tbody>
             </table>
           </div>
-          <div><b>交易账户</b></div>
+          <div class="row">
+            <div class="col-sm-9"> <b>交易账户</b> </div>
+            <div class="col-sm-3"> <button type="button" class="btn btn-sm btn-primary" (click)="onNewAccount()" >新增</button> </div>
+          </div>
+          <br>
           <div class="table-responsive">
             <table class="table table-bordered">
               <thead>
@@ -160,16 +164,16 @@
               </tr>
               </thead>
               <tbody>
-              <tr *ngFor="let acct of curTradeUnit.accountList">
-                <td>{{acct.userId}}</td>
-                <td>{{acct.fundCode}}</td>
-                <td>{{acct.inverstorId}}</td>
-                <td>{{acct.brokerName}}</td>
+              <tr *ngFor="let acct of curTradeUnit.accountList; let i=index">
+                <td><input class="form-control input-sm" type="text" [(ngModel)]="acct.userId"></td>
+                <td><input class="form-control input-sm" type="text" [(ngModel)]="acct.inverstorId"></td>
+                <td><input class="form-control input-sm" type="text" [(ngModel)]="acct.accountType"></td>
+                <td><input class="form-control input-sm" type="text" [(ngModel)]="acct.brokerName"></td>
                 <td>
                   <div class="tabledit-toolbar btn-toolbar">
                     <div class="btn-group btn-group-sm">
-                      <button type="button" class="tabledit-edit-button btn btn-sm btn-primary">保存</button>
-                      <button type="button" class="tabledit-delete-button btn btn-sm btn-default">取消</button>
+                      <button type="button" class="tabledit-edit-button btn btn-sm btn-primary" (click)="onSaveAccount(i)" [disabled]="acct.isSaved">保存</button>
+                      <button type="button" class="tabledit-delete-button btn btn-sm btn-default" (click)="onDeleteAccount(i)" [disabled]="!acct.isSaved">删除</button>
                     </div>
                   </div>
                 </td>
@@ -202,8 +206,7 @@
                 <td>
                   <div class="tabledit-toolbar btn-toolbar">
                     <div class="btn-group btn-group-sm">
-                      <button type="button" class="tabledit-edit-button btn btn-sm btn-primary">保存</button>
-                      <button type="button" class="tabledit-delete-button btn btn-sm btn-default">取消</button>
+                      <button type="button" class="tabledit-edit-button btn btn-sm btn-primary" (click)="onSaveParam(param)">保存</button>
                     </div>
                   </div>
                 </td>
@@ -212,11 +215,6 @@
             </table>
           </div>
         </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary">保存</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-
       </div>
     </div>
   </div>

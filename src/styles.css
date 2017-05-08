@@ -247,6 +247,100 @@ body,html{
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both
 }
+
+.r_tableChoose tr{
+  cursor: pointer;
+}
+.r_tableChoose tr.active td{
+  background: #0a9edc !important;
+  color: #fff;
+}
+
+.fixed-table-container{
+  border-radius: 0 !important;
+}
+.fixed-table-container{
+  padding-bottom: 41px !important;
+}
+.r_tableTabsNav ul{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.r_tableTabsNav ul li{
+  display:  inline-block;
+  margin: 0 0 1px 0;
+}
+.r_tableTabsNav ul li a{
+  display: inline-block;
+  line-height: 40px;
+  padding: 0 20px;
+  border-radius: 0 0 5px 5px;
+  background: #f8f8f8;
+  color: #666;
+}
+.r_tableTabsNav ul li a:hover{
+  color:#099fde;
+}
+.r_tableTabsNav ul li.active a{
+  background: #099fde;
+  color: #fff;
+
+}
+
+.selectRow ul{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.selectLeft,
+.selectRight{
+  width: 38%;
+  float: left;
+
+}
+.selectRight{
+  float: right;
+}
+.selectBar{
+  height: 380px;
+  border: 1px solid #ccc;
+  overflow: auto;
+  margin: 5px 0 0 0;
+}
+.selectTool{
+  position: absolute;
+  width: 16%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+}
+.selectTool .btn{
+  margin: 10px 0 !important;
+}
+.selectBar .panel-default{
+  margin: 0 !important;
+  border-radius: 0;
+  box-shadow: none;
+  border: none;
+  border-bottom: 1px solid #ddd;
+}
+.selectBar .r_collapseSon li a{
+  padding: 0 0 0 15px;
+}
+.selectBar .panel-title{
+  font-size: 14px;
+}
+.selectBar  ul{
+  margin: 0;
+}
+.selectBar .panel-group{
+  margin: 0;
+}
+.selectBar .panel-default:last-child{
+  border: none;
+}
+
 @-webkit-keyframes twinkling{
   0%{
     background: #eedeb7;

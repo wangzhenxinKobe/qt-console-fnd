@@ -126,58 +126,6 @@ export class TradeUnitService {
 
   }
 
-  /**
-   *
-   * @param tradeUnitId
-   * @param params
-   * @returns Promise<[boolean, any]> 如果成功，第一个参数为true，第二个参数为request_id
-     */
-  updateTradeUnitParam(tradeUnitId : string, params : TradeUnitParam[]) : Promise<[boolean, any]> {
-
-    this.request_id = generateRequestId(); //需要重新生成request_id
-
-    let paramList = [];
-    for(let param of params) {
-
-      paramList.push({
-        key : param.paraName,
-        value : param.paraValue,
-        type : param.paraType,
-        len : 10,
-        comment : param.comment,
-        defaultValue : param.defaultValue
-      });
-
-    }
-
-    let request = JSON.stringify({
-
-      tradeUnitID : tradeUnitId,
-      list : JSON.stringify(paramList),
-      requestId : this.request_id,
-      serviceCode : 'FS082'
-
-    });
-
-    return this.http
-      .post(this.hostUrl, request, {headers: this.headers})
-      .toPromise()
-      .then( res => {
-
-        let body = res.json();
-        if(body.errCode == '000000') {
-
-          return [true, this.request_id] ;
-
-        } else {
-          console.error("请求失败：" + body.errMsg);
-          return [false, body.errMsg];
-        }
-
-      })
-      .catch(this.handleError);
-
-  }
 
   /**
    *
@@ -372,6 +320,59 @@ export class TradeUnitService {
           console.error("请求失败：" + body.errMsg);
           return [false, body.errMsg];
 
+        }
+
+      })
+      .catch(this.handleError);
+
+  }
+
+  /**
+   *
+   * @param tradeUnitId
+   * @param params
+   * @returns Promise<[boolean, any]> 如果成功，第一个参数为true，第二个参数为request_id
+   */
+  updateTradeUnitParam(tradeUnitId : string, params : TradeUnitParam[]) : Promise<[boolean, any]> {
+
+    this.request_id = generateRequestId(); //需要重新生成request_id
+
+    let paramList = [];
+    for(let param of params) {
+
+      paramList.push({
+        key : param.paraName,
+        value : param.paraValue,
+        type : param.paraType,
+        len : 10,
+        comment : param.comment,
+        defaultValue : param.defaultValue
+      });
+
+    }
+
+    let request = JSON.stringify({
+
+      tradeUnitID : tradeUnitId,
+      list : JSON.stringify(paramList),
+      requestId : this.request_id,
+      serviceCode : 'FS082'
+
+    });
+
+    return this.http
+      .post(this.hostUrl, request, {headers: this.headers})
+      .toPromise()
+      .then( res => {
+
+        let body = res.json();
+        if(body.errCode == '000000') {
+
+          return [true, this.request_id] ;
+
+        } else {
+          console.error("请求失败：" + body.errMsg);
+          return [false, body.errMsg];
         }
 
       })

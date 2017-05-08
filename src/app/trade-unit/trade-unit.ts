@@ -25,11 +25,12 @@ export class TradeUnitParam {
 }
 
 export class TradeUnitAcct {
-  fundCode : string;      //产品编号
-  userId : string;        //用户代码
-  inverstorId : string;   //投资代码
-  brokerName : string;    //经济公司名称
-  accountType : string;   //账户类型
+  fundCode : string = '';      //产品编号
+  userId : string = '';        //用户代码
+  inverstorId : string = '';   //投资代码
+  brokerName : string = '';    //经济公司名称
+  accountType : string = '';   //账户类型
+  isSaved : boolean = true;      //是否已被保存到服务端
 }
 /**
  *
