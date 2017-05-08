@@ -30,8 +30,9 @@
               </div>
               <div class="col-md-4">
                 <div class="r_boxToolPad">
-                  <a href=" " class="btn btn-default btnFile btn-block"><input type="file" ng2FileSelect [uploader]="uploader" (change)="selectedFileOnChanged($event)"/>导入</a>
-
+                  <a href=" " class="btn btn-default btnFile btn-block">
+                    <input type="file" ng2FileSelect [uploader]="uploader" (change)="selectedFileOnChanged($event)"/>
+                    导入</a>
                 </div>
               </div>
             </div>
@@ -54,7 +55,7 @@
                 <th>板块</th>
                 <th>是否是基金</th>
                 <th>是否是指数</th>
-                <th>操作</th>
+
               </tr>
               </thead>
               <tbody>
@@ -64,17 +65,10 @@
                 <td>{{item.exchangeId}}</td>
                 <td>{{item.flowVolume}}</td>
                 <td>{{item.allVolume}}</td>
-                <td>{{item.stockBoard}}</td>
-                <td>{{item.isFund}}</td>
-                <td>{{item.isIndex}}</td>
-                <td style="text-align: center;">
-                  <div class="tabledit-toolbar btn-toolbar" style=" display: inline-block;">
-                    <div class="btn-group btn-group-sm" >
-                      <button class="tabledit-edit-button btn btn-sm btn-default" type="button" (click)="onEditSindex(item)" >编辑</button>
-                      <button class="tabledit-delete-button btn btn-sm btn-default" type="button" (click)="onDeleteSindex(item)">删除</button>
-                    </div>
-                  </div>
-                </td>
+                <td><app-cust-select dataType="bankuai" viewType="readonly" [value]="item.stockBoard" ></app-cust-select></td>
+                <td><app-cust-select dataType="sindex" viewType="readonly" [value]="item.isFund" ></app-cust-select></td>
+                <td><app-cust-select dataType="sindex" viewType="readonly" [value]="item.isIndex" ></app-cust-select></td>
+
               </tr>
               </tbody>
             </table>
@@ -112,11 +106,10 @@
           <label class="col-sm-3 control-label">交易所代码:</label>
           <div class="col-sm-9">
             <select class="form-control" [(ngModel)]="curSindex.exchangeId">
-              <option value="1">32131</option>
-              <option value="1">32132</option>
-              <option value="1">32133</option>
-              <option value="1">3214</option>
-              <option value="1">3215</option>
+              <option value="0">上期所</option>
+              <option value="1">郑商所</option>
+              <option value="2">大商所</option>
+              <option value="3">中金所</option>
             </select>
           </div>
         </div>
@@ -135,7 +128,11 @@
         <div class="form-group">
           <label class="col-sm-3 control-label">板块:</label>
           <div class="col-sm-9">
-            <input type="text" class="form-control"  placeholder="板块" [(ngModel)]="curSindex.stockBoard">
+            <select class="form-control" [(ngModel)]="curSindex.stockBoard">
+              <option value="0">主板</option>
+              <option value="1">中小板</option>
+              <option value="2">创业板</option>
+            </select>
           </div>
         </div>
         <div class="form-group">

@@ -139,21 +139,24 @@
 
       <div class="modal-body">
         <div class="row">
-          <div class="col-xs-offset-1 col-xs-11"><p class="lead">是否确定<strong>删除</strong>该行情订阅记录？</p></div>
+          <div class="col-xs-offset-1 col-xs-11"><p class="lead">是否确定<strong>删除</strong>该交易平台记录？</p></div>
         </div>
-        <!--<div class="row">-->
-          <!--<div class="col-xs-offset-1 col-xs-11">-->
-            <!--<dl class="dl-horizontal" style="margin-bottom: 8px;">-->
-              <!--<dt>交易平台</dt><dd>{{curMarketData?.platId}}</dd>-->
-            <!--</dl>-->
-            <!--<dl class="dl-horizontal" style="margin-bottom: 8px;">-->
-              <!--<dt>合约代码</dt><dd>{{curMarketData?.symbolId}}</dd>-->
-            <!--</dl>-->
-            <!--<dl class="dl-horizontal" >-->
-              <!--<dt>代码类型</dt><dd>{{curMarketData?.symbolType}}</dd>-->
-            <!--</dl>-->
-          <!--</div>-->
-        <!--</div>-->
+        <div class="row">
+          <div class="col-xs-offset-1 col-xs-11">
+            <dl class="dl-horizontal" style="margin-bottom: 8px;">
+              <dt>服务器IP</dt><dd>{{curTplatform?.ip}}</dd>
+            </dl>
+            <dl class="dl-horizontal" style="margin-bottom: 8px;">
+              <dt>端口</dt><dd>{{curTplatform?.port}}</dd>
+            </dl>
+            <dl class="dl-horizontal" style="margin-bottom: 8px;">
+              <dt>部署地点</dt><dd>{{curTplatform?.deploySite}}</dd>
+            </dl>
+            <dl class="dl-horizontal" >
+              <dt>备注</dt><dd>{{curTplatform?.comment}}</dd>
+            </dl>
+          </div>
+        </div>
       </div>
 
       <div class="modal-footer" style="text-align: right;">

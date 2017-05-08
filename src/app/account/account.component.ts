@@ -11,6 +11,9 @@ declare var $ : any;
 })
 export class AccountComponent implements OnInit {
 
+
+
+
   searchPlatId : string = '';
 
   curPage : number = 1;
@@ -29,7 +32,7 @@ export class AccountComponent implements OnInit {
 
     this.curAccount = {
     accountId : 0,
-    platId : 0,
+    platId :0,
     serviceId : 0,
     userId : "",
     tradePassword : "",
@@ -37,7 +40,7 @@ export class AccountComponent implements OnInit {
     commAccount : '',
     commPassword :"",
     flowPath : "",
-    isauth :"",
+    isauth :"0",
     userProductInfo  : "",
     inverstorId :"" ,
       ratio :0 ,
@@ -69,27 +72,50 @@ export class AccountComponent implements OnInit {
     this.isAddEditor = true;
     this.editorTitle = '新增交易账户';
     this.curAccount = { //初始化交易账户
-      accountId : 0,
-      platId : 0,
-      serviceId : 0,
+      accountId : 1,
+      platId : 1,
+      serviceId : 1,
       userId : "",
       tradePassword : "",
       fundCode  : "",
       commAccount : '',
       commPassword :"",
       flowPath : "",
-      isauth :"",
+      isauth :"0",
       userProductInfo  : "",
       inverstorId :"" ,
       ratio :0 ,
       groupName :"",
-      groupId : ""
+      groupId : "",
+
+
 
     };
 
+
+    // if($("#yesno option:selected").text() == "否"){
+    //   $("#fc").attr("disabled",true);
+    // }else{
+    //   $("#fc").attr("disabled",false);
+    // }
+
+    $("#fc").attr("disabled",true);
     $('#data_editor').modal('show'); //显示编辑对话框
 
   }
+
+  demo1(){
+
+    if($("#yesno option:selected").text() == "否"){
+      $("#fc").attr("disabled",true);
+    }
+    if($("#yesno option:selected").text() == "是"){
+      $("#fc").attr("disabled",false);
+    }
+  }
+
+
+
 
   onEditAccount(value : Account) {
 

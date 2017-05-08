@@ -13,6 +13,7 @@ export class TdServiceService {
   private headers = new Headers({'Content-Type': 'application/json'});
   private request_id = generateRequestId();
 
+  private allTdService = null;
 
   constructor(private http : Http) { }
 
@@ -62,6 +63,50 @@ export class TdServiceService {
 
 
   }
+
+
+  getAllTdService() : Promise<TdService[]> {
+
+    if(!!this.allTdService) return Promise.resolve(this.allTdService);
+
+    let request = JSON.stringify({
+
+      accountId : "",
+      userId : "",
+      pageSize : 1000,
+      currentPage : 1,
+      requestId : this.request_id,
+      serviceCode : 'FS117'
+
+    });
+
+    return this.http
+      .post(this.hostUrl, request, {headers: this.headers})
+      .toPromise()
+      .then( (res : Response) => {
+
+        let body = res.json();
+
+        if(body.errCode == '000000') {
+
+          this.allTdService = body.fieldList as TdService[];
+
+          return this.allTdService;
+
+        } else {
+
+          console.error("请求失败：" + body.errMsg);
+          return null;
+
+        }
+
+      })
+      .catch(this.handleError);
+
+  }
+
+
+
 
   //增加
   addTdService(tdService : TdService) : Promise<boolean> {

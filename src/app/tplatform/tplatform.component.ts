@@ -75,7 +75,7 @@ export class TplatformComponent implements OnInit {
   onEditTplatform(value : Tplatform) {
 
     this.isAddEditor = false;
-    this.editorTitle = '编辑柜台系统';
+    this.editorTitle = '编辑交易平台';
 
     this.curTplatform = value;
 
