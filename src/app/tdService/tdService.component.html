@@ -85,7 +85,7 @@
           <div class="form-group">
             <label class="col-sm-3 control-label">交易平台:</label>
             <div class="col-sm-9">
-              <app-platform-sel viewType="select_all" [(value)]="searchPlatId" (change)="search()"></app-platform-sel>
+              <app-platform-sel [(value)]="curTdService.platId" ></app-platform-sel>
               <!--<select class="form-control" [(ngModel)]="curTdService.platId">&lt;!&ndash;禁用添加disabled&ndash;&gt;-->
                 <!--<option value="101">1</option>-->
                 <!--<option value="102">2</option>-->
@@ -127,7 +127,7 @@
           <div class="form-group">
             <label class="col-sm-3 control-label">用户代码:</label>
             <div class="col-sm-9">
-              <app-tdservice-sel viewType="select_all" [(value)]="searchPlatId" (change)="search()"></app-tdservice-sel>
+              <app-tdservice-sel [(value)]="curTdService.accountId" ></app-tdservice-sel>
               <!--<select class="form-control" [(ngModel)]="curTdService.userId" >-->
                 <!--<option value="1">用户代码1</option>-->
                 <!--<option value="2">用户代码2</option>-->

@@ -41,13 +41,13 @@ export class TdserviceSelComponent implements OnInit{
 
       if(this.viewType == 'select_all') {
 
-        this.tdServiceList.unshift({paltId:'',deploySite:"全部用户"});
+        this.tdServiceList.unshift({accountId:'',userId:"全部用户"});
 
       }
 
       if(this.viewType == 'readonly') {
 
-        this.curTdservice = this.tdServiceList.find(data => data.platId == this.value);
+        this.curTdservice = this.tdServiceList.find(data => data.accountId == this.value);
 
       }
 
