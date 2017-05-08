@@ -128,25 +128,28 @@
 
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" >删除</h4>
+        <h4 class="modal-title" >是否确定删除该信息?</h4>
       </div>
 
       <div class="modal-body">
-        <div class="row">
-          <div class="col-xs-offset-1 col-xs-11"><p class="lead">是否确定<strong>删除</strong>该行情订阅记录？</p></div>
-        </div>
-        <div class="row">
-          <div class="col-xs-offset-1 col-xs-11">
-            <dl class="dl-horizontal" style="margin-bottom: 8px;">
-              <dt>交易平台</dt><dd>{{curMarketData?.platId}}</dd>
-            </dl>
-            <dl class="dl-horizontal" style="margin-bottom: 8px;">
-              <dt>合约代码</dt><dd>{{curMarketData?.symbolId}}</dd>
-            </dl>
-            <dl class="dl-horizontal" >
-              <dt>代码类型</dt><dd>{{curMarketData?.symbolType}}</dd>
-            </dl>
-          </div>
+
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <thead>
+            <tr>
+              <th>交易平台</th>
+              <th>合约代码</th>
+              <th>代码类型</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>{{curMarketData?.platId}}</td>
+              <td>{{curMarketData?.symbolId}}</td>
+              <td>{{curMarketData?.symbolType}}</td>
+            </tr>
+            </tbody>
+          </table>
         </div>
       </div>
 

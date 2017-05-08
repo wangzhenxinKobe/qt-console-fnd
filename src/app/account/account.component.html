@@ -41,7 +41,6 @@
                 <th>所属柜台系统</th>
                 <th>用户代码</th>
                 <th>投资者代码</th>
-                <th>交易密码</th>
                 <th>系数</th>
                 <th>所属分组</th>
                 <th width="120">操作</th>
@@ -54,7 +53,7 @@
                 <td>{{item.serviceId}}</td>
                 <td>{{item.userId}}</td>
                 <td>{{item.inverstorId}}</td>
-                <td>{{item.tradePassword}}</td>
+
                 <td>{{item.ratio}}</td>
                 <td>{{item.groupName}}</td>
                 <td style="text-align: center;">
@@ -163,9 +162,9 @@
             <div class="form-group">
               <label class="col-sm-4 control-label">是否认证：</label>
               <div class="col-sm-8">
-                <select class="form-control" [(ngModel)]="curAccount.isauth">
-                  <option value="1">是</option>
-                  <option value="0">否</option>
+                <select class="form-control" [(ngModel)]="curAccount.isauth" id="yesno" (change)="demo1()">
+                  <option value="0" >否</option>
+                  <option value="1" >是</option>
                 </select>
               </div>
             </div>
@@ -184,7 +183,7 @@
             <div class="form-group">
               <label class="col-sm-4 control-label">认证码：</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control" placeholder="认证码" [(ngModel)]="curAccount.fundCode">
+                <input type="text" class="form-control" placeholder="认证码" [(ngModel)]="curAccount.fundCode" id="fc">
               </div>
             </div>
           </div>
@@ -245,46 +244,43 @@
 </div>
 
 <!-- 删除 -->
-<div id="delete_confirm" class="modal fade bs-example-modal-sm" role="dialog">
-  <div class="modal-dialog" role="document">
+<div id="delete_confirm" class="modal fade bs-example-modal-lg" role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
 
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" >删除</h4>
+        <h4 class="modal-title" >是否确定删除该信息？</h4>
       </div>
 
       <div class="modal-body">
-        <div class="row">
-          <div class="col-xs-offset-1 col-xs-11"><p class="lead">是否确定<strong>删除</strong>该行情订阅记录？</p></div>
-        </div>
-        <div class="row">
-          <div class="col-xs-offset-1 col-xs-11">
-            <dl class="dl-horizontal" style="margin-bottom: 8px;">
-              <dt>账户编号</dt><dd>{{curAccount.accountId}}</dd>
-            </dl>
-            <dl class="dl-horizontal" style="margin-bottom: 8px;">
-              <dt>交易平台</dt><dd>{{curAccount.platId}}</dd>
-            </dl>
-            <dl class="dl-horizontal" style="margin-bottom: 8px;">
-              <dt>所属柜台系统</dt><dd>{{curAccount.serviceId}}</dd>
-            </dl>
-            <dl class="dl-horizontal" style="margin-bottom: 8px;">
-              <dt>用户代码</dt><dd>{{curAccount.userId}}</dd>
-            </dl>
-            <dl class="dl-horizontal" style="margin-bottom: 8px;">
-              <dt>投资者代码</dt><dd>{{curAccount.inverstorId}}</dd>
-            </dl>
-            <dl class="dl-horizontal" style="margin-bottom: 8px;">
-              <dt>交易密码</dt><dd>{{curAccount.tradePassword}}</dd>
-            </dl>
-            <dl class="dl-horizontal" style="margin-bottom: 8px;">
-              <dt>系数</dt><dd>{{curAccount.ratio}}</dd>
-            </dl>
-            <dl class="dl-horizontal" >
-              <dt>所属分组</dt><dd>{{curAccount.groupName}}</dd>
-            </dl>
-          </div>
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <thead>
+            <tr>
+              <th>账户编号</th>
+              <th>交易平台</th>
+              <th>所属柜台系统</th>
+              <th>用户代码</th>
+              <th>投资者代码</th>
+              <th>交易密码</th>
+              <th>系数</th>
+              <th>所属分组</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>{{curAccount.accountId}}</td>
+              <td>{{curAccount.platId}}</td>
+              <td>{{curAccount.serviceId}}</td>
+              <td>{{curAccount.userId}}</td>
+              <td>{{curAccount.inverstorId}}</td>
+              <td>{{curAccount.tradePassword}}</td>
+              <td>{{curAccount.ratio}}</td>
+              <td>{{curAccount.groupName}}</td>
+            </tr>
+            </tbody>
+          </table>
         </div>
       </div>
 

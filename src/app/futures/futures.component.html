@@ -50,12 +50,12 @@
               <tbody>
 
               <tr *ngFor="let item of futuresPage?.futures">
-                <td>{{item.exchangeId}}</td>
+                <td><app-cust-select dataType="tradehouse" viewType="readonly" [value]="item.exchangeId" ></app-cust-select></td>
                 <td>{{item.productId}}</td>
                 <td>{{item.productName}}</td>
                 <td>{{item.volumeMultiple}}</td>
                 <td>{{item.priceTick}}</td>
-                <td>{{item.feeMode}}</td>
+                <td><app-cust-select dataType="fmode" viewType="readonly" [value]="item.feeMode" ></app-cust-select></td>
                 <td style="text-align: center;">
                   <div class="tabledit-toolbar btn-toolbar" style=" display: inline-block;">
                     <div class="btn-group btn-group-sm" >
@@ -89,11 +89,10 @@
             <label class="col-sm-3 control-label">交易所代码:</label>
             <div class="col-sm-9">
               <select class="form-control" [(ngModel)]="curFutures.exchangeId">
-                <option>32131</option>
-                <option>32132</option>
-                <option>32133</option>
-                <option>3214</option>
-                <option>3215</option>
+                <option value="0">上期所</option>
+                <option value="1">郑商所</option>
+                <option value="2">大商所</option>
+                <option value="3">中金所</option>
               </select>
             </div>
           </div>
@@ -124,17 +123,16 @@
           <div class="form-group">
             <label class="col-sm-3 control-label">	计费方式:</label>
             <div class="col-sm-9">
-              <select class="form-control" placeholder="请输入计费方式" [(ngModel)]="curFutures.feeMode">
-                <option>单位手</option>
-                <option>成交额</option>
+              <select class="form-control" [(ngModel)]="curFutures.feeMode">
+                <option value="1">单位手</option>
+                <option value="2">成交额</option>
               </select>
             </div>
           </div>
-
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" (click)="save()">保存</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="search()">取消</button>
       </div>
     </div>
   </div>
@@ -147,42 +145,42 @@
 
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" >删除</h4>
+        <h4 class="modal-title" >是否确定删除该信息？</h4>
       </div>
 
       <div class="modal-body">
-        <div class="row">
-          <div class="col-xs-offset-1 col-xs-11"><p class="lead">是否确定<strong>删除</strong>该行情订阅记录？</p></div>
-        </div>
-       <div class="row">
-        <div class="col-xs-offset-1 col-xs-11">
-          <dl class="dl-horizontal" style="margin-bottom: 2px;">
-              <dt>交易所代码</dt><dd>{{curFutures?.exchangeId}}</dd>
-          </dl>
-            <dl class="dl-horizontal" style="margin-bottom: 2px;">
-           <dt>代码</dt><dd>{{curFutures?.productId}}</dd>
-            </dl>
-            <dl class="dl-horizontal" style="margin-bottom: 2px;">
-            <dt>名称</dt><dd>{{curFutures?.productName}}</dd>
-            </dl>
-            <dl class="dl-horizontal" style="margin-bottom: 2px;">
-           <dt>合约乘数</dt><dd>{{curFutures?.volumeMultiple}}</dd>
-            </dl>
-            <dl class="dl-horizontal" style="margin-bottom: 2px;">
-            <dt>最小价格变动单位</dt><dd>{{curFutures?.priceTick}}</dd>
-            </dl>
-            <dl class="dl-horizontal">
-            <dt>计费方式</dt><dd>{{curFutures?.feeMode}}</dd>
-            </dl>
-          </div>
-        </div>
-      </div>
 
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <thead>
+            <tr>
+              <th>交易所代码</th>
+              <th>代码</th>
+              <th>名称</th>
+              <th>合约乘数</th>
+              <th>最小价格变动单位</th>
+              <th>计费方式</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>{{curFutures?.exchangeId}}</td>
+              <td>{{curFutures?.productId}}</td>
+              <td>{{curFutures?.productName}}</td>
+              <td>{{curFutures?.volumeMultiple}}</td>
+              <td>{{curFutures?.priceTick}}</td>
+              <td>{{curFutures?.feeMode}}</td>
+            </tr>
+            </tbody>
+          </table>
+
+        </div>
       <div class="modal-footer" style="text-align: right;">
         <button type="button" class="btn btn-primary" (click)="delete()">确定</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
       </div>
     </div>
+  </div>
   </div>
 </div>
 

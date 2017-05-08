@@ -44,13 +44,44 @@ export class LoginComponent extends BaseComponent implements OnInit {
 
   onLogin() {
 
+// if($("#vcode").val() == ""){
+//   alert("请输入验证码");
+// }
+
+    //登陆验证
+    // var userId = $("#userId");
+    // var password = $("#password");
+    // var code = $("#code");
+    // var msg = "";
+    // if ($.trim(userId.val()) == ""){
+    //   msg = "用户名不能为空！";
+    //
+    // }else if (!/^\d{4,6}$/.test($.trim(userId.val()))){
+    //   msg = "用户名格式不正确！";
+    //
+    // }else if ($.trim(password.val()) == ""){
+    //   msg = "密码不能为空！";
+    //
+    // }else if (!/^\w{6}$/.test($.trim(password.val()))){
+    //   msg = "密码格式不正确！";
+    //
+    // }else if ($.trim(code.val()) == ""){
+    //   msg = "验证码不能为空！";
+    //
+    // }else if (!/^[0-9a-zA-Z]{4}$/.test($.trim(code.val()))){
+    //   msg = "验证码格式不正确！";
+    //
+    // }
+    // if (msg != ""){
+    //   alert(msg);
+    // }
+
     if( !this.password ) return ;
 
     let pwdMd5 = Md5.hashStr(this.password).toString();
 
     this.userService.login(this.userNo, pwdMd5, this.chkCode)
       .then( res => {
-
         if(res[0]) {
           this.router.navigate(['/business']);
         } else {

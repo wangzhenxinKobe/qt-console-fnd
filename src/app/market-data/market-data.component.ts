@@ -80,8 +80,8 @@ export class MarketDataComponent implements OnInit {
     this.editorTitle = '新增行情订阅';
 
     this.curMarketData = { //初始化行情数据
-      platId : '',
-      symbolType : '',
+      platId : '101',
+      symbolType : '0',
       symbolId : ''
     };
 

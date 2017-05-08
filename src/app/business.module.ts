@@ -45,6 +45,7 @@ import {OproleComponent} from "./oprole/oprole.component";
 import {OproleService} from "./oprole/oprole.service";
 import {OproleDetailComponent} from "./oprole/oprole-detail.component";
 import {PlatformSelComponent} from "./elements/tplatform-sel.component";
+import {TdserviceSelComponent} from "./elements/tdservice-sel.component";
 import {OperMngComponent} from "./oper-mng/opermng.component";
 import {OperMngService} from "./oper-mng/opermng.service";
 import {OperDetailComponent} from "./oper-mng/oper-detail.component";
@@ -81,7 +82,8 @@ import {BaseComponent} from "./common/base.component";
     OperDetailComponent,
     LoadingComponent,
     StrategySelComponent,
-    BaseComponent
+    BaseComponent,
+    TdserviceSelComponent
 
   ],
   exports: [

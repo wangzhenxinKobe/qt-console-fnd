@@ -38,12 +38,29 @@ export class CustSelectComponent implements OnInit {
 
     switch (this.dataType) { //准备数据
 
+      case 'tradehouse':
+        this.dataList = [
+          {value:'0', text:'上期所'},
+          {value:'1', text:'郑商所'},
+          {value:'2', text:'大商所'},
+          {value:'3', text:'中金所'}
+        ];
+        if(this.viewType == 'select_all') {
+          this.dataList.unshift( {value:'', text:'全部交易所'} );
+        }
+
+        break;
+
+
       case 'bankuai':
         this.dataList = [
           {value:'0', text:'主板'},
           {value:'1', text:'中小板'},
           {value:'2', text:'创业板'}
         ];
+        if(this.viewType == 'select_all') {
+          this.dataList.unshift( {value:'', text:'全部股票板块'} );
+        }
 
         break;
 
@@ -57,6 +74,17 @@ export class CustSelectComponent implements OnInit {
           this.dataList.unshift( {value:'', text:'全部股票信息'} );
         }
         break;
+
+      case 'sindex':
+        this.dataList = [
+          {value:'0', text:'否'},
+          {value:'1', text:'是'}
+        ];
+        if(this.viewType == 'select_all') {
+          this.dataList.unshift( {value:'', text:'全部股票指数'} );
+        }
+        break;
+
 
 
       case 'market_data':
@@ -124,6 +152,16 @@ export class CustSelectComponent implements OnInit {
         ];
         if(this.viewType == 'select_all') {
           this.dataList.unshift( {value:'', text:'全部类型'} );
+        }
+        break;
+
+      case 'fmode':
+        this.dataList = [
+          {value:'1', text:'单位手'},
+          {value:'2', text:'成交额'}
+        ];
+        if(this.viewType == 'select_all') {
+          this.dataList.unshift( {value:'', text:'全部'} );
         }
         break;
 

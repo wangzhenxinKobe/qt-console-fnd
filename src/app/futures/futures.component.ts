@@ -35,12 +35,12 @@ export class FuturesComponent implements OnInit {
   ngOnInit() {
 
     this.curFutures = {
-      exchangeId :"",
+      exchangeId :"0",
       productId :"",
       productName :"",
       volumeMultiple : 0,
       priceTick : 0,
-      feeMode : 0,
+      feeMode : 1,
     };
 
   }
@@ -85,12 +85,12 @@ export class FuturesComponent implements OnInit {
     this.editorTitle = '新增期货';
 
     this.curFutures = { //初始化期货数据
-      exchangeId :"",
+      exchangeId :"0",
       productId :"",
       productName :"",
       volumeMultiple : 0,
       priceTick : 0,
-      feeMode : 0,
+      feeMode : 1,
     };
 
     $('#data_editor').modal('show'); //显示编辑对话框
@@ -141,6 +141,11 @@ export class FuturesComponent implements OnInit {
       .then( result => result ? this.queryList() : alert("数据删除失败，请重试！") );
 
     $('#delete_confirm').modal('hide');
+
+  }
+
+  rfresh(){
+    // window.location.reload();
 
   }
 

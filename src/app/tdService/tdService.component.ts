@@ -64,10 +64,10 @@ export class TdServiceComponent implements OnInit {
       platId : 0,
       ip : "",
       port : 0,
-      adapterType : 0,
+      adapterType : 1,
       userId : "",
       tradePassword : "",
-      serviceType:0,
+      serviceType:1,
       serviceId : 0,
       accountId : 0,
 
