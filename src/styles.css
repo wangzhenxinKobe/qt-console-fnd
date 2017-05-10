@@ -1,3 +1,6 @@
+html,body{
+  height:100% !important;
+}
 .r_crumbs{
   background: #fff;
   padding: 0 30px;
@@ -447,6 +450,17 @@ a.collapsed .fa{
 }
 .selectBar .panel-default:last-child{
   border: none;
+}
+.r_boxToolFl .input-group{
+  position: relative;
+  display: block;
+}
+.r_boxToolFl .input-group .input-group-addon{
+  position: absolute;
+  right: 10px;
+  top: 4px;
+  border: none;
+  z-index: 9;
 }
 @media (max-width: 768px) {
   .r_crumbs{
