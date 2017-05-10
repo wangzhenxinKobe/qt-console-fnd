@@ -16,6 +16,8 @@ import {StrategyComponent} from "./strategy/strategy.component";
 import {StrategyEditorComponent} from "./strategy/strategy-editor.component";
 import {PaginationComponent} from "./elements/pagination.component";
 import { FuturesComponent } from './futures/futures.component';
+import {FuordersService} from "./fuorders/fuorders.service";
+import { FuordersComponent } from './fuorders/fuorders.component';
 import { MarketDataComponent } from './market-data/market-data.component';
 import {CustSelectComponent} from "./elements/cust-select.component";
 import { TradeUnitComponent } from './trade-unit/trade-unit.component';
@@ -46,6 +48,7 @@ import {OproleService} from "./oprole/oprole.service";
 import {OproleDetailComponent} from "./oprole/oprole-detail.component";
 import {PlatformSelComponent} from "./elements/tplatform-sel.component";
 import {TdserviceSelComponent} from "./elements/tdservice-sel.component";
+import {AccountSelComponent} from "./elements/account-sel.component";
 import {OperMngComponent} from "./oper-mng/opermng.component";
 import {OperMngService} from "./oper-mng/opermng.service";
 import {OperDetailComponent} from "./oper-mng/oper-detail.component";
@@ -62,6 +65,7 @@ import {BaseComponent} from "./common/base.component";
     StrategyEditorComponent,
     PaginationComponent,
     FuturesComponent,
+    FuordersComponent,
     MarketDataComponent,
     CustSelectComponent,
     TradeUnitComponent,
@@ -83,7 +87,8 @@ import {BaseComponent} from "./common/base.component";
     LoadingComponent,
     StrategySelComponent,
     BaseComponent,
-    TdserviceSelComponent
+    TdserviceSelComponent,
+    AccountSelComponent
 
   ],
   exports: [
@@ -100,7 +105,7 @@ import {BaseComponent} from "./common/base.component";
 
   ],
   providers: [ StrategyService, MarketDataService, TradeUnitService, AccountService, BinfoService, FuturesService, MdServiceService,
-    SbasketService, SindexService, SysfuncService, TdServiceService, TplatformService, AgroupService, OproleService, OperMngService
+    SbasketService, SindexService, SysfuncService, TdServiceService, TplatformService, AgroupService, OproleService, OperMngService,FuordersService
   ]
 
 })

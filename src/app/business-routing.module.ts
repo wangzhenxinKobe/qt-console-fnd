@@ -19,7 +19,7 @@ import {OproleComponent} from "./oprole/oprole.component";
 import {OproleDetailComponent} from "./oprole/oprole-detail.component";
 import {OperMngComponent} from "./oper-mng/opermng.component";
 import {OperDetailComponent} from "./oper-mng/oper-detail.component";
-
+import {FuordersComponent} from "./fuorders/fuorders.component";
 
 const childrenRoutes: Routes = [
   { path: 'strategy',  component: StrategyComponent },
@@ -38,7 +38,8 @@ const childrenRoutes: Routes = [
   { path: 'oprole',  component: OproleComponent },
   { path: 'oprole-detail',  component: OproleDetailComponent },
   { path: 'opermng',  component: OperMngComponent },
-  { path: 'opermng-detail',  component: OperDetailComponent }
+  { path: 'opermng-detail',  component: OperDetailComponent },
+  { path: 'fuorders',  component: FuordersComponent },
 ];
 
 const businessRoutes : Routes = [{

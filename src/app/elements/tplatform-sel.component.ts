@@ -6,7 +6,7 @@ import {TplatformService} from "../tplatform/tplatform.service";
     template: `
     
     <select *ngIf="viewType != 'readonly'" [(ngModel)]="value" class="form-control" (change)="onChange()">
-      <option *ngFor="let item of platformList" value="{{item.platId}}">{{item.platId}}{{item.deploySite}}</option>
+      <option *ngFor="let item of platformList" value="{{item.platId}}">{{item.deploySite}}</option>
     </select>
 
     <div *ngIf="viewType == 'readonly'">{{curPlatform?.deploySite}}</div>

@@ -42,8 +42,10 @@ export class OproleDetailComponent extends BaseComponent implements OnInit {
 
     this.oproleService.getAllSysFuncs()
       .then(res => {
+
         if(res[0]) {
           this.allSysFuncs = res[1];
+          console.info(res);
         }
         else {
           this.alert.error(res[1]);

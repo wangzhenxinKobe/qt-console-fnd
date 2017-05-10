@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FuturesService} from "./futures.service";
 import {FuturesPage,Futures} from "./futures";
 import { FileUploader } from 'ng2-file-upload';
-
+import {BaseComponent} from "../common/base.component";
 declare var $ : any;
 
 @Component({
@@ -10,7 +10,7 @@ declare var $ : any;
   templateUrl: './futures.component.html',
   styleUrls: ['./futures.component.css']
 })
-export class FuturesComponent implements OnInit {
+export class FuturesComponent extends BaseComponent implements OnInit {
   searchPlatId : string = '';
 
   curPage : number = 1;
@@ -30,7 +30,7 @@ export class FuturesComponent implements OnInit {
 
   constructor(
     private futuresService : FuturesService
-  ) { }
+  ) { super();}
 
   ngOnInit() {
 
@@ -141,7 +141,7 @@ export class FuturesComponent implements OnInit {
       .then( result => result ? this.queryList() : alert("数据删除失败，请重试！") );
 
     $('#delete_confirm').modal('hide');
-
+    this.alert.info("删除成功！");
   }
 
   rfresh(){

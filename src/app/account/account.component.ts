@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AccountService} from "./account.service";
 import {AccountPage, Account} from "./account";
-
+import {BaseComponent} from "../common/base.component";
 declare var $ : any;
 
 @Component({
@@ -9,7 +9,7 @@ declare var $ : any;
   templateUrl: 'account.component.html',
   styleUrls: ['account.component.css']
 })
-export class AccountComponent implements OnInit {
+export class AccountComponent extends BaseComponent implements OnInit {
 
 
 
@@ -26,7 +26,7 @@ export class AccountComponent implements OnInit {
 
   constructor(
     private accountService : AccountService
-  ) { }
+  ) {super(); }
 
   ngOnInit() {
 
@@ -161,7 +161,7 @@ export class AccountComponent implements OnInit {
       .then( result => result ? this.queryList() : alert("数据删除失败，请重试！") );
 
     $('#delete_confirm').modal('hide');
-
+this.alert.info("删除成功！")
   }
 
   private queryList() {
