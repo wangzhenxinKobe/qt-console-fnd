@@ -43,4 +43,9 @@ export class NavbarComponent implements OnInit {
 
   }
 
+  logout() {
+    this.authService.clearTokenId();
+    this.router.navigate(['/business']);
+  }
+
 }

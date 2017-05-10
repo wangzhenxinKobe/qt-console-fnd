@@ -42,4 +42,10 @@ export class AuthService {
 
   }
 
+  clearTokenId() {
+    this.tokenId = '';
+    Cookie.delete('qt-console-cookie-tokenid');
+
+  }
+
 }

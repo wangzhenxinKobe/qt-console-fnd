@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AgroupService} from "./agroup.service";
 import {AgroupPage, Agroup} from "./agroup";
-
+import {BaseComponent} from "../common/base.component";
 declare var $ : any;
 
 @Component({
@@ -9,7 +9,7 @@ declare var $ : any;
   templateUrl: './agroup.component.html',
   styleUrls: ['./agroup.component.css']
 })
-export class AgroupComponent implements OnInit {
+export class AgroupComponent extends BaseComponent implements OnInit {
 
   searchPlatId : string = '';
 
@@ -23,7 +23,7 @@ export class AgroupComponent implements OnInit {
 
   constructor(
     private agroupService : AgroupService
-  ) { }
+  ) {super(); }
 
   ngOnInit() {
 
@@ -116,7 +116,7 @@ export class AgroupComponent implements OnInit {
       .then( result => result ? this.queryList() : alert("数据删除失败，请重试！") );
 
     $('#delete_confirm').modal('hide');
-
+this.alert.info("删除成功！")
   }
 
   private queryList() {

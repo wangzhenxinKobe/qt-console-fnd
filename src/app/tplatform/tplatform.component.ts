@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {TplatformService} from "./tplatform.service";
 import {TplatformPage, Tplatform} from "./tplatform";
-
+import {BaseComponent} from "../common/base.component";
 declare var $ : any;
 
 @Component({
@@ -9,7 +9,7 @@ declare var $ : any;
   templateUrl: './tplatform.component.html',
   styleUrls: ['./tplatform.component.css']
 })
-export class TplatformComponent implements OnInit {
+export class TplatformComponent extends BaseComponent implements OnInit {
 
   searchPlatId : string = '';
 
@@ -23,7 +23,7 @@ export class TplatformComponent implements OnInit {
 
   constructor(
     private tplatformService : TplatformService
-  ) { }
+  ) {super(); }
 
   ngOnInit() {
 
@@ -118,7 +118,7 @@ export class TplatformComponent implements OnInit {
       .then( result => result ? this.queryList() : alert("数据删除失败，请重试！") );
 
     $('#delete_confirm').modal('hide');
-
+    this.alert.info("删除成功！");
   }
 
   private queryList() {

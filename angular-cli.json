@@ -19,17 +19,22 @@
       "prefix": "app",
       "styles": [
         "../node_modules/bootstrap/dist/css/bootstrap.min.css",
+        "../plugins/tabledit-cust/css/bootstrap-table.css",
+
 
         "../admin-lte/css/AdminLTE.css",
         "../admin-lte/css/skins/_all-skins.css",
+
 
         "styles.css"
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.min.js",
         "../node_modules/bootstrap/dist/js/bootstrap.min.js",
+        "../plugins/tabledit-cust/js/bootstrap-table.js",
 
         "../admin-lte/js/app.min.js",
+
         "../admin-lte/js/demo.js",
 
         "../plugins/tabledit-cust/js/jquery.tabledit.js"

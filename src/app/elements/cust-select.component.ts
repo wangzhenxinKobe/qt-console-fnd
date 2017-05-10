@@ -51,6 +51,19 @@ export class CustSelectComponent implements OnInit {
 
         break;
 
+      case 'tradehouse':
+        this.dataList = [
+          {value:'SHFE', text:'上期所'},
+          {value:'CZCE', text:'郑商所'},
+          {value:'DCE', text:'大商所'},
+          {value:'CFFEX', text:'中金所'}
+        ];
+        if(this.viewType == 'select_all') {
+          this.dataList.unshift( {value:'', text:'全部交易所'} );
+        }
+
+        break;
+
 
       case 'bankuai':
         this.dataList = [

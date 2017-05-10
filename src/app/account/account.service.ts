@@ -5,11 +5,15 @@ import {Account,AccountPage} from "./account";
 import {ParamConfig} from "../common/param.config";
 import {generateRequestId} from "../app.module";
 
+
+
 @Injectable()
 export class AccountService {
   private hostUrl = ParamConfig.HTTP_HOST_URL; //URL to web api
   private headers = new Headers({'Content-Type': 'application/json'});
   private request_id = generateRequestId();
+
+  private allAccount = null;
 
   constructor(private http : Http) { }
 
@@ -61,7 +65,45 @@ export class AccountService {
   }
 
 
+  getAllAccount() : Promise<Account[]> {
 
+    if(!!this.allAccount) return Promise.resolve(this.allAccount);
+
+    let request = JSON.stringify({
+
+      groupId : "",
+      groupName : "",
+      pageSize : 1000,
+      currentPage : 1,
+      requestId : this.request_id,
+      serviceCode : 'FS116'
+
+    });
+
+    return this.http
+      .post(this.hostUrl, request, {headers: this.headers})
+      .toPromise()
+      .then( (res : Response) => {
+
+        let body = res.json();
+
+        if(body.errCode == '000000') {
+
+          this.allAccount = body.fieldList as Account[];
+
+          return this.allAccount;
+
+        } else {
+
+          console.error("请求失败：" + body.errMsg);
+          return null;
+
+        }
+
+      })
+      .catch(this.handleError);
+
+  }
 
 
 

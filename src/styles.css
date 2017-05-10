@@ -1,17 +1,3 @@
-/* You can add global styles to this file, and also import other style files */
-body,html{
-  height: 100% !important;
-}
-.login-page{
-  background-size: auto 100%  !important;
-
-  background: rgb(9,159,222)  !important;
-  background: -moz-linear-gradient(top, rgba(9,159,222,1) 0%, rgba(35,47,62,1) 100%)  !important;
-  background: -webkit-linear-gradient(top, rgba(9,159,222,1) 0%,rgba(35,47,62,1) 100%)  !important;
-  background: linear-gradient(to bottom, rgba(9,159,222,1) 0%,rgba(35,47,62,1) 100%)  !important;
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#099fde', endColorstr='#232f3e',GradientType=0 );
-}
-
 .r_crumbs{
   background: #fff;
   padding: 0 30px;
@@ -24,6 +10,10 @@ body,html{
   padding: 0 10px 0 0;
   margin: 0 5px 0 0;
   color: #666;
+  cursor: default;
+}
+.r_crumbs a:hover{
+  color: #666 !important;
 }
 .r_crumbs a:after,
 .r_crumbs a:before{
@@ -154,6 +144,7 @@ body,html{
   line-height: 40px;
   position: relative;
   padding: 0 0 0 14px;
+
 }
 .r_collapseLi>a>i{
   position: absolute;
@@ -194,7 +185,50 @@ body,html{
 .r_collapseLi ul{
   display: none;
 }
-.r_collapseLi.active .fa-angle-right{
+
+.r_collapseSon li a{
+  line-height: 40px;
+  display: block;
+  padding: 0 0 0 28px;
+  position:relative;
+  -webkit-transition:0.2s ease-in 0s;
+  -o-transition:0.2s ease-in 0s;
+  transition:0.2s ease-in 0s;
+}
+.r_collapseSon li a .fa{
+  position:absolute;
+  right: 12px;
+  top: 50%;
+  line-height: 16px;
+  font-size: 16px;
+  margin: -7px 0 0 0;
+  display: none;
+}
+.r_collapseSon li.active a .fa{
+  display: block;
+}
+.r_collapseSon li{
+  padding: 0 0 1px 0;
+}
+.r_collapseSon li a:hover{
+  background: #eee;
+}
+.r_collapseSon li.active a{
+  background: #0a9edc;
+  color: #fff;
+}
+.r_collapse .panel-heading,
+.r_collapse .panel-group .panel{
+  box-shadow: none;
+  border-radius: 0 !important;
+}
+.r_collapse .panel-group .panel+.panel{
+  margin: -1px 0 0 0;
+}
+.r_collapse .glyphicon{
+  font-size: 12px;
+}
+a.collapsed .fa{
   transform: rotate(90deg);
 }
 .r_footRow{
@@ -247,15 +281,90 @@ body,html{
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both
 }
-
-.r_tableChoose tr{
-  cursor: pointer;
+@-webkit-keyframes twinkling{
+  0%{
+    background: #eedeb7;
+  }
+  100%{
+    opacity: 1;
+  }
 }
-.r_tableChoose tr.active td{
-  background: #0a9edc !important;
-  color: #fff;
+@keyframes twinkling{
+  0%{
+    background: #fff;
+  }
+  100%{
+    background: #eedeb7;
+  }
 }
+.btnFile{
+  position: relative;
+  overflow: hidden;
 
+}
+.btnFile input{
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  opacity: 0;
+}
+.r_toolPad{
+  padding: 5px 0;
+}
+.loadingMask{
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 999999;
+}
+.loadingBox{
+  width: 150px;
+  height: 15px;
+  margin: -7.5px 0 0 -75px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  text-align: center;
+}
+.loadingBox span{
+  display: inline-block;
+  width: 15px;
+  height: 100%;
+  margin-right: 5px;
+  background: #fff;
+  -webkit-animation: load 1.04s ease infinite;
+}
+.loadingBox span:last-child{
+  margin-right: 0px;
+}
+@-webkit-keyframes load{
+  0%{
+    opacity: 1;
+  }
+  100%{
+    opacity: 0;
+  }
+}
+.loadingBox span:nth-child(1){
+  -webkit-animation-delay:0.13s;
+}
+.loadingBox span:nth-child(2){
+  -webkit-animation-delay:0.26s;
+}
+.loadingBox span:nth-child(3){
+  -webkit-animation-delay:0.39s;
+}
+.loadingBox span:nth-child(4){
+  -webkit-animation-delay:0.52s;
+}
+.loadingBox span:nth-child(5){
+  -webkit-animation-delay:0.65s;
+}
 .fixed-table-container{
   border-radius: 0 !important;
 }
@@ -287,7 +396,6 @@ body,html{
   color: #fff;
 
 }
-
 .selectRow ul{
   list-style: none;
   margin: 0;
@@ -313,7 +421,7 @@ body,html{
   width: 16%;
   left: 50%;
   top: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, 0);
 }
 .selectTool .btn{
   margin: 10px 0 !important;
@@ -339,50 +447,6 @@ body,html{
 }
 .selectBar .panel-default:last-child{
   border: none;
-}
-
-@-webkit-keyframes twinkling{
-  0%{
-    background: #eedeb7;
-  }
-  100%{
-    opacity: 1;
-  }
-}
-.r_main .input-group{
-  position: relative;
-  display: block;
-}
-.r_main .input-group .input-group-addon{
-  border: none;
-  position: absolute;
-  right:12px;
-  top:4px;
-  z-index: 9;
-}
-.r_wm{
-  max-width: 320px;
-  margin: 0 auto;
-}
-@keyframes twinkling{
-  0%{
-    background: #fff;
-  }
-  100%{
-    background: #eedeb7;
-  }
-}
-.btnFile{
-  position: relative;
-  overflow: hidden;
-}
-.btnFile input{
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  opacity: 0;
 }
 @media (max-width: 768px) {
   .r_crumbs{
@@ -432,4 +496,7 @@ body,html{
   .r_boxPad{
     padding: 10px;
   }
+}
+.modal-dialog .table th, .modal-dialog .table td{
+  vertical-align: middle !important;
 }

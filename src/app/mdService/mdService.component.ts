@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MdServiceService} from "./mdService.service";
 import {MdServicePage, MdService} from "./mdService";
-
+import {BaseComponent} from "../common/base.component";
 declare var $ : any;
 
 @Component({
@@ -9,7 +9,7 @@ declare var $ : any;
   templateUrl: './mdService.component.html',
   styleUrls: ['./mdService.component.css']
 })
-export class MdServiceComponent implements OnInit {
+export class MdServiceComponent extends BaseComponent implements OnInit {
 
   searchPlatId : string = '';
 
@@ -23,7 +23,7 @@ export class MdServiceComponent implements OnInit {
 
   constructor(
     private mdServiceService : MdServiceService
-  ) { }
+  ) { super();}
 
   ngOnInit() {
 
@@ -112,7 +112,7 @@ export class MdServiceComponent implements OnInit {
       .then( result => result ? this.queryList() : alert("数据删除失败，请重试！") );
 
     $('#delete_confirm').modal('hide');
-
+this.alert.info("删除成功！")
   }
 
   private queryList() {
