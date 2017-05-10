@@ -76,7 +76,7 @@ export class BinfoComponent extends BaseComponent implements OnInit {
               console.info(result);
               if(result[0]) {
                 this.fileUrl = result[1];
-                alert(result[1]);
+                // alert(result[1]);
               }
               else {
                 alert(result[1]);

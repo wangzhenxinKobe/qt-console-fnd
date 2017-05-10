@@ -77,6 +77,19 @@ export class CustSelectComponent implements OnInit {
 
         break;
 
+      case 'shangji':
+        this.dataList = [
+          {value:'0', text:'无'},
+          {value:'1200', text:'业务信息管理'},
+          {value:'1300', text:'交易管理'},
+          {value:'1500', text:'系统管理'}
+        ];
+        if(this.viewType == 'select_all') {
+          this.dataList.unshift( {value:'', text:'全部'} );
+        }
+
+        break;
+
 
       case 'binfo':
         this.dataList = [
@@ -85,6 +98,16 @@ export class CustSelectComponent implements OnInit {
         ];
         if(this.viewType == 'select_all') {
           this.dataList.unshift( {value:'', text:'全部股票信息'} );
+        }
+        break;
+
+      case 'sfunc':
+        this.dataList = [
+          {value:'0', text:'一级菜单'},
+          {value:'1', text:'二级菜单'}
+        ];
+        if(this.viewType == 'select_all') {
+          this.dataList.unshift( {value:'', text:'全部'} );
         }
         break;
 

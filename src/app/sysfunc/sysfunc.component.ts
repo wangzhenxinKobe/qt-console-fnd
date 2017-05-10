@@ -33,8 +33,8 @@ export class SysfuncComponent extends BaseComponent implements OnInit {
  funcName :"",
  url : "",
  remark  : "",
- level : "1",
- status :"1"
+ level : "",
+ status :""
     };
 
   }
@@ -64,10 +64,11 @@ export class SysfuncComponent extends BaseComponent implements OnInit {
       funcName :"",
       url : "",
       remark  : "",
-      level : "1",
-      status :"1"
+      level : "0",
+      status :"0"
 
     };
+
     $("#fc").attr("disabled",true);
     $('#data_editor').modal('show'); //显示编辑对话框
 
@@ -92,8 +93,15 @@ export class SysfuncComponent extends BaseComponent implements OnInit {
 
     this.curSysfunc = value;
 
+
     $('#data_editor').modal('show'); //显示编辑对话框
 
+    if($("#fc ").text() == "0"){
+      $("#fc").attr("disabled",true);
+
+    }else{
+      $("#fc").attr("disabled",false);
+    }
   }
 
   onDeleteSysfunc(value : Sysfunc) {
