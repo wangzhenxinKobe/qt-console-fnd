@@ -29,6 +29,7 @@
         "../node_modules/jquery/dist/jquery.min.js",
         "../node_modules/bootstrap/dist/js/bootstrap.min.js",
         "../plugins/tabledit-cust/js/bootstrap-table.js",
+        "../plugins/tabledit-cust/js/icheck.min.js",
         "../admin-lte/js/app.min.js",
 
         "../admin-lte/js/demo.js"

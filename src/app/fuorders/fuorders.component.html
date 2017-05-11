@@ -58,7 +58,7 @@
             </div>
             <div class="col-md-3">
               <div class="r_toolPad">
-                <input type="number" class="form-control" placeholder="数量" [(ngModel)]="curFuorders.entrustVolume"/>
+                <input type="text" class="form-control" placeholder="数量" [(ngModel)]="curFuorders.entrustVolume"/>
               </div>
             </div>
             <div class="col-md-3">
@@ -81,7 +81,7 @@
             <div class="col-md-9">
               <div class="r_toolPad">
                 <div class="input-group" data-toggle="modal" data-target="#add">
-                  <input type="text" class="form-control" placeholder="选择用户" value="张三/李四" readonly >
+                  <input type="text" id="show" class="form-control" placeholder="选择用户" value="" readonly >
                   <a href="javascript:;"  class="input-group-addon"><i class="fa fa-plus"></i></a>
 
                 </div>
@@ -89,7 +89,7 @@
             </div>
             <div class="col-md-3">
               <div class="r_toolPad">
-                <button type="button" class="btn btn-primary btn-block">下订单</button>
+                <button type="button" class="btn btn-primary btn-block" >下订单</button>
               </div>
             </div>
           </div>
@@ -568,13 +568,13 @@
                 <tr>
                   <td rowspan="4">
                     <label class="checkbox-inline">
-                      <input type="checkbox" class="checkboxAll" > 分组一
+                      <input type="checkbox" class="checkboxAll" (click)="allSel()"> 分组一
                     </label>
                   </td>
                   <td>
                     <div class="checkbox">
                       <label>
-                        <input type="checkbox" name="subBox"> 账户001
+                        <input type="checkbox" name="subBox1" value="214124"> 账户001
                       </label>
                     </div>
                   </td>
@@ -625,7 +625,7 @@
                 <tr>
                   <td rowspan="4">
                     <label class="checkbox-inline">
-                      <input type="checkbox" class="checkboxAll" > 分组二
+                      <input type="checkbox" class="checkboxAll" (click)="allSel()"> 分组二
                     </label>
                   </td>
                   <td>
@@ -643,7 +643,7 @@
                   <td>
                     <div class="checkbox">
                       <label>
-                        <input type="checkbox" name="subBox"> 账户001
+                          <input type="checkbox" name="subBox" > 账户001
                       </label>
                     </div>
                   </td>
@@ -682,7 +682,7 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary">保存</button>
+            <button type="button" class="btn btn-primary" (click)="sel()">保存</button>
             <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
 
           </div>

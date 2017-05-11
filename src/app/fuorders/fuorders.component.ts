@@ -33,36 +33,44 @@ export class FuordersComponent implements OnInit {
     this.curFuorders = {
       accountId :0,
       symbol :"",
-      exchange :"",
-      direction :"",
-      offset :"",
-      hedge :"",
+      exchange :"SHFE",
+      direction :"0",
+      offset :"0",
+      hedge :"1",
       entrustprice : "",
       entrustVolume : 0,
-      orderTradeTppe : ""
+      orderTradeTppe : "0"
     };
 
   }
-//上传
-  // selectedFileOnChanged(event:any) {
-  //
-  //   console.log(event.target.value);
-  //   // 这里是文件选择完成后的操作处理
-  //   this.uploader.queue[0].onSuccess = (response, status, headers) => {
-  //
-  //     // 上传文件成功
-  //     if (status == 200) {
-  //       // 上传文件后获取服务器返回的数据
-  //       let tempRes = JSON.parse(response);
-  //       console.info(tempRes);
-  //       alert(tempRes.errMsg);
-  //     }else {
-  //       // 上传文件后获取服务器返回的数据错误
-  //     }
-  //   };
-  //   this.uploader.queue[0].upload(); // 开始上传
-  //
-  // }
+
+
+  allSel(){
+
+     $("[name = subBox1]:checkbox").attr("checked", true);
+
+    // var clicks = $(this).data('clicks');
+    //
+    // if (clicks) {
+    //   //Uncheck all checkboxes
+    //   $(this).parents('tbody').find("tr td input").iCheck("uncheck");
+    // } else {
+    //   //Check all checkboxes
+    //   $(this).parents('tbody').find("tr td input").iCheck("check");
+    // }
+    // $(this).data("clicks", clicks);
+  }
+
+  sel(){
+
+    $('#show').html("");
+    $("input[name='subBox1']:checked").each(function () {
+       alert($(this).val());
+      $('#show').append($(this).val());
+    });
+    $('#add').modal('hide');
+    // $("[name = subBox]:checkbox").attr("checked", true);
+  }
 
   search() {
 
@@ -78,7 +86,7 @@ export class FuordersComponent implements OnInit {
 
   }
 
-  onAddFutures() {
+  onAddFuorders() {
 
     this.isAddEditor = true;
     // this.editorTitle = '新增期货';

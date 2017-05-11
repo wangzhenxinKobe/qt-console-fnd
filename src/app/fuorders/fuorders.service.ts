@@ -7,7 +7,7 @@ import {generateRequestId} from "../app.module";
 
 @Injectable()
 export class FuordersService {
-  private hostUrl = 'http://192.168.0.65:8077/handler'; //URL to web api
+  private hostUrl = ParamConfig.HTTP_HOST_URL; //URL to web api
   private headers = new Headers({'Content-Type': 'application/json'});
   private request_id = generateRequestId();
 

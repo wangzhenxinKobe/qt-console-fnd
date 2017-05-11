@@ -9,7 +9,7 @@ import {AccountService} from "../account/account.service";
       <option *ngFor="let item of accountList" value="{{item.groupId}}">{{item.groupName}}</option>
     </select>
 
-    <div *ngIf="viewType == 'readonly'">{{curTdservice?.userId}}</div>
+    <div *ngIf="viewType == 'readonly'">{{curTdservice?.groupName}}</div>
     
     `
 })
