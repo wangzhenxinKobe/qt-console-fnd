@@ -48,10 +48,10 @@ import {PlatformSelComponent} from "./elements/tplatform-sel.component";
 import {TdserviceSelComponent} from "./elements/tdservice-sel.component";
 import {OperMngComponent} from "./oper-mng/opermng.component";
 import {OperMngService} from "./oper-mng/opermng.service";
-import {OperDetailComponent} from "./oper-mng/oper-detail.component";
 import {LoadingComponent} from "./elements/loading.component";
 import {StrategySelComponent} from "./elements/strategy-select.component";
 import {BaseComponent} from "./common/base.component";
+import {RoleSelComponent} from "./elements/role-sel.component";
 
 
 @NgModule({
@@ -79,11 +79,11 @@ import {BaseComponent} from "./common/base.component";
     OproleDetailComponent,
     PlatformSelComponent,
     OperMngComponent,
-    OperDetailComponent,
     LoadingComponent,
     StrategySelComponent,
     BaseComponent,
-    TdserviceSelComponent
+    TdserviceSelComponent,
+    RoleSelComponent
 
   ],
   exports: [

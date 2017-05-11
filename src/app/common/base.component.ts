@@ -16,6 +16,7 @@ export class BaseComponent {
 
   constructor() {}
 
+  /*
   protected asyncTimer( runner : ()=> Promise<boolean>) {
 
     this.loading.show();
@@ -43,6 +44,49 @@ export class BaseComponent {
       i++;
 
     }, 2000);
+
+  }
+  */
+
+  protected asyncTimer( runner : () => Promise<boolean>) {
+
+    this.loading.show();
+
+    runner().then(res_1 => {
+
+      if(res_1) {
+
+        this.loading.hide();
+
+      } else {
+
+        this.sleep(1000);
+        runner().then(res_2 => {
+
+          if(res_2) {
+
+            this.loading.hide();
+
+          } else {
+
+            this.sleep(1000);
+            runner().then(res_3 => this.loading.hide());
+
+          }
+
+        });
+
+      }
+
+    });
+
+  }
+
+  private sleep(d){
+
+    let t = Date.now();
+
+    while(Date.now() - t <= d);
 
   }
 

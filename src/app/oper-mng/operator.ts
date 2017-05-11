@@ -14,8 +14,10 @@ export class Operator {
 
 export class OperAccount {
 
-  accountId : string;
-
+  accountId : number; //交易账户ID
+  platId : number;    //平台编号
+  userId : string;    //交易账户名称
+  active : boolean = false;   //是否被点击激活
 }
 
 export class OperatorPage {

@@ -5,7 +5,7 @@ import 'rxjs/add/operator/toPromise';
 import {ParamConfig} from "../common/param.config";
 import {generateRequestId} from "../app.module";
 
-import {OperatorPage, Operator} from "./operator";
+import {OperatorPage, Operator, OperAccount} from "./operator";
 import {Role} from "../oprole/role";
 
 @Injectable()
@@ -86,8 +86,14 @@ export class OperMngService {
 
     if(body.errCode == '000000') {
 
+      let oper = body as Operator;
 
-      return [true, body as Operator];
+      oper.userAccountList = body.fieldList as OperAccount[];
+
+      console.info(oper);
+
+
+      return [true, oper];
 
     } else {
 
@@ -98,54 +104,24 @@ export class OperMngService {
 
   }
 
-  /**
-   * 获取全部角色
-   * @returns
-   */
-  getAllRoles() : Promise<[boolean, any]> {
-
-    let request = JSON.stringify({
-      roleName : '',
-      pageSize : 1000,
-      currentPage : 1,
-      requestId : this.request_id,
-      serviceCode : 'FS071'
-
-    });
-
-    return this.http
-      .post(this.hostUrl, request, {headers: this.headers})
-      .toPromise()
-      .then( res => {
-
-        let body = res.json();
-        if(body.errCode == '000000') {
-
-          return [ true, body.fieldList as Role[] ] ;
-
-        }
-        else {
-
-          console.error("请求失败：" + body.errMsg);
-          return [false, body.errMsg];
-
-        }
-
-      })
-      .catch(this.handleError);
-
-  }
-
-
 
   addOperator(oper : Operator) : Promise<[boolean, any]> {
+
+    let acctList = [];
+    for(let acct of oper.userAccountList) {
+
+      acctList.push({
+        accountId : acct.accountId
+      });
+
+    }
 
     let request = JSON.stringify({
       userNo : oper.userNo,
       userName : oper.userName,
       remark : oper.remark,
       roleId :oper.roleId,
-      userAccountList : JSON.stringify(oper.userAccountList),
+      userAccountList : JSON.stringify(acctList),
       requestId : this.request_id,
       serviceCode : 'FS077'
 
@@ -187,7 +163,7 @@ export class OperMngService {
       userRoleList : JSON.stringify([{sysUserId : oper.sysUserId, roleId : oper.roleId}]),
       userAccountList : JSON.stringify(acctList),
       requestId : this.request_id,
-      serviceCode : 'FS074'
+      serviceCode : 'FS079'
 
     });
 

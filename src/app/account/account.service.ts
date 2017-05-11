@@ -62,7 +62,39 @@ export class AccountService {
 
 
 
+  getAccountsInOnePage(accountId) : Promise<Account[]> {
 
+    let request = JSON.stringify({
+
+      accountId : accountId,
+      pageSize : 1000,
+      currentPage : 1,
+      requestId : this.request_id,
+      serviceCode : 'FS046'
+
+    });
+
+    return this.http
+      .post(this.hostUrl, request, {headers: this.headers})
+      .toPromise()
+      .then(res => {
+
+        let body = res.json();
+
+        if(body.errCode == '000000') {
+
+          return body.fieldList as Account[];
+
+        } else {
+
+          console.error("请求失败：" + body.errMsg);
+          return null;
+
+        }
+
+      }).catch(this.handleError);
+
+  }
 
 
 

@@ -13,6 +13,8 @@ export class OproleService {
   private headers = new Headers({'Content-Type': 'application/json'});
   private request_id = generateRequestId();
 
+  private allRoleList = null;
+
   constructor(private http:Http) {
   }
 
@@ -56,6 +58,44 @@ export class OproleService {
       return [false, body.errMsg];
 
     }
+
+  }
+
+  getAllRoles() : Promise<Role[]> {
+
+    if(!!this.allRoleList) return Promise.resolve(this.allRoleList);
+
+    let request = JSON.stringify({
+
+      roleName : '',
+      pageSize : 1000,
+      currentPage : 1,
+      requestId : this.request_id,
+      serviceCode : 'FS071'
+
+    });
+
+    return this.http
+      .post(this.hostUrl, request, {headers: this.headers})
+      .toPromise()
+      .then((res : Response) => {
+
+      let body = res.json();
+
+      if(body.errCode == '000000') {
+
+        this.allRoleList = body.fieldList as Role[];
+
+        return this.allRoleList;
+
+      } else {
+
+        console.error("请求失败：" + body.errMsg);
+        return null;
+
+      }
+
+    }).catch(this.handleError);
 
   }
 
