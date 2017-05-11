@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {SbasketService} from "./sbasket.service";
 import {SbasketPage,Sbasket} from "./sbasket";
 import { FileUploader } from 'ng2-file-upload';
-
+import {BaseComponent} from "../common/base.component";
 declare var $ : any;
 
 @Component({
@@ -10,7 +10,7 @@ declare var $ : any;
   templateUrl: './sbasket.component.html',
   styleUrls: ['./sbasket.component.css']
 })
-export class SbasketComponent implements OnInit {
+export class SbasketComponent extends BaseComponent implements OnInit {
   searchPlatId : string = '篮';
   curPage : number = 1;
   sbasketPage : SbasketPage;
@@ -26,7 +26,7 @@ export class SbasketComponent implements OnInit {
 
   constructor(
     private sbasketService : SbasketService
-  ) { }
+  ) { super();}
 
   ngOnInit() {
    this.curSbasket = {
@@ -37,8 +37,6 @@ export class SbasketComponent implements OnInit {
      code1  : "",
    volume1 : 0
     };
-
-
 
   }
 
@@ -141,7 +139,7 @@ export class SbasketComponent implements OnInit {
       .then( result => result ? this.queryList() : alert("数据删除失败，请重试！") );
 
     $('#delete_confirm').modal('hide');
-
+    this.alert.info("删除成功！");
   }
 
   private queryList() {

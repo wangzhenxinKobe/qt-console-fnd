@@ -1,9 +1,10 @@
 <div class="r_crumbs">
-  <a href="#">首页</a>
-  <a href="#">系统管理</a>
+  <a href="javascript:;">首页</a>
+  <a href="javascript:;">系统管理</a>
   交易平台管理
 </div>
 <div class="r_main">
+  <app-alert></app-alert>
   <div class="r_box">
     <div class="r_boxHead">
       <h2>交易平台管理</h2>
@@ -78,7 +79,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" (click)="search()">&times;</span></button>
         <h4 class="modal-title" >{{editorTitle}}</h4>
       </div>
       <div class="modal-body form-horizontal">
@@ -121,7 +122,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" (click)="save()" >保存</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="search()">取消</button>
       </div>
     </div>
   </div>
@@ -151,10 +152,10 @@
             </thead>
             <tbody>
             <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
+              <td>{{curTplatform.ip}}</td>
+              <td>{{curTplatform.port}}</td>
+              <td>{{curTplatform.deploySite}}</td>
+              <td>{{curTplatform.comment}}</td>
             </tr>
             </tbody>
           </table>

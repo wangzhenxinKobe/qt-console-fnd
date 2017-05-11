@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {MarketDataService} from "./market-data.service";
 import {MarketDataPage, MarketData} from "./market-data";
 import { FileUploader } from 'ng2-file-upload';
-
+import {BaseComponent} from "../common/base.component";
 declare var $ : any;
 
 @Component({
@@ -10,7 +10,7 @@ declare var $ : any;
   templateUrl: './market-data.component.html',
   styleUrls: ['./market-data.component.css']
 })
-export class MarketDataComponent implements OnInit {
+export class MarketDataComponent extends BaseComponent implements OnInit {
 
   searchPlatId : string = '';
 
@@ -28,7 +28,7 @@ export class MarketDataComponent implements OnInit {
   });
   constructor(
     private marketDataService : MarketDataService
-  ) { }
+  ) { super();}
 
   ngOnInit() {
 
@@ -155,7 +155,7 @@ export class MarketDataComponent implements OnInit {
       .then( result => result ? this.queryList() : alert("数据删除失败，请重试！") );
 
     $('#delete_confirm').modal('hide');
-
+    this.alert.info("删除成功！");
   }
 
   private queryList() {

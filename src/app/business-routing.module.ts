@@ -18,7 +18,7 @@ import {AgroupComponent} from "./agroup/agroup.component";
 import {OproleComponent} from "./oprole/oprole.component";
 import {OproleDetailComponent} from "./oprole/oprole-detail.component";
 import {OperMngComponent} from "./oper-mng/opermng.component";
-
+import {FuordersComponent} from "./fuorders/fuorders.component";
 
 const childrenRoutes: Routes = [
   { path: 'strategy',  component: StrategyComponent },
@@ -36,6 +36,7 @@ const childrenRoutes: Routes = [
   { path: 'agroup',  component: AgroupComponent },
   { path: 'oprole',  component: OproleComponent },
   { path: 'oprole-detail',  component: OproleDetailComponent },
+  { path: 'fuorders',  component: FuordersComponent },
   { path: 'opermng',  component: OperMngComponent }
 ];
 

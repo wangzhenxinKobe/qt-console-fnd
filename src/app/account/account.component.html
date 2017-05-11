@@ -1,9 +1,10 @@
 <div class="r_crumbs">
-  <a href="#">首页</a>
-  <a href="#">业务信息管理</a>
+  <a href="javascript:;">首页</a>
+  <a href="javascript:;">业务信息管理</a>
   交易账户维护
 </div>
 <div class="r_main">
+  <app-alert></app-alert>
   <div class="r_box">
     <div class="r_boxHead">
       <h2>交易账户维护</h2>
@@ -80,7 +81,7 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" (click)="search()">&times;</span></button>
         <h4 class="modal-title" >{{editorTitle}}</h4>
       </div>
       <div class="modal-body form-horizontal">
@@ -221,8 +222,9 @@
             <div class="form-group">
               <label class="col-sm-4 control-label">所属分组：</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control" placeholder="所属分组" [(ngModel)]="curAccount.groupName">
+                <!--<input type="text" class="form-control" placeholder="所属分组" [(ngModel)]="curAccount.groupName">-->
                   <!--<input type="hidden" class="form-control" placeholder="所属分组" [(ngModel)]="curAccount.groupId">-->
+                <app-account-sel [(value)]="curAccount.groupId" ></app-account-sel>
               </div>
             </div>
           </div>
@@ -237,7 +239,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" (click)="save()" >保存</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="search()">取消</button>
       </div>
     </div>
   </div>

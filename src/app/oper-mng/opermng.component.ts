@@ -207,6 +207,7 @@ export class OperMngComponent extends BaseComponent implements OnInit {
   onDeleteOper(oper) {
 
     this.curOper = oper;
+
     $('#delete_confirm').modal('show'); //显示删除对话框
 
   }

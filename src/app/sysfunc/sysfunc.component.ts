@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {SysfuncService} from "./sysfunc.service";
 import {SysfuncPage, Sysfunc} from "./sysfunc";
-
+import {BaseComponent} from "../common/base.component";
 declare var $ : any;
 
 @Component({
@@ -9,7 +9,7 @@ declare var $ : any;
   templateUrl: './sysfunc.component.html',
   styleUrls: ['./sysfunc.component.css']
 })
-export class SysfuncComponent implements OnInit {
+export class SysfuncComponent extends BaseComponent implements OnInit {
 
   searchPlatId : string = '';
 
@@ -23,7 +23,7 @@ export class SysfuncComponent implements OnInit {
 
   constructor(
     private sysfuncService : SysfuncService
-  ) { }
+  ) {super(); }
 
   ngOnInit() {
 
@@ -64,14 +64,27 @@ export class SysfuncComponent implements OnInit {
       funcName :"",
       url : "",
       remark  : "",
-      level : "",
-      status :""
+      level : "0",
+      status :"0"
 
     };
 
+    $("#fc").attr("disabled",true);
     $('#data_editor').modal('show'); //显示编辑对话框
 
   }
+
+  demo1(){
+
+    if($("#yesno option:selected").text() == "一级菜单"){
+      $("#fc").attr("disabled",true);
+    }
+    if($("#yesno option:selected").text() == "二级菜单"){
+      $("#fc").attr("disabled",false);
+    }
+  }
+
+
 
   onEditSysfunc(value : Sysfunc) {
 
@@ -80,8 +93,15 @@ export class SysfuncComponent implements OnInit {
 
     this.curSysfunc = value;
 
+
     $('#data_editor').modal('show'); //显示编辑对话框
 
+    if($("#fc ").text() == "0"){
+      $("#fc").attr("disabled",true);
+
+    }else{
+      $("#fc").attr("disabled",false);
+    }
   }
 
   onDeleteSysfunc(value : Sysfunc) {
@@ -117,7 +137,7 @@ export class SysfuncComponent implements OnInit {
       .then( result => result ? this.queryList() : alert("数据删除失败，请重试！") );
 
     $('#delete_confirm').modal('hide');
-
+    this.alert.info("删除成功！");
   }
 
   private queryList() {

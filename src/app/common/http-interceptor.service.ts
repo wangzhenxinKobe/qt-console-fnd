@@ -26,6 +26,13 @@ export class HttpInterceptor implements Interceptor {
 
     console.info(response);
 
+    let body = response.response.json();
+    if(body.errCode == '000001') { //Token失效
+
+      this.authService.sendLoginStatus(false);
+
+    }
+
     return response;
     /*
      You can return:

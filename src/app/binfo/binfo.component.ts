@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {BinfoService} from "./binfo.service";
 import {BinfoPage,Binfo} from "./binfo";
 import { FileUploader } from 'ng2-file-upload';
+import {BaseComponent} from "../common/base.component";
 
 declare var $ : any;
 
@@ -10,7 +11,7 @@ declare var $ : any;
   templateUrl: './binfo.component.html',
   styleUrls: ['./binfo.component.css']
 })
-export class BinfoComponent implements OnInit {
+export class BinfoComponent extends BaseComponent implements OnInit {
   searchPlatId : string = '';
   curPage : number = 1;
   binfoPage : BinfoPage;
@@ -28,7 +29,7 @@ export class BinfoComponent implements OnInit {
 
   constructor(
     private binfoService : BinfoService
-  ) { }
+  ) { super();}
 
   ngOnInit() {
 
@@ -75,7 +76,7 @@ export class BinfoComponent implements OnInit {
               console.info(result);
               if(result[0]) {
                 this.fileUrl = result[1];
-                alert(result[1]);
+                // alert(result[1]);
               }
               else {
                 alert(result[1]);
@@ -163,7 +164,7 @@ export class BinfoComponent implements OnInit {
       .then( result => result ? this.queryList() : alert("数据删除失败，请重试！") );
 
     $('#delete_confirm').modal('hide');
-
+    this.alert.info("删除成功！");
   }
 
   private queryList() {

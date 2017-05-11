@@ -1,0 +1,693 @@
+
+  <div class="r_crumbs">
+    <a href="javascript:;">首页</a>
+    <a href="javascript:;">交易管理</a>
+    期货交易
+  </div>
+  <div class="r_main">
+    <div class="r_box">
+      <div class="r_boxHead">
+        <h2>期货交易</h2>
+      </div>
+      <div class="r_boxContent">
+        <div class="r_boxTool clearfix">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="r_toolPad">
+
+                <input type="text" class="form-control" placeholder="合约代码" [(ngModel)]="curFuorders.symbol"/>
+
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="r_toolPad">
+                <select class="form-control" [(ngModel)]="curFuorders.exchange">
+                  <option value="SHFE">上期所</option>
+                  <option value="CZCE">郑商所</option>
+                  <option value="DCE">大商所</option>
+                  <option value="CFFEX">中金所</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="r_toolPad">
+                <select class="form-control" [(ngModel)]="curFuorders.offset">
+                  <option value="0">开仓</option>
+                  <option value="1">平仓</option>
+                  <option value="2">平今</option>
+                  <option value="3">平昨</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="r_toolPad">
+                <select class="form-control" [(ngModel)]="curFuorders.direction">
+                  <option value="0">买</option>
+                  <option value="1">卖</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="r_toolPad">
+                <select class="form-control" [(ngModel)]="curFuorders.orderTradeTppe">
+                  <option value="0">限价指令</option>
+                  <option value="1">FOK指令</option>
+                  <option value="2">FAK指令</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="r_toolPad">
+                <input type="text" class="form-control" placeholder="数量" [(ngModel)]="curFuorders.entrustVolume"/>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="r_toolPad">
+                <select class="form-control" [(ngModel)]="curFuorders.hedge">
+                  <option value="0">投机</option>
+                  <option value="1">套利</option>
+                  <option value="2">套保</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="r_toolPad">
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="价格" [(ngModel)]="curFuorders.entrustprice">
+                  <span class="input-group-addon">元</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div class="r_toolPad">
+                <div class="input-group" data-toggle="modal" data-target="#add">
+                  <input type="text" id="show" class="form-control" placeholder="选择用户" value="" readonly >
+                  <a href="javascript:;"  class="input-group-addon"><i class="fa fa-plus"></i></a>
+
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="r_toolPad">
+                <button type="button" class="btn btn-primary btn-block" >下订单</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div>
+
+
+        </div>
+      </div>
+    </div>
+    <br />
+    <div class="r_box">
+      <div class="r_boxContent">
+        <div class="r_boxTool clearfix">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="r_toolPad">
+                <div class="tabledit-toolbar btn-toolbar">
+                  <div class="btn-group ">
+                    <button class="tabledit-edit-button btn btn-default" type="button">全部平仓</button>
+                    <button class="tabledit-delete-button btn  btn-default" type="button">快捷反手</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="r_toolPad">
+                <div class="tabledit-toolbar btn-toolbar">
+                  <div class="btn-group ">
+                    <button class="tabledit-delete-button btn btn-default" type="button">全部对价追单</button>
+                    <button class="tabledit-edit-button btn btn-default" type="button">全部跟价追单</button>
+                    <button class="tabledit-delete-button btn btn-default" type="button">撤单</button>
+                    <button class="tabledit-delete-button btn  btn-default" type="button">全部撤单</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+          <div>
+          </div>
+
+        </div>
+        <div class="r_boxPad">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="box" style=" border-radius: 0; box-shadow: none;">
+                <div class="box-header with-border" style="padding: 15px 0;">
+                  <h3 class="box-title">持仓信息</h3>
+
+                </div>
+                <div class="box-body" style="padding: 15px 0;">
+
+                  <div class="r_tableTabs">
+                    <div class="tab-content">
+                      <div class="tab-pane fade in active" id="div1" >
+                        <table data-toggle="table" data-height="350" class="table table-striped table-bordered table-hover text-nowrap">
+                          <thead>
+                          <tr>
+                            <th>序号</th>
+                            <th>期货合约</th>
+                            <th>方向</th>
+                            <th>昨仓</th>
+                            <th>今仓</th>
+                            <th>投机套保指令</th>
+                            <th>交易账户</th>
+                            <th>交易单元</th>
+                            <th>浮动盈亏</th>
+                            <th>持仓盈亏</th>
+                            <th>合约占用保证金</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          <tr>
+                            <td>2</td>
+                            <td>双欣矿业</td>
+                            <td>低硫煤</td>
+                            <td>321</td>
+                            <td>321</td>
+                            <td>账户一</td>
+                            <td>321</td>
+                            <td>+1%</td>
+                            <td>+1%</td>
+                            <td>+1%</td>
+                            <td>￥423</td>
+                          </tr>
+                          <tr>
+                            <td>2</td>
+                            <td>双欣矿业</td>
+                            <td>低硫煤</td>
+                            <td>321</td>
+                            <td>321</td>
+                            <td>账户一</td>
+                            <td>321</td>
+                            <td>+1%</td>
+                            <td>+1%</td>
+                            <td>+1%</td>
+                            <td>￥423</td>
+                          </tr>
+                          <tr>
+                            <td>2</td>
+                            <td>双欣矿业</td>
+                            <td>低硫煤</td>
+                            <td>321</td>
+                            <td>321</td>
+                            <td>账户一</td>
+                            <td>321</td>
+                            <td>+1%</td>
+                            <td>+1%</td>
+                            <td>+1%</td>
+                            <td>￥423</td>
+                          </tr>
+                          <tr>
+                            <td>2</td>
+                            <td>双欣矿业</td>
+                            <td>低硫煤</td>
+                            <td>321</td>
+                            <td>321</td>
+                            <td>账户一</td>
+                            <td>321</td>
+                            <td>+1%</td>
+                            <td>+1%</td>
+                            <td>+1%</td>
+                            <td>￥423</td>
+                          </tr>
+                          <tr>
+                            <td>2</td>
+                            <td>双欣矿业</td>
+                            <td>低硫煤</td>
+                            <td>321</td>
+                            <td>321</td>
+                            <td>账户一</td>
+                            <td>321</td>
+                            <td>+1%</td>
+                            <td>+1%</td>
+                            <td>+1%</td>
+                            <td>￥423</td>
+                          </tr>
+                          <tr>
+                            <td>2</td>
+                            <td>双欣矿业</td>
+                            <td>低硫煤</td>
+                            <td>321</td>
+                            <td>321</td>
+                            <td>账户一</td>
+                            <td>321</td>
+                            <td>+1%</td>
+                            <td>+1%</td>
+                            <td>+1%</td>
+                            <td>￥423</td>
+                          </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="tab-pane fade" id="div2">
+                        <table data-toggle="table" data-height="350" class="table table-striped table-bordered table-hover text-nowrap">
+                          <thead>
+                          <tr>
+                            <th>序号</th>
+                            <th>期货合约</th>
+                            <th>方向</th>
+                            <th>昨仓</th>
+                            <th>今仓</th>
+                            <th>投机套保指令</th>
+                            <th>交易账户</th>
+                            <th>交易单元</th>
+                            <th>浮动盈亏</th>
+                            <th>持仓盈亏</th>
+                            <th>合约占用保证金</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          <tr>
+                            <td>22222</td>
+                            <td>双欣矿业</td>
+                            <td>低硫煤</td>
+                            <td>321</td>
+                            <td>321</td>
+                            <td>账户一</td>
+                            <td>321</td>
+                            <td>+1%</td>
+                            <td>+1%</td>
+                            <td>+1%</td>
+                            <td>￥423</td>
+                          </tr>
+
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="tab-pane fade" id="div3">
+                        <table data-toggle="table" data-height="350" class="table table-striped table-bordered table-hover text-nowrap">
+                          <thead>
+                          <tr>
+                            <th>序号</th>
+                            <th>期货合约</th>
+                            <th>方向</th>
+                            <th>昨仓</th>
+                            <th>今仓</th>
+                            <th>投机套保指令</th>
+                            <th>交易账户</th>
+                            <th>交易单元</th>
+                            <th>浮动盈亏</th>
+                            <th>持仓盈亏</th>
+                            <th>合约占用保证金</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          <tr>
+                            <td>333</td>
+                            <td>双欣矿业</td>
+                            <td>低硫煤</td>
+                            <td>321</td>
+                            <td>321</td>
+                            <td>账户一</td>
+                            <td>321</td>
+                            <td>+1%</td>
+                            <td>+1%</td>
+                            <td>+1%</td>
+                            <td>￥423</td>
+                          </tr>
+
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="tab-pane fade" id="div4">
+                        <table data-toggle="table" data-height="350" class="table table-striped table-bordered table-hover text-nowrap">
+                          <thead>
+                          <tr>
+                            <th>序号</th>
+                            <th>期货合约</th>
+                            <th>方向</th>
+                            <th>昨仓</th>
+                            <th>今仓</th>
+                            <th>投机套保指令</th>
+                            <th>交易账户</th>
+                            <th>交易单元</th>
+                            <th>浮动盈亏</th>
+                            <th>持仓盈亏</th>
+                            <th>合约占用保证金</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          <tr>
+                            <td>444</td>
+                            <td>双欣矿业</td>
+                            <td>低硫煤</td>
+                            <td>321</td>
+                            <td>321</td>
+                            <td>账户一</td>
+                            <td>321</td>
+                            <td>+1%</td>
+                            <td>+1%</td>
+                            <td>+1%</td>
+                            <td>￥423</td>
+                          </tr>
+
+                          </tbody>
+                        </table>
+                      </div>
+
+                    </div>
+                    <div class="r_tableTabsNav">
+                      <ul class="clearfix">
+                        <li class="active"><a href="#div1" data-toggle="tab">账户1</a></li>
+                        <li ><a href="#div2"data-toggle="tab">账户2</a></li>
+                        <li ><a href="#div3" data-toggle="tab">账户3</a></li>
+                        <li ><a href="#div4" data-toggle="tab">账户4</a></li>
+
+                      </ul>
+                    </div>
+
+                  </div>
+                </div>
+
+
+
+
+
+
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="box" style=" border-radius: 0; box-shadow: none;">
+                <div class="box-header with-border" style="padding: 15px 0;">
+                  <h3 class="box-title">订单明细</h3>
+                </div>
+                <div class="box-body" style="padding: 15px 0;">
+                  <div class="r_tableTabs">
+                    <div class="tab-content">
+                      <div class="tab-pane fade in active" id="divA" >
+                        <table data-toggle="table" data-height="350" class="table table-striped table-bordered table-hover text-nowrap" style="border-radius: 0;">
+                          <thead>
+                          <tr>
+                            <th>序号</th>
+                            <th>合约代码</th>
+                            <th>保单引用</th>
+                            <th>方向</th>
+                            <th>开平</th>
+                            <th>套保</th>
+                            <th>委托时间</th>
+                            <th>委托价格</th>
+                            <th>委托数量</th>
+                            <th>成交价格</th>
+                            <th>成交数量</th>
+                            <th>成交金额</th>
+                            <th>委托状态</th>
+                            <th>交易账户</th>
+                            <th>交易单元</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          <tr>
+                            <td>2</td>
+                            <td>双欣矿业</td>
+                            <td>低硫煤</td>
+                            <td>321</td>
+                            <td>321</td>
+                            <td>账户一</td>
+                            <td>321</td>
+                            <td>+1%</td>
+                            <td>+1%</td>
+                            <td>+1%</td>
+                            <td>￥423</td>
+                            <td>+1%</td>
+                            <td>+1%</td>
+                            <td>+1%</td>
+                            <td>￥423</td>
+                          </tr>
+
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="tab-pane fade" id="divB">
+                        <table data-toggle="table" data-height="350" class="table table-striped table-bordered table-hover text-nowrap" style="border-radius: 0;">
+                          <thead>
+                          <tr>
+                            <th>序号</th>
+                            <th>合约代码</th>
+                            <th>保单引用</th>
+                            <th>方向</th>
+                            <th>开平</th>
+                            <th>套保</th>
+                            <th>委托时间</th>
+                            <th>委托价格</th>
+                            <th>委托数量</th>
+                            <th>成交价格</th>
+                            <th>成交数量</th>
+                            <th>成交金额</th>
+                            <th>委托状态</th>
+                            <th>交易账户</th>
+                            <th>交易单元</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          <tr>
+                            <td>2</td>
+                            <td>双欣矿业</td>
+                            <td>低硫煤</td>
+                            <td>321</td>
+                            <td>321</td>
+                            <td>账户一</td>
+                            <td>321</td>
+                            <td>+1%</td>
+                            <td>+1%</td>
+                            <td>+1%</td>
+                            <td>￥423</td>
+                            <td>+1%</td>
+                            <td>+1%</td>
+                            <td>+1%</td>
+                            <td>￥423</td>
+                          </tr>
+                          <tr>
+                            <td>2</td>
+                            <td>双欣矿业</td>
+                            <td>低硫煤</td>
+                            <td>321</td>
+                            <td>321</td>
+                            <td>账户一</td>
+                            <td>321</td>
+                            <td>+1%</td>
+                            <td>+1%</td>
+                            <td>+1%</td>
+                            <td>￥423</td>
+                            <td>+1%</td>
+                            <td>+1%</td>
+                            <td>+1%</td>
+                            <td>￥423</td>
+                          </tr>
+
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="tab-pane fade" id="divC">
+                        <table data-toggle="table" data-height="350" class="table table-striped table-bordered table-hover text-nowrap" style="border-radius: 0;">
+                          <thead>
+                          <tr>
+                            <th>序号</th>
+                            <th>合约代码</th>
+                            <th>保单引用</th>
+                            <th>方向</th>
+                            <th>开平</th>
+                            <th>套保</th>
+                            <th>委托时间</th>
+                            <th>委托价格</th>
+                            <th>委托数量</th>
+                            <th>成交价格</th>
+                            <th>成交数量</th>
+                            <th>成交金额</th>
+                            <th>委托状态</th>
+                            <th>交易账户</th>
+                            <th>交易单元</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          <tr>
+                            <td>2</td>
+                            <td>双欣矿业</td>
+                            <td>低硫煤</td>
+                            <td>321</td>
+                            <td>321</td>
+                            <td>账户一</td>
+                            <td>321</td>
+                            <td>+1%</td>
+                            <td>+1%</td>
+                            <td>+1%</td>
+                            <td>￥423</td>
+                            <td>+1%</td>
+                            <td>+1%</td>
+                            <td>+1%</td>
+                            <td>￥423</td>
+                          </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <div class="r_tableTabsNav">
+                      <ul class="clearfix">
+                        <li class="active"><a href="#divA" data-toggle="tab">未成交合约</a></li>
+                        <li ><a href="#divB"data-toggle="tab">成交明细</a></li>
+                        <li ><a href="#divC" data-toggle="tab">委托记录</a></li>
+                      </ul>
+                    </div>
+
+
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 添加用户 -->
+    <div id="add" class="modal bs-example-modal-lg fade" role="dialog">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">选择用户</h4>
+          </div>
+          <div class="modal-body">
+            <div class="table-responsive ">
+              <table class="table table-bordered">
+                <thead>
+                <tr>
+                  <th>组名</th>
+                  <th>交易账户</th>
+                  <th>系数</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td rowspan="4">
+                    <label class="checkbox-inline">
+                      <input type="checkbox" class="checkboxAll" (click)="allSel()"> 分组一
+                    </label>
+                  </td>
+                  <td>
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" name="subBox1" value="214124"> 账户001
+                      </label>
+                    </div>
+                  </td>
+                  <td>
+                    321
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" name="subBox"> 账户001
+                      </label>
+                    </div>
+                  </td>
+                  <td>
+                    321
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" name="subBox"> 账户001
+                      </label>
+                    </div>
+                  </td>
+                  <td>
+                    321
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" name="subBox"> 账户001
+                      </label>
+                    </div>
+                  </td>
+                  <td>
+                    321
+                  </td>
+                </tr>
+
+
+                </tbody>
+                <tbody style="border-top: none;">
+                <tr>
+                  <td rowspan="4">
+                    <label class="checkbox-inline">
+                      <input type="checkbox" class="checkboxAll" (click)="allSel()"> 分组二
+                    </label>
+                  </td>
+                  <td>
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" name="subBox"> 账户001
+                      </label>
+                    </div>
+                  </td>
+                  <td>
+                    321
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="checkbox">
+                      <label>
+                          <input type="checkbox" name="subBox" > 账户001
+                      </label>
+                    </div>
+                  </td>
+                  <td>
+                    321
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" name="subBox"> 账户001
+                      </label>
+                    </div>
+                  </td>
+                  <td>
+                    321
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" name="subBox"> 账户001
+                      </label>
+                    </div>
+                  </td>
+                  <td>
+                    321
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+
+
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" (click)="sel()">保存</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
