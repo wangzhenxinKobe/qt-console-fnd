@@ -132,10 +132,7 @@ export class FuordersComponent implements OnInit {
 
 
 
-  rfresh(){
-    // window.location.reload();
 
-  }
 
   private queryList() {
 

@@ -18,6 +18,8 @@ import {PaginationComponent} from "./elements/pagination.component";
 import { FuturesComponent } from './futures/futures.component';
 import {FuordersService} from "./fuorders/fuorders.service";
 import { FuordersComponent } from './fuorders/fuorders.component';
+import { FuordersRightComponent } from './fuorders/fuorders-right.component';
+import { FuordersLeftComponent } from './fuorders/fuorders-left.component';
 import { MarketDataComponent } from './market-data/market-data.component';
 import {CustSelectComponent} from "./elements/cust-select.component";
 import { TradeUnitComponent } from './trade-unit/trade-unit.component';
@@ -57,6 +59,7 @@ import {StrategySelComponent} from "./elements/strategy-select.component";
 import {BaseComponent} from "./common/base.component";
 
 
+
 @NgModule({
   declarations: [
     BusinessComponent,
@@ -88,7 +91,9 @@ import {BaseComponent} from "./common/base.component";
     StrategySelComponent,
     BaseComponent,
     TdserviceSelComponent,
-    AccountSelComponent
+    AccountSelComponent,
+    FuordersLeftComponent,
+    FuordersRightComponent
 
   ],
   exports: [
