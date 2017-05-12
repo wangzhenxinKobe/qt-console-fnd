@@ -53,10 +53,10 @@ import {TdserviceSelComponent} from "./elements/tdservice-sel.component";
 import {AccountSelComponent} from "./elements/account-sel.component";
 import {OperMngComponent} from "./oper-mng/opermng.component";
 import {OperMngService} from "./oper-mng/opermng.service";
-import {OperDetailComponent} from "./oper-mng/oper-detail.component";
 import {LoadingComponent} from "./elements/loading.component";
 import {StrategySelComponent} from "./elements/strategy-select.component";
 import {BaseComponent} from "./common/base.component";
+import {RoleSelComponent} from "./elements/role-sel.component";
 
 
 
@@ -86,14 +86,14 @@ import {BaseComponent} from "./common/base.component";
     OproleDetailComponent,
     PlatformSelComponent,
     OperMngComponent,
-    OperDetailComponent,
     LoadingComponent,
     StrategySelComponent,
     BaseComponent,
     TdserviceSelComponent,
     AccountSelComponent,
     FuordersLeftComponent,
-    FuordersRightComponent
+    FuordersRightComponent,
+    RoleSelComponent
 
   ],
   exports: [
@@ -110,7 +110,7 @@ import {BaseComponent} from "./common/base.component";
 
   ],
   providers: [ StrategyService, MarketDataService, TradeUnitService, AccountService, BinfoService, FuturesService, MdServiceService,
-    SbasketService, SindexService, SysfuncService, TdServiceService, TplatformService, AgroupService, OproleService, OperMngService,FuordersService
+    SbasketService, SindexService, SysfuncService, TdServiceService, TplatformService, AgroupService, OproleService, OperMngService, FuordersService
   ]
 
 })

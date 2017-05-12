@@ -5,15 +5,13 @@ import {Account,AccountPage} from "./account";
 import {ParamConfig} from "../common/param.config";
 import {generateRequestId} from "../app.module";
 
-
-
 @Injectable()
 export class AccountService {
   private hostUrl = ParamConfig.HTTP_HOST_URL; //URL to web api
   private headers = new Headers({'Content-Type': 'application/json'});
   private request_id = generateRequestId();
 
-  private allAccount = null;
+  private allAccount : Account[] = [];
 
   constructor(private http : Http) { }
 
@@ -64,7 +62,6 @@ export class AccountService {
 
   }
 
-
   getAllAccount() : Promise<Account[]> {
 
     if(!!this.allAccount) return Promise.resolve(this.allAccount);
@@ -105,6 +102,40 @@ export class AccountService {
 
   }
 
+
+  getAccountsInOnePage(accountId) : Promise<Account[]> {
+
+    let request = JSON.stringify({
+
+      accountId : accountId,
+      pageSize : 1000,
+      currentPage : 1,
+      requestId : this.request_id,
+      serviceCode : 'FS046'
+
+    });
+
+    return this.http
+      .post(this.hostUrl, request, {headers: this.headers})
+      .toPromise()
+      .then(res => {
+
+        let body = res.json();
+
+        if(body.errCode == '000000') {
+
+          return body.fieldList as Account[];
+
+        } else {
+
+          console.error("请求失败：" + body.errMsg);
+          return null;
+
+        }
+
+      }).catch(this.handleError);
+
+  }
 
 
 
