@@ -49,21 +49,23 @@ export class LoginComponent extends BaseComponent implements OnInit {
 // }
 //
 //     //登陆验证
-//     var userId = $("#userId");
-    // var password = $("#password");
-//     var code = $("#code");
-    // var msg = "";
-//     if ($.trim(userId.val()) == ""){
-//       msg = "用户名不能为空！";
-//
-//     }else if (!/^\d{4,6}$/.test($.trim(userId.val()))){
+     var userId = $("#userId");
+     var password = $("#password");
+     var code = $("#code");
+    var msg = "";
+    if ($.trim(userId.val()) == ""){
+      msg = "用户名不能为空！";
+
+     }
+// else if (!/^\d{4,6}$/.test($.trim(userId.val()))){
 //       msg = "用户名格式不正确！";
 //
 //     }else
 // if ($.trim(password.val()) == ""){
 //       msg = "密码不能为空！";
 //
-//     }else if (!/^\w{6}$/.test($.trim(password.val()))){
+//     }
+// else if (!/^\w{6}$/.test($.trim(password.val()))){
 //       msg = "密码格式不正确！";
 //
 //     }else if ($.trim(code.val()) == ""){
@@ -73,9 +75,9 @@ export class LoginComponent extends BaseComponent implements OnInit {
 //       msg = "验证码格式不正确！";
 //
 //     }
-//     if (msg != ""){
-//       this.alert.error(msg);
-//     }
+    if (msg != ""){
+      this.alert.error(msg);
+    }
 
      if( !this.password ) return ;
 

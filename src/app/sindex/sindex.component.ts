@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {SindexService} from "./sindex.service";
 import {SindexPage,Sindex} from "./sindex";
 import { FileUploader } from 'ng2-file-upload';
-
+import {BaseComponent} from "../common/base.component";
 declare var $ : any;
 
 @Component({
@@ -10,7 +10,7 @@ declare var $ : any;
   templateUrl: './sindex.component.html',
   styleUrls: ['./sindex.component.css']
 })
-export class SindexComponent implements OnInit {
+export class SindexComponent extends BaseComponent implements OnInit {
   searchPlatId : string = '';
 
   curPage : number = 1;
@@ -22,14 +22,14 @@ export class SindexComponent implements OnInit {
   isAddEditor : boolean;
 
   uploader : FileUploader = new FileUploader({
-    url: "http://192.168.0.65:8077/upload?serviceCode=FS016",
+    url: "http://192.168.0.18/upload?serviceCode=FS016",
     method: "POST",
     itemAlias: "file"
   });
 
   constructor(
     private sindexService : SindexService
-  ) { }
+  ) { super();}
 
   ngOnInit() {
 
@@ -60,7 +60,7 @@ export class SindexComponent implements OnInit {
         // 上传文件后获取服务器返回的数据
         let tempRes = JSON.parse(response);
         console.info(tempRes);
-        alert(tempRes.errMsg);
+        this.alert.info("导入成功！");
       }else {
         // 上传文件后获取服务器返回的数据错误
       }

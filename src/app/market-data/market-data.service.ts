@@ -159,6 +159,37 @@ export class MarketDataService {
 
   }
 
+  //股票基本信息导出
+  exportMarketData(marketData : MarketData) : Promise<[boolean, any]> {
+
+
+    let request = JSON.stringify({
+      symbolId : marketData.symbolId,
+      requestId : this.request_id,
+      serviceCode : 'FS035'
+
+    });
+
+    return this.http
+      .post(this.hostUrl, request, {headers: this.headers})
+      .toPromise()
+      .then( res => {
+        let body = res.json();
+        if(body.errCode == '000000') {
+          console.info(body);
+          return [true, body.url] ;
+        }
+        else {
+          console.error("请求失败：" + body.errMsg);
+          return [false, body.errMsg];
+        }
+
+      })
+      .catch(this.handleError);
+  }
+
+
+
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
     return null;

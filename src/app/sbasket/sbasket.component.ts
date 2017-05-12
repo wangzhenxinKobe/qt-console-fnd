@@ -19,7 +19,7 @@ export class SbasketComponent extends BaseComponent implements OnInit {
   isAddEditor : boolean;
 
   uploader : FileUploader = new FileUploader({
-    url: "http://192.168.0.65:8077/upload?serviceCode=FS022",
+    url: "http://192.168.0.18/upload?serviceCode=FS022",
     method: "POST",
     itemAlias: "file"
   });
@@ -51,7 +51,7 @@ export class SbasketComponent extends BaseComponent implements OnInit {
         // 上传文件后获取服务器返回的数据
         let tempRes = JSON.parse(response);
         console.info(tempRes);
-        alert(tempRes.errMsg);
+        this.alert.info("导入成功！");
       }else {
         // 上传文件后获取服务器返回的数据错误
       }

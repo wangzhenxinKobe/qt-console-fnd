@@ -22,7 +22,7 @@ export class BinfoComponent extends BaseComponent implements OnInit {
   fileUrl : string;
 
   uploader : FileUploader = new FileUploader({
-    url: "http://192.168.0.65:8077/upload?serviceCode=FS010",
+    url: "http://192.168.0.18/upload?serviceCode=FS010",
     method: "POST",
     itemAlias: "file"
   });
@@ -57,7 +57,7 @@ export class BinfoComponent extends BaseComponent implements OnInit {
         // 上传文件后获取服务器返回的数据
         let tempRes = JSON.parse(response);
         console.info(tempRes);
-        alert(tempRes.errMsg);
+        this.alert.info("导入成功！");
       }else {
         // 上传文件后获取服务器返回的数据错误
       }
@@ -84,7 +84,9 @@ export class BinfoComponent extends BaseComponent implements OnInit {
             });
    }
 
-
+  hideurl(){
+    $('#requesting').modal('hide');
+  }
   search() {
 
     this.curPage = 1;

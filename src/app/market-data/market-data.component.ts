@@ -21,8 +21,11 @@ export class MarketDataComponent extends BaseComponent implements OnInit {
   curMarketData : MarketData;
   editorTitle : string = '';
   isAddEditor : boolean;
+  downloadRequesting : boolean;
+  fileUrl : string;
+
   uploader : FileUploader = new FileUploader({
-    url: "http://192.168.0.65:8077/upload?serviceCode=FS034",
+    url: "http://192.168.0.18/upload?serviceCode=FS034",
     method: "POST",
     itemAlias: "file"
   });
@@ -51,13 +54,35 @@ export class MarketDataComponent extends BaseComponent implements OnInit {
         // 上传文件后获取服务器返回的数据
         let tempRes = JSON.parse(response);
         console.info(tempRes);
-        alert(tempRes.errMsg);
+        this.alert.info("导入成功！");
       }else {
         // 上传文件后获取服务器返回的数据错误
       }
     };
     this.uploader.queue[0].upload(); // 开始上传
 
+  }
+
+  //文件导出中
+  downloadFile() {
+    this.downloadRequesting = true;
+    $('#requesting').modal('show'); //显示编辑对话框
+    this.downloadRequesting=false;
+    this.marketDataService.exportMarketData(this.curMarketData)
+      .then( result => {
+        console.info(result);
+        if(result[0]) {
+          this.fileUrl = result[1];
+          // alert(result[1]);
+        }
+        else {
+          alert(result[1]);
+        }
+      });
+  }
+
+  hideurl(){
+    $('#requesting').modal('hide');
   }
 
   search() {

@@ -14,16 +14,16 @@ export class FuturesComponent extends BaseComponent implements OnInit {
   searchPlatId : string = '';
 
   curPage : number = 1;
-
+  downloadRequesting : boolean;
   futuresPage : FuturesPage;
-
+  fileUrl : string;
   curFutures : Futures;
   editorTitle : string = '';
   isAddEditor : boolean;
   // futuresList : Futures[];
 
   uploader : FileUploader = new FileUploader({
-    url: "http://192.168.0.65:8077/upload?serviceCode=FS028",
+    url: "http://192.168.0.18/upload?serviceCode=FS028",
     method: "POST",
     itemAlias: "file"
   });
@@ -56,7 +56,7 @@ export class FuturesComponent extends BaseComponent implements OnInit {
         // 上传文件后获取服务器返回的数据
         let tempRes = JSON.parse(response);
         console.info(tempRes);
-        alert(tempRes.errMsg);
+        this.alert.info("导入成功！");
       }else {
         // 上传文件后获取服务器返回的数据错误
       }
@@ -65,6 +65,27 @@ export class FuturesComponent extends BaseComponent implements OnInit {
 
   }
 
+  //文件导出中
+  downloadFile() {
+    this.downloadRequesting = true;
+    $('#requesting').modal('show'); //显示编辑对话框
+    this.downloadRequesting=false;
+    this.futuresService.exportFutures(this.curFutures)
+      .then( result => {
+        console.info(result);
+        if(result[0]) {
+          this.fileUrl = result[1];
+          // alert(result[1]);
+        }
+        else {
+          alert(result[1]);
+        }
+      });
+  }
+
+  hideurl(){
+    $('#requesting').modal('hide');
+  }
   search() {
 
     this.curPage = 1;
@@ -144,14 +165,10 @@ export class FuturesComponent extends BaseComponent implements OnInit {
     this.alert.info("删除成功！");
   }
 
-  rfresh(){
-    // window.location.reload();
-
-  }
 
   private queryList() {
 
-    console.info(`searchPlatId[${this.searchPlatId}], curPage[${this.curPage}]`);
+    // console.info(`searchPlatId[${this.searchPlatId}], curPage[${this.curPage}]`);
 
     this.futuresService.getFuturesPage(this.searchPlatId, this.curPage)
       .then( page => this.futuresPage = page );

@@ -31,7 +31,7 @@ export class FuordersRightComponent implements OnInit {
   ngOnInit() {
 
     this.curFuorders = {
-      accountId :0,
+      rgAccountDTOlist :[],
       symbol :"",
       exchange :"SHFE",
       direction :"0",
@@ -92,7 +92,7 @@ export class FuordersRightComponent implements OnInit {
     // this.editorTitle = '新增期货';
 
     this.curFuorders = { //初始化期货数据
-      accountId :0,
+      rgAccountDTOlist :[],
       symbol :"",
       exchange :"",
       direction :"",

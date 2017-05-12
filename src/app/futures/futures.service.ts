@@ -167,7 +167,33 @@ export class FuturesService {
 
 
 
+//期货导出
+  exportFutures(futures : Futures) : Promise<[boolean, any]> {
 
+
+    let request = JSON.stringify({
+      productName : futures.productName,
+      requestId : this.request_id,
+      serviceCode : 'FS029'
+    });
+
+    return this.http
+      .post(this.hostUrl, request, {headers: this.headers})
+      .toPromise()
+      .then( res => {
+        let body = res.json();
+        if(body.errCode == '000000') {
+          console.info(body);
+          return [true, body.url] ;
+        }
+        else {
+          console.error("请求失败：" + body.errMsg);
+          return [false, body.errMsg];
+        }
+
+      })
+      .catch(this.handleError);
+  }
 
 
 

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Headers, Http, Response } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import {ParamConfig} from "../common/param.config";
-import {Fuorders,FuordersPage} from "./fuorders";
+import {Fuorders,FuordersPage,FuordersFunc} from "./fuorders";
 import {generateRequestId} from "../app.module";
 
 @Injectable()
@@ -12,6 +12,36 @@ export class FuordersService {
   private request_id = generateRequestId();
 
   constructor(private http : Http) { }
+
+
+  //查询账户
+  getFuorders(): Promise<[boolean, any]>{
+let request = JSON.stringify({
+
+  requestId : this.request_id,
+  serviceCode : 'FS121'
+});
+    return this.http
+      .post(this.hostUrl, request, {headers: this.headers})
+      .toPromise()
+      .then(this.FuordersList)
+      .catch(this.handleError);
+  }
+  private FuordersList(res : Response){
+    let body = res.json();
+    if(body.errCode == '000000'){
+      var pagedata = new FuordersPage();
+      pagedata.fuorders = body.fieldList as Fuorders[];
+      pagedata.totalPages = body.totalPages;
+      pagedata.totalRows = body.totalRows;
+      return [true, pagedata];
+    }else{
+      console.error("请求失败：" + body.errMsg);
+      return [false, body.errMsg];
+    }
+  }
+
+
 
   //下单
   // getFuorders(accountId,symbol,exchage,direction,offset,hedge,entrustprice,entrustVolume,orderTradeTppe,pageSize, currentPage) : Promise<FuordersPage> {
@@ -74,7 +104,7 @@ export class FuordersService {
 
     let request = JSON.stringify({
 
-      exchangeId : fuorders.accountId,
+
       symbol : fuorders.symbol,
       exchage : fuorders.exchange,
       direction : fuorders.direction,

@@ -36,7 +36,7 @@
         <div class="r_boxToolFRl">
 
           <a href=" " class="btn btn-default btnFile"><input type="file" ng2FileSelect [uploader]="uploader" (change)="selectedFileOnChanged($event)"/>导入</a>
-          <button type="button" class="btn btn-default">导出</button>
+          <button type="button" class="btn btn-default" (click)="downloadFile()">导出</button>
           <button type="button" class="btn btn-primary" (click)="onAddMarketData()"><i class="fa fa-plus"></i> 新增</button>
 
         </div>
@@ -157,6 +157,29 @@
       <div class="modal-footer" style="text-align: right;">
         <button type="button" class="btn btn-primary" (click)="delete()">确定</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--文件导出中-->
+<div id="requesting" class="modal fade bs-example-modal-sm" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" >请求文件</h4>
+      </div>
+      <div class="modal-body loading">
+        <div *ngIf="downloadRequesting">
+          <img src="assets/images/loading.gif" />
+          <span>文件导入中...</span>
+        </div>
+        <div *ngIf="!downloadRequesting">
+          <span>点击<a [href]="fileUrl" (click)="hideurl()">这里</a>下载</span>
+        </div>
+
       </div>
     </div>
   </div>

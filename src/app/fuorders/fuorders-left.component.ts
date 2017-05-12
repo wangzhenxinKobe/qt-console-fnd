@@ -31,7 +31,7 @@ export class FuordersLeftComponent implements OnInit {
   ngOnInit() {
 
     this.curFuorders = {
-      accountId :0,
+
       symbol :"",
       exchange :"SHFE",
       direction :"0",
@@ -39,7 +39,8 @@ export class FuordersLeftComponent implements OnInit {
       hedge :"1",
       entrustprice : "",
       entrustVolume : 0,
-      orderTradeTppe : "0"
+      orderTradeTppe : "0",
+      rgAccountDTOlist :[]
     };
 
   }
@@ -92,7 +93,7 @@ export class FuordersLeftComponent implements OnInit {
     // this.editorTitle = '新增期货';
 
     this.curFuorders = { //初始化期货数据
-      accountId :0,
+
       symbol :"",
       exchange :"",
       direction :"",
@@ -100,7 +101,8 @@ export class FuordersLeftComponent implements OnInit {
       hedge :"",
       entrustprice : "",
       entrustVolume : 0,
-      orderTradeTppe : ""
+      orderTradeTppe : "",
+      rgAccountDTOlist :[]
     };
 
     $('#data_editor').modal('show'); //显示编辑对话框

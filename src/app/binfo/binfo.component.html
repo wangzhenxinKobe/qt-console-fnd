@@ -239,7 +239,7 @@
           <span>文件导入中...</span>
         </div>
         <div *ngIf="!downloadRequesting">
-          <span>点击<a [href]="fileUrl">这里</a>下载</span>
+          <span>点击<a [href]="fileUrl"  (click)="hideurl()">这里</a>下载</span>
         </div>
 
       </div>
