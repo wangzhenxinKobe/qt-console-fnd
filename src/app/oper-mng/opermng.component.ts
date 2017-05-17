@@ -104,7 +104,7 @@ export class OperMngComponent extends BaseComponent implements OnInit {
   onAcctItemClick(acct : OperAccount) {
 
     acct.active = !acct.active;
-
+    console.info(acct.active);
   }
 
   addAcct() {
@@ -113,7 +113,8 @@ export class OperMngComponent extends BaseComponent implements OnInit {
 
       if(this.curOper.userAccountList.findIndex(at => at.accountId == acct.accountId) == -1) {
 
-        this.curOper.userAccountList.push(JSON.parse(JSON.stringify(acct)) );
+        this.curOper.userAccountList.push(JSON.parse(JSON.stringify(acct)));
+
         acct.active = false;
 
       }
@@ -127,10 +128,8 @@ export class OperMngComponent extends BaseComponent implements OnInit {
     for(let acct of this.allAcctList) {
 
       if(this.curOper.userAccountList.findIndex(at => at.accountId == acct.accountId) == -1) {
-
         this.curOper.userAccountList.push(JSON.parse(JSON.stringify(acct)) );
         acct.active = false;
-
       }
 
     }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FuordersService} from "./fuorders.service";
-import {FuordersPage,Fuorders} from "./fuorders";
+import {Fuorders,FuordersFunc,FuordersAccount} from "./fuorders";
+import {forEach} from "@angular/router/src/utils/collection";
 
 
 declare var $ : any;
@@ -11,27 +12,19 @@ declare var $ : any;
   styleUrls: ['./fuorders.component.css']
 })
 export class FuordersComponent implements OnInit {
-  searchPlatId : string = '';
-
-  curPage : number = 1;
-
-  fuordersPage : FuordersPage;
-
   curFuorders : Fuorders;
+  rgAccountDTOlist:FuordersFunc[];
+
+  fuorderAccountList : FuordersAccount[] = [];
   editorTitle : string = '';
   isAddEditor : boolean;
-  // futuresList : Futures[];
-
-
 
   constructor(
     private fuordersService : FuordersService
   ) { }
 
   ngOnInit() {
-
     this.curFuorders = {
-
       symbol :"",
       exchange :"SHFE",
       direction :"0",
@@ -42,108 +35,52 @@ export class FuordersComponent implements OnInit {
       orderTradeTppe : "0",
       rgAccountDTOlist :[]
     };
-
   }
 
-
-  allSel(){
-
-     $("[name = subBox1]:checkbox").attr("checked", true);
-
-    // var clicks = $(this).data('clicks');
-    //
-    // if (clicks) {
-    //   //Uncheck all checkboxes
-    //   $(this).parents('tbody').find("tr td input").iCheck("uncheck");
-    // } else {
-    //   //Check all checkboxes
-    //   $(this).parents('tbody').find("tr td input").iCheck("check");
-    // }
-    // $(this).data("clicks", clicks);
-  }
-
-  sel(){
-
-    $('#show').html("");
-    $("input[name='subBox1']:checked").each(function () {
-       alert($(this).val());
-      $('#show').append($(this).val());
-    });
-    $('#add').modal('hide');
-    // $("[name = subBox]:checkbox").attr("checked", true);
-  }
-
-  search() {
-
-    this.curPage = 1;
-    this.queryList();
-
-  }
-
-  onPage(event) {
-
-    this.curPage = event;
-    this.queryList();
-
-  }
-
-  onAddFuorders() {
-
-    this.isAddEditor = true;
-    // this.editorTitle = '新增期货';
-
-    this.curFuorders = { //初始化期货数据
-
-      symbol :"",
-      exchange :"",
-      direction :"",
-      offset :"",
-      hedge :"",
-      entrustprice : "",
-      entrustVolume : 0,
-      orderTradeTppe : "",
-      rgAccountDTOlist :[]
-    };
-
-    $('#data_editor').modal('show'); //显示编辑对话框
-
-  }
-
-
-
-
-
-  save() {
-
-    if(this.isAddEditor) { //新增期货数据
-
-      this.curPage = 1;
-      this.fuordersService.addFuorders(this.curFuorders)
-        .then(result => result ? this.queryList() : alert("数据新增失败，请重试！"));
-
-    } else { //修改期货数据
-
-      // this.fuordersService.updateFuorders(this.curFuorders)
-      //   .then( result => result ? this.queryList() : alert("数据修改失败，请重试！") );
-
-    }
-
-    // $('#data_editor').modal('hide');
-
-  }
-
-
-
-
-
-  private queryList() {
-
-    console.info(`searchPlatId[${this.searchPlatId}], curPage[${this.curPage}]`);
-
+  //选择交易账户
+   addgroup(){
     this.fuordersService.getFuorders()
-      .then();
-
+      .then(result => {
+        if(result[0]){
+          this.fuorderAccountList = result[1];
+        }else {
+          alert(result[1]);
+        }
+      } ).catch(error => alert(error));
+     $('#add').modal('show'); //显示编辑对话框
+   }
+//全选checkbox
+    allSel(item : FuordersAccount){
+      item.active = !item.active;
+      item.rgAccountDTOlist.forEach(func =>{ func.active = item.active});
+      console.info(item.active)
+    }
+ //点击账户checkbox
+  lonesel(rga ){
+    rga.active = !rga.active;
+    console.info(rga.active)
   }
-
-
+//点击保存按钮
+  sel(){
+    $('#add').modal('hide'); //隐藏编辑对话框
+  }
+//选择账户value值
+  selectedAccounts(){
+    var selectID =  "";
+    for(let item of this.fuorderAccountList){
+      for(let idwrap of item.rgAccountDTOlist.filter(ele => ele.active == true)){
+        selectID += idwrap.accountId+' '
+      }
+    }
+    return selectID;
+  }
+//点击取消
+  qingkong(){
+    $("#show").val("");
+  }
+//手动下单
+  onAddFuorders() {
+  this.fuordersService.getFuorders()
+  .then()
+  }
 }

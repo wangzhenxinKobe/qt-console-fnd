@@ -15,12 +15,6 @@ export class Fuorders {
     public  orderTradeTppe : string; //指令
   rgAccountDTOlist : FuordersFunc[];
 
-
-    // public paraList :{
-    //     paraName  : string;
-    //     paraType  : string;
-    //     paraValue : string; }[];
-
     constructor() {}
 
 }
@@ -33,12 +27,12 @@ export  class FuordersFunc{
   public accountId : number; //账户ID
   public userId : string; //用户代码
   public ratio : number; //系数
+  active : boolean = false;   //是否被点击激活
 }
 
-export class FuordersPage {
-
+export class FuordersAccount {
+    public groupName : string;
     public fuorders : Fuorders[];
-    public totalPages : string;
-    public totalRows : string;
-
+    public active : boolean = true;
+    public rgAccountDTOlist : FuordersFunc[];
 }

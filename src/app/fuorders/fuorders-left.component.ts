@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FuordersService} from "./fuorders.service";
-import {FuordersPage,Fuorders} from "./fuorders";
+import {Fuorders} from "./fuorders";
 
 
 declare var $ : any;
@@ -14,8 +14,6 @@ export class FuordersLeftComponent implements OnInit {
   searchPlatId : string = '';
 
   curPage : number = 1;
-
-  fuordersPage : FuordersPage;
 
   curFuorders : Fuorders;
   editorTitle : string = '';

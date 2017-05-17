@@ -521,3 +521,42 @@ a.collapsed .fa{
 .modal-dialog .table th, .modal-dialog .table td{
   vertical-align: middle !important;
 }
+.r_userList{
+  position: relative;
+  border: 1px solid #eee;
+}
+.r_userListRow{
+  margin: 0 0 0 33.3333333%;
+  border-bottom: 1px solid #eee;
+  border-left: 1px solid #eee;
+}
+.r_userListSpan{
+  width: 50%;
+  float: left;
+}
+.r_userList dt{
+  position: absolute;
+  left: 0;
+  top: 50%;
+  margin: -20px 0 0 0;
+  padding: 0 0 0 10px;
+  font-weight: normal;
+}
+.r_userListSpan{
+  border-right: 1px solid #eee;
+  box-sizing: border-box;
+  padding: 0 0 0 10px;
+}
+.r_userListSpan:last-child{
+  border: none;
+}
+.r_userListRow:last-child{
+  border-bottom: none;
+}
+.r_userList:last-child{
+  border-top: none;
+}
+.r_userList{
+  margin:0;
+  min-height:40px;
+}

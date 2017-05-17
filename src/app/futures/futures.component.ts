@@ -168,7 +168,7 @@ export class FuturesComponent extends BaseComponent implements OnInit {
 
   private queryList() {
 
-    // console.info(`searchPlatId[${this.searchPlatId}], curPage[${this.curPage}]`);
+     console.info(`searchPlatId[${this.searchPlatId}], curPage[${this.curPage}]`);
 
     this.futuresService.getFuturesPage(this.searchPlatId, this.curPage)
       .then( page => this.futuresPage = page );

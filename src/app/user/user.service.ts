@@ -11,7 +11,7 @@ import {ParamConfig} from "../common/param.config";
 export class UserService {
 
   private hostUrl = ParamConfig.HTTP_HOST_URL; //URL to web api
-  private headers = new Headers({'Content-Type': 'application/json'});
+  private headers = new Headers([{'Content-Type': 'application/json'}, {'tokenid':'xxxx'}]);
 
   private user : User = null;
   private request_id : string;

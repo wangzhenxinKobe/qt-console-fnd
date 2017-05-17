@@ -9,12 +9,6 @@ export class Futures {
     public volumeMultiple : number;      //合约乘数
     public priceTick  : number; //最小价格变动单位
     public feeMode : number;       //计费方式
-    // public comment : string;
-
-    // public paraList :{
-    //     paraName  : string;
-    //     paraType  : string;
-    //     paraValue : string; }[];
 
     constructor() {}
 

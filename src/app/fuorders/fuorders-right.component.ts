@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FuordersService} from "./fuorders.service";
-import {FuordersPage,Fuorders} from "./fuorders";
+import {Fuorders} from "./fuorders";
 
 
 declare var $ : any;
@@ -14,8 +14,6 @@ export class FuordersRightComponent implements OnInit {
   searchPlatId : string = '';
 
   curPage : number = 1;
-
-  fuordersPage : FuordersPage;
 
   curFuorders : Fuorders;
   editorTitle : string = '';
@@ -47,18 +45,9 @@ export class FuordersRightComponent implements OnInit {
 
   allSel(){
 
-     $("[name = subBox1]:checkbox").attr("checked", true);
+     $("[name = subBox]:checkbox").attr("checked", true);
 
-    // var clicks = $(this).data('clicks');
-    //
-    // if (clicks) {
-    //   //Uncheck all checkboxes
-    //   $(this).parents('tbody').find("tr td input").iCheck("uncheck");
-    // } else {
-    //   //Check all checkboxes
-    //   $(this).parents('tbody').find("tr td input").iCheck("check");
-    // }
-    // $(this).data("clicks", clicks);
+
   }
 
   sel(){
@@ -69,7 +58,7 @@ export class FuordersRightComponent implements OnInit {
       $('#show').append($(this).val());
     });
     $('#add').modal('hide');
-    // $("[name = subBox]:checkbox").attr("checked", true);
+
   }
 
   search() {

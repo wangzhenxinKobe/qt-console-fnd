@@ -80,16 +80,15 @@
             </div>
             <div class="col-md-9">
               <div class="r_toolPad">
-                <div class="input-group" data-toggle="modal" data-target="#add">
-                  <input type="text" id="show" class="form-control" placeholder="选择用户" value="" readonly >
+                <div class="input-group" (click)="addgroup()">
+                  <input type="text" id="show" class="form-control" placeholder="选择用户" value="{{selectedAccounts()}}" readonly >
                   <a href="javascript:;"  class="input-group-addon"><i class="fa fa-plus"></i></a>
-
                 </div>
               </div>
             </div>
             <div class="col-md-3">
               <div class="r_toolPad">
-                <button type="button" class="btn btn-primary btn-block" >下订单</button>
+                <button type="button" class="btn btn-primary btn-block"  (click)="onAddFuorders()">下订单</button>
               </div>
             </div>
           </div>
@@ -156,135 +155,38 @@
             <h4 class="modal-title" id="myModalLabel">选择用户</h4>
           </div>
           <div class="modal-body">
-            <div class="table-responsive ">
-              <table class="table table-bordered">
-                <thead>
-                <tr>
-                  <th>组名</th>
-                  <th>交易账户</th>
-                  <th>系数</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                  <td rowspan="4">
-                    <label class="checkbox-inline">
-                      <input type="checkbox" class="checkboxAll" (click)="allSel()"> 分组一
+            <dl class="r_userList">
+              <dt><div class="checkbox"><b>分组</b></div></dt>
+              <dd class="clearfix r_userListRow" >
+                <div class="r_userListSpan"><div class="checkbox"><b>用户名</b></div></div>
+                <div class="r_userListSpan"><div class="checkbox"><b>系数</b></div></div>
+              </dd>
+
+            </dl>
+
+            <dl class="r_userList" *ngFor="let item of fuorderAccountList">
+              <dt>
+              <div class="checkbox">
+              <label>
+                <input type="checkbox" id="checkAll" (click)="allSel(item)" name="subBoxAll" [checked]="item.active"/>{{item.groupName}}
+              </label>
+              </div>
+              </dt>
+              <dd class="clearfix r_userListRow" *ngFor="let rga of item.rgAccountDTOlist">
+                <div class="r_userListSpan">
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox" name="subBox" [checked]="rga.active" (click)="lonesel(rga)"/>{{rga.accountId}}
                     </label>
-                  </td>
-                  <td>
-                    <div class="checkbox">
-                      <label>
-                        <input type="checkbox" name="subBox1" value="214124"> 账户001
-                      </label>
-                    </div>
-                  </td>
-                  <td>
-                    321
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="checkbox">
-                      <label>
-                        <input type="checkbox" name="subBox"> 账户001
-                      </label>
-                    </div>
-                  </td>
-                  <td>
-                    321
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="checkbox">
-                      <label>
-                        <input type="checkbox" name="subBox"> 账户001
-                      </label>
-                    </div>
-                  </td>
-                  <td>
-                    321
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="checkbox">
-                      <label>
-                        <input type="checkbox" name="subBox"> 账户001
-                      </label>
-                    </div>
-                  </td>
-                  <td>
-                    321
-                  </td>
-                </tr>
-
-
-                </tbody>
-                <tbody style="border-top: none;">
-                <tr>
-                  <td rowspan="4">
-                    <label class="checkbox-inline">
-                      <input type="checkbox" class="checkboxAll" (click)="allSel()"> 分组二
-                    </label>
-                  </td>
-                  <td>
-                    <div class="checkbox">
-                      <label>
-                        <input type="checkbox" name="subBox"> 账户001
-                      </label>
-                    </div>
-                  </td>
-                  <td>
-                    321
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="checkbox">
-                      <label>
-                          <input type="checkbox" name="subBox" > 账户001
-                      </label>
-                    </div>
-                  </td>
-                  <td>
-                    321
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="checkbox">
-                      <label>
-                        <input type="checkbox" name="subBox"> 账户001
-                      </label>
-                    </div>
-                  </td>
-                  <td>
-                    321
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="checkbox">
-                      <label>
-                        <input type="checkbox" name="subBox"> 账户001
-                      </label>
-                    </div>
-                  </td>
-                  <td>
-                    321
-                  </td>
-                </tr>
-                </tbody>
-              </table>
-
-
-            </div>
+                  </div>
+                </div>
+                <div class="r_userListSpan"><div class="checkbox">{{rga.ratio}}</div></div>
+              </dd>
+            </dl>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-primary" (click)="sel()">保存</button>
-            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal" (click)="qingkong()">取消</button>
 
           </div>
         </div>

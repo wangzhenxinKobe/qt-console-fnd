@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Headers, Http, Response } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import {ParamConfig} from "../common/param.config";
-import {Fuorders,FuordersPage,FuordersFunc} from "./fuorders";
+import {Fuorders, FuordersFunc, FuordersAccount} from "./fuorders";
 import {generateRequestId} from "../app.module";
 
 @Injectable()
@@ -28,13 +28,13 @@ let request = JSON.stringify({
       .catch(this.handleError);
   }
   private FuordersList(res : Response){
+
     let body = res.json();
+
     if(body.errCode == '000000'){
-      var pagedata = new FuordersPage();
-      pagedata.fuorders = body.fieldList as Fuorders[];
-      pagedata.totalPages = body.totalPages;
-      pagedata.totalRows = body.totalRows;
-      return [true, pagedata];
+
+      return [true, body.fieldList as FuordersAccount[]];
+
     }else{
       console.error("请求失败：" + body.errMsg);
       return [false, body.errMsg];
@@ -98,13 +98,20 @@ let request = JSON.stringify({
   //
   // }
 
-//   //增加
-  addFuorders(fuorders : Fuorders) : Promise<[boolean ,string]> {
+//手动下单
+  addFuorders(fuorders : Fuorders) : Promise<[boolean ,any]> {
 
+    let acctList = [];
+    for(let acct of fuorders.rgAccountDTOlist) {
 
+      acctList.push({
+        accountId : acct.accountId
+      });
+
+    }
     let request = JSON.stringify({
 
-
+      rgAccountDTOlist : JSON.stringify(acctList),
       symbol : fuorders.symbol,
       exchage : fuorders.exchange,
       direction : fuorders.direction,
@@ -126,7 +133,7 @@ let request = JSON.stringify({
 
   }
   //添加返回结果
-  private addFuordersData	(res : Response) : Promise<[boolean ,string]> {
+  private addFuordersData	(res : Response) : Promise<[boolean ,any]> {
 
     console.info(res);
 
@@ -136,7 +143,7 @@ let request = JSON.stringify({
 
       console.info("请求成功");
 
-      return Promise[true, ""];
+      return Promise[true, "success"];
 
     } else {
 
