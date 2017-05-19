@@ -15,7 +15,7 @@
             <div class="col-md-3">
               <div class="r_toolPad">
 
-                <input type="text" class="form-control" placeholder="合约代码" [(ngModel)]="curFuorders.symbol"/>
+                <input type="text" class="form-control" readonly placeholder="合约代码" [(ngModel)]="curFuorders.symbol" (click)="addsymbol()"/>
 
               </div>
             </div>
@@ -186,9 +186,86 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-primary" (click)="sel()">保存</button>
-            <button type="button" class="btn btn-default" data-dismiss="modal" (click)="qingkong()">取消</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
 
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 合约代码 -->
+  <div id="search" class="modal bs-example-modal-lg fade" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" >合约代码</h4>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-5">
+              <div class="r_toolPad">
+                <input type="text" class="form-control" placeholder="按合约代码搜索" (keyup.enter)="searchi()">
+              </div>
+            </div>
+            <div class="col-md-5">
+              <div class="r_toolPad">
+                <input type="text" class="form-control"  placeholder="按合约名称搜索" >
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="r_toolPad">
+                <button type="button" class="btn btn-primary btn-block">搜索</button>
+              </div>
+            </div>
+          </div><br />
+
+
+
+          <div class="table-responsive">
+            <table class="table table-bordered table-striped table-hover">
+              <thead>
+              <tr>
+                <th>
+                  合约代码
+                </th>
+                <th>
+                  合约名称
+                </th>
+                <th>
+                  期货品种
+                </th>
+                <th>
+                  交易所代码
+                </th>
+                <th>
+                  合约乘数
+                </th>
+                <th>
+                  最小价格变动单位
+                </th>
+
+              </tr>
+              </thead>
+              <tbody class="r_tableChoose">
+
+              <tr *ngFor="let item of instrument">
+                <td >{{item.instrumentId}}</td>
+                <td>{{item.instrumentName}}</td>
+                <td>{{item.protected}}</td>
+                <td>{{item.exchangeId}}</td>
+                <td>{{item.volumeMultiple}}</td>
+                <td>{{item.priceTick}}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary">保存</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+
         </div>
       </div>
     </div>

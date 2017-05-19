@@ -16,6 +16,8 @@ import {StrategyComponent} from "./strategy/strategy.component";
 import {StrategyEditorComponent} from "./strategy/strategy-editor.component";
 import {PaginationComponent} from "./elements/pagination.component";
 import { FuturesComponent } from './futures/futures.component';
+import { FuproComponent } from './fupro/fupro.component';
+import {FuproService} from "./fupro/fupro.service";
 import {FuordersService} from "./fuorders/fuorders.service";
 import { FuordersComponent } from './fuorders/fuorders.component';
 import { FuordersRightComponent } from './fuorders/fuorders-right.component';
@@ -93,7 +95,8 @@ import {RoleSelComponent} from "./elements/role-sel.component";
     AccountSelComponent,
     FuordersLeftComponent,
     FuordersRightComponent,
-    RoleSelComponent
+    RoleSelComponent,
+    FuproComponent
 
   ],
   exports: [
@@ -110,7 +113,7 @@ import {RoleSelComponent} from "./elements/role-sel.component";
 
   ],
   providers: [ StrategyService, MarketDataService, TradeUnitService, AccountService, BinfoService, FuturesService, MdServiceService,
-    SbasketService, SindexService, SysfuncService, TdServiceService, TplatformService, AgroupService, OproleService, OperMngService, FuordersService
+    SbasketService, SindexService, SysfuncService, TdServiceService, TplatformService, AgroupService, OproleService, OperMngService, FuordersService,FuproService
   ]
 
 })

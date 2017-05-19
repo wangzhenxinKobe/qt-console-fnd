@@ -101,6 +101,16 @@ export class CustSelectComponent implements OnInit {
         }
         break;
 
+      case 'jiaoyisuo':
+        this.dataList = [
+          {value:'SH', text:'上海证券交易所'},
+          {value:'SZ', text:'深圳证券交易所'}
+        ];
+        if(this.viewType == 'select_all') {
+          this.dataList.unshift( {value:'', text:'全部'} );
+        }
+        break;
+
       case 'sfunc':
         this.dataList = [
           {value:'0', text:'一级菜单'},
@@ -157,37 +167,81 @@ export class CustSelectComponent implements OnInit {
         }
         break;
 
-      case 'mdService':
-        this.dataList = [
-          {value:'1', text:'期货行情'},
-          {value:'2', text:'期货交易'},
-          {value:'3', text:'股票行情'},
-          {value:'4', text:'股票交易'}
-        ];
-        if(this.viewType == 'select_all') {
-          this.dataList.unshift( {value:'', text:'全部'} );
-        }
-        break;
+
 
       case 'tdService':
         this.dataList = [
-          {value:'1', text:'期货行情'},
-          {value:'2', text:'期货交易'},
-          {value:'3', text:'股票行情'},
-          {value:'4', text:'股票交易'}
+          {value:'0', text:'期货行情'},
+          {value:'1', text:'股票行情'},
         ];
         if(this.viewType == 'select_all') {
           this.dataList.unshift( {value:'', text:'全部'} );
         }
         break;
 
-      case 'mdlei':
+      case 'tdSer1':
         this.dataList = [
-          {value:'0', text:'类1'},
-          {value:'1', text:'类2'}
+          {value:'0', text:'CTP'},
+          {value:'1', text:'飞马'},
+          {value:'2', text:'金飞鼠'},
+          {value:'3', text:'UFT'}
         ];
         if(this.viewType == 'select_all') {
-          this.dataList.unshift( {value:'', text:'全部类型'} );
+          this.dataList.unshift( {value:'', text:'全部'} );
+        }
+        break;
+
+
+      case 'tdSer2':
+        this.dataList = [
+          {value:'0', text:'期货行情'},
+          {value:'1', text:'股票行情'},
+        ];
+        if(this.viewType == 'select_all') {
+          this.dataList.unshift( {value:'', text:'全部'} );
+        }
+        break;
+
+      case 'mdService':
+        this.dataList = [
+          {value:'0', text:'万得'},
+          {value:'1', text:'宏汇'},
+          {value:'2', text:'金证'},
+          {value:'3', text:'LTS L1'},
+          {value:'4', text:'LTS L2'},
+          {value:'5', text:'原生L2'},
+          {value:'6', text:'CTP'},
+          {value:'7', text:'钱龙'}
+        ];
+        if(this.viewType == 'select_all') {
+          this.dataList.unshift( {value:'', text:'全部'} );
+        }
+        break;
+
+      case 'mdlei1':
+        this.dataList = [
+          {value:'0', text:'CTP'},
+          {value:'1', text:'飞马'},
+          {value:'2', text:'金飞鼠'},
+          {value:'3', text:'UFT'}
+        ];
+        if(this.viewType == 'select_all') {
+          this.dataList.unshift( {value:'', text:'全部'} );
+        }
+        break;
+      case 'mdlei2':
+        this.dataList = [
+          {value:'0', text:'恒生'},
+          {value:'1', text:'金证'},
+          {value:'2', text:'顶点'},
+          {value:'3', text:'金仕达'},
+          {value:'4', text:'LTS'},
+          {value:'5', text:'CTP'},
+          {value:'6', text:'深证通'},
+          {value:'7', text:'讯投'}
+        ];
+        if(this.viewType == 'select_all') {
+          this.dataList.unshift( {value:'', text:'全部'} );
         }
         break;
 

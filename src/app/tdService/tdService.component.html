@@ -43,7 +43,7 @@
                 <th>端口</th>
                 <th>服务类型</th>
                 <th>适配器类型</th>
-                <th>用户代码</th>
+
                 <th width="120">操作</th>
               </tr>
               </thead>
@@ -53,8 +53,11 @@
                 <td>{{item.ip}}</td>
                 <td>{{item.port}}</td>
                 <td><app-cust-select dataType="tdService" viewType="readonly" [value]="item.serviceType" ></app-cust-select></td>
-                <td>{{item.adapterType}}</td>
-                <td>{{item.userId}}</td>
+                <td>
+                  <app-cust-select *ngIf="item.serviceType == '0'" dataType="mdlei1" [value]="item.adapterType" viewType="readonly"></app-cust-select>
+                  <app-cust-select *ngIf="item.serviceType == '1'" dataType="mdlei2" viewType="readonly" [value]="item.adapterType"></app-cust-select>
+                </td>
+
                 <td style="text-align: center;">
                   <div class="tabledit-toolbar btn-toolbar" style=" display: inline-block;">
                     <div class="btn-group btn-group-sm" >
@@ -87,10 +90,7 @@
             <label class="col-sm-3 control-label">交易平台:</label>
             <div class="col-sm-9">
               <app-platform-sel [(value)]="curTdService.platId" ></app-platform-sel>
-              <!--<select class="form-control" [(ngModel)]="curTdService.platId">&lt;!&ndash;禁用添加disabled&ndash;&gt;-->
-                <!--<option value="101">1</option>-->
-                <!--<option value="102">2</option>-->
-              <!--</select>-->
+
             </div>
           </div>
           <div class="form-group">
@@ -102,12 +102,7 @@
         <div class="form-group">
           <label class="col-sm-3 control-label">服务类型:</label>
           <div class="col-sm-9">
-            <select class="form-control" [(ngModel)]="curTdService.serviceType">
-              <option value="1">期货行情</option>
-              <option value="2">期货交易</option>
-              <option value="3">股票行情</option>
-              <option value="4">股票交易</option>
-            </select>
+            <app-cust-select dataType="tdService" [(value)]="curTdService.serviceType" ></app-cust-select>
           </div>
         </div>
           <div class="form-group">
@@ -119,25 +114,14 @@
           <div class="form-group">
             <label class="col-sm-3 control-label">适配器类型:</label>
             <div class="col-sm-9">
-              <select class="form-control" [(ngModel)]="curTdService.adapterType">
-                <option value="1">1</option>
-                <option value="2">2</option>
-              </select>
+              <div *ngIf="curTdService.serviceType == '0'">
+                <app-cust-select dataType="mdlei1" [(value)]="curTdService.adapterType"></app-cust-select>
+              </div>
+              <div *ngIf="curTdService.serviceType == '1'">
+                <app-cust-select dataType="mdlei2" [(value)]="curTdService.adapterType"></app-cust-select>
+              </div>
             </div>
           </div>
-          <div class="form-group">
-            <label class="col-sm-3 control-label">用户代码:</label>
-            <div class="col-sm-9">
-              <app-tdservice-sel [(value)]="curTdService.accountId" ></app-tdservice-sel>
-              <!--<select class="form-control" [(ngModel)]="curTdService.userId" >-->
-                <!--<option value="1">用户代码1</option>-->
-                <!--<option value="2">用户代码2</option>-->
-              <!--</select>-->
-            </div>
-          </div>
-
-
-
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" (click)="save()">保存</button>

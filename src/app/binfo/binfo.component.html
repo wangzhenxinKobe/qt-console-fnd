@@ -56,7 +56,7 @@
               <tr *ngFor="let item of binfoPage?.binfo">
                 <td>{{item.stockCode}}</td>
                 <td>{{item.stockName}}</td>
-                <td>{{item.exchangeId}}</td>
+                <td><app-cust-select dataType="jiaoyisuo" viewType="readonly" [value]="item.exchangeId" ></app-cust-select></td>
                 <td>{{item.flowVolume}}</td>
                 <td>{{item.allVolume}}</td>
                 <td><app-cust-select dataType="bankuai" viewType="readonly" [value]="item.stockBoard" ></app-cust-select></td>
@@ -107,9 +107,9 @@
             <label class="col-sm-3 control-label">交易所代码:</label>
             <div class="col-sm-9">
               <select class="form-control" [(ngModel)]="curBinfo.exchangeId">
-                <option value="">32131</option>
-                <option value="">32132</option>
-                <option value="">32133</option>
+                <option value="SH">上海证券交易所</option>
+                <option value="SZ">深圳证券交易所</option>
+
 
               </select>
             </div>

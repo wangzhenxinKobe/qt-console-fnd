@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { Headers, Http, Response } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import {ParamConfig} from "../common/param.config";
-import {Fuorders, FuordersFunc, FuordersAccount} from "./fuorders";
+import {Fuorders, Instrument, FuordersAccount} from "./fuorders";
 import {generateRequestId} from "../app.module";
+import Any = jasmine.Any;
 
 @Injectable()
 export class FuordersService {
@@ -41,77 +42,21 @@ let request = JSON.stringify({
     }
   }
 
-
-
-  //下单
-  // getFuorders(accountId,symbol,exchage,direction,offset,hedge,entrustprice,entrustVolume,orderTradeTppe,pageSize, currentPage) : Promise<FuordersPage> {
-  //
-  //   let request = JSON.stringify({
-  //
-  //     accountId : accountId,
-  //     symbol : symbol,
-  //     exchage : exchage,
-  //     direction : direction,
-  //     offset : offset,
-  //     hedge : hedge,
-  //     entrustprice : entrustprice,
-  //     entrustVolume : entrustVolume,
-  //     orderTradeTppe : orderTradeTppe,
-  //     pageSize : pageSize,
-  //     currentPage : currentPage,
-  //     requestId : this.requestId,
-  //     serviceCode : 'FS056'
-  //
-  //   });
-  //
-  //   return this.http
-  //     .post(this.hostUrl, request, {headers: this.headers})
-  //     .toPromise()
-  //     .then(this.extractFuordersData)
-  //     .catch(this.handleError);
-  //
-  // }
-  // //查询返回参数
-  // private extractFuordersData(res : Response) : Promise<FuordersPage> {
-  //
-  //   console.info(res);
-  //
-  //   let body = res.json();
-  //
-  //   if(body.errCode == '000000') {
-  //
-  //     var pagedata = new FuordersPage();
-  //
-  //     pagedata.fuorders = body.fieldList as Fuorders[];
-  //     pagedata.totalPages = body.totalPages;
-  //     pagedata.totalRows = body.totalRows;
-  //
-  //     return pagedata;
-  //
-  //   } else {
-  //
-  //     console.error("请求失败：" + body.errMsg);
-  //     return null;
-  //
-  //   }
-  //
-  //
-  // }
-
 //手动下单
   addFuorders(fuorders : Fuorders) : Promise<[boolean ,any]> {
 
-    let acctList = [];
-    for(let acct of fuorders.rgAccountDTOlist) {
-
-      acctList.push({
-        accountId : acct.accountId
-      });
-
-    }
+    // let acctList = [];
+    // for(let acct of fuorders.rgAccountDTOlist) {
+    //
+    //   acctList.push({
+    //     accountId : acct.accountId
+    //   });
+    //
+    // }
     let request = JSON.stringify({
 
-      rgAccountDTOlist : JSON.stringify(acctList),
+      // rgAccountDTOlist : JSON.stringify(acctList),
+      //accountId : fuorders.accountId,
       symbol : fuorders.symbol,
       exchage : fuorders.exchange,
       direction : fuorders.direction,
@@ -152,6 +97,46 @@ let request = JSON.stringify({
 
     }
   }
+
+  //查询合约代码
+  getinsId(instrumentName,instrumentId) : Promise<[boolean ,Any]> {
+
+    let request = JSON.stringify({
+      instrumentName : instrumentName,
+      instrumentId : instrumentId,
+      requestId : this.request_id,
+      serviceCode : 'FS127'
+    });
+    return this.http
+      .post(this.hostUrl, request, {headers: this.headers})
+      .toPromise()
+      .then(this.extractFuproData)
+      .catch(this.handleError);
+  }
+
+  //查询返回参数
+  private extractFuproData(res : Response) {
+
+    console.info(res);
+
+    let body = res.json();
+
+    if(body.errCode == '000000') {
+
+      return[true,body.fieldList] ;
+
+    } else {
+
+      console.error("请求失败：" + body.errMsg);
+      return [false, body.errMsg];;
+
+    }
+
+
+  }
+
+
+
 //
 //
 //   //修改

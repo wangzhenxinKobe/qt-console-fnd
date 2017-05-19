@@ -51,7 +51,10 @@
                 <td>{{item.ip}}</td>
                 <td>{{item.port}}</td>
                 <td><app-cust-select dataType="mdService" viewType="readonly" [value]="item.serviceType" ></app-cust-select></td>
-                <td><app-cust-select dataType="mdlei" viewType="readonly" [value]="item.adapterType" ></app-cust-select></td>
+                <td>
+                    <app-cust-select *ngIf="item.serviceType == '0'" dataType="tdSer1" [value]="item.adapterType" viewType="readonly"></app-cust-select>
+                    <app-cust-select *ngIf="item.serviceType == '1'" dataType="tdSer2" viewType="readonly" [value]="item.adapterType"></app-cust-select>
+                </td>
                 <td style="text-align: center;">
                   <div class="tabledit-toolbar btn-toolbar" style=" display: inline-block;">
                     <div class="btn-group btn-group-sm" >
@@ -106,26 +109,20 @@
           <label class="col-sm-3 control-label">服务类型:</label>
           <div class="col-sm-9">
 
-            <select class="form-control" [(ngModel)]="curMdService.serviceType">
-              <option value="1">期货行情</option>
-              <option value="2">期货交易</option>
-              <option value="3">股票行情</option>
-              <option value="4">股票交易</option>
-            </select>
+            <app-cust-select dataType="mdService" [(value)]="curMdService.serviceType" ></app-cust-select>
           </div>
         </div>
           <div class="form-group">
             <label class="col-sm-3 control-label">适配器类型:</label>
             <div class="col-sm-9">
-              <select class="form-control" [(ngModel)]="curMdService.adapterType">
-                <option value="1">octp</option>
-                <option value="2">2</option>
-              </select>
+              <div *ngIf="curMdService.serviceType == '0'">
+                <app-cust-select dataType="mdlei1" [(value)]="curMdService.adapterType"></app-cust-select>
+              </div>
+              <div *ngIf="curMdService.serviceType == '1'">
+                <app-cust-select dataType="mdlei2" [(value)]="curMdService.adapterType"></app-cust-select>
+              </div>
             </div>
           </div>
-
-
-
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" (click)="save()" >保存</button>

@@ -109,7 +109,7 @@ export class BinfoComponent extends BaseComponent implements OnInit {
     this.curBinfo = { //初始化期货数据
       stockCode :"",
       stockName :"",
-      exchangeId :"",
+      exchangeId :"SH",
       flowVolume : 0,
       allVolume : 0,
       stockBoard : 0,
