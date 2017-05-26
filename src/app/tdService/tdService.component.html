@@ -54,8 +54,8 @@
                 <td>{{item.port}}</td>
                 <td><app-cust-select dataType="tdService" viewType="readonly" [value]="item.serviceType" ></app-cust-select></td>
                 <td>
-                  <app-cust-select *ngIf="item.serviceType == '0'" dataType="mdlei1" [value]="item.adapterType" viewType="readonly"></app-cust-select>
-                  <app-cust-select *ngIf="item.serviceType == '1'" dataType="mdlei2" viewType="readonly" [value]="item.adapterType"></app-cust-select>
+                  <app-cust-select *ngIf="item.serviceType == 0" dataType="mdlei1" [value]="item.adapterType" viewType="readonly"></app-cust-select>
+                  <app-cust-select *ngIf="item.serviceType == 1" dataType="mdlei2" viewType="readonly" [value]="item.adapterType"></app-cust-select>
                 </td>
 
                 <td style="text-align: center;">
@@ -114,10 +114,10 @@
           <div class="form-group">
             <label class="col-sm-3 control-label">适配器类型:</label>
             <div class="col-sm-9">
-              <div *ngIf="curTdService.serviceType == '0'">
+              <div *ngIf="curTdService.serviceType == 0">
                 <app-cust-select dataType="mdlei1" [(value)]="curTdService.adapterType"></app-cust-select>
               </div>
-              <div *ngIf="curTdService.serviceType == '1'">
+              <div *ngIf="curTdService.serviceType == 1">
                 <app-cust-select dataType="mdlei2" [(value)]="curTdService.adapterType"></app-cust-select>
               </div>
             </div>

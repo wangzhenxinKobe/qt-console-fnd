@@ -148,7 +148,7 @@ export class FuordersComponent implements OnInit {
           }
       ).catch(error => alert(error))
       }
-    },5000);
+    },500);
   $("#selectins").modal("hide");
   }
   //选中的Tr
