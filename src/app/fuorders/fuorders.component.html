@@ -8,92 +8,137 @@
     <div class="r_box">
       <div class="r_boxHead">
         <h2>期货交易</h2>
+        <div class="r_boxToolFRl">
+          <a data-toggle="modal" data-target="#selectins"
+              class="btn btn-primary" (click)="searchi()"><i class="fa fa-plus"></i> 选择合约</a>
+        </div>
+
       </div>
       <div class="r_boxContent">
-        <div class="r_boxTool clearfix">
-          <div class="row">
-            <div class="col-md-3">
-              <div class="r_toolPad">
+        <div class="r_boxPad">
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped table-hover">
+            <thead>
+            <tr>
+              <th>
+                合约代码
+              </th>
+              <th>
+                合约名称
+              </th>
+              <th>
+                最新价
+              </th>
+              <th>
+                买一价
+              </th>
+              <th>
+                买一量
+              </th>
+              <th>
+                卖一价
+              </th>
+              <th>
+                卖一量
+              </th>
+              <th>
+                涨停价
+              </th>
+              <th>
+                跌停价
+              </th>
+              <th>
+                最低价
+              </th>
+              <th>
+                最高价
+              </th>
+              <th>
+                昨结算价
+              </th>
+              <th>
+                行情更新时间
+              </th>
 
-                <input type="text" class="form-control" readonly placeholder="合约代码" [(ngModel)]="curFuorders.symbol" (click)="addsymbol()"/>
+            </tr>
+            </thead>
+            <tbody class="r_tableChoose">
 
-              </div>
+            <tr *ngFor="let item of curInstrument"  (click)="curTr(item)">
+              <td >{{item.instrumentId}}</td>
+              <td>{{item.instrumentName}}</td>
+              <td>{{item.dLastPrice}}</td>
+              <td>{{item.dBidPrice}}</td>
+              <td>{{item.nBidVolume}}</td>
+              <td>{{item.dAskPrice}}</td>
+              <td>{{item.nAskVolume}}</td>
+              <td>{{item.dUpperLimitPrice}}</td>
+              <td>{{item.dLowerLimitPrice}}</td>
+              <td>{{item.dLowestPrice}}</td>
+              <td>{{item.dHighestPrice}}</td>
+              <td>{{item.dPreSettlementPrice}}</td>
+              <td>{{item.nUpdateTime}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        </div>
+        <div class="r_boxTool clearfix form-inline">
+          <div class="r_toolPad">
+            <div class="r_searchBox">
+            <input  style="width: 140px" class="form-control " placeholder="请输入合约代码" type="text"  [(ngModel)]="instrumentId" (keyup)="searchi()" >
+             <div class="r_searchBoxList" id="selectul">
+              <ul class="aaa" >
+                <li *ngFor="let item of allInstrument" class="bbb" (click)="selectli(item)">{{item.instrumentId}}</li>
+              </ul>
+             </div>
             </div>
-            <div class="col-md-3">
-              <div class="r_toolPad">
-                <select class="form-control" [(ngModel)]="curFuorders.exchange">
+                <select class="form-control" [(ngModel)]="curFuorders.exchange" style="width: 140px">
                   <option value="SHFE">上期所</option>
                   <option value="CZCE">郑商所</option>
                   <option value="DCE">大商所</option>
                   <option value="CFFEX">中金所</option>
                 </select>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="r_toolPad">
-                <select class="form-control" [(ngModel)]="curFuorders.offset">
+
+                <select class="form-control" [(ngModel)]="curFuorders.offset" style="width: 140px">
                   <option value="0">开仓</option>
                   <option value="1">平仓</option>
                   <option value="2">平今</option>
                   <option value="3">平昨</option>
                 </select>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="r_toolPad">
-                <select class="form-control" [(ngModel)]="curFuorders.direction">
+
+                <select class="form-control" [(ngModel)]="curFuorders.direction" style="width: 140px">
                   <option value="0">买</option>
                   <option value="1">卖</option>
                 </select>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="r_toolPad">
-                <select class="form-control" [(ngModel)]="curFuorders.orderTradeTppe">
+
+                <select class="form-control" [(ngModel)]="curFuorders.orderTradeTppe" style="width: 140px">
                   <option value="0">限价指令</option>
                   <option value="1">FOK指令</option>
                   <option value="2">FAK指令</option>
                 </select>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="r_toolPad">
-                <input type="text" class="form-control" placeholder="数量" [(ngModel)]="curFuorders.entrustVolume"/>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="r_toolPad">
-                <select class="form-control" [(ngModel)]="curFuorders.hedge">
+
+                <input type="text" class="form-control" placeholder="数量" [(ngModel)]="curFuorders.entrustVolume" style="width: 140px"/>
+
+                <select class="form-control" [(ngModel)]="curFuorders.hedge" style="width: 140px">
                   <option value="0">投机</option>
                   <option value="1">套利</option>
                   <option value="2">套保</option>
                 </select>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="r_toolPad">
+
                 <div class="input-group">
-                  <input type="text" class="form-control" placeholder="价格" [(ngModel)]="curFuorders.entrustprice">
+                  <input type="text" class="form-control" placeholder="价格" [(ngModel)]="curFuorders.entrustprice" style="width: 140px">
                   <span class="input-group-addon">元</span>
                 </div>
-              </div>
-            </div>
-            <div class="col-md-9">
-              <div class="r_toolPad">
+
                 <div class="input-group" (click)="addgroup()">
-                  <input type="text" id="show" class="form-control" placeholder="选择用户" value="{{selectedAccounts()}}" readonly >
+                  <input type="text" id="show" class="form-control" placeholder="选择用户" value="{{selectedAccounts()}}" readonly  style="width: 140px">
                   <a href="javascript:;"  class="input-group-addon"><i class="fa fa-plus"></i></a>
                 </div>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="r_toolPad">
-                <button type="button" class="btn btn-primary btn-block"  (click)="onAddFuorders()">下订单</button>
-              </div>
-            </div>
-          </div>
 
-        </div>
+                <button type="button" class="btn btn-primary"  (click)="onAddFuorders()" style="width: 140px">下单</button>
+
+
         <div>
 
 
@@ -194,80 +239,81 @@
     </div>
   </div>
 
-  <!-- 合约代码 -->
-  <div id="search" class="modal bs-example-modal-lg fade" role="dialog">
-    <div class="modal-dialog modal-lg" role="document">
+<!--选择合约-->
+  <div id="selectins" class="modal bs-example-modal-lg fade" role="dialog">
+    <div class="modal-dialog  modal-lg" role="document">
       <div class="modal-content">
+
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" >合约代码</h4>
+          <h4 class="modal-title" id="">选择合约</h4>
         </div>
         <div class="modal-body">
-          <div class="row">
-            <div class="col-md-5">
-              <div class="r_toolPad">
-                <input type="text" class="form-control" placeholder="按合约代码搜索" (keyup.enter)="searchi()">
-              </div>
-            </div>
-            <div class="col-md-5">
-              <div class="r_toolPad">
-                <input type="text" class="form-control"  placeholder="按合约名称搜索" >
-              </div>
-            </div>
-            <div class="col-md-2">
-              <div class="r_toolPad">
-                <button type="button" class="btn btn-primary btn-block">搜索</button>
-              </div>
-            </div>
-          </div><br />
+          <div class="table-responsive ">
 
-
-
-          <div class="table-responsive">
-            <table class="table table-bordered table-striped table-hover">
-              <thead>
-              <tr>
-                <th>
-                  合约代码
-                </th>
-                <th>
-                  合约名称
-                </th>
-                <th>
-                  期货品种
-                </th>
-                <th>
-                  交易所代码
-                </th>
-                <th>
-                  合约乘数
-                </th>
-                <th>
-                  最小价格变动单位
-                </th>
-
-              </tr>
-              </thead>
-              <tbody class="r_tableChoose">
-
-              <tr *ngFor="let item of instrument">
-                <td >{{item.instrumentId}}</td>
-                <td>{{item.instrumentName}}</td>
-                <td>{{item.protected}}</td>
-                <td>{{item.exchangeId}}</td>
-                <td>{{item.volumeMultiple}}</td>
-                <td>{{item.priceTick}}</td>
-              </tr>
-              </tbody>
-            </table>
           </div>
+          <div class="input-group">
+
+          </div>
+          <br />
+
+          <div class="selectRow clearfix">
+            <div class="selectLeft">
+              <b>全部合约：</b>
+              <div class="selectBar">
+                <div class="table-responsive">
+                  <table class="table  table-bordered table-hover">
+                    <thead>
+                    <tr>
+                      <th>合约代码</th>
+                      <th>合约名称</th>
+                    </tr>
+                    </thead>
+                    <tbody class="r_tableChoose" id="left">
+                    <tr *ngFor="let fuo of allInstrument" [class.active]="fuo.active" (click)="onFuoItemClick(fuo)">
+                      <td>{{fuo.instrumentId}}</td>
+                      <td>{{fuo.instrumentName}}</td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="selectTool">
+              <button class="btn btn-default btn-block" (click)="addFuo()">添加 ></button>
+
+              <button class="btn btn-default btn-block" (click)="deleteFuo()">删除 <</button>
+            </div>
+            <div class="selectRight">
+              <b>已选择的合约：</b>
+              <div class="selectBar">
+                <div class="table-responsive">
+                  <table class="table  table-bordered table-hover">
+                    <thead>
+                    <tr>
+                      <th>合约代码</th>
+                      <th>合约名称</th>
+                    </tr>
+                    </thead>
+                    <tbody class="r_tableChoose" id="right">
+                    <tr *ngFor="let curFu of curInstrument" [class.active]="curFu.active" (click)="onFuoItemClick(curFu)">
+                      <td>{{curFu.instrumentId}}</td>
+                      <td>{{curFu.instrumentName}}</td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary">保存</button>
+          <button type="button" class="btn btn-primary" (click)="save()">保存</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-
         </div>
       </div>
     </div>
   </div>
-
+    </div>
+  </div>

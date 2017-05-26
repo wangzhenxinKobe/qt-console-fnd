@@ -43,21 +43,16 @@ let request = JSON.stringify({
   }
 
 //手动下单
-  addFuorders(fuorders : Fuorders) : Promise<[boolean ,any]> {
-
-    // let acctList = [];
-    // for(let acct of fuorders.rgAccountDTOlist) {
-    //
-    //   acctList.push({
-    //     accountId : acct.accountId
-    //   });
-    //
-    // }
+  addFuorders(fuorders : Fuorders,symbol : String) : Promise<[boolean ,any]> {
+    let fuoList = [];
+    for(let fuo of fuorders.rgAccountDTOlist) {
+      fuoList.push({
+        accountId : fuo.accountId
+      });
+    };
     let request = JSON.stringify({
-
-      // rgAccountDTOlist : JSON.stringify(acctList),
-      //accountId : fuorders.accountId,
-      symbol : fuorders.symbol,
+      rgAccountDTOlist : JSON.stringify(fuoList),
+      symbol : symbol,
       exchage : fuorders.exchange,
       direction : fuorders.direction,
       offset : fuorders.offset,
@@ -79,19 +74,11 @@ let request = JSON.stringify({
   }
   //添加返回结果
   private addFuordersData	(res : Response) : Promise<[boolean ,any]> {
-
-    console.info(res);
-
     let body = res.json();
 
     if (body.errCode == '000000') {
-
-      console.info("请求成功");
-
       return Promise[true, "success"];
-
     } else {
-
       console.error("请求失败：" + body.errMsg);
       return null;
 
@@ -99,7 +86,7 @@ let request = JSON.stringify({
   }
 
   //查询合约代码
-  getinsId(instrumentName,instrumentId) : Promise<[boolean ,Any]> {
+  getinsId(instrumentName,instrumentId) : Promise<Instrument> {
 
     let request = JSON.stringify({
       instrumentName : instrumentName,
@@ -123,7 +110,7 @@ let request = JSON.stringify({
 
     if(body.errCode == '000000') {
 
-      return[true,body.fieldList] ;
+      return[true,body.fieldList as Instrument] ;
 
     } else {
 
@@ -134,6 +121,83 @@ let request = JSON.stringify({
 
 
   }
+
+//查询行情信息
+  getMark(instrumentId) : Promise<Instrument> {
+
+    let request = JSON.stringify({
+      instrumentId : instrumentId,
+      requestId : this.request_id,
+      serviceCode : 'FS133'
+    });
+    return this.http
+      .post(this.hostUrl, request, {headers: this.headers})
+      .toPromise()
+      .then(this.extractMarkData)
+      .catch(this.handleError);
+  }
+
+  //查询返回参数
+  private extractMarkData(res : Response) {
+
+    console.info(res);
+
+    let body = res.json();
+console.info(body)
+    if(body.errCode == '000000') {
+
+      return[true,body.field ] ;
+
+    } else {
+
+      console.error("请求失败：" + body.errMsg);
+      return [false, body.errMsg];;
+
+    }
+
+
+  }
+
+
+//查询账户持仓信息
+  getPosi(accountId) : Promise<Instrument> {
+
+    let request = JSON.stringify({
+      instrumentId : accountId,
+      requestId : this.request_id,
+      serviceCode : 'FS120'
+    });
+    return this.http
+      .post(this.hostUrl, request, {headers: this.headers})
+      .toPromise()
+      .then(this.extractPosition)
+      .catch(this.handleError);
+  }
+
+  //查询返回参数
+  private extractPosition(res : Response) {
+
+    console.info(res);
+
+    let body = res.json();
+    console.info(body)
+    if(body.errCode == '000000') {
+
+      return[true,] ;
+
+    } else {
+
+      console.error("请求失败：" + body.errMsg);
+      return [false, body.errMsg];;
+
+    }
+
+
+  }
+
+
+
+
 
 
 

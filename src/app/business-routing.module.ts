@@ -39,7 +39,7 @@ const childrenRoutes: Routes = [
   { path: 'oprole-detail',  component: OproleDetailComponent },
   { path: 'fuorders',  component: FuordersComponent },
   { path: 'opermng',  component: OperMngComponent },
-  { path: 'fupro',  component: FuproComponent }
+  { path: 'fupro',  component: FuproComponent },
 ];
 
 const businessRoutes : Routes = [{

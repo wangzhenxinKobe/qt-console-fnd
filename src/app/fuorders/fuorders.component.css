@@ -1,0 +1,29 @@
+.r_searchBox{
+  position: relative;
+  z-index: 9;
+  display: inline-block;
+}
+.r_searchBoxList{
+  position: absolute;
+  background: #fff;
+  left: 0;
+  right: 0;
+  top: 33px;
+  border: 1px solid #d2d6de;
+  max-height: 180px;
+  overflow-y: auto;
+}
+.r_searchBoxList li{
+  list-style: none;
+  padding: 0 10px;
+  margin: 0;
+  cursor: pointer;
+  line-height: 34px;
+}
+.r_searchBoxList li:hover{
+  background: #eee;
+}
+.r_searchBoxList ul{
+  margin:0;
+  padding:0;
+}

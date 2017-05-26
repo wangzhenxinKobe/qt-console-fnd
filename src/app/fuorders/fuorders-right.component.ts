@@ -37,6 +37,7 @@ export class FuordersRightComponent implements OnInit {
       hedge :"1",
       entrustprice : "",
       entrustVolume : 0,
+      instrumentId : "",
       orderTradeTppe : "0"
     };
 
@@ -89,6 +90,7 @@ export class FuordersRightComponent implements OnInit {
       hedge :"",
       entrustprice : "",
       entrustVolume : 0,
+      instrumentId : "",
       orderTradeTppe : ""
     };
 
@@ -100,24 +102,24 @@ export class FuordersRightComponent implements OnInit {
 
 
 
-  save() {
-
-    if(this.isAddEditor) { //新增期货数据
-
-      this.curPage = 1;
-      this.fuordersService.addFuorders(this.curFuorders)
-        .then(result => result ? this.queryList() : alert("数据新增失败，请重试！"));
-
-    } else { //修改期货数据
-
-      // this.fuordersService.updateFuorders(this.curFuorders)
-      //   .then( result => result ? this.queryList() : alert("数据修改失败，请重试！") );
-
-    }
-
-    // $('#data_editor').modal('hide');
-
-  }
+  // save() {
+  //
+  //   if(this.isAddEditor) { //新增期货数据
+  //
+  //     this.curPage = 1;
+  //     this.fuordersService.addFuorders(this.curFuorders)
+  //       .then(result => result ? this.queryList() : alert("数据新增失败，请重试！"));
+  //
+  //   } else { //修改期货数据
+  //
+  //     // this.fuordersService.updateFuorders(this.curFuorders)
+  //     //   .then( result => result ? this.queryList() : alert("数据修改失败，请重试！") );
+  //
+  //   }
+  //
+  //   // $('#data_editor').modal('hide');
+  //
+  // }
 
 
 

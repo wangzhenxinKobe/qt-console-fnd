@@ -51,7 +51,7 @@ export class CustSelectComponent implements OnInit {
 
         break;
 
-      case 'tradehouse':
+      case 'tradehouse1':
         this.dataList = [
           {value:'SHFE', text:'上期所'},
           {value:'CZCE', text:'郑商所'},
@@ -63,6 +63,8 @@ export class CustSelectComponent implements OnInit {
         }
 
         break;
+
+
 
 
       case 'bankuai':

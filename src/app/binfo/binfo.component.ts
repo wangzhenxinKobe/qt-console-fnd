@@ -4,6 +4,7 @@ import {BinfoPage,Binfo} from "./binfo";
 import { FileUploader } from 'ng2-file-upload';
 import {BaseComponent} from "../common/base.component";
 
+
 declare var $ : any;
 
 @Component({
