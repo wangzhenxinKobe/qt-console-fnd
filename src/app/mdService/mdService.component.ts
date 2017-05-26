@@ -18,7 +18,7 @@ export class MdServiceComponent extends BaseComponent implements OnInit {
   mdServicePage : MdServicePage;
 
   curMdService : MdService;
-  editorTitle : string = '';
+  // editorTitle : string = '';
   isAddEditor : boolean;
 
   constructor(
@@ -54,7 +54,7 @@ export class MdServiceComponent extends BaseComponent implements OnInit {
 
   onAddMdService() {
     this.isAddEditor = true;
-    this.editorTitle = '新增柜台系统';
+    // this.editorTitle = '新增柜台系统';
     this.curMdService = { //初始化行情数据
       platId : 0,
       ip : "",
@@ -69,7 +69,7 @@ export class MdServiceComponent extends BaseComponent implements OnInit {
   onEditMdService(value : MdService) {
 
     this.isAddEditor = false;
-    this.editorTitle = '编辑柜台系统';
+    // this.editorTitle = '编辑柜台系统';
 
     this.curMdService = value;
 
