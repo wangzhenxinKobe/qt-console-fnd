@@ -10,7 +10,7 @@
   right: 0;
   top: 33px;
   border: 1px solid #d2d6de;
-  max-height: 180px;
+  max-height: 100px;
   overflow-y: auto;
 }
 .r_searchBoxList li{

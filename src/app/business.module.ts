@@ -19,6 +19,7 @@ import { FuturesComponent } from './futures/futures.component';
 import { FuproComponent } from './fupro/fupro.component';
 import {FuproService} from "./fupro/fupro.service";
 import {FuordersService} from "./fuorders/fuorders.service";
+
 import { FuordersComponent } from './fuorders/fuorders.component';
 import { FuordersRightComponent } from './fuorders/fuorders-right.component';
 import { FuordersLeftComponent } from './fuorders/fuorders-left.component';

@@ -8,6 +8,7 @@
     <div class="r_box">
       <div class="r_boxHead">
         <h2>期货交易</h2>
+
         <div class="r_boxToolFRl">
           <a data-toggle="modal" data-target="#selectins"
               class="btn btn-primary" (click)="searchi()"><i class="fa fa-plus"></i> 选择合约</a>
@@ -64,8 +65,8 @@
             </thead>
             <tbody class="r_tableChoose">
 
-            <tr *ngFor="let item of curInstrument"  (click)="curTr(item)">
-              <td >{{item.instrumentId}}</td>
+            <tr *ngFor="let item of selInstrument"  (click)="curTr(item)" >
+              <td>{{item.instrumentId}}</td>
               <td>{{item.instrumentName}}</td>
               <td>{{item.dLastPrice}}</td>
               <td>{{item.dBidPrice}}</td>
@@ -86,7 +87,7 @@
         <div class="r_boxTool clearfix form-inline">
           <div class="r_toolPad">
             <div class="r_searchBox">
-            <input  style="width: 140px" class="form-control " placeholder="请输入合约代码" type="text"  [(ngModel)]="instrumentId" (keyup)="searchi()" >
+            <input  style="width: 140px"  id= "hcode" class="form-control " placeholder="请输入合约代码" type="text"  [(ngModel)]="instrumentId" (keyup)="searchii()" >
              <div class="r_searchBoxList" id="selectul">
               <ul class="aaa" >
                 <li *ngFor="let item of allInstrument" class="bbb" (click)="selectli(item)">{{item.instrumentId}}</li>
@@ -112,7 +113,7 @@
                   <option value="1">卖</option>
                 </select>
 
-                <select class="form-control" [(ngModel)]="curFuorders.orderTradeTppe" style="width: 140px">
+                <select class="form-control" [(ngModel)]="curFuorders.orderTradeType" style="width: 140px">
                   <option value="0">限价指令</option>
                   <option value="1">FOK指令</option>
                   <option value="2">FAK指令</option>
@@ -127,21 +128,15 @@
                 </select>
 
                 <div class="input-group">
-                  <input type="text" class="form-control" placeholder="价格" [(ngModel)]="curFuorders.entrustprice" style="width: 140px">
+                  <input type="text" class="form-control" placeholder="价格" [(ngModel)]="curFuorders.entrustPrice" style="width: 140px">
                   <span class="input-group-addon">元</span>
                 </div>
-
                 <div class="input-group" (click)="addgroup()">
                   <input type="text" id="show" class="form-control" placeholder="选择用户" value="{{selectedAccounts()}}" readonly  style="width: 140px">
                   <a href="javascript:;"  class="input-group-addon"><i class="fa fa-plus"></i></a>
                 </div>
-
                 <button type="button" class="btn btn-primary"  (click)="onAddFuorders()" style="width: 140px">下单</button>
-
-
         <div>
-
-
         </div>
       </div>
     </div>
@@ -151,11 +146,18 @@
         <div class="r_boxTool clearfix">
           <div class="row">
             <div class="col-md-6">
-              <div class="r_toolPad">
-                <div class="tabledit-toolbar btn-toolbar">
+              <div class="r_toolPad" style="padding: 0 0 0 200px;">
+                <div class="r_tableTabsNav">
+                  <button class="btn btn-primary" data-toggle="modal" data-target="#selyh" (click)="selyh()">选择账户</button>
+
+                  <ul class="clearfix">
+                    <li *ngFor="let rga of selFuordersFunc" (click)="searchinfo(rga.accountId)"><a href="#div1" data-toggle="tab" >{{rga.accountId}}</a>&nbsp;</li>
+                  </ul>
+                </div>
+                <div class="tabledit-toolbar btn-toolbar pull-right">
                   <div class="btn-group ">
-                    <button class="tabledit-edit-button btn btn-default" type="button">全部平仓</button>
-                    <button class="tabledit-delete-button btn  btn-default" type="button">快捷反手</button>
+                    <button class="tabledit-edit-button btn btn-default" type="button" (click)="allclosePosi(accountId)">全部平仓</button>
+                    <button class="tabledit-delete-button btn  btn-default" type="button" (click)="quickhand()">快捷反手</button>
                   </div>
                 </div>
               </div>
@@ -164,10 +166,10 @@
               <div class="r_toolPad">
                 <div class="tabledit-toolbar btn-toolbar">
                   <div class="btn-group ">
-                    <button class="tabledit-delete-button btn btn-default" type="button">全部对价追单</button>
-                    <button class="tabledit-edit-button btn btn-default" type="button">全部跟价追单</button>
+                    <button class="tabledit-delete-button btn btn-default" type="button" (click)="allprice()">全部对价追单</button>
+                    <button class="tabledit-edit-button btn btn-default" type="button" (click)="alldocu()">全部跟价追单</button>
                     <button class="tabledit-delete-button btn btn-default" type="button">撤单</button>
-                    <button class="tabledit-delete-button btn  btn-default" type="button">全部撤单</button>
+                    <button class="tabledit-delete-button btn  btn-default" type="button" (click)="allkill()">全部撤单</button>
                   </div>
                 </div>
               </div>
@@ -181,7 +183,7 @@
         </div>
         <div class="row">
         <div class="col-md-6">
-          <app-fuorders-left></app-fuorders-left>
+          <app-fuorders-left ></app-fuorders-left>
         </div>
           <div class="col-md-6">
             <app-fuorders-right></app-fuorders-right>
@@ -191,6 +193,7 @@
 
       </div>
     </div>
+
     <!-- 添加用户 -->
     <div id="add" class="modal bs-example-modal-lg fade" role="dialog">
       <div class="modal-dialog modal-lg" role="document">
@@ -315,5 +318,42 @@
       </div>
     </div>
   </div>
+    </div>
+  </div>
+  <!--选择用户-->
+  <div id="selyh" class="modal bs-example-modal-lg fade" role="dialog">
+    <div class="modal-dialog  modal-lg" role="document">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">选择账户</h4>
+        </div>
+        <div class="modal-body" >
+
+          <dl>
+            <dt>
+            <div class="checkbox">
+              <label>
+                <input value="option1" type="checkbox" (click)="allPosi()" [checked]="active">全选
+              </label>
+            </div>
+            </dt>
+            <dd>
+              <label class="checkbox-inline"  *ngFor="let rga of curFuordersFunc">
+                <input  value="option1" type="checkbox"  [checked]="rga.active" (click)="selPosi(rga)">{{rga.accountId}}
+              </label>
+
+            </dd>
+          </dl>
+
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" (click)="savePosi()">保存</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal" (click)="delPosi()">取消</button>
+        </div>
+      </div>
     </div>
   </div>

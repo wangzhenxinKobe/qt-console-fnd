@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import { Headers, Http, Response } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import {ParamConfig} from "../common/param.config";
-import {Fuorders, Instrument, FuordersAccount} from "./fuorders";
+import {Fuorders, Instrument, FuordersAccount,FuordersFunc} from "./fuorders";
 import {generateRequestId} from "../app.module";
 import Any = jasmine.Any;
+import {AccountPage, Account} from "../account/account";
 
 @Injectable()
 export class FuordersService {
@@ -43,7 +44,7 @@ let request = JSON.stringify({
   }
 
 //手动下单
-  addFuorders(fuorders : Fuorders,symbol : String) : Promise<[boolean ,any]> {
+  addFuorders(fuorders : Fuorders,symbol : String ) : Promise<[boolean ,any]> {
     let fuoList = [];
     for(let fuo of fuorders.rgAccountDTOlist) {
       fuoList.push({
@@ -53,13 +54,14 @@ let request = JSON.stringify({
     let request = JSON.stringify({
       rgAccountDTOlist : JSON.stringify(fuoList),
       symbol : symbol,
-      exchage : fuorders.exchange,
+      exchange : fuorders.exchange,
       direction : fuorders.direction,
       offset : fuorders.offset,
       hedge : fuorders.hedge,
-      entrustprice : fuorders.entrustprice,
+      entrustPrice : fuorders.entrustPrice,
       entrustVolume : fuorders.entrustVolume,
-      orderTradeTppe : fuorders.orderTradeTppe,
+      orderTradeType : fuorders.orderTradeType,
+      tradeUnitId : "Manual",
       requestId : this.request_id,
       serviceCode : 'FS056'
 
@@ -86,10 +88,9 @@ let request = JSON.stringify({
   }
 
   //查询合约代码
-  getinsId(instrumentName,instrumentId) : Promise<Instrument> {
+  getinsId(instrumentId) : Promise<Instrument> {
 
     let request = JSON.stringify({
-      instrumentName : instrumentName,
       instrumentId : instrumentId,
       requestId : this.request_id,
       serviceCode : 'FS127'
@@ -115,179 +116,158 @@ let request = JSON.stringify({
     } else {
 
       console.error("请求失败：" + body.errMsg);
-      return [false, body.errMsg];;
+      return [false, body.errMsg];
 
     }
 
 
   }
 
-//查询行情信息
-  getMark(instrumentId) : Promise<Instrument> {
 
+
+//添加用户
+  getAccount() : Promise<[boolean ,any]> {
     let request = JSON.stringify({
-      instrumentId : instrumentId,
       requestId : this.request_id,
-      serviceCode : 'FS133'
+      serviceCode : 'FS117'
     });
     return this.http
       .post(this.hostUrl, request, {headers: this.headers})
       .toPromise()
-      .then(this.extractMarkData)
+      .then(this.extractAccount)
       .catch(this.handleError);
   }
-
   //查询返回参数
-  private extractMarkData(res : Response) {
-
-    console.info(res);
-
+  private extractAccount(res : Response) {
     let body = res.json();
-console.info(body)
     if(body.errCode == '000000') {
-
-      return[true,body.field ] ;
-
+      return[true,body.fieldList];
     } else {
-
       console.error("请求失败：" + body.errMsg);
-      return [false, body.errMsg];;
-
+      return null;
     }
-
-
   }
 
-
-//查询账户持仓信息
-  getPosi(accountId) : Promise<Instrument> {
-
+//全部平仓
+  getclosePosi(accountId : String) : Promise<FuordersFunc> {
     let request = JSON.stringify({
-      instrumentId : accountId,
+      accountId : accountId,
       requestId : this.request_id,
-      serviceCode : 'FS120'
+      serviceCode : 'FS122'
     });
     return this.http
       .post(this.hostUrl, request, {headers: this.headers})
       .toPromise()
-      .then(this.extractPosition)
+      .then(this.extractclosePosition)
       .catch(this.handleError);
   }
-
   //查询返回参数
-  private extractPosition(res : Response) {
-
-    console.info(res);
-
+  private extractclosePosition(res : Response) {
     let body = res.json();
-    console.info(body)
+    console.info(body);
     if(body.errCode == '000000') {
-
-      return[true,] ;
-
+      return [true,"success"] ;
     } else {
-
       console.error("请求失败：" + body.errMsg);
-      return [false, body.errMsg];;
-
+      return [false, body.errMsg];
     }
-
-
   }
-
-
-
-
-
-
-
-//
-//
-//   //修改
-//   updateFutures(futures : Futures) : Promise<[boolean ,string]> {
-//
-//
-//     let request = JSON.stringify({
-//
-//       exchangeId : futures.exchangeId,
-//       productId : futures.productId,
-//       productName : futures.productName,
-//       volumeMultiple : futures.volumeMultiple,
-//       priceTick : futures.priceTick,
-//       feeMode : futures.feeMode,
-//       serviceCode : 'FS026'
-//
-//     });
-//
-//     return this.http
-//       .post(this.hostUrl, request, {headers: this.headers})
-//       .toPromise()
-//       .then(this.addFuturesData)
-//       .catch(this.handleError);
-//
-//   }
-//   //修改返回结果
-//   private updateFuturesData	(res : Response) : Promise<[boolean ,string]> {
-//
-//     console.info(res);
-//
-//     let body = res.json();
-//
-//     if (body.errCode == '000000') {
-//
-//       console.info("请求成功");
-//
-//       return Promise[true, ""];
-//
-//     } else {
-//
-//       console.error("请求失败：" + body.errMsg);
-//       return null;
-//
-//     }
-//   }
-//
-// //删除
-//   removeFutures(futures : Futures) : Promise<[boolean ,string]> {
-//
-//
-//     let request = JSON.stringify({
-//       productId : futures.productId,
-//       serviceCode : 'FS027'
-//
-//     });
-//
-//     return this.http
-//       .post(this.hostUrl, request, {headers: this.headers})
-//       .toPromise()
-//       .then(this.addFuturesData)
-//       .catch(this.handleError);
-//
-//   }
-//   //删除返回结果
-//   private removeFuturesData	(res : Response) : Promise<[boolean ,string]> {
-//
-//     console.info(res);
-//
-//     let body = res.json();
-//
-//     if (body.errCode == '000000') {
-//
-//       console.info("请求成功");
-//
-//       return Promise[true, ""];
-//
-//     } else {
-//
-//       console.error("请求失败：" + body.errMsg);
-//       return null;
-//
-//     }
-//   }
-
-
-
-
+//快捷反手
+  getQuickhand(accountId : String) : Promise<FuordersFunc> {
+    let request = JSON.stringify({
+      accountId : accountId,
+      requestId : this.request_id,
+      serviceCode : 'FS124'
+    });
+    return this.http
+      .post(this.hostUrl, request, {headers: this.headers})
+      .toPromise()
+      .then(this.extractQuickhand)
+      .catch(this.handleError);
+  }
+  //查询返回参数
+  private extractQuickhand(res : Response) {
+    let body = res.json();
+    console.info(body);
+    if(body.errCode == '000000') {
+      return [true,"success"] ;
+    } else {
+      console.error("请求失败：" + body.errMsg);
+      return [false, body.errMsg];
+    }
+  }
+//全部对价追单
+  getallPrice(type:String) : Promise<FuordersFunc> {
+    let request = JSON.stringify({
+      type : type,
+      requestId : this.request_id,
+      serviceCode : 'FS125'
+    });
+    return this.http
+      .post(this.hostUrl, request, {headers: this.headers})
+      .toPromise()
+      .then(this.extractAllprice)
+      .catch(this.handleError);
+  }
+  //查询返回参数
+  private extractAllprice(res : Response) {
+    let body = res.json();
+    console.info(body);
+    if(body.errCode == '000000') {
+      return [true,"success"] ;
+    } else {
+      console.error("请求失败：" + body.errMsg);
+      return [false, body.errMsg];
+    }
+  }
+//全部对价跟单
+  getallDocu(type:String) : Promise<FuordersFunc> {
+    let request = JSON.stringify({
+      type : type,
+      requestId : this.request_id,
+      serviceCode : 'FS126'
+    });
+    return this.http
+      .post(this.hostUrl, request, {headers: this.headers})
+      .toPromise()
+      .then(this.extractAlldocu)
+      .catch(this.handleError);
+  }
+  //查询返回参数
+  private extractAlldocu(res : Response) {
+    let body = res.json();
+    console.info(body);
+    if(body.errCode == '000000') {
+      return [true,"success"] ;
+    } else {
+      console.error("请求失败：" + body.errMsg);
+      return [false, body.errMsg];
+    }
+  }
+//全部撤单
+  getallkill(type:String) : Promise<FuordersFunc> {
+    let request = JSON.stringify({
+      type : type,
+      requestId : this.request_id,
+      serviceCode : 'FS123'
+    });
+    return this.http
+      .post(this.hostUrl, request, {headers: this.headers})
+      .toPromise()
+      .then(this.extractAllkill)
+      .catch(this.handleError);
+  }
+  //查询返回参数
+  private extractAllkill(res : Response) {
+    let body = res.json();
+    console.info(body);
+    if(body.errCode == '000000') {
+      return [true,"success"] ;
+    } else {
+      console.error("请求失败：" + body.errMsg);
+      return [false, body.errMsg];
+    }
+  }
 
 
 

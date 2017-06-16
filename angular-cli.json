@@ -26,6 +26,8 @@
         "styles.css"
       ],
       "scripts": [
+        "../node_modules/sockjs-client/dist/sockjs.min.js",
+        "../node_modules/stompjs/lib/stomp.min.js",
         "../node_modules/jquery/dist/jquery.min.js",
         "../node_modules/bootstrap/dist/js/bootstrap.min.js",
         "../plugins/tabledit-cust/js/bootstrap-table.js",
