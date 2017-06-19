@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges,Input,SimpleChanges } from '@angular/core';
 import {FuordersService} from "./fuorders.service";
 import {FuordersLeftComponent} from "./fuorders-left.component";
 import {OrderInfo,FuordersFunc} from "./fuorders";
@@ -9,13 +9,13 @@ declare let SockJS;
 declare let Stomp;
 declare var $ : any;
 
-
 @Component({
   selector: 'app-fuorders-right',
   templateUrl: './fuorders-right.component.html',
   styleUrls: ['./fuorders-right.component.css']
 })
-export class FuordersRightComponent implements OnInit {
+export class FuordersRightComponent implements OnInit,OnChanges {
+  @Input() accountId : string = "";
   selFuordersFunc:FuordersFunc[] = [];//选择的账户
   host : string = "http://192.168.0.62:7766";
   request_id = generateRequestId();
@@ -26,6 +26,9 @@ export class FuordersRightComponent implements OnInit {
     private fuordersService : FuordersService,
     private http: Http
   ) { }
+  ngOnChanges(){
+
+  }
   ngOnInit() {
     //建立连接
     var socket = new SockJS(this.host + '/gs-guide-websocket');
@@ -37,8 +40,7 @@ export class FuordersRightComponent implements OnInit {
   }
 //委托记录按钮
   onOrder(accountId:string){
-
-    var name = JSON.stringify({serviceCode : 'FS114', type :'E_PLAT_CJ_FUTURE_RTN_ORDER',code : '2', accountId : 101,requestId : this.request_id});
+    var name = JSON.stringify({serviceCode : 'FS114', type :'E_PLAT_CJ_FUTURE_RTN_ORDER',code : '2', accountId : this.accountId,requestId : this.request_id});
     this.stompClient.send("/app/handler",{},name );
     this.stompClient.subscribe('/topic/entrustdata',  data => {
     this.allOrder = [];
@@ -49,7 +51,7 @@ export class FuordersRightComponent implements OnInit {
   }
 //成交明细
 onTrade(){
-  var name = JSON.stringify({serviceCode : 'FS114', type :'E_PLAT_CJ_FUTURE_RTN_TRADE',code : '1', requestId : this.request_id});
+  var name = JSON.stringify({serviceCode : 'FS114', type :'E_PLAT_CJ_FUTURE_RTN_TRADE',code : '1',accountId : this.accountId, requestId : this.request_id});
   this.stompClient.send("/app/handler",{},name );
   this.stompClient.subscribe('/topic/entrustdata',  data => {
     this.allOrder = [];
@@ -60,7 +62,7 @@ onTrade(){
 }
 //未成交合约
   onOrderr(){
-    var name = JSON.stringify({serviceCode : 'FS114', type :'E_PLAT_CJ_FUTURE_RTN_ORDER',code : '0', requestId : this.request_id});
+    var name = JSON.stringify({serviceCode : 'FS114', type :'E_PLAT_CJ_FUTURE_RTN_ORDER',code : '0',accountId : this.accountId, requestId : this.request_id});
     this.stompClient.send("/app/handler",{},name );
     this.stompClient.subscribe('/topic/entrustdata',  data => {
       this.allOrder = [];

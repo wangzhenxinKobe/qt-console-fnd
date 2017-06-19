@@ -257,6 +257,39 @@ export class CustSelectComponent implements OnInit {
         }
         break;
 
+      case 'fuorders_direction':
+        this.dataList = [
+          {value:'0', text:'买'},
+          {value:'1', text:'卖'}
+        ];
+        if(this.viewType == 'select_all') {
+          this.dataList.unshift( {value:'', text:'全部'} );
+        }
+        break;
+
+      case 'fuorders_offset':
+        this.dataList = [
+          {value:'0', text:'开仓'},
+          {value:'1', text:'平仓'},
+          {value:'3', text:'平今'},
+          {value:'4', text:'平昨'}
+        ];
+        if(this.viewType == 'select_all') {
+          this.dataList.unshift( {value:'', text:'全部'} );
+        }
+        break;
+
+      case 'fuorders_hedge':
+        this.dataList = [
+          {value:'1', text:'投机'},
+          {value:'2', text:'套利'},
+          {value:'3', text:'套保'}
+        ];
+        if(this.viewType == 'select_all') {
+          this.dataList.unshift( {value:'', text:'全部'} );
+        }
+
+        break;
       case 'strategy_param_type':
         this.dataList = [
           {value:'0', text:'bool'},

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges,Input } from '@angular/core';
+import { Component, OnInit, OnChanges,Input,SimpleChanges } from '@angular/core';
 import {FuordersService} from "./fuorders.service";
 import {Positioninfo,FuordersFunc} from "./fuorders";
 import {generateRequestId} from "../app.module";
@@ -13,14 +13,13 @@ declare var $ : any;
   templateUrl: './fuorders-left.component.html',
   styleUrls: ['./fuorders-left.component.css']
 })
-export class FuordersLeftComponent implements OnInit {
+export class FuordersLeftComponent implements OnInit,OnChanges {
   host : string = "http://192.168.0.62:7766";
   stompClient : any = null;
-  ind : any = null;
   @Input() accountId : string = "";
-  // @Input() allPosition : any[] = [];
+  bConnected : boolean = true;
   request_id = generateRequestId();
-   allPosition : Positioninfo[] = [];
+  allPosition : Positioninfo[] = [];
   curFuordersFunc:FuordersFunc[] = [];//所有账户
   selFuordersFunc:FuordersFunc[] = [];//选择的账户
   constructor(
@@ -29,37 +28,32 @@ export class FuordersLeftComponent implements OnInit {
   ){ }
   ngOnInit() {
     //建立连接
- /* var socket = new SockJS(this.host + '/gs-guide-websocket');
-    this.stompClient = Stomp.over(socket);
-    this.stompClient.connect({
-    }, (frame) => {
-      console.log('Connected: ' + frame);
-    });*/
-
-    /*var name = JSON.stringify({serviceCode : 'FS120',accountId : this.accountId, requestId : this.request_id});
-    this.stompClient.send("/app/handler",{},name );
-    this.stompClient.subscribe('/topic/posdata', data =>{
-      var infoPosi = JSON.parse(JSON.parse(data.body).resultMap);
-      this.allPosition = [];
-      for (let key in infoPosi){
-        this.allPosition.push(JSON.parse(infoPosi[key]));
-      }
-    });*/
+    var socket = new SockJS(this.host + '/gs-guide-websocket');
+     this.stompClient = Stomp.over(socket);
+     this.stompClient.connect({
+     }, (frame) => {
+     this.bConnected = true;
+     console.log('Connected: ' + frame);
+     });
   }
 
-//查询用户持仓信息
- /* searchinfo(accountId : string){
-    // this.accountId = accountId;
 
-    var name = JSON.stringify({serviceCode : 'FS120',accountId : accountId, requestId : this.request_id});
-    this.stompClient.send("/app/handler",{},name );
-    this.stompClient.subscribe('/topic/posdata', data =>{
-      var infoPosi = JSON.parse(JSON.parse(data.body).resultMap);
-      this.allPosition = [];
-      for (let key in infoPosi){
-        this.allPosition.push(JSON.parse(infoPosi[key]));
+ngOnChanges(changes : SimpleChanges){
+   for(let propName in changes){
+     if(propName = 'accountId'){
+      if(this.bConnected && this.accountId != null && this.accountId != ""){
+       var name = JSON.stringify({serviceCode : 'FS120',accountId : this.accountId, requestId : this.request_id});
+        this.stompClient.send("/app/handler",{},name );
+        this.stompClient.subscribe('/topic/posdata', data =>{
+          var infoPosi = JSON.parse(JSON.parse(data.body).resultMap);
+          this.allPosition = [];
+          for(let key in infoPosi){
+            this.allPosition.push(JSON.parse(infoPosi[key]));
+          }
+        });
+        }
       }
-    });
-  }*/
+    }
+  }
 
 }

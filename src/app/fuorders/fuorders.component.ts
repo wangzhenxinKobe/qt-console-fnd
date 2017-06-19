@@ -23,6 +23,7 @@ export class FuordersComponent implements OnInit {
   request_id = generateRequestId();
   messages : string[] = [];
   instrumentName : string = '';
+  accountId : string = '';
   instrumentId : string = '';
   allPosition : Positioninfo[] = [];
   curFuordersFunc:FuordersFunc[] = [];//所有账户
@@ -320,16 +321,9 @@ this.fuordersService.getallPrice(type)
       rga.active = false;
     }
   }
-   searchinfo(accountId : string){
-     var name = JSON.stringify({serviceCode : 'FS120',accountId : accountId, requestId : this.request_id});
-     this.stompClient.send("/app/handler",{},name );
-     this.stompClient.subscribe('/topic/posdata', data =>{
-     var infoPosi = JSON.parse(JSON.parse(data.body).resultMap);
-     this.allPosition = [];
-     for (let key in infoPosi){
-     this.allPosition.push(JSON.parse(infoPosi[key]));
-   }
-   });
+  searchinfo(accountId : string){
+     this.accountId = accountId;
+
    }
 }
 

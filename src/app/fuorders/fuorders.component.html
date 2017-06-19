@@ -65,7 +65,7 @@
             </thead>
             <tbody class="r_tableChoose">
 
-            <tr *ngFor="let item of selInstrument"  (click)="curTr(item)" >
+            <tr *ngFor="let item of selInstrument" (click)="curTr(item)">
               <td>{{item.instrumentId}}</td>
               <td>{{item.instrumentName}}</td>
               <td>{{item.dLastPrice}}</td>
@@ -117,6 +117,7 @@
                   <option value="0">限价指令</option>
                   <option value="1">FOK指令</option>
                   <option value="2">FAK指令</option>
+                  <option value="3">市价指令</option>
                 </select>
 
                 <input type="text" class="form-control" placeholder="数量" [(ngModel)]="curFuorders.entrustVolume" style="width: 140px"/>
@@ -183,10 +184,10 @@
         </div>
         <div class="row">
         <div class="col-md-6">
-          <app-fuorders-left ></app-fuorders-left>
+          <app-fuorders-left [accountId]="accountId"></app-fuorders-left>
         </div>
           <div class="col-md-6">
-            <app-fuorders-right></app-fuorders-right>
+            <app-fuorders-right [accountId]="accountId"></app-fuorders-right>
           </div>
         </div>
 

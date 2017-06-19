@@ -38,7 +38,6 @@ export class PaginationComponent implements OnChanges {
 
 
   ngOnChanges(changes : SimpleChanges) {
-
     for(let propName in changes) {
 
       if(propName == 'totalPages') {
